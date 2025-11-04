@@ -1,15 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use Illuminate\Http\Request;
 
-Route::get('/', fn() => redirect()->route('login'));
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.attempt');
+Route::view('/', 'home')->name('home');
+Route::view('/login', 'auth.login')->name('login');
+Route::view('/register', 'auth.register')->name('register');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
-Route::post('/register', function () {
-    return back()->withErrors(['name' => 'Demo UI: proses register belum diaktifkan.']);
+Route::post('/register', function (Request $request) {
+    $request->validate([
+        'name' => 'required|string|max:100',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed', // otomatis cocokkan dengan password_confirmation
+    ]);
+
+    return redirect()->route('login')->with('status', 'Register success. Please login.');
 })->name('register.store');
+
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
