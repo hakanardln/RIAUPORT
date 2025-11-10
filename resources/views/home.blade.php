@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RiauPort – Home</title>
-    @vite('resources/css/app.css')
+
+    {{-- Tailwind via CDN (aman tanpa Vite) --}}
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
         /* ====== NAVBAR GLASS ====== */
@@ -55,9 +57,13 @@
         /* ====== HERO ====== */
         .hero {
             position: relative;
-            width: 100%;
-            height: 78vh;
-            overflow: hidden;
+            width: 100vw;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            height: 72vh;
+            overflow: hidden
         }
 
         .hero-bg {
@@ -65,7 +71,6 @@
             inset: 0;
             background-position: center;
             background-size: cover;
-            background-repeat: no-repeat;
             transition: opacity .85s ease
         }
 
@@ -76,7 +81,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, .0) 0, rgba(255, 255, 255, .0) 60%, rgba(0, 0, 0, .15) 100%)
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, .15) 100%)
         }
 
         /* ====== SEARCH CARD ====== */
@@ -84,7 +89,7 @@
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            bottom: 18%;
+            bottom: 14%;
             width: min(980px, 92%);
             background: rgba(255, 255, 255, .9);
             backdrop-filter: blur(16px);
@@ -93,33 +98,16 @@
             box-shadow: 0 18px 40px rgba(0, 0, 0, .14);
         }
 
-        .search-select {
+        .search-input {
             border-radius: 14px;
             border: 1px solid #e5e7eb;
             padding: .9rem 1rem;
             background: #f4f7f9;
             outline: none;
-            width: 100%;
-            appearance: none;
-            /* sembunyikan arrow default */
+            width: 100%
         }
 
-        .select-wrap {
-            position: relative;
-        }
-
-        .select-wrap:after {
-            content: "▾";
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #0e586d;
-            pointer-events: none;
-            font-weight: 700;
-        }
-
-        /* ====== SEARCH ICON OUTSIDE (GLASS CIRCLE) ====== */
+        /* ====== SEARCH ICON (OUTSIDE) ====== */
         .search-glass {
             position: absolute;
             right: -35px;
@@ -128,8 +116,9 @@
             height: 68px;
             width: 68px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, .4);
+            background: rgba(255, 255, 255, .75);
             backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
             box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
             display: flex;
             align-items: center;
@@ -139,16 +128,16 @@
 
         .search-glass:hover {
             transform: translateY(-50%) scale(1.08);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, .25);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .25)
         }
 
         .search-glass svg {
             color: #0e586d;
             width: 28px;
-            height: 28px;
+            height: 28px
         }
 
-        /* ====== CTA SECTION ====== */
+        /* ====== CTA ====== */
         .cta-title {
             font-weight: 800;
             color: #0a2d34;
@@ -159,61 +148,33 @@
             background: #0e586d;
             color: #fff;
             font-weight: 700;
-            padding: 0.95rem 1.3rem;
+            padding: .95rem 1.3rem;
             border-radius: 14px;
             box-shadow: 0 14px 28px rgba(14, 88, 109, .25), inset 0 2px 6px rgba(255, 255, 255, .35);
             transition: .25s;
         }
 
         .cta-btn:hover {
-            background: #127692;
-            transform: translateY(-3px);
-            box-shadow: 0 16px 30px rgba(14, 88, 109, 0.35);
+            background: #127692
         }
-
 
         .cta-image {
             width: 115%;
             max-width: 620px;
-            transform: translateX(5%);
+            transform: translateX(5%)
         }
 
-        /* ====== FITUR SECTION ====== */
-        .fitur-section {
-            background: linear-gradient(180deg, #a9ecff 0%, #c6f4ff 70%, #baf1ff 100%);
-            padding: 5rem 1rem;
-        }
-
-        .fitur-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: rgba(255, 255, 255, 0.8);
+        /* ====== FEATURE CARDS (Halaman depan 2 style) ====== */
+        .feature-wrap {
+            background: linear-gradient(160deg, #cdf3f8 0%, #7fd0d9 38%, #53b7c7 100%);
             border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            padding: 1rem 1.4rem;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: 0.25s;
         }
 
-        .fitur-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
-        }
-
-        .fitur-card img {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-        }
-
-        .fitur-title {
-            font-weight: 800;
-            font-size: 1.9rem;
-            color: #0A2D34;
-            text-align: center;
-            margin-bottom: 3rem;
-            line-height: 1.3;
+        .feature-card {
+            background: rgba(255, 255, 255, .95);
+            border-radius: 20px;
+            box-shadow: 0 16px 28px rgba(0, 0, 0, .15), inset 0 2px 6px rgba(255, 255, 255, .45);
+            padding: 1.4rem 1.2rem;
         }
 
         body {
@@ -223,17 +184,19 @@
     </style>
 </head>
 
-<body>
+<body class="bg-white">
+
     {{-- ================= NAVBAR ================= --}}
     <header class="site-header">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <nav class="glass-nav">
                 <div class="flex items-center gap-3">
-                    <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort" class="h-12 md:h-14">
+                    <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort Logo" class="h-12 md:h-14"
+                        onerror="this.style.display='none'">
                 </div>
 
                 <ul class="hidden md:flex items-center gap-10">
-                    <li><a class="nav-link" href="#">Home</a></li>
+                    <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                     <li><a class="nav-link" href="#">Contact</a></li>
                     <li><a class="nav-link" href="#">About</a></li>
                 </ul>
@@ -243,11 +206,12 @@
         </div>
     </header>
 
-    {{-- ================= HERO ================= --}}
+    {{-- ================= HERO + SLIDESHOW ================= --}}
     @php
+        // Kumpulkan gambar Gambar1..Gambar4 (atau "Frame 1..4") dengan ekstensi umum
         $frames = [];
-        foreach ([1, 2, 3, 4] as $i) {
-            foreach (['png', 'jpg', 'jpeg', 'webp'] as $ext) {
+        foreach (range(1, 4) as $i) {
+            foreach (['jpg', 'png', 'jpeg', 'webp'] as $ext) {
                 $p = public_path("images/Gambar{$i}.{$ext}");
                 if (file_exists($p)) {
                     $frames[] = asset("images/Gambar{$i}.{$ext}");
@@ -255,7 +219,19 @@
                 }
             }
         }
+        if (empty($frames)) {
+            foreach (range(1, 4) as $i) {
+                foreach (['jpg', 'png', 'jpeg', 'webp'] as $ext) {
+                    $p = public_path("images/Frame {$i}.{$ext}");
+                    if (file_exists($p)) {
+                        $frames[] = asset("images/Frame {$i}.{$ext}");
+                        break;
+                    }
+                }
+            }
+        }
 
+        // Gambar laptop (opsional)
         $ctaImg = null;
         foreach (['laptop1', 'mock-laptop'] as $base) {
             foreach (['png', 'jpg', 'jpeg', 'webp'] as $e) {
@@ -272,7 +248,7 @@
         <div id="heroBg" class="hero-bg"></div>
         <div class="hero-overlay"></div>
 
-        {{-- Search card --}}
+        {{-- Kartu pencarian --}}
         <div class="search-card">
             <h3 class="text-center text-xl md:text-2xl font-semibold text-slate-800 mb-4">
                 Hai Kamu, <span class="font-extrabold text-[#0e586d]">Ingin pergi ke mana?</span>
@@ -280,13 +256,32 @@
 
             <div class="relative">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <input type="text" class="search-input" placeholder="Asal">
-                    <input type="text" class="search-input" placeholder="Tujuan">
+                    {{-- ASAL (SELECT) --}}
+                    <select class="search-input" aria-label="Asal">
+                        <option value="" selected disabled>Asal</option>
+                        <option>Dumai</option>
+                        <option>Pekanbaru</option>
+                        <option>Duri</option>
+                        <option>Bengkalis</option>
+                        <option>Siak</option>
+                        <option>Pakning</option>
+                    </select>
+
+                    {{-- TUJUAN (SELECT) --}}
+                    <select class="search-input" aria-label="Tujuan">
+                        <option value="" selected disabled>Tujuan</option>
+                        <option>Dumai</option>
+                        <option>Pekanbaru</option>
+                        <option>Duri</option>
+                        <option>Bengkalis</option>
+                        <option>Siak</option>
+                        <option>Pakning</option>
+                    </select>
                 </div>
 
-                {{-- Ikon kaca pembesar --}}
-                <button class="search-glass" aria-label="Cari">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {{-- Ikon kaca pembesar melayang di kanan --}}
+                <button type="button" class="search-glass" aria-label="Cari">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5a7.5 7.5 0 0013.15 13.15z" />
                     </svg>
@@ -296,7 +291,7 @@
     </section>
 
     {{-- ================= CTA SECTION ================= --}}
-    <section class="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-20">
+    <section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
                 <h2 class="cta-title text-3xl md:text-4xl lg:text-5xl">
@@ -324,33 +319,49 @@
         </div>
     </section>
 
-    {{-- ================= FITUR SECTION (HALAMAN DEPAN 2) ================= --}}
-    <section class="fitur-section">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="fitur-title">
-                Riauport, Solusi terhubung ke <br />
-                berbagai jasa transportasi Travel pilihan anda
-            </h2>
+    {{-- ================= HALAMAN DEPAN 2 (FITUR) ================= --}}
+    <section class="max-w-7xl mx-auto px-4 md:px-6 pb-16">
+        <div class="feature-wrap p-8 md:p-10">
+            <h3 class="text-white font-extrabold text-2xl md:text-4xl leading-tight tracking-wide mb-8">
+                Riauport, Solusi terhubung ke&nbsp;berbagai<br class="hidden md:block" />
+                jasa transportasi Travel pilihan anda
+            </h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="fitur-card">
-                    <img src="{{ asset('images/car.png') }}" alt="Car">
-                    <p>Perjalanan nyaman dimulai dari pilihan yang tepat.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {{-- Kartu 1 --}}
+                <div class="feature-card flex items-start gap-4">
+                    <img src="{{ asset('images/car.png') }}" class="h-12 w-12 object-contain"
+                        onerror="this.style.display='none'">
+                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                        Perjalanan nyaman dimulai dari pilihan yang tepat.
+                    </p>
                 </div>
 
-                <div class="fitur-card">
-                    <img src="{{ asset('images/ratings.png') }}" alt="Ratings">
-                    <p>Dapatkan pengalaman terbaik dari rekomendasi nyata penumpang.</p>
+                {{-- Kartu 2 --}}
+                <div class="feature-card flex items-start gap-4">
+                    <img src="{{ asset('images/ratings.png') }}" class="h-12 w-12 object-contain"
+                        onerror="this.style.display='none'">
+                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                        Dapatkan pengalaman terbaik dari rekomendasi nyata penumpang
+                    </p>
                 </div>
 
-                <div class="fitur-card">
-                    <img src="{{ asset('images/browser.png') }}" alt="Browser">
-                    <p>Semua Sopir Travel, Satu Portal.</p>
+                {{-- Kartu 3 --}}
+                <div class="feature-card flex items-start gap-4">
+                    <img src="{{ asset('images/browser.png') }}" class="h-12 w-12 object-contain"
+                        onerror="this.style.display='none'">
+                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                        Semua Sopir Travel, Satu Portal
+                    </p>
                 </div>
 
-                <div class="fitur-card">
-                    <img src="{{ asset('images/whatsapp.png') }}" alt="Whatsapp">
-                    <p>Hubungi sopir secara langsung via Whatsapp atau telepon.</p>
+                {{-- Kartu 4 --}}
+                <div class="feature-card flex items-start gap-4">
+                    <img src="{{ asset('images/whatsapp.png') }}" class="h-12 w-12 object-contain"
+                        onerror="this.style.display='none'">
+                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                        Hubungi sopir secara langsung via Whatsapp atau telepon
+                    </p>
                 </div>
             </div>
         </div>
@@ -361,11 +372,13 @@
         (function() {
             const images = @json($frames);
             const el = document.getElementById('heroBg');
+
             if (!images || !images.length) {
-                el.style.background = '#e9f2f6';
+                el.style.background = 'linear-gradient(180deg,#e9f2f6,#f6fafc)';
                 return;
             }
 
+            // preload
             images.forEach(src => {
                 const im = new Image();
                 im.src = src;
