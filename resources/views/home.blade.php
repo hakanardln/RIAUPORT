@@ -245,50 +245,52 @@
     @endphp
 
     <section class="hero">
-        <div id="heroBg" class="hero-bg"></div>
-        <div class="hero-overlay"></div>
+    <div id="heroBg" class="hero-bg"></div>
+    <div class="hero-overlay"></div>
 
-        {{-- Kartu pencarian --}}
-        <div class="search-card">
-            <h3 class="text-center text-xl md:text-2xl font-semibold text-slate-800 mb-4">
-                Hai Kamu, <span class="font-extrabold text-[#0e586d]">Ingin pergi ke mana?</span>
-            </h3>
+    {{-- Kartu pencarian --}}
+    <div class="search-card">
+        <h3 class="text-center text-xl md:text-2xl font-semibold text-slate-800 mb-4">
+            Hai Kamu, <span class="font-extrabold text-[#0e586d]">Ingin pergi ke mana?</span>
+        </h3>
 
-            <div class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {{-- ASAL (SELECT) --}}
-                    <select class="search-input" aria-label="Asal">
-                        <option value="" selected disabled>Asal</option>
-                        <option>Dumai</option>
-                        <option>Pekanbaru</option>
-                        <option>Duri</option>
-                        <option>Bengkalis</option>
-                        <option>Siak</option>
-                        <option>Pakning</option>
-                    </select>
+        <div class="flex items-center gap-3 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-slate-200">
 
-                    {{-- TUJUAN (SELECT) --}}
-                    <select class="search-input" aria-label="Tujuan">
-                        <option value="" selected disabled>Tujuan</option>
-                        <option>Dumai</option>
-                        <option>Pekanbaru</option>
-                        <option>Duri</option>
-                        <option>Bengkalis</option>
-                        <option>Siak</option>
-                        <option>Pakning</option>
-                    </select>
-                </div>
+            {{-- ASAL --}}
+            <select class="search-input flex-1">
+                <option value="" disabled selected>Asal</option>
+                <option>Dumai</option>
+                <option>Pekanbaru</option>
+                <option>Duri</option>
+                <option>Bengkalis</option>
+                <option>Siak</option>
+                <option>Pakning</option>
+            </select>
 
-                {{-- Ikon kaca pembesar melayang di kanan --}}
-                <button type="button" class="search-glass" aria-label="Cari">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5a7.5 7.5 0 0013.15 13.15z" />
-                    </svg>
-                </button>
-            </div>
+            {{-- TUJUAN --}}
+            <select class="search-input flex-1">
+                <option value="" disabled selected>Tujuan</option>
+                <option>Dumai</option>
+                <option>Pekanbaru</option>
+                <option>Duri</option>
+                <option>Bengkalis</option>
+                <option>Siak</option>
+                <option>Pakning</option>
+            </select>
+
+            {{-- SEARCH BUTTON (DALAM KOTAK) --}}
+            <button type="button"
+                class="h-12 w-12 flex items-center justify-center rounded-xl bg-[#0e586d] text-white hover:bg-[#0b4a59] transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                    class="w-6 h-6" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5a7.5 7.5 0 0013.15 13.15z" />
+                </svg>
+            </button>
         </div>
-    </section>
+    </div>
+</section>
+
 
     {{-- ================= CTA SECTION ================= --}}
     <section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
