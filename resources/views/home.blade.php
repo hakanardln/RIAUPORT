@@ -394,7 +394,7 @@
             <!-- Card -->
             <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
                 <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
-                    <img src="img1.jpg" class="w-full h-full object-cover">
+                    <img src={{asset('Images2.jpg')}} class="w-full h-full object-cover">
                 </div>
 
                 <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
@@ -416,7 +416,7 @@
             <!-- Card -->
             <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
                 <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
-                    <img src="img2.jpg" class="w-full h-full object-cover">
+                    <img src={{asset('mobil2.jpg')}} class="w-full h-full object-cover">
                 </div>
 
                 <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
@@ -438,7 +438,7 @@
             <!-- Card -->
             <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
                 <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
-                    <img src="img3.jpg" class="w-full h-full object-cover">
+                    <img src={{asset('mobil3.jpg')}} class="w-full h-full object-cover">
                 </div>
 
                 <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
@@ -475,8 +475,7 @@
         <div class="w-3 h-3 bg-white border border-black rounded-full"></div>
     </div>
 
-
-
+    
     {{-- ================= SLIDESHOW SCRIPT ================= --}}
     <script>
         (function() {
