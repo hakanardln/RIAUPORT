@@ -369,6 +369,114 @@
         </div>
     </section>
 
+    <section class="w-full bg-gradient-to-b from-white via-[#d8f0f7] to-[#3FA6C4] py-16 flex flex-col items-center">
+
+    <!-- Title -->
+    <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-3 text-center">
+        Temukan Sopir Sesuai Tujuan Anda
+    </h2>
+    <div class="w-1/2 h-1 bg-[#3FA6C4] rounded-full mb-12"></div>
+
+    <!-- Wrapper -->
+    <div class="relative w-full max-w-6xl">
+
+        <!-- Prev Button -->
+        <button
+            class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+
+        <!-- Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 md:px-14">
+
+            <!-- Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                    <img src="img1.jpg" class="w-full h-full object-cover">
+                </div>
+
+                <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                    </svg>
+                    FITRA
+                </div>
+
+                <p class="text-sm text-gray-700 mt-1">
+                    <strong>Tujuan :</strong><br>
+                    Bengkalis > Pekanbaru > Siak > Dumai
+                </p>
+
+                <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat selengkapnya...</a>
+            </div>
+
+            <!-- Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                    <img src="img2.jpg" class="w-full h-full object-cover">
+                </div>
+
+                <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                    </svg>
+                    Zawa Aufi
+                </div>
+
+                <p class="text-sm text-gray-700 mt-1">
+                    <strong>Tujuan :</strong><br>
+                    Bengkalis > Dumai > Pekanbaru
+                </p>
+
+                <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat selengkapnya...</a>
+            </div>
+
+            <!-- Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                    <img src="img3.jpg" class="w-full h-full object-cover">
+                </div>
+
+                <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                    </svg>
+                    Riki
+                </div>
+
+                <p class="text-sm text-gray-700 mt-1">
+                    <strong>Tujuan :</strong><br>
+                    Duri > Dumai > Pakning > Bengkalis
+                </p>
+
+                <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat selengkapnya...</a>
+            </div>
+
+        </div>
+
+        <!-- Next Button -->
+        <button
+            class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+
+    </div>
+
+    <!-- Dots -->
+    <div class="flex gap-3 mt-8">
+        <div class="w-3 h-3 bg-black rounded-full"></div>
+        <div class="w-3 h-3 bg-white border border-black rounded-full"></div>
+    </div>
+
+
+
     {{-- ================= SLIDESHOW SCRIPT ================= --}}
     <script>
         (function() {
