@@ -213,42 +213,50 @@
         <div id="heroBg" class="hero-bg"></div>
         <div class="hero-overlay"></div>
 
+        {{-- Kartu pencarian --}}
         <div class="search-card">
             <h3 class="text-center text-xl md:text-2xl font-semibold text-slate-800 mb-4">
                 Hai Kamu, <span class="font-extrabold text-[#0e586d]">Ingin pergi ke mana?</span>
             </h3>
 
-            <div class="relative">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {{-- Select Asal & Tujuan (static list contoh) --}}
-                    <select class="search-input">
-                        <option>Asal</option>
-                        <option>Dumai</option>
-                        <option>Pekanbaru</option>
-                        <option>Duri</option>
-                        <option>Bengkalis</option>
-                        <option>Siak</option>
-                    </select>
-                    <select class="search-input">
-                        <option>Tujuan</option>
-                        <option>Pekanbaru</option>
-                        <option>Dumai</option>
-                        <option>Duri</option>
-                        <option>Bengkalis</option>
-                        <option>Siak</option>
-                    </select>
-                </div>
+            <div
+                class="flex items-center gap-3 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-slate-200">
 
-                {{-- kaca pembesar di luar kotak --}}
-                <button class="search-glass" aria-label="Cari">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                {{-- ASAL --}}
+                <select class="search-input flex-1">
+                    <option value="" disabled selected>Asal</option>
+                    <option>Dumai</option>
+                    <option>Pekanbaru</option>
+                    <option>Duri</option>
+                    <option>Bengkalis</option>
+                    <option>Siak</option>
+                    <option>Pakning</option>
+                </select>
+
+                {{-- TUJUAN --}}
+                <select class="search-input flex-1">
+                    <option value="" disabled selected>Tujuan</option>
+                    <option>Dumai</option>
+                    <option>Pekanbaru</option>
+                    <option>Duri</option>
+                    <option>Bengkalis</option>
+                    <option>Siak</option>
+                    <option>Pakning</option>
+                </select>
+
+                {{-- SEARCH BUTTON (DALAM KOTAK) --}}
+                <button type="button"
+                    class="h-12 w-12 flex items-center justify-center rounded-xl bg-[#0e586d] text-white hover:bg-[#0b4a59] transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-6 h-6"
+                        stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5a7.5 7.5 0 0013.15 13.15z" />
                     </svg>
                 </button>
             </div>
         </div>
     </section>
+
 
     {{-- CTA SECTION --}}
     <section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
@@ -326,118 +334,247 @@
         </div>
     </section>
 
-    {{-- ===== FAQ (HALAMAN 3) ===== --}}
-    <section id="faq" class="relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-[#6CC6D6] to-[#aee3ea]"></div>
-        <div class="relative max-w-7xl mx-auto px-4 md:px-6 pt-10 pb-8">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white drop-shadow-sm">Pernyataan Umum</h2>
-        </div>
+    <section class="w-full bg-gradient-to-b from-white via-[#d8f0f7] to-[#3FA6C4] py-16 flex flex-col items-center">
 
-        <div class="relative max-w-6xl mx-auto px-4 md:px-6 -mt-4 pb-16">
-            <div class="bg-white rounded-2xl faq-card overflow-hidden">
+        <!-- Title -->
+        <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-3 text-center">
+            Temukan Sopir Sesuai Tujuan Anda
+        </h2>
+        <div class="w-1/2 h-1 bg-[#3FA6C4] rounded-full mb-12"></div>
 
-                <details class="group border-b border-slate-100 open:bg-white/60">
-                    <summary
-                        class="list-none cursor-pointer flex items-center justify-between gap-4 px-6 md:px-8 py-6 md:py-7">
-                        <h3 class="font-semibold text-lg md:text-xl">Apa itu Riauport?</h3>
-                        <span
-                            class="chev text-2xl md:text-3xl select-none text-slate-700 group-open:rotate-180">^</span>
-                    </summary>
-                    <div class="grid faq-body px-6 md:px-8 pb-6" aria-expanded="true">
-                        <div class="overflow-hidden text-slate-700 leading-relaxed">
-                            Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
-                            dalam memperoleh informasi terkait perjalanan travel, dan kontak hubung sopir di seluruh
-                            riau.
-                        </div>
+        <!-- Wrapper -->
+        <div class="relative w-full max-w-6xl">
+
+            <!-- Prev Button -->
+            <button
+                class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 md:px-14">
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                    <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                        <img src={{ asset('images/Images2.jpg') }} class="w-full h-full object-cover">
                     </div>
-                </details>
 
-                <details class="group border-b border-slate-100">
-                    <summary
-                        class="list-none cursor-pointer flex items-center justify-between gap-4 px-6 md:px-8 py-6 md:py-7">
-                        <h3 class="font-semibold text-lg md:text-xl">Bagaimana cara mendapatkan Whatsapp Sopir?</h3>
-                        <span class="chev text-2xl md:text-3xl select-none text-slate-700">V</span>
-                    </summary>
-                    <div class="grid faq-body px-6 md:px-8 pb-6" aria-expanded="false">
-                        <div class="overflow-hidden text-slate-700 leading-relaxed">
-                            Buka halaman daftar sopir, pilih rute yang sesuai, lalu tekan tombol “Hubungi” pada kartu
-                            sopir.
-                            Nomor Whatsapp & telepon akan tampil untuk dihubungi langsung.
-                        </div>
+                    <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                        </svg>
+                        FITRA
                     </div>
-                </details>
 
-                <details class="group border-b border-slate-100">
-                    <summary
-                        class="list-none cursor-pointer flex items-center justify-between gap-4 px-6 md:px-8 py-6 md:py-7">
-                        <h3 class="font-semibold text-lg md:text-xl">Bagaimana cara melihat detail travel?</h3>
-                        <span class="chev text-2xl md:text-3xl select-none text-slate-700">V</span>
-                    </summary>
-                    <div class="grid faq-body px-6 md:px-8 pb-6" aria-expanded="false">
-                        <div class="overflow-hidden text-slate-700 leading-relaxed">
-                            Gunakan form pencarian Asal & Tujuan di halaman depan, lalu pilih salah satu travel.
-                            Halaman detail berisi jadwal, armada, titik jemput, harga, serta kontak sopir.
-                        </div>
-                    </div>
-                </details>
+                    <p class="text-sm text-gray-700 mt-1">
+                        <strong>Tujuan :</strong><br>
+                        Bengkalis > Pekanbaru > Siak > Dumai
+                    </p>
 
-                <details class="group">
-                    <summary
-                        class="list-none cursor-pointer flex items-center justify-between gap-4 px-6 md:px-8 py-6 md:py-7">
-                        <h3 class="font-semibold text-lg md:text-xl">Apakah saja persyaratan mendaftarkan travel?</h3>
-                        <span class="chev text-2xl md:text-3xl select-none text-slate-700">V</span>
-                    </summary>
-                    <div class="grid faq-body px-6 md:px-8 pb-6" aria-expanded="false">
-                        <div class="overflow-hidden text-slate-700 leading-relaxed">
-                            Siapkan data pemilik & sopir (KTP), data armada (STNK), nomor Whatsapp aktif,
-                            rute utama, serta jadwal keberangkatan. Klik “Daftar sebagai sopir” di beranda.
-                        </div>
+                    <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat
+                        selengkapnya...</a>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                    <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                        <img src={{ asset('images/mobil2.jpg') }} class="w-full h-full object-cover">
                     </div>
-                </details>
+
+                    <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                        </svg>
+                        Zawa Aufi
+                    </div>
+
+                    <p class="text-sm text-gray-700 mt-1">
+                        <strong>Tujuan :</strong><br>
+                        Bengkalis > Dumai > Pekanbaru
+                    </p>
+
+                    <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat
+                        selengkapnya...</a>
+                </div>
+
+                <!-- Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                    <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                        <img src={{ asset('images/mobil3.jpg') }} class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                        </svg>
+                        Riki
+                    </div>
+
+                    <p class="text-sm text-gray-700 mt-1">
+                        <strong>Tujuan :</strong><br>
+                        Duri > Dumai > Pakning > Bengkalis
+                    </p>
+
+                    <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat
+                        selengkapnya...</a>
+                </div>
 
             </div>
+
+            <!-- Next Button -->
+            <button
+                class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+
         </div>
-    </section>
 
-    {{-- JS: slideshow & FAQ icon state --}}
-    <script>
-        // Slideshow
-        (function() {
-            const images = @json($frames);
-            const el = document.getElementById('heroBg');
-            if (!images || !images.length) {
-                el.style.background = '#e9f2f6';
-                return;
-            }
-            images.forEach(src => {
-                const im = new Image();
-                im.src = src;
+        <!-- Dots -->
+        <div class="flex gap-3 mt-8">
+            <div class="w-3 h-3 bg-black rounded-full"></div>
+            <div class="w-3 h-3 bg-white border border-black rounded-full"></div>
+        </div>
+
+        <section>
+            <div class="relative flex flex-col md:flex-row max-w-5xl mx-auto shadow-2xl rounded-lg my-12">
+
+                <div
+                    class="relative z-10 w-full md:w-2/5 bg-[#4AA8BA] text-white p-10 rounded-t-lg md:rounded-l-lg md:rounded-tr-none md:rounded-r-[3rem]">
+
+                    <h2 class="text-3xl font-bold mb-6" style="font-family: serif;">Tentang RiauPort</h2>
+
+                    <p class="text-sm font-bold mb-4">
+                        Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat dalam
+                        memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.
+                    </p>
+
+                    <p class="text-sm font-bold mb-4">
+                        sistem berbasis website yang terpusat diperlukan untuk menyediakan layanan informasi travel.
+                        Karena website ini memang dirancang sedemikian rupa, pengguna dapat dengan mudah menemukan
+                        berbagai jasa travel sesuai daerah pilihan mereka. Nama travel, jadwal keberangkatan, desti,
+                        harga, jenis kendaraan, serta kontak yang dapat dihubungi termasuk ke dalam informasi yang
+                        disajikan.
+                    </p>
+                </div>
+
+                <div
+                    class="w-full md:w-3/5 bg-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-bl-none flex flex-col items-center justify-center">
+
+                    <img src="images/riauport-logo.png" alt="riauport-logo.png" class="w-64 mb-4">
+
+                    <p class="text-md text-riau-teal text-center font-im-fell">
+                        Temukan berbagai Travel dalam satu platform RiauPort
+                        </smp>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-12 md:py-20">
+            <div class="container mx-auto px-4">
+
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+
+                    <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">
+                        About Us
+                    </h2>
+
+                    <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8">
+
+                        <div
+                            class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                            <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                                <img src="https://ui-avatars.com/api/?name=Nurvia+Sulistry&size=128&background=e8f5e9&color=388e3c"
+                                    alt="Nurvia Sulistry" class="w-full h-full object-cover">
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-900">Nurvia Sulistry</h3>
+                            <p class="text-gray-500">Anggota 1</p>
+                        </div>
+
+
+                        <div
+                            class="bg-gray-100 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center w-full md:max-w-xs border-4 border-blue-500 scale-105">
+
+                            <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-blue-100">
+                                <img src="https://ui-avatars.com/api/?name=Handal+Karis+Arbi&size=128&background=e1f5fe&color=0277bd"
+                                    alt="Handal Karis Arbi" class="w-full h-full object-cover">
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-700">Handal Karis Arbi</h3>
+                            <p class="text-gray-500">Koordinator</p>
+                        </div>
+
+
+                        <div
+                            class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                            <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                                <img src="https://ui-avatars.com/api/?name=Nur+Lela+Sabila&size=128&background=fce4ec&color=c2185b"
+                                    alt="Nur Lela Sabila" class="w-full h-full object-cover">
+                            </div>
+
+                            <h3 class="text-xl font-bold text-gray-900">Nur Lela Sabila</h3>
+                            <p class="text-gray-500">Anggota 2</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{-- ================= SLIDESHOW SCRIPT ================= --}}
+        <script>
+            // Slideshow
+            (function() {
+                const images = @json($frames);
+                const el = document.getElementById('heroBg');
+                if (!images || !images.length) {
+                    el.style.background = '#e9f2f6';
+                    return;
+                }
+                images.forEach(src => {
+                    const im = new Image();
+                    im.src = src;
+                });
+                let i = 0;
+                el.style.backgroundImage = `url('${images[0]}')`;
+                setInterval(() => {
+                    el.classList.add('fade');
+                    setTimeout(() => {
+                        i = (i + 1) % images.length;
+                        el.style.backgroundImage = `url('${images[i]}')`;
+                        el.classList.remove('fade');
+                    }, 700);
+                }, 6000);
+            })();
+
+            // FAQ ^ / V toggle
+            document.querySelectorAll('details').forEach(d => {
+                const body = d.querySelector('.faq-body');
+                const chev = d.querySelector('.chev');
+                const sync = () => {
+                    const open = d.hasAttribute('open');
+                    body.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    chev.textContent = open ? '^' : 'V';
+                };
+                d.addEventListener('toggle', sync);
+                sync();
             });
-            let i = 0;
-            el.style.backgroundImage = `url('${images[0]}')`;
-            setInterval(() => {
-                el.classList.add('fade');
-                setTimeout(() => {
-                    i = (i + 1) % images.length;
-                    el.style.backgroundImage = `url('${images[i]}')`;
-                    el.classList.remove('fade');
-                }, 700);
-            }, 6000);
-        })();
-
-        // FAQ ^ / V toggle
-        document.querySelectorAll('details').forEach(d => {
-            const body = d.querySelector('.faq-body');
-            const chev = d.querySelector('.chev');
-            const sync = () => {
-                const open = d.hasAttribute('open');
-                body.setAttribute('aria-expanded', open ? 'true' : 'false');
-                chev.textContent = open ? '^' : 'V';
-            };
-            d.addEventListener('toggle', sync);
-            sync();
-        });
-    </script>
+        </script>
 </body>
 
 </html>
