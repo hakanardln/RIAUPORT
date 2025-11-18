@@ -484,97 +484,57 @@
         </section>
 
         <section class="py-12 md:py-20">
-            <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4">
 
-                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
 
-                    <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">
-                        About Us
-                    </h2>
+            <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">
+                About Us
+            </h2>
 
-                    <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8">
+            <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8">
 
-                        <div
-                            class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+                <!-- Anggota 1 -->
+                <div
+                    class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
 
-                            <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
-                                <img src="https://ui-avatars.com/api/?name=Nurvia+Sulistry&size=128&background=e8f5e9&color=388e3c"
-                                    alt="Nurvia Sulistry" class="w-full h-full object-cover">
-                            </div>
-
-                            <h3 class="text-xl font-bold text-gray-900">Nurvia Sulistry</h3>
-                            <p class="text-gray-500">Anggota 1</p>
-                        </div>
-
-
-                        <div
-                            class="bg-gray-100 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center w-full md:max-w-xs border-4 border-blue-500 scale-105">
-
-                            <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-blue-100">
-                                <img src="https://ui-avatars.com/api/?name=Handal+Karis+Arbi&size=128&background=e1f5fe&color=0277bd"
-                                    alt="Handal Karis Arbi" class="w-full h-full object-cover">
-                            </div>
-
-                            <h3 class="text-xl font-bold text-gray-700">Handal Karis Arbi</h3>
-                            <p class="text-gray-500">Koordinator</p>
-                        </div>
-
-
-                        <div
-                            class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
-
-                            <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
-                                <img src="https://ui-avatars.com/api/?name=Nur+Lela+Sabila&size=128&background=fce4ec&color=c2185b"
-                                    alt="Nur Lela Sabila" class="w-full h-full object-cover">
-                            </div>
-
-                            <h3 class="text-xl font-bold text-gray-900">Nur Lela Sabila</h3>
-                            <p class="text-gray-500">Anggota 2</p>
-                        </div>
-
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                        <img src="https://ui-avatars.com/api/?name=Nurvia+Sulistry&size=128&background=e8f5e9&color=388e3c"
+                            alt="Nurvia Sulistry" class="w-full h-full object-cover">
                     </div>
+
+                    <h3 class="text-xl font-bold text-gray-900">Nurvia Sulistry</h3>
+                    <p class="text-gray-500">Anggota 1</p>
                 </div>
+
+                <!-- Koordinator -->
+                <div
+                    class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                        <img src="https://ui-avatars.com/api/?name=Handal+Karis+Arbi&size=128&background=e1f5fe&color=0277bd"
+                            alt="Handal Karis Arbi" class="w-full h-full object-cover">
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-900">Handal Karis Arbi</h3>
+                    <p class="text-gray-500">Koordinator</p>
+                </div>
+
+                <!-- Anggota 2 -->
+                <div
+                    class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                        <img src="https://ui-avatars.com/api/?name=Nur+Lela+Sabila&size=128&background=fce4ec&color=c2185b"
+                            alt="Nur Lela Sabila" class="w-full h-full object-cover">
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-900">Nur Lela Sabila</h3>
+                    <p class="text-gray-500">Anggota 2</p>
+                </div>
+
             </div>
-        </section>
-        {{-- ================= SLIDESHOW SCRIPT ================= --}}
-        <script>
-            // Slideshow
-            (function() {
-                const images = @json($frames);
-                const el = document.getElementById('heroBg');
-                if (!images || !images.length) {
-                    el.style.background = '#e9f2f6';
-                    return;
-                }
-                images.forEach(src => {
-                    const im = new Image();
-                    im.src = src;
-                });
-                let i = 0;
-                el.style.backgroundImage = `url('${images[0]}')`;
-                setInterval(() => {
-                    el.classList.add('fade');
-                    setTimeout(() => {
-                        i = (i + 1) % images.length;
-                        el.style.backgroundImage = `url('${images[i]}')`;
-                        el.classList.remove('fade');
-                    }, 700);
-                }, 6000);
-            })();
+        </div>
+    </div>
+</section>
 
-            // FAQ ^ / V toggle
-            document.querySelectorAll('details').forEach(d => {
-                const body = d.querySelector('.faq-body');
-                const chev = d.querySelector('.chev');
-                const sync = () => {
-                    const open = d.hasAttribute('open');
-                    body.setAttribute('aria-expanded', open ? 'true' : 'false');
-                    chev.textContent = open ? '^' : 'V';
-                };
-                d.addEventListener('toggle', sync);
-                sync();
-            });
-        </script>
-</body>
-
-</html>
