@@ -12,7 +12,6 @@
     <style>
         /* ===== Navbar Glass ===== */
         .site-header {
-            /* was: position: sticky; top: 18px; */
             position: absolute;
             top: 0;
             left: 0;
@@ -73,12 +72,12 @@
             inset: 0;
             background-size: cover;
             background-position: center top;
-            /* was: center */
-            transition: opacity .8s ease
+            transition: opacity .8s ease;
+            opacity: 1;
         }
 
         .hero-bg.fade {
-            opacity: 0
+            opacity: 0;
         }
 
         .hero-overlay {
@@ -176,6 +175,7 @@
             }
         }
     }
+
     // Mockup laptop (opsional)
     $ctaImg = null;
     foreach (['laptop1', 'mock-laptop'] as $base) {
@@ -209,7 +209,7 @@
 
             {{-- Tombol Login --}}
             <a href="{{ route('login') }}"
-                class="bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-8 py-2 rounded-lg shadow-lg">
+               class="bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-8 py-2 rounded-lg shadow-lg">
                 Login
             </a>
         </div>
@@ -219,7 +219,6 @@
     <section class="hero">
         <div id="heroBg" class="hero-bg"></div>
         <div class="hero-overlay"></div>
-
 
         {{-- Kartu pencarian --}}
         <div class="relative max-w-3xl mx-auto pt-40">
@@ -252,11 +251,11 @@
                         <option>Pakning</option>
                     </select>
 
-                    {{-- SEARCH BUTTON (DALAM KOTAK) --}}
+                    {{-- SEARCH BUTTON --}}
                     <button
                         class="mt-2 md:mt-0 md:ml-4 h-[70px] w-[70px] rounded-full bg-white shadow-xl flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-8 w-8 text-slate-800"
-                            fill="none" stroke="currentColor" stroke-width="2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="h-8 w-8 text-slate-800" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="5"></circle>
                             <path d="m16 16 4 4" stroke-linecap="round"></path>
                         </svg>
@@ -266,8 +265,7 @@
         </div>
     </section>
 
-
-    {{-- ================= CTA SECTION ================= --}}
+    {{-- CTA SECTION --}}
     <section class="bg-white py-16">
         <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 px-6">
 
@@ -285,7 +283,7 @@
 
                 <div class="mt-10">
                     <a href="{{ route('register') }}"
-                        class="inline-block bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-10 py-3 rounded-lg shadow-xl">
+                       class="inline-block bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-10 py-3 rounded-lg shadow-xl">
                         Daftar Sebagai Sopir
                     </a>
                 </div>
@@ -293,11 +291,52 @@
 
             {{-- Gambar laptop kanan --}}
             <div class="flex-1 flex justify-center lg:justify-end">
-                <img src="{{ asset('images/laptop1.png') }}" alt="RiauPort Mockup"
-                    class="w-full max-w-xl drop-shadow-[0_25px_40px_rgba(0,0,0,0.35)]">
+                <img src="{{ $ctaImg ?? asset('images/laptop1.png') }}" alt="RiauPort Mockup"
+                     class="w-full max-w-xl drop-shadow-[0_25px_40px_rgba(0,0,0,0.35)]">
             </div>
         </div>
     </section>
+
+    {{-- CONTACT --}}
+    <section id="contact" class="py-16 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    {{-- ABOUT --}}
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    {{-- ========== SCRIPT SLIDESHOW ========== --}}
+    <script>
+        const frames = @json($frames);
+        const heroBg = document.getElementById('heroBg');
+
+        if (frames.length > 0 && heroBg) {
+            let index = 0;
+
+            // set gambar pertama
+            heroBg.style.backgroundImage = `url('${frames[index]}')`;
+
+            setInterval(() => {
+                // fade out
+                heroBg.classList.add('fade');
+
+                setTimeout(() => {
+                    // ganti index
+                    index = (index + 1) % frames.length;
+                    // ganti gambar
+                    heroBg.style.backgroundImage = `url('${frames[index]}')`;
+                    // fade in
+                    heroBg.classList.remove('fade');
+                }, 400); // waktu fade out (harus < interval)
+            }, 4000); // ganti gambar tiap 4 detik
+        }
+    </script>
 
     {{-- Placeholder section contact & about (kalau mau dipakai nanti) --}}
     <section id="contact" class="py-16 bg-slate-50">
