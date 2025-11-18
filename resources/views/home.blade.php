@@ -192,19 +192,26 @@
 <body class="bg-[#f4f7f9] text-slate-800">
 
     {{-- NAVBAR --}}
-    <header class="site-header">
-        <div class="max-w-7xl mx-auto px-4 md:px-6">
-            <nav class="glass-nav">
-                <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort" class="h-12 md:h-14">
+    <header class="w-full absolute top-0 left-0 z-20">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-2 pt-6">
 
-                <ul class="hidden md:flex items-center gap-10">
-                    <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                    <li><a class="nav-link" href="#fitur">Contact</a></li>
-                    <li><a class="nav-link" href="#faq">About</a></li>
-                </ul>
+            {{-- Logo --}}
+            <div class="flex items-center">
+                <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
+            </div>
 
-                <a href="{{ route('login') }}" class="btn-login">Login</a>
+            {{-- Menu --}}
+            <nav class="flex items-center gap-10 text-white font-semibold text-lg">
+                <a href="{{ route('home') }}" class="hover:text-slate-100">Home</a>
+                <a href="#contact" class="hover:text-slate-100">Contact</a>
+                <a href="#about" class="hover:text-slate-100">About</a>
             </nav>
+
+            {{-- Tombol Login --}}
+            <a href="{{ route('login') }}"
+                class="bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-8 py-2 rounded-lg shadow-lg">
+                Login
+            </a>
         </div>
     </header>
 
@@ -213,78 +220,95 @@
         <div id="heroBg" class="hero-bg"></div>
         <div class="hero-overlay"></div>
 
+
         {{-- Kartu pencarian --}}
-        <div class="search-card">
-            <h3 class="text-center text-xl md:text-2xl font-semibold text-slate-800 mb-4">
-                Hai Kamu, <span class="font-extrabold text-[#0e586d]">Ingin pergi ke mana?</span>
-            </h3>
+        <div class="relative max-w-3xl mx-auto pt-40">
+            <div class="search-card relative bg-white rounded-[40px] mx-4 px-10 py-10 flex flex-col items-center gap-6">
+                <h1 class="text-xl md:text-2xl font-semibold text-slate-800 text-center">
+                    Hai Kamu, <span class="font-bold">Ingin pergi ke mana?</span>
+                </h1>
 
-            <div
-                class="flex items-center gap-3 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-slate-200">
+                <div class="w-full flex flex-col md:flex-row gap-4 items-center">
 
-                {{-- ASAL --}}
-                <select class="search-input flex-1">
-                    <option value="" disabled selected>Asal</option>
-                    <option>Dumai</option>
-                    <option>Pekanbaru</option>
-                    <option>Duri</option>
-                    <option>Bengkalis</option>
-                    <option>Siak</option>
-                    <option>Pakning</option>
-                </select>
+                    {{-- ASAL --}}
+                    <select class="search-input flex-1">
+                        <option value="" disabled selected>Asal</option>
+                        <option>Dumai</option>
+                        <option>Pekanbaru</option>
+                        <option>Duri</option>
+                        <option>Bengkalis</option>
+                        <option>Siak</option>
+                        <option>Pakning</option>
+                    </select>
 
-                {{-- TUJUAN --}}
-                <select class="search-input flex-1">
-                    <option value="" disabled selected>Tujuan</option>
-                    <option>Dumai</option>
-                    <option>Pekanbaru</option>
-                    <option>Duri</option>
-                    <option>Bengkalis</option>
-                    <option>Siak</option>
-                    <option>Pakning</option>
-                </select>
+                    {{-- TUJUAN --}}
+                    <select class="search-input flex-1">
+                        <option value="" disabled selected>Tujuan</option>
+                        <option>Dumai</option>
+                        <option>Pekanbaru</option>
+                        <option>Duri</option>
+                        <option>Bengkalis</option>
+                        <option>Siak</option>
+                        <option>Pakning</option>
+                    </select>
 
-                {{-- SEARCH BUTTON (DALAM KOTAK) --}}
-                <button type="button"
-                    class="h-12 w-12 flex items-center justify-center rounded-xl bg-[#0e586d] text-white hover:bg-[#0b4a59] transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-6 h-6"
-                        stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5a7.5 7.5 0 0013.15 13.15z" />
-                    </svg>
-                </button>
+                    {{-- SEARCH BUTTON (DALAM KOTAK) --}}
+                    <button
+                        class="mt-2 md:mt-0 md:ml-4 h-[70px] w-[70px] rounded-full bg-white shadow-xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-8 w-8 text-slate-800"
+                            fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="5"></circle>
+                            <path d="m16 16 4 4" stroke-linecap="round"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </section>
 
 
-    {{-- CTA SECTION --}}
-    <section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <div>
-                <h2 class="font-extrabold text-3xl md:text-4xl lg:text-5xl leading-tight text-[#0a2d34]">
-                    Daftarkan Layanan Travelmu<br />
-                    <span class="text-[#0e586d]">Sekarang!</span>
+    {{-- ================= CTA SECTION ================= --}}
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 px-6">
+
+            {{-- Text kiri --}}
+            <div class="flex-1">
+                <h2 class="text-3xl md:text-4xl font-semibold text-slate-700 leading-snug">
+                    Daftarkan Layanan Travelmu<br>
+                    <span class="font-bold text-slate-800">Sekarang!</span>
                 </h2>
-                <p class="mt-5 text-lg text-slate-600">Tampilkan layanan travelmu dan raih lebih banyak penumpang.</p>
-                <div class="mt-7">
+
+                <p class="mt-5 text-slate-600 text-lg max-w-xl">
+                    Tampilkan layanan travelmu dan raih lebih banyak penumpang
+                    melalui satu tempat RiauPort.
+                </p>
+
+                <div class="mt-10">
                     <a href="{{ route('register') }}"
-                        class="inline-block bg-[#0e586d] text-white font-semibold rounded-xl px-5 py-3 shadow-[0_14px_28px_rgba(14,88,109,.25)]">
+                        class="inline-block bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-10 py-3 rounded-lg shadow-xl">
                         Daftar Sebagai Sopir
                     </a>
                 </div>
             </div>
 
-            <div class="relative flex justify-center lg:justify-end">
-                @if ($ctaImg)
-                    <img src="{{ $ctaImg }}" alt="Mockup"
-                        class="w-[115%] max-w-[620px] translate-x-[5%] rounded-2xl drop-shadow-[0_20px_40px_rgba(0,0,0,.25)]" />
-                @else
-                    <div class="w-full h-64 md:h-80 bg-slate-100 rounded-2xl grid place-items-center text-slate-500">
-                        (Tambahkan <strong>public/images/laptop1.png</strong>)
-                    </div>
-                @endif
+            {{-- Gambar laptop kanan --}}
+            <div class="flex-1 flex justify-center lg:justify-end">
+                <img src="{{ asset('images/laptop1.png') }}" alt="RiauPort Mockup"
+                    class="w-full max-w-xl drop-shadow-[0_25px_40px_rgba(0,0,0,0.35)]">
             </div>
+        </div>
+    </section>
+
+    {{-- Placeholder section contact & about (kalau mau dipakai nanti) --}}
+    <section id="contact" class="py-16 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
         </div>
     </section>
 
