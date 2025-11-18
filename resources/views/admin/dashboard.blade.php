@@ -80,19 +80,19 @@
                 </a>
 
                 {{-- Pelanggan --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
+                <a href="{{ route('admin.pelanggan.index') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/20 transition">
+                    <span class="grid place-items-center h-9 w-9 rounded-full bg-white/20">
+                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.7">
                             <circle cx="9" cy="8" r="3"></circle>
                             <path d="M16 21a7 7 0 0 0-14 0"></path>
                             <path d="M19 8v6M22 11h-6"></path>
                         </svg>
-                    </div>
-                    <span class="font-semibold">Pelanggan</span>
+                    </span>
+                    Pelanggan
                 </a>
+
 
                 {{-- Pengaturan --}}
                 <a href="#"
@@ -164,8 +164,7 @@
                     </div>
                     <div class="hidden lg:block">
                         {{-- Ganti gambar laptop sesuai asetmu --}}
-                        <img src="{{ asset('images/laptop1.png') }}" alt="Preview Website"
-                            class="h-40 object-contain">
+                        <img src="{{ asset('images/laptop1.png') }}" alt="Preview Website" class="h-40 object-contain">
                     </div>
                 </div>
             </section>

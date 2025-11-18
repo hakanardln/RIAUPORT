@@ -88,3 +88,21 @@ Route::post('/register', [RegisterController::class, 'store'])
 Route::fallback(function () {
     abort(404);   // pakai 404 bawaan Laravel, tidak butuh view errors.404
 });
+
+use App\Http\Controllers\PelangganController;
+
+Route::get('/admin/pelanggan', [PelangganController::class, 'index'])
+    ->name('admin.pelanggan.index');
+
+Route::middleware(['auth'])->group(function () {
+
+    // halaman dashboard admin kamu yang sudah ada...
+    // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // CRUD Pelanggan
+    Route::get('/admin/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
+    Route::post('/admin/pelanggan', [PelangganController::class, 'store'])->name('admin.pelanggan.store');
+    Route::get('/admin/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('admin.pelanggan.edit');
+    Route::put('/admin/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
+    Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.destroy');
+});
