@@ -1,12 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-// Controller
+// Controllers
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,47 @@ Route::view('/', 'home')->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| ROUTE YANG HARUS LOGIN
+| AUTHENTICATION (Guest Only)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('guest')->group(function () {
+    
+    // Login Routes
+    Route::view('/login', 'auth.login')->name('login');
+    Route::post('/login', function (Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6'],
+        ]);
+
+        $remember = (bool) $request->filled('remember');
+
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('admin.dashboard'));
+        }
+
+        return back()
+            ->withErrors(['email' => 'Email atau password salah.'])
+            ->onlyInput('email');
+    })->name('login.attempt');
+
+    // Register Routes
+    Route::view('/register', 'auth.register')->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])
+        ->name('register.store');
+
+    // Google OAuth Routes
+    Route::get('/auth/google', [RegisterController::class, 'redirectToGoogle'])
+        ->name('google.redirect');
+    Route::get('/auth/google/callback', [RegisterController::class, 'handleGoogleCallback'])
+        ->name('google.callback');
+});
+
+/*
+|--------------------------------------------------------------------------
+| AUTHENTICATED ROUTES
 |--------------------------------------------------------------------------
 */
 
@@ -28,7 +70,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])
         ->name('admin.dashboard');
 
-    // Logout (kembali ke home)
+    // Pelanggan Management
+    Route::prefix('admin/pelanggan')->name('admin.pelanggan.')->group(function () {
+        Route::get('/', [PelangganController::class, 'index'])->name('index');
+        Route::post('/', [PelangganController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [PelangganController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [PelangganController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PelangganController::class, 'destroy'])->name('destroy');
+    });
+
+    // Logout
     Route::post('/logout', function (Request $request) {
         Auth::logout();
         $request->session()->invalidate();
@@ -40,69 +91,15 @@ Route::middleware('auth')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| LOGIN
-|--------------------------------------------------------------------------
-*/
-
-// Halaman login
-Route::view('/login', 'auth.login')->name('login');
-
-// Proses login
-Route::post('/login', function (Request $request) {
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required', 'min:6'],
-    ]);
-
-    $remember = (bool) $request->filled('remember');
-
-    if (Auth::attempt($credentials, $remember)) {
-        $request->session()->regenerate();
-        return redirect()->route('admin.dashboard');
-    }
-
-    return back()
-        ->withErrors(['email' => 'Email atau password salah.'])
-        ->onlyInput('email');
-})->name('login.attempt');
-
-/*
-|--------------------------------------------------------------------------
-| REGISTER
-|--------------------------------------------------------------------------
-*/
-
-// Halaman register
-Route::view('/register', 'auth.register')->name('register');
-
-// Proses register
-Route::post('/register', [RegisterController::class, 'store'])
-    ->name('register.store');
-
-/*
-|--------------------------------------------------------------------------
 | FALLBACK (404)
 |--------------------------------------------------------------------------
 */
 
+use App\Http\Controllers\Auth\GoogleController;
+
+Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.redirect');
+Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
+
 Route::fallback(function () {
-    abort(404);   // pakai 404 bawaan Laravel, tidak butuh view errors.404
-});
-
-use App\Http\Controllers\PelangganController;
-
-Route::get('/admin/pelanggan', [PelangganController::class, 'index'])
-    ->name('admin.pelanggan.index');
-
-Route::middleware(['auth'])->group(function () {
-
-    // halaman dashboard admin kamu yang sudah ada...
-    // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-
-    // CRUD Pelanggan
-    Route::get('/admin/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
-    Route::post('/admin/pelanggan', [PelangganController::class, 'store'])->name('admin.pelanggan.store');
-    Route::get('/admin/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('admin.pelanggan.edit');
-    Route::put('/admin/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
-    Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.destroy');
+    abort(404);
 });

@@ -119,7 +119,7 @@
                             </div>
 
                             <!-- Google button -->
-                            <a href="#"
+                            <a href="{{ route('google.redirect') }}"
                                 class="w-full md:w-auto md:px-6 py-3 rounded-full mx-auto block
                     bg-[#e8f3ff] text-[#1a73e8] font-semibold
                     shadow-[0_8px_0_#cdd9ea,0_14px_22px_rgba(0,0,0,.18)]
