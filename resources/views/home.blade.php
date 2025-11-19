@@ -493,7 +493,7 @@
 
       <div class="w-full md:w-3/5 bg-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-bl-none flex flex-col items-center justify-center">
         
-        <img src="http://127.0.0.1:8000/riauport-logo.png" alt="riauport-logo.png" class="w-64 mb-4">
+        <img src="http://127.0.0.1:8000/riauport-logo.jpg" alt="riauport-logo.jpg" class="w-64 mb-4">
         
         <p class="text-md text-riau-teal text-center font-im-fell">
           Temukan berbagai Travel dalam satu platform RiauPort
