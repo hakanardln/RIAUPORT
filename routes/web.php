@@ -1,13 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
-// =================== HALAMAN UTAMA ===================
+// Controller
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisterController;
+
+/*
+|--------------------------------------------------------------------------
+| Halaman Utama
+|--------------------------------------------------------------------------
+*/
+
 Route::view('/', 'home')->name('home');
 
-// =================== AUTH (LOGIN & REGISTER) ===================
+/*
+|--------------------------------------------------------------------------
+| ROUTE YANG HARUS LOGIN
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')->group(function () {
+
+    // Dashboard Admin
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])
+        ->name('admin.dashboard');
+
+    // Logout (kembali ke home)
+    Route::post('/logout', function (Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
+    })->name('logout');
+});
+
+/*
+|--------------------------------------------------------------------------
+| LOGIN
+|--------------------------------------------------------------------------
+*/
 
 // Halaman login
 Route::view('/login', 'auth.login')->name('login');
@@ -15,49 +50,59 @@ Route::view('/login', 'auth.login')->name('login');
 // Proses login
 Route::post('/login', function (Request $request) {
     $credentials = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|min:6',
+        'email' => ['required', 'email'],
+        'password' => ['required', 'min:6'],
     ]);
 
-    // Autentikasi manual
-    if (Auth::attempt($credentials)) {
+    $remember = (bool) $request->filled('remember');
+
+    if (Auth::attempt($credentials, $remember)) {
         $request->session()->regenerate();
-        return redirect()->route('home')->with('status', 'Login berhasil!');
+        return redirect()->route('admin.dashboard');
     }
 
-    return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
+    return back()
+        ->withErrors(['email' => 'Email atau password salah.'])
+        ->onlyInput('email');
 })->name('login.attempt');
+
+/*
+|--------------------------------------------------------------------------
+| REGISTER
+|--------------------------------------------------------------------------
+*/
 
 // Halaman register
 Route::view('/register', 'auth.register')->name('register');
 
 // Proses register
-Route::post('/register', function (Request $request) {
-    $request->validate([
-        'name' => 'required|string|max:100',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:8|confirmed',
-    ]);
+Route::post('/register', [RegisterController::class, 'store'])
+    ->name('register.store');
 
-    // Simpan user baru
-    \App\Models\User::create([
-        'name' => $request->name,
-        'email' => $request->email,
-        'password' => bcrypt($request->password),
-    ]);
+/*
+|--------------------------------------------------------------------------
+| FALLBACK (404)
+|--------------------------------------------------------------------------
+*/
 
-    return redirect()->route('login')->with('status', 'Register sukses! Silakan login.');
-})->name('register.store');
-
-// Logout
-Route::post('/logout', function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect()->route('home');
-})->name('logout');
-
-// =================== FALLBACK (404) ===================
 Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
+    abort(404);   // pakai 404 bawaan Laravel, tidak butuh view errors.404
+});
+
+use App\Http\Controllers\PelangganController;
+
+Route::get('/admin/pelanggan', [PelangganController::class, 'index'])
+    ->name('admin.pelanggan.index');
+
+Route::middleware(['auth'])->group(function () {
+
+    // halaman dashboard admin kamu yang sudah ada...
+    // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // CRUD Pelanggan
+    Route::get('/admin/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
+    Route::post('/admin/pelanggan', [PelangganController::class, 'store'])->name('admin.pelanggan.store');
+    Route::get('/admin/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('admin.pelanggan.edit');
+    Route::put('/admin/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
+    Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.destroy');
 });

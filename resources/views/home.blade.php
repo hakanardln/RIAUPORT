@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RiauPort – Home</title>
 
-    {{-- Tailwind via CDN (aman tanpa Vite) --}}
+    {{-- Tailwind CDN (tanpa Vite) --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        /* ====== NAVBAR GLASS ====== */
+        /* ===== Navbar Glass ===== */
         .site-header {
             position: absolute;
-            inset-inline: 0;
-            top: 18px;
-            z-index: 1000
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
         }
 
         .glass-nav {
@@ -26,14 +27,13 @@
             backdrop-filter: blur(20px) saturate(180%);
             border-radius: 22px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
-            padding: .9rem 1.4rem;
+            padding: .9rem 1.2rem
         }
 
         .nav-link {
             font-weight: 600;
             color: #0a3b44;
-            transition: .25s;
-            font-size: 1.06rem
+            transition: .25s
         }
 
         .nav-link:hover {
@@ -47,321 +47,349 @@
             padding: .55rem 1.35rem;
             border-radius: 14px;
             box-shadow: inset 0 2px 6px rgba(255, 255, 255, .35), 0 8px 18px rgba(0, 0, 0, .18);
-            transition: .25s;
+            transition: .25s
         }
 
         .btn-login:hover {
             background: #127692
         }
 
-        /* ====== HERO ====== */
+        /* ===== Hero Slideshow ===== */
         .hero {
             position: relative;
-            width: 100vw;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            height: 72vh;
-            overflow: hidden
+            overflow: hidden;
+            height: 70vh
+        }
+
+        @media (min-width:1024px) {
+            .hero {
+                height: 72vh
+            }
         }
 
         .hero-bg {
             position: absolute;
             inset: 0;
-            background-position: center;
             background-size: cover;
-            transition: opacity .85s ease
+            background-position: center top;
+            transition: opacity .8s ease;
+            opacity: 1;
         }
 
         .hero-bg.fade {
-            opacity: 0
+            opacity: 0;
         }
 
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0) 60%, rgba(0, 0, 0, .15) 100%)
+            background: linear-gradient(180deg, rgba(0, 0, 0, .0) 0, rgba(0, 0, 0, .08) 70%, rgba(0, 0, 0, .15) 100%)
         }
 
-        /* ====== SEARCH CARD ====== */
+        /* ===== Search Card + outside icon ===== */
         .search-card {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             bottom: 14%;
-            width: min(980px, 92%);
-            background: rgba(255, 255, 255, .9);
+            width: min(1060px, 92%);
+            background: rgba(255, 255, 255, .92);
             backdrop-filter: blur(16px);
             border-radius: 28px;
-            padding: 1.6rem 1.4rem;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, .14);
+            padding: 1.6rem 1.2rem;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .14)
         }
 
         .search-input {
             border-radius: 14px;
             border: 1px solid #e5e7eb;
             padding: .9rem 1rem;
-            background: #f4f7f9;
-            outline: none;
+            background: #f6f9fb;
             width: 100%
         }
 
-        /* ====== SEARCH ICON (OUTSIDE) ====== */
         .search-glass {
             position: absolute;
-            right: -35px;
+            right: -36px;
             top: 50%;
             transform: translateY(-50%);
             height: 68px;
             width: 68px;
             border-radius: 50%;
             background: rgba(255, 255, 255, .75);
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            backdrop-filter: blur(12px) saturate(180%);
             box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: .25s;
+            transition: .25s
         }
 
         .search-glass:hover {
-            transform: translateY(-50%) scale(1.08);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, .25)
+            transform: translateY(-50%) scale(1.06)
         }
 
         .search-glass svg {
-            color: #0e586d;
             width: 28px;
-            height: 28px
+            height: 28px;
+            color: #0e586d
         }
 
-        /* ====== CTA ====== */
-        .cta-title {
-            font-weight: 800;
-            color: #0a2d34;
-            line-height: 1.1
-        }
-
-        .cta-btn {
-            background: #0e586d;
-            color: #fff;
-            font-weight: 700;
-            padding: .95rem 1.3rem;
-            border-radius: 14px;
-            box-shadow: 0 14px 28px rgba(14, 88, 109, .25), inset 0 2px 6px rgba(255, 255, 255, .35);
-            transition: .25s;
-        }
-
-        .cta-btn:hover {
-            background: #127692
-        }
-
-        .cta-image {
-            width: 115%;
-            max-width: 620px;
-            transform: translateX(5%)
-        }
-
-        /* ====== FEATURE CARDS (Halaman depan 2 style) ====== */
-        .feature-wrap {
-            background: linear-gradient(160deg, #cdf3f8 0%, #7fd0d9 38%, #53b7c7 100%);
-            border-radius: 20px;
-        }
-
+        /* ===== Cards fitur (Halaman Depan 2) ===== */
         .feature-card {
-            background: rgba(255, 255, 255, .95);
-            border-radius: 20px;
-            box-shadow: 0 16px 28px rgba(0, 0, 0, .15), inset 0 2px 6px rgba(255, 255, 255, .45);
-            padding: 1.4rem 1.2rem;
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, .10);
+            padding: 22px 22px
         }
 
-        body {
-            margin: 0;
-            font-family: 'Poppins', system-ui, Segoe UI, Roboto, Arial, sans-serif
+        /* ===== FAQ ===== */
+        .faq-card {
+            box-shadow: 0 12px 22px rgba(0, 0, 0, .10)
+        }
+
+        .chev {
+            transition: .2s
+        }
+
+        .faq-body {
+            grid-template-rows: 0fr;
+            transition: grid-template-rows .25s ease
+        }
+
+        .faq-body[aria-expanded="true"] {
+            grid-template-rows: 1fr
         }
     </style>
 </head>
 
-<body class="bg-white">
+@php
+    // KUMPULKAN gambar slideshow secara dinamis
+    $frames = [];
+    foreach ([1, 2, 3, 4] as $i) {
+        foreach (['png', 'jpg', 'jpeg', 'webp'] as $e) {
+            $p = public_path("images/Gambar{$i}.{$e}");
+            if (file_exists($p)) {
+                $frames[] = asset("images/Gambar{$i}.{$e}");
+                break;
+            }
+        }
+    }
 
-    {{-- ================= NAVBAR ================= --}}
-    <header class="site-header">
-        <div class="max-w-7xl mx-auto px-4 md:px-6">
-            <nav class="glass-nav">
-                <div class="flex items-center gap-3">
-                    <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort Logo" class="h-12 md:h-14"
-                        onerror="this.style.display='none'">
-                </div>
+    // Mockup laptop (opsional)
+    $ctaImg = null;
+    foreach (['laptop1', 'mock-laptop'] as $base) {
+        foreach (['png', 'jpg', 'jpeg', 'webp'] as $e) {
+            $p = public_path("images/{$base}.{$e}");
+            if (file_exists($p)) {
+                $ctaImg = asset("images/{$base}.{$e}");
+                break 2;
+            }
+        }
+    }
+@endphp
 
-                <ul class="hidden md:flex items-center gap-10">
-                    <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
-                    <li><a class="nav-link" href="#">Contact</a></li>
-                    <li><a class="nav-link" href="#">About</a></li>
-                </ul>
+<body class="bg-[#f4f7f9] text-slate-800">
 
-                <a href="{{ route('login') }}" class="btn-login">Login</a>
+    {{-- NAVBAR --}}
+    <header class="w-full absolute top-0 left-0 z-20">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-2 pt-6">
+
+            {{-- Logo --}}
+            <div class="flex items-center">
+                <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
+            </div>
+
+            {{-- Menu --}}
+            <nav class="flex items-center gap-10 text-white font-semibold text-lg">
+                <a href="{{ route('home') }}" class="hover:text-slate-100">Home</a>
+                <a href="#contact" class="hover:text-slate-100">Contact</a>
+                <a href="#about" class="hover:text-slate-100">About</a>
             </nav>
+
+            {{-- Tombol Login --}}
+            <a href="{{ route('login') }}"
+               class="bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-8 py-2 rounded-lg shadow-lg">
+                Login
+            </a>
         </div>
     </header>
 
-    {{-- ================= HERO + SLIDESHOW ================= --}}
-    @php
-        // Kumpulkan gambar Gambar1..Gambar4 (atau "Frame 1..4") dengan ekstensi umum
-        $frames = [];
-        foreach (range(1, 4) as $i) {
-            foreach (['jpg', 'png', 'jpeg', 'webp'] as $ext) {
-                $p = public_path("images/Gambar{$i}.{$ext}");
-                if (file_exists($p)) {
-                    $frames[] = asset("images/Gambar{$i}.{$ext}");
-                    break;
-                }
-            }
-        }
-        if (empty($frames)) {
-            foreach (range(1, 4) as $i) {
-                foreach (['jpg', 'png', 'jpeg', 'webp'] as $ext) {
-                    $p = public_path("images/Frame {$i}.{$ext}");
-                    if (file_exists($p)) {
-                        $frames[] = asset("images/Frame {$i}.{$ext}");
-                        break;
-                    }
-                }
-            }
-        }
-
-        // Gambar laptop (opsional)
-        $ctaImg = null;
-        foreach (['laptop1', 'mock-laptop'] as $base) {
-            foreach (['png', 'jpg', 'jpeg', 'webp'] as $e) {
-                $p = public_path("images/{$base}.{$e}");
-                if (file_exists($p)) {
-                    $ctaImg = asset("images/{$base}.{$e}");
-                    break 2;
-                }
-            }
-        }
-    @endphp
-
+    {{-- HERO + PENCARIAN --}}
     <section class="hero">
-    <div id="heroBg" class="hero-bg"></div>
-    <div class="hero-overlay"></div>
+        <div id="heroBg" class="hero-bg"></div>
+        <div class="hero-overlay"></div>
 
-    {{-- Kartu pencarian --}}
-    <div class="search-card">
-        <h3 class="text-center text-xl md:text-2xl font-semibold text-slate-800 mb-4">
-            Hai Kamu, <span class="font-extrabold text-[#0e586d]">Ingin pergi ke mana?</span>
-        </h3>
+        {{-- Kartu pencarian --}}
+        <div class="relative max-w-3xl mx-auto pt-40">
+            <div class="search-card relative bg-white rounded-[40px] mx-4 px-10 py-10 flex flex-col items-center gap-6">
+                <h1 class="text-xl md:text-2xl font-semibold text-slate-800 text-center">
+                    Hai Kamu, <span class="font-bold">Ingin pergi ke mana?</span>
+                </h1>
 
-        <div class="flex items-center gap-3 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-slate-200">
+                <div class="w-full flex flex-col md:flex-row gap-4 items-center">
 
-            {{-- ASAL --}}
-            <select class="search-input flex-1">
-                <option value="" disabled selected>Asal</option>
-                <option>Dumai</option>
-                <option>Pekanbaru</option>
-                <option>Duri</option>
-                <option>Bengkalis</option>
-                <option>Siak</option>
-                <option>Pakning</option>
-            </select>
+                    {{-- ASAL --}}
+                    <select class="search-input flex-1">
+                        <option value="" disabled selected>Asal</option>
+                        <option>Dumai</option>
+                        <option>Pekanbaru</option>
+                        <option>Duri</option>
+                        <option>Bengkalis</option>
+                        <option>Siak</option>
+                        <option>Pakning</option>
+                    </select>
 
-            {{-- TUJUAN --}}
-            <select class="search-input flex-1">
-                <option value="" disabled selected>Tujuan</option>
-                <option>Dumai</option>
-                <option>Pekanbaru</option>
-                <option>Duri</option>
-                <option>Bengkalis</option>
-                <option>Siak</option>
-                <option>Pakning</option>
-            </select>
+                    {{-- TUJUAN --}}
+                    <select class="search-input flex-1">
+                        <option value="" disabled selected>Tujuan</option>
+                        <option>Dumai</option>
+                        <option>Pekanbaru</option>
+                        <option>Duri</option>
+                        <option>Bengkalis</option>
+                        <option>Siak</option>
+                        <option>Pakning</option>
+                    </select>
 
-            {{-- SEARCH BUTTON (DALAM KOTAK) --}}
-            <button type="button"
-                class="h-12 w-12 flex items-center justify-center rounded-xl bg-[#0e586d] text-white hover:bg-[#0b4a59] transition">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                    class="w-6 h-6" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103.5 3.5a7.5 7.5 0 0013.15 13.15z" />
-                </svg>
-            </button>
-        </div>
-    </div>
-</section>
-
-
-    {{-- ================= CTA SECTION ================= --}}
-    <section class="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <div>
-                <h2 class="cta-title text-3xl md:text-4xl lg:text-5xl">
-                    Daftarkan Layanan Travelmu<br />
-                    <span style="color:#0e586d">Sekarang!</span>
-                </h2>
-                <p class="mt-5 text-lg text-slate-600">
-                    Tampilkan layanan travelmu dan raih lebih banyak penumpang.
-                </p>
-                <div class="mt-7">
-                    <a href="{{ route('register') }}" class="cta-btn inline-block">Daftar Sebagai Sopir</a>
+                    {{-- SEARCH BUTTON --}}
+                    <button
+                        class="mt-2 md:mt-0 md:ml-4 h-[70px] w-[70px] rounded-full bg-white shadow-xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                             class="h-8 w-8 text-slate-800" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="5"></circle>
+                            <path d="m16 16 4 4" stroke-linecap="round"></path>
+                        </svg>
+                    </button>
                 </div>
-            </div>
-
-            <div class="relative flex justify-center lg:justify-end">
-                @if ($ctaImg)
-                    <img src="{{ $ctaImg }}" alt="Mockup"
-                        class="cta-image drop-shadow-[0_20px_40px_rgba(0,0,0,.25)] rounded-2xl" />
-                @else
-                    <div class="w-full h-64 md:h-80 bg-slate-100 rounded-2xl grid place-items-center text-slate-500">
-                        (Tambahkan <strong>public/images/laptop1.png</strong>)
-                    </div>
-                @endif
             </div>
         </div>
     </section>
 
-    {{-- ================= HALAMAN DEPAN 2 (FITUR) ================= --}}
-    <section class="max-w-7xl mx-auto px-4 md:px-6 pb-16">
-        <div class="feature-wrap p-8 md:p-10">
-            <h3 class="text-white font-extrabold text-2xl md:text-4xl leading-tight tracking-wide mb-8">
-                Riauport, Solusi terhubung ke&nbsp;berbagai<br class="hidden md:block" />
-                jasa transportasi Travel pilihan anda
-            </h3>
+    {{-- CTA SECTION --}}
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-10 px-6">
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {{-- Text kiri --}}
+            <div class="flex-1">
+                <h2 class="text-3xl md:text-4xl font-semibold text-slate-700 leading-snug">
+                    Daftarkan Layanan Travelmu<br>
+                    <span class="font-bold text-slate-800">Sekarang!</span>
+                </h2>
+
+                <p class="mt-5 text-slate-600 text-lg max-w-xl">
+                    Tampilkan layanan travelmu dan raih lebih banyak penumpang
+                    melalui satu tempat RiauPort.
+                </p>
+
+                <div class="mt-10">
+                    <a href="{{ route('register') }}"
+                       class="inline-block bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-10 py-3 rounded-lg shadow-xl">
+                        Daftar Sebagai Sopir
+                    </a>
+                </div>
+            </div>
+
+            {{-- Gambar laptop kanan --}}
+            <div class="flex-1 flex justify-center lg:justify-end">
+                <img src="{{ $ctaImg ?? asset('images/laptop1.png') }}" alt="RiauPort Mockup"
+                     class="w-full max-w-xl drop-shadow-[0_25px_40px_rgba(0,0,0,0.35)]">
+            </div>
+        </div>
+    </section>
+
+    {{-- CONTACT --}}
+    <section id="contact" class="py-16 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    {{-- ABOUT --}}
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    {{-- ========== SCRIPT SLIDESHOW ========== --}}
+    <script>
+        const frames = @json($frames);
+        const heroBg = document.getElementById('heroBg');
+
+        if (frames.length > 0 && heroBg) {
+            let index = 0;
+
+            // set gambar pertama
+            heroBg.style.backgroundImage = `url('${frames[index]}')`;
+
+            setInterval(() => {
+                // fade out
+                heroBg.classList.add('fade');
+
+                setTimeout(() => {
+                    // ganti index
+                    index = (index + 1) % frames.length;
+                    // ganti gambar
+                    heroBg.style.backgroundImage = `url('${frames[index]}')`;
+                    // fade in
+                    heroBg.classList.remove('fade');
+                }, 400); // waktu fade out (harus < interval)
+            }, 4000); // ganti gambar tiap 4 detik
+        }
+    </script>
+
+    {{-- Placeholder section contact & about (kalau mau dipakai nanti) --}}
+    <section id="contact" class="py-16 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center text-slate-600">
+            {{-- isi sendiri --}}
+        </div>
+    </section>
+
+    {{-- ===== HALAMAN DEPAN 2 (FITUR) ===== --}}
+    <section id="fitur" class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#7BD1DF] via-[#6CC6D6] to-[#5CBCCB]"></div>
+        <div class="relative max-w-7xl mx-auto px-4 md:px-6 py-14">
+
+            <h2 class="text-white text-3xl md:text-4xl font-extrabold drop-shadow-sm mb-10">
+                Riauport, Solusi terhubung ke berbagai<br class="hidden md:block" />
+                jasa transportasi Travel pilihan anda
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {{-- Kartu 1 --}}
-                <div class="feature-card flex items-start gap-4">
-                    <img src="{{ asset('images/car.png') }}" class="h-12 w-12 object-contain"
-                        onerror="this.style.display='none'">
-                    <p class="text-[19px] md:text-[20px] text-slate-800">
-                        Perjalanan nyaman dimulai dari pilihan yang tepat.
+                <div class="feature-card flex gap-4 items-start">
+                    <img src="{{ asset('images/car.png') }}" class="w-12 h-12" alt="">
+                    <p class="text-lg">
+                        <span class="font-semibold">Perjalanan nyaman dimulai dari pilihan yang tepat.</span>
                     </p>
                 </div>
 
                 {{-- Kartu 2 --}}
-                <div class="feature-card flex items-start gap-4">
-                    <img src="{{ asset('images/ratings.png') }}" class="h-12 w-12 object-contain"
-                        onerror="this.style.display='none'">
-                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                <div class="feature-card flex gap-4 items-start">
+                    <img src="{{ asset('images/ratings.png') }}" class="w-12 h-12" alt="">
+                    <p class="text-lg">
                         Dapatkan pengalaman terbaik dari rekomendasi nyata penumpang
                     </p>
                 </div>
 
                 {{-- Kartu 3 --}}
-                <div class="feature-card flex items-start gap-4">
-                    <img src="{{ asset('images/browser.png') }}" class="h-12 w-12 object-contain"
-                        onerror="this.style.display='none'">
-                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                <div class="feature-card flex gap-4 items-start">
+                    <img src="{{ asset('images/browser.png') }}" class="w-12 h-12" alt="">
+                    <p class="text-lg">
                         Semua Sopir Travel, Satu Portal
                     </p>
                 </div>
 
                 {{-- Kartu 4 --}}
-                <div class="feature-card flex items-start gap-4">
-                    <img src="{{ asset('images/whatsapp.png') }}" class="h-12 w-12 object-contain"
-                        onerror="this.style.display='none'">
-                    <p class="text-[19px] md:text-[20px] text-slate-800">
+                <div class="feature-card flex gap-4 items-start">
+                    <img src="{{ asset('images/whatsapp.png') }}" class="w-12 h-12" alt="">
+                    <p class="text-lg">
                         Hubungi sopir secara langsung via Whatsapp atau telepon
                     </p>
                 </div>
@@ -371,126 +399,243 @@
 
     <section class="w-full bg-gradient-to-b from-white via-[#d8f0f7] to-[#3FA6C4] py-16 flex flex-col items-center">
 
-    <!-- Title -->
-    <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-3 text-center">
-        Temukan Sopir Sesuai Tujuan Anda
-    </h2>
-    <div class="w-1/2 h-1 bg-[#3FA6C4] rounded-full mb-12"></div>
+        <!-- Title -->
+        <h2 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-3 text-center">
+            Temukan Sopir Sesuai Tujuan Anda
+        </h2>
+        <div class="w-1/2 h-1 bg-[#3FA6C4] rounded-full mb-12"></div>
 
-    <!-- Wrapper -->
-    <div class="relative w-full max-w-6xl">
+        <!-- Wrapper -->
+        <div class="relative w-full max-w-6xl">
 
-        <!-- Prev Button -->
-        <button
-            class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </button>
+            <!-- Prev Button -->
+            <button
+                class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
 
-        <!-- Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 md:px-14">
+            <!-- Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 px-10 md:px-14">
 
-            <!-- Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
-                <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
-                    <img src={{asset('Images2.jpg')}} class="w-full h-full object-cover">
+                <!-- Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                    <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                        <img src={{ asset('images/Images2.jpg') }} class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                        </svg>
+                        FITRA
+                    </div>
+
+                    <p class="text-sm text-gray-700 mt-1">
+                        <strong>Tujuan :</strong><br>
+                        Bengkalis > Pekanbaru > Siak > Dumai
+                    </p>
+
+                    <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat
+                        selengkapnya...</a>
                 </div>
 
-                <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
-                    </svg>
-                    FITRA
+                <!-- Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                    <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                        <img src={{ asset('images/mobil2.jpg') }} class="w-full h-full object-cover">
+                    </div>
+
+                    <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                        </svg>
+                        Zawa Aufi
+                    </div>
+
+                    <p class="text-sm text-gray-700 mt-1">
+                        <strong>Tujuan :</strong><br>
+                        Bengkalis > Dumai > Pekanbaru
+                    </p>
+
+                    <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat
+                        selengkapnya...</a>
                 </div>
 
-                <p class="text-sm text-gray-700 mt-1">
-                    <strong>Tujuan :</strong><br>
-                    Bengkalis > Pekanbaru > Siak > Dumai
-                </p>
+                <!-- Card -->
+                <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
+                    <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
+                        <img src={{ asset('images/mobil3.jpg') }} class="w-full h-full object-cover">
+                    </div>
 
-                <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat selengkapnya...</a>
+                    <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
+                        </svg>
+                        Riki
+                    </div>
+
+                    <p class="text-sm text-gray-700 mt-1">
+                        <strong>Tujuan :</strong><br>
+                        Duri > Dumai > Pakning > Bengkalis
+                    </p>
+
+                    <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat
+                        selengkapnya...</a>
+                </div>
+
             </div>
 
-            <!-- Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
-                <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
-                    <img src={{asset('mobil2.jpg')}} class="w-full h-full object-cover">
-                </div>
-
-                <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
-                    </svg>
-                    Zawa Aufi
-                </div>
-
-                <p class="text-sm text-gray-700 mt-1">
-                    <strong>Tujuan :</strong><br>
-                    Bengkalis > Dumai > Pekanbaru
-                </p>
-
-                <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat selengkapnya...</a>
-            </div>
-
-            <!-- Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-4 hover:shadow-xl transition">
-                <div class="w-full h-48 bg-gray-100 rounded-xl overflow-hidden">
-                    <img src={{asset('mobil3.jpg')}} class="w-full h-full object-cover">
-                </div>
-
-                <div class="mt-3 flex items-center gap-2 text-purple-600 font-semibold">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M5.121 17.804A9 9 0 1117.804 5.12 9 9 0 015.12 17.804z" />
-                    </svg>
-                    Riki
-                </div>
-
-                <p class="text-sm text-gray-700 mt-1">
-                    <strong>Tujuan :</strong><br>
-                    Duri > Dumai > Pakning > Bengkalis
-                </p>
-
-                <a href="#" class="text-sm text-blue-600 hover:underline mt-2 block">Lihat selengkapnya...</a>
-            </div>
+            <!-- Next Button -->
+            <button
+                class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
 
         </div>
 
-        <!-- Next Button -->
-        <button
-            class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg p-3 rounded-full hover:scale-110 transition z-10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" stroke="black" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-        </button>
+        <!-- Dots -->
+        <div class="flex gap-3 mt-8">
+            <div class="w-3 h-3 bg-black rounded-full"></div>
+            <div class="w-3 h-3 bg-white border border-black rounded-full"></div>
+        </div>
 
+        <section>
+            <div class="relative flex flex-col md:flex-row max-w-5xl mx-auto shadow-2xl rounded-lg my-12">
+
+                <div
+                    class="relative z-10 w-full md:w-2/5 bg-[#4AA8BA] text-white p-10 rounded-t-lg md:rounded-l-lg md:rounded-tr-none md:rounded-r-[3rem]">
+
+                    <h2 class="text-3xl font-bold mb-6" style="font-family: serif;">Tentang RiauPort</h2>
+
+                    <p class="text-sm font-bold mb-4">
+                        Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat dalam
+                        memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.
+                    </p>
+
+                    <p class="text-sm font-bold mb-4">
+                        sistem berbasis website yang terpusat diperlukan untuk menyediakan layanan informasi travel.
+                        Karena website ini memang dirancang sedemikian rupa, pengguna dapat dengan mudah menemukan
+                        berbagai jasa travel sesuai daerah pilihan mereka. Nama travel, jadwal keberangkatan, desti,
+                        harga, jenis kendaraan, serta kontak yang dapat dihubungi termasuk ke dalam informasi yang
+                        disajikan.
+                    </p>
+                </div>
+
+                <div
+                    class="w-full md:w-3/5 bg-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-bl-none flex flex-col items-center justify-center">
+
+                    <img src="images/riauport-logo.png" alt="riauport-logo.png" class="w-64 mb-4">
+
+                    <p class="text-md text-riau-teal text-center font-im-fell">
+                        Temukan berbagai Travel dalam satu platform RiauPort
+                        </smp>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-12 md:py-20">
+    <div class="container mx-auto px-4">
+
+        <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+
+            <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">
+                About Us
+            </h2>
+
+            <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8">
+
+                <!-- Anggota 1 -->
+                <div
+                    class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                        <img src="https://ui-avatars.com/api/?name=Nurvia+Sulistry&size=128&background=e8f5e9&color=388e3c"
+                            alt="Nurvia Sulistry" class="w-full h-full object-cover">
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-900">Nurvia Sulistry</h3>
+                    <p class="text-gray-500">Anggota 1</p>
+                </div>
+
+                <!-- Koordinator -->
+                <div
+                    class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                        <img src="https://ui-avatars.com/api/?name=Handal+Karis+Arbi&size=128&background=e1f5fe&color=0277bd"
+                            alt="Handal Karis Arbi" class="w-full h-full object-cover">
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-900">Handal Karis Arbi</h3>
+                    <p class="text-gray-500">Koordinator</p>
+                </div>
+
+                <!-- Anggota 2 -->
+                <div
+                    class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
+
+                    <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
+                        <img src="https://ui-avatars.com/api/?name=Nur+Lela+Sabila&size=128&background=fce4ec&color=c2185b"
+                            alt="Nur Lela Sabila" class="w-full h-full object-cover">
+                    </div>
+
+                    <h3 class="text-xl font-bold text-gray-900">Nur Lela Sabila</h3>
+                    <p class="text-gray-500">Anggota 2</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ - Riauport</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-sky-300 to-green-200 min-h-screen flex items-center justify-center px-4 py-10">
+
+  <!-- Kotak Besar FAQ -->
+  <div class="bg-white rounded-md shadow-lg max-w-5xl w-full">
+    
+    <!-- Judul -->
+    <div class="px-8 pt-10 pb-6">
+      <h2 class="text-3xl font-bold text-gray-800">Pernyataan Umum</h2>
     </div>
 
-    <!-- Dots -->
-    <div class="flex gap-3 mt-8">
-        <div class="w-3 h-3 bg-black rounded-full"></div>
-        <div class="w-3 h-3 bg-white border border-black rounded-full"></div>
-    </div>
-
-<section>
-    <div class="relative flex flex-col md:flex-row max-w-5xl mx-auto shadow-2xl rounded-lg my-12">
-
-      <div class="relative z-10 w-full md:w-2/5 bg-[#4AA8BA] text-white p-10 rounded-t-lg md:rounded-l-lg md:rounded-tr-none md:rounded-r-[3rem]">
-        
-        <h2 class="text-3xl font-bold mb-6" style="font-family: serif;">Tentang RiauPort</h2>
-        
-        <p class="text-sm font-bold mb-4">
-          Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat dalam memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.
+    <!-- Daftar FAQ -->
+    <div class="divide-y divide-gray-200 text-lg">
+      
+      <!-- FAQ 1 -->
+      <details class="group px-8 py-6 transition-all duration-300">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+          <span>Apa itu Riauport?</span>
+          <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+          Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
+          dalam memperoleh informasi terkait perjalanan travel, dan kontak hubung sopir di seluruh Riau.
         </p>
-        
-        <p class="text-sm font-bold mb-4">
-          sistem berbasis website yang terpusat diperlukan untuk menyediakan layanan informasi travel. Karena website ini memang dirancang sedemikian rupa, pengguna dapat dengan mudah menemukan berbagai jasa travel sesuai daerah pilihan mereka. Nama travel, jadwal keberangkatan, desti, harga, jenis kendaraan, serta kontak yang dapat dihubungi termasuk ke dalam informasi yang disajikan.
-        </p>
-      </div>
+      </details>
 
+<<<<<<< HEAD
       <div class="w-full md:w-3/5 bg-white p-10 rounded-b-lg md:rounded-r-lg md:rounded-bl-none flex flex-col items-center justify-center">
         
         <img src="http://127.0.0.1:8000/riauport-logo.jpg" alt="riauport-logo.jpg" class="w-64 mb-4">
@@ -499,85 +644,50 @@
           Temukan berbagai Travel dalam satu platform RiauPort
         </smp>
       </div>
+=======
+      <!-- FAQ 2 -->
+      <details class="group px-8 py-6 transition-all duration-300">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+          <span>Bagaimana cara mendapatkan Whatsapp Sopir?</span>
+          <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+          Kamu bisa melihat nomor sopir langsung pada detail travel yang tersedia di halaman utama.
+        </p>
+      </details>
+
+      <!-- FAQ 3 -->
+      <details class="group px-8 py-6 transition-all duration-300">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+          <span>Bagaimana cara melihat detail travel?</span>
+          <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+          Klik pada nama travel yang ditampilkan, maka kamu akan diarahkan ke halaman detail travel tersebut.
+        </p>
+      </details>
+
+      <!-- FAQ 4 -->
+      <details class="group px-8 py-6 transition-all duration-300">
+        <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+          <span>Apakah saja persyaratan mendaftarkan travel?</span>
+          <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+          Harus memiliki informasi rute, jadwal, kontak aktif, serta izin operasional dari pihak berwenang.
+        </p>
+      </details>
+>>>>>>> ccb49917ebd8b9e8c880f5b347feeb9ab50f8fc4
 
     </div>
-  </section>
+  </div>
 
- <section class="py-12 md:py-20">
-        <div class="container mx-auto px-4">
-
-            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
-
-                <h2 class="text-4xl font-bold text-gray-800 text-center mb-12">
-                    About Us
-                </h2>
-
-                <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch gap-8">
-
-                    <div class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
-                        
-                        <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
-                            <img src="https://ui-avatars.com/api/?name=Nurvia+Sulistry&size=128&background=e8f5e9&color=388e3c" alt="Nurvia Sulistry" class="w-full h-full object-cover">
-                        </div>
-                        
-                        <h3 class="text-xl font-bold text-gray-900">Nurvia Sulistry</h3>
-                        <p class="text-gray-500">Anggota 1</p>
-                    </div>
-
-
-                    <div class="bg-gray-100 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center w-full md:max-w-xs border-4 border-blue-500 scale-105">
-                        
-                        <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-blue-100">
-                            <img src="https://ui-avatars.com/api/?name=Handal+Karis+Arbi&size=128&background=e1f5fe&color=0277bd" alt="Handal Karis Arbi" class="w-full h-full object-cover">
-                        </div>
-                        
-                        <h3 class="text-xl font-bold text-gray-700">Handal Karis Arbi</h3>
-                        <p class="text-gray-500">Koordinator</p>
-                    </div>
-
-
-                    <div class="bg-gray-100 rounded-2xl shadow-lg p-8 flex flex-col items-center text-center w-full md:max-w-xs transition-transform transform hover:scale-105">
-                        
-                        <div class="w-32 h-32 rounded-full overflow-hidden mb-5 border-4 border-gray-200">
-                            <img src="https://ui-avatars.com/api/?name=Nur+Lela+Sabila&size=128&background=fce4ec&color=c2185b" alt="Nur Lela Sabila" class="w-full h-full object-cover">
-                        </div>
-                        
-                        <h3 class="text-xl font-bold text-gray-900">Nur Lela Sabila</h3>
-                        <p class="text-gray-500">Anggota 2</p>
-                    </div>
-
-                </div> </div> </div>
-    </section>
-    {{-- ================= SLIDESHOW SCRIPT ================= --}}
-    <script>
-        (function() {
-            const images = @json($frames);
-            const el = document.getElementById('heroBg');
-
-            if (!images || !images.length) {
-                el.style.background = 'linear-gradient(180deg,#e9f2f6,#f6fafc)';
-                return;
-            }
-
-            // preload
-            images.forEach(src => {
-                const im = new Image();
-                im.src = src;
-            });
-
-            let i = 0;
-            el.style.backgroundImage = `url('${images[0]}')`;
-
-            setInterval(() => {
-                el.classList.add('fade');
-                setTimeout(() => {
-                    i = (i + 1) % images.length;
-                    el.style.backgroundImage = `url('${images[i]}')`;
-                    el.classList.remove('fade');
-                }, 700);
-            }, 6000);
-        })();
-    </script>
 </body>
-
 </html>
+
