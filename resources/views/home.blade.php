@@ -283,8 +283,8 @@
 
             <div
                 class="w-[100%] max-w-[2500px] mx-auto
-    backdrop-blur-xl bg-white/50
-    shadow-[0_8px_32px_rgba(0,0,0,0.12)]
+    backdrop-blur-xl bg-white/1
+    shadow-[0_2px_12px_rgba(0,0,0,0.12)]
     rounded-[20px]
     border border-white/40
     px-7 py-2
@@ -292,7 +292,7 @@
 
                 {{-- Logo --}}
                 <div class="flex items-center">
-                    <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
+                    <img src="{{ asset('riauport-logo.jpg') }}" alt="RiauPort" class="h-20 drop-shadow-md">
                 </div>
 
                 {{-- Menu --}}

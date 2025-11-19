@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-// Controller
+use App\Http\Controllers\SopirController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -106,3 +106,5 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
     Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.destroy');
 });
+Route::get('/sopir/dashboard', [SopirController::class, 'dashboard'])
+    ->name('sopir.dashboard');
