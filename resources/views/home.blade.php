@@ -281,9 +281,38 @@
     <header class="w-full absolute top-0 left-0 z-20">
         <div class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-2 pt-6">
 
+<<<<<<< HEAD
             {{-- Logo --}}
             <div class="flex items-center">
                 <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
+=======
+            <div
+                class="w-[100%] max-w-[2500px] mx-auto
+    backdrop-blur-xl bg-white/1
+    shadow-[0_2px_12px_rgba(0,0,0,0.12)]
+    rounded-[20px]
+    border border-white/40
+    px-7 py-2
+    flex items-center justify-between">
+
+                {{-- Logo --}}
+                <div class="flex items-center">
+                    <img src="{{ asset('riauport-logo.jpg') }}" alt="RiauPort" class="h-20 drop-shadow-md">
+                </div>
+
+                {{-- Menu --}}
+                <nav class="flex items-center gap-10 text-white font-semibold text-lg">
+                    <a href="{{ route('home') }}" class="hover:text-slate-100">Home</a>
+                    <a href="#contact" class="hover:text-slate-100">Contact</a>
+                    <a href="#about" class="hover:text-slate-100">About</a>
+                </nav>
+
+                {{-- Tombol Login --}}
+                <a href="{{ route('login') }}"
+                    class="bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-8 py-2 rounded-lg shadow-lg">
+                    Login
+                </a>
+>>>>>>> fbc1594283a46ce88e46f502cb09108a0a987a07
             </div>
 
             {{-- Menu --}}

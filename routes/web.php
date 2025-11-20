@@ -4,8 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+<<<<<<< HEAD
 // Controllers
 use App\Http\Controllers\AuthController;
+=======
+use App\Http\Controllers\SopirController;
+>>>>>>> fbc1594283a46ce88e46f502cb09108a0a987a07
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RegisterController;
@@ -101,5 +105,30 @@ Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 
 Route::fallback(function () {
+<<<<<<< HEAD
     abort(404);
 });
+=======
+    abort(404);   // pakai 404 bawaan Laravel, tidak butuh view errors.404
+});
+
+use App\Http\Controllers\PelangganController;
+
+Route::get('/admin/pelanggan', [PelangganController::class, 'index'])
+    ->name('admin.pelanggan.index');
+
+Route::middleware(['auth'])->group(function () {
+
+    // halaman dashboard admin kamu yang sudah ada...
+    // Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // CRUD Pelanggan
+    Route::get('/admin/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
+    Route::post('/admin/pelanggan', [PelangganController::class, 'store'])->name('admin.pelanggan.store');
+    Route::get('/admin/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('admin.pelanggan.edit');
+    Route::put('/admin/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
+    Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.destroy');
+});
+Route::get('/sopir/dashboard', [SopirController::class, 'dashboard'])
+    ->name('sopir.dashboard');
+>>>>>>> fbc1594283a46ce88e46f502cb09108a0a987a07
