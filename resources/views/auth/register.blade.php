@@ -1,159 +1,201 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="h-full">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-
-    <!-- Tailwind CDN -->
+    <title>Daftar • RiauPort</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Font untuk tagline kiri -->
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
             --primary: #0E586D;
-            /* warna utama */
-            --p-50: #e7f7fb;
-            /* latar panel kiri */
-            --p-100: #cae9ef;
-            /* garis samping kiri */
+            --primary-dark: #0B4C5D;
+            --accent: #00D4FF;
+            --glass: rgba(255, 255, 255, 0.75);
         }
 
-        .fell-font {
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%);
+        }
+
+        .fell {
             font-family: 'IM FELL French Canon', serif;
-            letter-spacing: .2px;
+        }
+
+        .wave-bg {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23CAE9EF' fill-opacity='0.35' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 3rem;
+            box-shadow: 0 20px 40px rgba(14, 88, 109, 0.2);
+        }
+
+        .btn-3d {
+            background: linear-gradient(145deg, var(--primary), #0f6a82);
+            box-shadow: 0 8px 0 var(--primary-dark), 0 16px 30px rgba(14, 88, 109, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(3px);
+            box-shadow: 0 5px 0 var(--primary-dark), 0 10px 20px rgba(14, 88, 109, 0.3);
+        }
+
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 var(--primary-dark);
+        }
+
+        .input-glow:focus {
+            box-shadow: 0 0 0 3px rgba(14, 88, 109, 0.25);
+            border-color: var(--primary);
         }
     </style>
 </head>
 
-<body class="bg-white min-h-screen flex items-center justify-center">
+<body class="h-full">
 
-    <!-- Fullscreen background putih -->
-    <div class="w-full h-full min-h-screen grid grid-cols-1 md:grid-cols-2">
+    <div class="grid grid-cols-1 lg:grid-cols-2 h-full">
 
-        <!-- Panel kiri -->
-        <div class="relative bg-[color:var(--p-50)] rounded-r-[40px]">
-            <div class="flex flex-col items-center justify-center text-center gap-6 min-h-full h-full py-14 px-6">
+        <!-- PANEL KIRI – HERO (desktop only) -->
+        <div
+            class="hidden lg:flex relative wave-bg bg-gradient-to-br from-cyan-50 to-sky-100 items-center justify-center p-10">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
+            <div class="text-center">
                 <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort"
-                    class="w-64 md:w-80 lg:w-96 mx-auto drop-shadow-md">
-                <p class="fell-font text-gray-700 text-lg md:text-xl leading-relaxed max-w-md">
-                    Temukan berbagai <b>Travel</b> dalam satu <br>
-                    platfrom <span class="font-semibold text-[color:var(--primary)]">RiauPort</span>
+                    class="w-80 mx-auto drop-shadow-2xl mb-8 animate-[pulse_6s_ease-in-out_infinite]">
+                <h2 class="fell text-5xl font-bold text-gray-800 mb-4">RiauPort</h2>
+                <p class="fell text-2xl text-gray-700 leading-relaxed max-w-md mx-auto">
+                    Temukan berbagai <span class="text-[var(--primary)] font-bold">Travel</span> impianmu<br>
+                    dalam satu platform yang <span class="italic text-[var(--accent)]">mengagumkan</span>.
                 </p>
             </div>
         </div>
 
+        <!-- PANEL KANAN – FORM -->
+        <div class="flex items-center justify-center bg-gradient-to-br from-gray-50 to-white p-6">
 
-        <!-- Panel kanan -->
-        <div class="flex items-center justify-center bg-white relative">
-            <div class="relative w-full max-w-lg p-6 md:p-10 lg:p-12">
+            <!-- Logo kecil di mobile -->
+            <div class="absolute top-8 left-1/2 -translate-x-1/2 lg:hidden">
+                <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort" class="h-16">
+            </div>
 
-                <!-- KARTU UTAMA tanpa background di belakang -->
-                <div
-                    class="relative rounded-[28px] bg-white ring-1 ring-black/5
-                shadow-[0_14px_28px_rgba(0,0,0,0.10),0_4px_10px_rgba(0,0,0,0.06)]">
-                    <div class="p-6 md:p-8 lg:p-10">
-
-                        <h1 class="text-3xl md:text-4xl font-extrabold text-[color:var(--primary)] text-center mb-6">
-                            Sign Up</h1>
-
-                        <form action="{{ route('register.store') }}" method="POST" class="space-y-4">
-                            @csrf
-
-                            <!-- Name -->
-                            <div>
-                                <label class="block text-[15px] font-semibold text-gray-700 mb-2">Name</label>
-                                <input type="text" name="name" required
-                                    class="w-full rounded-xl px-4 py-3 bg-gray-100/70 focus:bg-white
-                          focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]
-                          placeholder-gray-400">
-                            </div>
-
-                            <!-- Email -->
-                            <div>
-                                <label class="block text-[15px] font-semibold text-gray-700 mb-2">Email</label>
-                                <input type="email" name="email" required
-                                    class="w-full rounded-xl px-4 py-3 bg-gray-100/70 focus:bg-white
-                          focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]
-                          placeholder-gray-400">
-                            </div>
-
-                            <!-- Password & Confirm -->
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label class="block text-[15px] font-semibold text-gray-700 mb-2">Password</label>
-                                    <input type="password" name="password" placeholder="Minimal 8 karakter" required
-                                        class="w-full rounded-xl px-4 py-3 bg-white border border-gray-300
-                            focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]
-                            placeholder-gray-400">
-                                </div>
-                                <div>
-                                    <label class="block text-[15px] font-semibold text-gray-700 mb-2">Confirm
-                                        Password</label>
-                                    <input type="password" name="password_confirmation" placeholder="Minimal 8 karakter"
-                                        required
-                                        class="w-full rounded-xl px-4 py-3 bg-white border border-gray-300
-                            focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]
-                            placeholder-gray-400">
-                                </div>
-                            </div>
-
-                            <!-- Tombol Create account -->
-                            <button type="submit"
-                                class="w-full md:w-auto md:px-8 py-3 rounded-full mx-auto block
-                         bg-[#CFEFF7] text-[color:var(--primary)] font-semibold
-                         shadow-[0_8px_0_#b7dce6,0_14px_22px_rgba(0,0,0,.18)]
-                         hover:translate-y-[1px] hover:shadow-[0_6px_0_#b7dce6,0_12px_18px_rgba(0,0,0,.16)]
-                         transition-all duration-150">
-                                Create an account
-                            </button>
-
-                            <!-- Divider -->
-                            <div class="flex items-center gap-3 my-2">
-                                <div class="h-px bg-[color:var(--primary)]/70 w-full"></div>
-                                <span class="text-[color:var(--primary)]/80 text-sm">or</span>
-                                <div class="h-px bg-[color:var(--primary)]/70 w-full"></div>
-                            </div>
-
-                            <!-- Google button -->
-                            <a href="{{ route('google.redirect') }}"
-                                class="w-full md:w-auto md:px-6 py-3 rounded-full mx-auto block
-                    bg-[#e8f3ff] text-[#1a73e8] font-semibold
-                    shadow-[0_8px_0_#cdd9ea,0_14px_22px_rgba(0,0,0,.18)]
-                    hover:translate-y-[1px] hover:shadow-[0_6px_0_#cdd9ea,0_12px_18px_rgba(0,0,0,.16)]
-                    transition-all duration-150 text-center">
-                                <span class="inline-flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="w-5 h-5">
-                                        <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
-                  s5.373-12,12-12c3.059,0,5.842,1.154,7.957,3.043l5.657-5.657C32.676,6.053,28.513,4,24,4C12.955,4,4,12.955,4,24
-                  s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
-                                        <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,16.108,18.961,13,24,13c3.059,0,5.842,1.154,7.957,3.043l5.657-5.657
-                  C32.676,6.053,28.513,4,24,4C16.318,4,9.69,8.337,6.306,14.691z" />
-                                        <path fill="#4CAF50" d="M24,44c4.438,0,8.49-1.706,11.566-4.49l-5.333-4.5C28.189,36.808,26.189,37,24,37
-                  c-5.202,0-9.616-3.317-11.279-7.954l-6.513,5.02C9.556,39.556,16.227,44,24,44z" />
-                                        <path fill="#1976D2"
-                                            d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.236-2.229,4.166-4.089,5.61
-                  c0.001-0.001,0.002-0.001,0.003-0.002l6.513,5.02C39.393,35.705,44,30,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
-                                    </svg>
-                                    Sign Up with Google
-                                </span>
-                            </a>
-
-                            <!-- Link ke login -->
-                            <p class="text-center text-sm text-gray-600 mt-6">
-                                Already have an account?
-                                <a href="{{ route('login') }}"
-                                    class="text-[color:var(--primary)] font-semibold hover:underline">Login</a>
-                            </p>
-                        </form>
+            <div class="w-full max-w-md">
+                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]">
                     </div>
+
+                    <div class="text-center mb-10">
+                        <h1 class="text-4xl font-bold text-[var(--primary)]">Buat Akun Baru</h1>
+                        <p class="text-gray-600 mt-2">Bergabunglah dan mulai perjalananmu sekarang</p>
+                    </div>
+
+                    <form action="{{ route('register.store') }}" method="POST" class="space-y-6">
+                        @csrf
+
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700">Nama Lengkap</label>
+                            <input type="text" name="name" required
+                                class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 focus:outline-none input-glow transition-all"
+                                placeholder="Masukkan nama lengkap">
+                        </div>
+
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700">Email</label>
+                            <input type="email" name="email" required
+                                class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 focus:outline-none input-glow transition-all"
+                                placeholder="nama@email.com">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-sm font-semibold text-gray-700">Password</label>
+                                <input type="password" name="password" required minlength="8"
+                                    class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 focus:outline-none input-glow transition-all"
+                                    placeholder="Min. 8 karakter">
+                            </div>
+                            <div>
+                                <label class="text-sm font-semibold text-gray-700">Konfirmasi Password</label>
+                                <input type="password" name="password_confirmation" required minlength="8"
+                                    class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 focus:outline-none input-glow transition-all"
+                                    placeholder="Ulangi password">
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="btn-3d w-full py-5 rounded-2xl text-white font-bold text-lg relative overflow-hidden group mt-8">
+                            <span class="relative z-10">Daftar Sekarang</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000">
+                            </div>
+                        </button>
+
+                        <div class="relative my-8">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm"><span
+                                    class="px-4 bg-gradient-to-br from-gray-50 to-white text-gray-500">atau</span></div>
+                        </div>
+
+                        <a href="{{ route('google.redirect') }}"
+                            class="w-full inline-flex items-center justify-center gap-3 py-4 rounded-2xl border border-gray-300 bg-white/80 hover:bg-white font-semibold text-gray-700 shadow-md hover:shadow-lg transition-all duration-200">
+                            <svg class="w-6 h-6" viewBox="0 0 48 48">
+                                <path fill="#FFC107"
+                                    d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12s5.373-12,12-12c3.059,0,5.842,1.154,7.957,3.043l5.657-5.657C32.676,6.053,28.513,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                                <path fill="#FF3D00"
+                                    d="M6.306,14.691l6.571,4.819C14.655,16.108,18.961,13,24,13c3.059,0,5.842,1.154,7.957,3.043l5.657-5.657C32.676,6.053,28.513,4,24,4C16.318,4,9.69,8.337,6.306,14.691z" />
+                                <path fill="#4CAF50"
+                                    d="M24,44c4.438,0,8.49-1.706,11.566-4.49l-5.333-4.5C28.189,36.808,26.189,37,24,37c-5.202,0-9.616-3.317-11.279-7.954l-6.513,5.02C9.556,39.556,16.227,44,24,44z" />
+                                <path fill="#1976D2"
+                                    d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.236-2.229,4.166-4.089,5.61l6.513,5.02C39.393,35.705,44,30,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+                            </svg>
+                            Daftar dengan Google
+                        </a>
+
+                        <div class="text-center mt-10 pt-4">
+                            <span class="text-gray-600">Sudah punya akun?</span>
+                            <a href="{{ route('login') }}"
+                                class="ml-2 font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors">
+                                Masuk di sini →
+                            </a>
+                        </div>
+
+                        @if ($errors->any())
+                            <div
+                                class="mt-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-sm text-red-700 text-center">
+                                <ul class="list-disc list-inside">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </form>
                 </div>
             </div>
         </div>
-
+    </div>
 
 </body>
 

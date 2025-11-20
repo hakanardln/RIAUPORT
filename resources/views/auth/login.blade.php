@@ -1,172 +1,184 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="h-full">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Pengguna</title>
+    <title>Login • RiauPort</title>
 
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Google Font: IM FELL French Canon -->
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon:ital@0;1&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
             --primary: #0E586D;
-            /* warna utama */
-            --p-50: #e7f7fb;
-            /* panel kiri bg muda */
-            --p-100: #cae9ef;
-            /* garis tepi panel kiri */
+            --primary-dark: #0B4C5D;
+            --accent: #00D4FF;
         }
 
-        /* utilitas kecil */
-        .input {
-            /* gunakan @apply di Tailwind CDN */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
         }
-    </style>
-    <script>
-        /* define utilities for CDN build */
-        tailwind.config = {
-            theme: {
-                extend: {}
-            }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%);
         }
-    </script>
-    <style>
-        /* karena @apply tidak tersedia di style biasa, kita pakai class util langsung */
-        .fell-font {
+
+        .fell {
             font-family: 'IM FELL French Canon', serif;
-            letter-spacing: .3px;
+        }
+
+        .wave-bg {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23CAE9EF' fill-opacity='0.3' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,144C960,149,1056,139,1152,122.7C1248,107,1344,85,1392,74.7L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-3d {
+            background: linear-gradient(145deg, var(--primary), #0f6a82);
+            box-shadow: 0 8px 0 var(--primary-dark), 0 16px 30px rgba(14, 88, 109, 0.35);
+            transition: all 0.2s ease;
+        }
+
+        .btn-3d:hover {
+            transform: translateY(3px);
+            box-shadow: 0 5px 0 var(--primary-dark), 0 10px 20px rgba(14, 88, 109, 0.3);
+        }
+
+        .btn-3d:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 var(--primary-dark);
+        }
+
+        .input-glow:focus {
+            box-shadow: 0 0 0 3px rgba(14, 88, 109, 0.25);
+            border-color: var(--primary);
         }
     </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="h-full flex items-center justify-center p-4 sm:p-6">
 
-    <!-- WRAPPER -->
+    <!-- Ukuran 90% dari layar + sedikit margin di sekeliling -->
     <div
-        class="w-full max-w-6xl mx-auto bg-white rounded-3xl shadow-[0_12px_28px_rgba(0,0,0,.06),0_8px_14px_rgba(0,0,0,.04)] overflow-hidden">
-        <div class="grid grid-cols-1 md:grid-cols-2">
+        class="w-full max-w-7xl h-[90vh] mx-auto grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
 
-            <!-- PANEL KIRI: LOGO + TAGLINE -->
-            <div class="relative bg-[color:var(--p-50)]">
-                <div class="absolute inset-y-0 right-0 w-3 md:w-5 bg-[color:var(--p-100)]"></div>
+        <!-- PANEL KIRI – HERO -->
+        <div class="relative wave-bg bg-gradient-to-br from-cyan-50 to-sky-100 flex items-center justify-center p-10">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
 
-                <div class="flex flex-col items-center justify-center text-center gap-6 min-h-full h-full">
-                    <div class="flex flex-col items-center justify-center h-full py-10">
-                        <img src="{{ asset('images/riauport-logo.png') }}" alt="Logo RiauPort"
-                            class="w-64 md:w-80 lg:w-96 mx-auto drop-shadow-md mb-6">
-                        <p class="fell-font text-gray-700 text-lg md:text-xl leading-relaxed max-w-md">
-                            Temukan berbagai <b>Travel</b> dalam satu <br>
-                            platform <span class="font-semibold text-[color:var(--primary)]">RiauPort</span>
-                        </p>
-                    </div>
+            <div class="relative z-10 text-center">
+                <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort Logo"
+                    class="w-80 mx-auto drop-shadow-2xl mb-8 animate-[pulse_6s_ease-in-out_infinite]">
+
+                <h2 class="fell text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    RiauPort
+                </h2>
+                <p class="fell text-xl md:text-2xl text-gray-700 leading-relaxed max-w-md mx-auto">
+                    Temukan berbagai <span class="text-[var(--primary)] font-bold">Travel</span> impianmu<br>
+                    dalam satu platform yang <span class="italic text-[var(--accent)]">mengagumkan</span>.
+                </p>
+
+                <div class="mt-12 flex justify-center gap-3">
+                    <div class="w-3 h-3 bg-[var(--primary)] rounded-full animate-bounce"></div>
+                    <div class="w-3 h-3 bg-[var(--accent)] rounded-full animate-bounce delay-100"></div>
+                    <div class="w-3 h-3 bg-cyan-400 rounded-full animate-bounce delay-200"></div>
                 </div>
-
-
             </div>
+        </div>
 
-            <!-- PANEL KANAN: KARTU LOGIN DENGAN 3D SHADOW -->
-            <div class="p-5 md:p-10 lg:p-12">
-                <div class="relative">
+        <!-- PANEL KANAN – FORM LOGIN -->
+        <div class="bg-gradient-to-br from-gray-50 to-white flex items-center justify-center p-8 md:p-12">
+            <div class="w-full max-w-md">
 
-                    <!-- Backplate offset: memberi ketebalan/3D (bukan layer menimpa) -->
-                    <div class="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-[28px]
-                      bg-[#8FAEB3]/35"
-                        style="box-shadow:0 22px 40px rgba(0,0,0,.16);">
+                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden">
+                    <div
+                        class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]">
                     </div>
 
-                    <!-- KARTU UTAMA -->
-                    <div
-                        class="relative rounded-[28px] bg-white ring-1 ring-black/5
-                      shadow-[0_14px_28px_rgba(0,0,0,.10),0_4px_10px_rgba(0,0,0,.06)]">
-                        <div class="p-6 md:p-8 lg:p-10">
-
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <h1 class="text-2xl md:text-3xl font-bold text-[color:var(--primary)]">Welcome !
-                                    </h1>
-                                    <p class="text-xs md:text-sm text-gray-500 mt-1">Login to your account</p>
-                                </div>
-                                <div
-                                    class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gray-300
-                            shadow-[inset_0_2px_4px_rgba(255,255,255,.6),0_8px_18px_rgba(0,0,0,.12)]">
-                                </div>
-                            </div>
-
-                            <!-- FORM -->
-                            <form method="POST" action="{{ route('login.attempt') }}" class="mt-6 md:mt-8 space-y-4">
-                                @csrf
-
-                                <div>
-                                    <label class="block text-[15px] font-semibold text-gray-700 mb-2">Email</label>
-                                    <input type="email" name="email" placeholder="Email" required
-                                        class="w-full rounded-xl px-4 py-3 bg-gray-100/70 focus:bg-white
-                                focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]
-                                placeholder-gray-400">
-                                </div>
-
-                                <div>
-                                    <label class="block text-[15px] font-semibold text-gray-700 mb-2">Password</label>
-                                    <input type="password" name="password" placeholder="Password" required
-                                        class="w-full rounded-xl px-4 py-3 bg-gray-100/70 focus:bg-white
-                                focus:outline-none focus:ring-2 focus:ring-[color:var(--primary)]
-                                placeholder-gray-400">
-                                </div>
-
-                                <label class="inline-flex items-center gap-2 select-none">
-                                    <input type="checkbox"
-                                        class="h-4 w-4 rounded border-gray-300 text-[color:var(--primary)]
-                                focus:ring-[color:var(--primary)]">
-                                    <span class="text-sm text-gray-600">Remember Me</span>
-                                </label>
-
-                                <!-- Tombol Login (timbul) -->
-                                <button type="submit"
-                                    class="w-full py-3 rounded-full bg-[color:var(--primary)] text-white font-semibold
-                               shadow-[0_6px_0_#0B4C5D,0_12px_18px_rgba(0,0,0,.18)]
-                               hover:translate-y-[1px] hover:shadow-[0_5px_0_#0B4C5D,0_10px_14px_rgba(0,0,0,.18)]
-                               transition-all duration-150">
-                                    Login
-                                </button>
-
-                                <!-- Link Register (warna #0E586D + efek timbul) -->
-
-                                <div class="flex items-center justify-center gap-3 text-sm mt-1.5">
-                                    <span class="text-gray-600">Don't have an account ?</span>
-                                    <a href="{{ route('register') }}"
-                                        class="rounded-full px-5 py-2 font-semibold text-white
-          bg-[#0E586D]
-          shadow-[0_4px_0_#0B4C5D,0_10px_16px_rgba(0,0,0,.18)]
-          hover:translate-y-[2px] hover:shadow-[0_2px_0_#0B4C5D,0_8px_12px_rgba(0,0,0,.18)]
-          transition-all duration-200">
-                                        Register Here
-                                    </a>
-
-                                </div>
-
-                                <!-- Pesan error (opsional jika validasi server) -->
-                                @if ($errors->any())
-                                    <div
-                                        class="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-                                        {{ $errors->first() }}
-                                    </div>
-                                @endif
-
-                            </form>
+                    <div class="flex items-center justify-between mb-10">
+                        <div>
+                            <h1 class="text-4xl font-bold text-[var(--primary)]">Welcome!</h1>
+                            <p class="text-gray-600 mt-1">Login to your account</p>
+                        </div>
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--primary)] to-cyan-600 shadow-lg">
                         </div>
                     </div>
 
+                    <form method="POST" action="{{ route('login.attempt') }}" class="space-y-6">
+                        @csrf
+
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700">Email</label>
+                            <input type="email" name="email" required
+                                class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 
+                                          focus:outline-none focus:border-[var(--primary)] input-glow
+                                          transition-all duration-300 placeholder-gray-400"
+                                placeholder="nama@email.com">
+                        </div>
+
+                        <div>
+                            <label class="text-sm font-semibold text-gray-700">Password</label>
+                            <input type="password" name="password" required
+                                class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 
+                                          focus:outline-none focus:border-[var(--primary)] input-glow
+                                          transition-all duration-300 placeholder-gray-400"
+                                placeholder="••••••••">
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center gap-3 cursor-pointer select-none">
+                                <input type="checkbox"
+                                    class="w-5 h-5 rounded text-[var(--primary)] focus:ring-[var(--primary)]">
+                                <span class="text-gray-600">Ingat saya</span>
+                            </label>
+                            <a href="#" class="text-sm text-[var(--primary)] hover:underline">Lupa password?</a>
+                        </div>
+
+                        <button type="submit"
+                            class="btn-3d w-full py-5 rounded-2xl text-white font-bold text-lg
+                                       relative overflow-hidden group mt-8">
+                            <span class="relative z-10">Login Sekarang</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent 
+                                          translate-x-[-100%] group-hover:translate-x-[100%] 
+                                          transition-transform duration-1000">
+                            </div>
+                        </button>
+
+                        <div class="text-center mt-8">
+                            <span class="text-gray-600">Belum punya akun?</span>
+                            <a href="{{ route('register') }}"
+                                class="ml-2 font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors">
+                                Daftar di sini
+                            </a>
+                        </div>
+
+                        @if ($errors->any())
+                            <div
+                                class="mt-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-sm text-red-700 text-center">
+                                {{ $errors->first() }}
+                            </div>
+                        @endif
+                    </form>
                 </div>
             </div>
-            <!-- END PANEL KANAN -->
-
         </div>
     </div>
-
 </body>
 
 </html>
