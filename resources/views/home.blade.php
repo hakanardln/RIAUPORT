@@ -585,7 +585,7 @@
 
                     <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-900">Alya Putri</p>
+                            <p class="text-xs font-semibold text-slate-900">Anonymous</p>
                             <p class="text-[11px] text-slate-400">Mahasiswa – Bengkalis</p>
                         </div>
                         <div
@@ -617,7 +617,7 @@
 
                     <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-900">Budi Santoso</p>
+                            <p class="text-xs font-semibold text-slate-900">Budi Utama</p>
                             <p class="text-[11px] text-slate-400">Owner Travel Riau Jaya</p>
                         </div>
                         <div
@@ -648,7 +648,7 @@
 
                     <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-900">Rama Aditya</p>
+                            <p class="text-xs font-semibold text-slate-900">Raditya</p>
                             <p class="text-[11px] text-slate-400">Karyawan – Pekanbaru</p>
                         </div>
                         <div
@@ -679,7 +679,7 @@
 
                     <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
                         <div>
-                            <p class="text-xs font-semibold text-slate-900">Siti Zahra</p>
+                            <p class="text-xs font-semibold text-slate-900">Zahra</p>
                             <p class="text-[11px] text-slate-400">Pengguna Rutin</p>
                         </div>
                         <div
