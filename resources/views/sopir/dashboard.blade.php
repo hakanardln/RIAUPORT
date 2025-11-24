@@ -1,6 +1,10 @@
-@extends('layouts.sopir')
+<!DOCTYPE html>
+<html lang="id">
 
-@section('title', 'Dashboard')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>RiauPort – Dashboard Admin</title>
 
 @section('content')
 <style>
