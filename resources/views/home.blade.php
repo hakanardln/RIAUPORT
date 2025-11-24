@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RiauPort – Home</title>
 
+    <!-- FAVICON – cukup copy-paste ini saja, sudah 100% kerja di semua browser & device -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('favicon_io/site.webmanifest') }}">
+
+    <!-- Opsional: untuk Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon_io/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicon_io/android-chrome-512x512.png') }}">
+
     {{-- Tailwind CDN (tanpa Vite) --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -33,120 +43,162 @@
         }
 
         .glass-nav {
-            display: flex;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08)),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.18),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(18px) saturate(180%);
+            -webkit-backdrop-filter: blur(18px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Highlight yang bergerak untuk efek “liquid” */
+        .glass-nav::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.55) 0, transparent 55%),
+                radial-gradient(circle at 80% 0%, rgba(126, 220, 255, 0.38) 0, transparent 60%),
+                radial-gradient(circle at 20% 90%, rgba(14, 88, 109, 0.22) 0, transparent 60%);
+            opacity: 0.9;
+            mix-blend-mode: screen;
+            animation: liquidMove 14s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes liquidMove {
+            0% {
+                transform: translate3d(-8%, -4%, 0) scale(1);
+            }
+
+            50% {
+                transform: translate3d(6%, 4%, 0) scale(1.05);
+            }
+
+            100% {
+                transform: translate3d(-4%, 2%, 0) scale(1.02);
+            }
+        }
+
+        /* Tombol login ikut nuansa glass */
+        .glass-btn-login {
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, .68);
-            backdrop-filter: blur(20px) saturate(180%);
-            border-radius: 22px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
-            padding: .9rem 1.2rem
-        }
-
-        .nav-link {
+            justify-content: center;
+            padding: 0.55rem 2.4rem;
+            border-radius: 10px;
             font-weight: 600;
-            color: #0a3b44;
-            transition: .25s
+            font-size: 1rem;
+            color: #ffffff;
+            background: radial-gradient(circle at 0% 0%, #42c0dd, #0e586d);
+            box-shadow:
+                0 10px 25px rgba(14, 88, 109, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.35);
+            border: 1px solid rgba(5, 34, 49, 0.7);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease,
+                filter 0.2s ease;
         }
 
-        .nav-link:hover {
-            color: #0e586d
+        .glass-btn-login:hover {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow:
+                0 16px 35px rgba(14, 88, 109, 0.55),
+                0 0 0 1px rgba(255, 255, 255, 0.5);
+            filter: brightness(1.05);
         }
 
-        .btn-login {
-            background: #0e586d;
-            color: #fff;
-            font-weight: 700;
-            padding: .55rem 1.35rem;
-            border-radius: 14px;
-            box-shadow: inset 0 2px 6px rgba(255, 255, 255, .35), 0 8px 18px rgba(0, 0, 0, .18);
-            transition: .25s
+        .glass-btn-login:active {
+            transform: translateY(1px) scale(0.99);
+            box-shadow:
+                0 6px 18px rgba(14, 88, 109, 0.45),
+                0 0 0 1px rgba(255, 255, 255, 0.4);
         }
 
-        .btn-login:hover {
-            background: #127692
-        }
 
         /* ===== Hero Slideshow ===== */
         .hero {
             position: relative;
+            height: 430px;
+            /* ubah sampai pas dengan garis merah */
             overflow: hidden;
-            height: 70vh
-        }
-
-        @media (min-width:1024px) {
-            .hero {
-                height: 72vh
-            }
         }
 
         .hero-bg {
             position: absolute;
             inset: 0;
             background-size: cover;
-            background-position: center top;
-            transition: opacity .8s ease;
-            opacity: 1;
+            background-position: center;
+            transition: opacity .4s ease;
         }
 
+        /* efek fade */
         .hero-bg.fade {
             opacity: 0;
         }
 
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0, 0, 0, .0) 0, rgba(0, 0, 0, .08) 70%, rgba(0, 0, 0, .15) 100%)
-        }
-
         /* ===== Search Card + outside icon ===== */
+        /* Wrapper untuk border animasi di kartu pencarian */
+        .search-border-wrapper {
+            position: relative;
+            border-radius: 40px;
+            padding: 3px;
+            /* ketebalan border */
+            overflow: hidden;
+        }
+
+        /* Gradient berputar mengelilingi kartu */
+        .search-border-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: -40%;
+            background: conic-gradient(from 0deg,
+                    #42c0dd,
+                    #0e586d,
+                    #7fffd4,
+                    #42c0dd,
+                    #0e586d);
+            animation: spinBorder 8s linear infinite;
+            z-index: 0;
+        }
+
+        /* Biar isi kartu tetap di atas gradient */
         .search-card {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 14%;
-            width: min(1060px, 92%);
-            background: rgba(255, 255, 255, .92);
-            backdrop-filter: blur(16px);
-            border-radius: 28px;
-            padding: 1.6rem 1.2rem;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, .14)
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow:
+                0 20px 40px rgba(15, 23, 42, 0.22),
+                0 0 0 1px rgba(255, 255, 255, 0.75);
         }
 
+        /* Animasi muter */
+        @keyframes spinBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Styling input biar match (kalau belum ada) */
         .search-input {
-            border-radius: 14px;
-            border: 1px solid #e5e7eb;
-            padding: .9rem 1rem;
-            background: #f6f9fb;
-            width: 100%
+            @apply bg-white/90 rounded-2xl px-4 py-3 border border-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0e586d]/60 focus:border-transparent;
         }
 
-        .search-glass {
-            position: absolute;
-            right: -36px;
-            top: 50%;
-            transform: translateY(-50%);
-            height: 68px;
-            width: 68px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, .75);
-            backdrop-filter: blur(12px) saturate(180%);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: .25s
-        }
-
-        .search-glass:hover {
-            transform: translateY(-50%) scale(1.06)
-        }
-
-        .search-glass svg {
-            width: 28px;
-            height: 28px;
-            color: #0e586d
-        }
 
         /* ===== Cards fitur (Halaman Depan 2) ===== */
         .feature-card {
@@ -278,27 +330,24 @@
 <body class="bg-[#f4f7f9] text-slate-800">
 
     {{-- NAVBAR --}}
-    <header class="w-full absolute top-0 left-0 z-20">
+    <header class="w-full absolute top-0 left-0 z-[9999]">
         <div class="max-w-6xl mx-auto px-4 md:px-2 pt-6">
-            <div
-                class="w-full backdrop-blur-xl bg-white/70 shadow-[0_2px_12px_rgba(0,0,0,0.12)] rounded-[20px] border border-white/40 px-7 py-2 flex items-center justify-between">
+            <div class="glass-nav w-full rounded-[25px] border px-7 py-3 flex items-center justify-between">
 
                 {{-- Logo --}}
                 <div class="flex items-center">
-                    <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort"
-                        class="h-20 drop-shadow-md">
+                    <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
                 </div>
 
                 {{-- Menu Navigation --}}
-                <nav class="flex items-center gap-10 text-white font-semibold text-lg">
-                    <a href="#home" class="hover:text-slate-100 transition-colors">Home</a>
-                    <a href="#contact" class="hover:text-slate-100 transition-colors">Contact</a>
-                    <a href="#about" class="hover:text-slate-100 transition-colors">About</a>
+                <nav class="flex items-center gap-8 text-slate-800 font-semibold text-base md:text-lg relative z-[10000]">
+                    <a href="#home" class="hover:text-[#0e586d] transition-colors">Home</a>
+                    <a href="{{ route('contact') }}" class="hover:text-[#0e586d] transition-colors">Contact</a>
+                    <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
                 </nav>
 
                 {{-- Tombol Login --}}
-                <a href="{{ route('login') }}"
-                    class="bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-8 py-2 rounded-lg shadow-lg transition-colors">
+                <a href="{{ route('login') }}" class="glass-btn-login">
                     Login
                 </a>
             </div>
@@ -306,53 +355,80 @@
     </header>
 
     {{-- HERO + PENCARIAN --}}
-    <section class="hero">
-        <div id="heroBg" class="hero-bg"></div>
-        <div class="hero-overlay"></div>
+    <section class="hero relative">
+        <div id="heroBg" class="hero-bg absolute inset-0 z-0"></div>
+        <div class="hero-overlay absolute inset-0 bg-slate-900/40 z-10"></div>
 
-        {{-- Kartu pencarian --}}
-        <div class="relative max-w-3xl mx-auto pt-40">
-            <div class="search-card relative bg-white rounded-[40px] mx-4 px-10 py-10 flex flex-col items-center gap-6">
-                <h1 class="text-xl md:text-2xl font-semibold text-slate-800 text-center">
-                    Hai Kamu, <span class="font-bold">Ingin pergi ke mana?</span>
-                </h1>
+        <div class="relative max-w-3xl mx-auto pt-32 md:pt-40 z-20">
+            <div class="mx-4 relative">
+                <!-- Kartu Pencarian -->
+                <div class="search-border-wrapper rounded-[40px] overflow-hidden shadow-2xl">
+                    <div
+                        class="search-card bg-white/95 px-6 py-10 md:px-10 flex flex-col gap-6 items-center border border-slate-200">
+                        <h1 class="text-2xl md:text-3xl font-semibold text-slate-800 text-center">
+                            Hai Kamu, <span class="font-bold text-primary">Ingin pergi ke mana?</span>
+                        </h1>
 
-                <div class="w-full flex flex-col md:flex-row gap-4 items-center">
+                        <!-- Form dengan ID -->
+                        <form id="searchForm" class="w-full">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+                                <select
+                                    class="px-4 py-3 rounded-full border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary text-slate-700 bg-white transition"
+                                    aria-label="Asal">
+                                    <option value="" disabled selected hidden>Asal</option>
+                                    <option>Dumai</option>
+                                    <option>Pekanbaru</option>
+                                    <option>Duri</option>
+                                    <option>Bengkalis</option>
+                                    <option>Siak</option>
+                                    <option>Pakning</option>
+                                </select>
 
-                    {{-- ASAL --}}
-                    <select class="search-input flex-1">
-                        <option value="" disabled selected>Asal</option>
-                        <option>Dumai</option>
-                        <option>Pekanbaru</option>
-                        <option>Duri</option>
-                        <option>Bengkalis</option>
-                        <option>Siak</option>
-                        <option>Pakning</option>
-                    </select>
-
-                    {{-- TUJUAN --}}
-                    <select class="search-input flex-1">
-                        <option value="" disabled selected>Tujuan</option>
-                        <option>Dumai</option>
-                        <option>Pekanbaru</option>
-                        <option>Duri</option>
-                        <option>Bengkalis</option>
-                        <option>Siak</option>
-                        <option>Pakning</option>
-                    </select>
-
-                    {{-- SEARCH BUTTON --}}
-                    <button
-                        class="mt-2 md:mt-0 md:ml-4 h-[70px] w-[70px] rounded-full bg-white shadow-xl flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-8 w-8 text-slate-800"
-                            fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="5"></circle>
-                            <path d="m16 16 4 4" stroke-linecap="round"></path>
-                        </svg>
-                    </button>
+                                <select
+                                    class="px-4 py-3 rounded-full border border-slate-300 focus:border-primary focus:ring-2 focus:ring-primary text-slate-700 bg-white transition"
+                                    aria-label="Tujuan">
+                                    <option value="" disabled selected hidden>Tujuan</option>
+                                    <option>Dumai</option>
+                                    <option>Pekanbaru</option>
+                                    <option>Duri</option>
+                                    <option>Bengkalis</option>
+                                    <option>Siak</option>
+                                    <option>Pakning</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
+
+                <!-- Tombol di luar, sejajar kanan-tengah kartu -->
+                <button type="submit" form="searchForm"
+                    class="absolute top-1/2 -translate-y-1/2 right-[-25px] md:right-[-100px] 
+           h-[55px] w-[55px] md:h-[70px] md:w-[70px] 
+           rounded-full 
+           /* Glassmorphism + warna elegan */
+           bg-white/20 backdrop-blur-xl 
+           border border-white/40 
+           shadow-2xl 
+           flex items-center justify-center 
+           hover:bg-white/35 hover:backdrop-blur-2xl 
+           hover:border-white/60 
+           hover:scale-110 
+           active:scale-95 
+           transition-all duration-300 
+           focus:outline-none 
+           focus:ring-4 focus:ring-white/30 
+           z-30 
+           /* Inner glow biar lebih mewah */
+           ring-1 ring-white/50 ring-inset">
+
+                    <span class="sr-only">Cari</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        class="h-7 w-7 md:h-8 md:w-8 text-white drop-shadow-lg" fill="none" stroke="currentColor"
+                        stroke-width="3" stroke-linecap="round">
+                        <circle cx="11" cy="11" r="6"></circle>
+                        <path d="m16 16 5 5"></path>
+                    </svg>
+                </button>
     </section>
 
     {{-- CTA SECTION --}}
@@ -372,7 +448,7 @@
                 </p>
 
                 <div class="mt-10">
-                    <a href="{{ route('register') }}"
+                    <a href="{{ route('register.sopir.show') }}"
                         class="inline-block bg-[#0e586d] hover:bg-[#0b4353] text-white font-semibold px-10 py-3 rounded-lg shadow-xl">
                         Daftar Sebagai Sopir
                     </a>
@@ -584,7 +660,7 @@
                     <p class="text-xs text-slate-500 leading-relaxed mb-6">
                         Pemesanan travel jadi lebih mudah. Saya bisa melihat jadwal, harga,
                         dan kontak sopir tanpa harus chat satu-satu. Sangat praktis untuk
-                        yang sering pulang–pergi Bengkalis – Pekanbaru.
+                        yang sering pulang-pergi Bengkalis - Pekanbaru.
                     </p>
 
                     <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
@@ -596,7 +672,6 @@
                             class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0E586D] to-[#5CBCCB]
                                flex items-center justify-center text-white text-xs font-semibold
                                transition-all duration-300 group-hover:scale-105">
-                            AP
                         </div>
                     </div>
                 </article>
@@ -947,7 +1022,6 @@
         </div>
     </section>
 
-
     <!-- ========== FOOTER ========== -->
     <footer class="bg-white border-t border-gray-200 mt-0 w-full">
         {{-- Bagian atas footer --}}
@@ -1008,7 +1082,8 @@
                         <h3 class="text-gray-900 font-semibold text-base mb-4">Layanan</h3>
                         <ul class="space-y-3 text-sm">
                             <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">Cari Travel</a></li>
-                            <li><a href="{{ route('register') }}" class="text-gray-600 hover:text-[#3FA6C4]">Daftar
+                            <li><a href="{{ route('register.sopir.show') }}"
+                                    class="text-gray-600 hover:text-[#3FA6C4]">Daftar
                                     Sopir</a></li>
                             <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">Rute Populer</a></li>
                             <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">FAQ</a></li>

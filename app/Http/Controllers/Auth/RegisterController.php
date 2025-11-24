@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,14 +22,14 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::min(8)],
         ]);
 
         $user = User::create([
-            'name'     => $validated['name'],
-            'email'    => $validated['email'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
 
@@ -49,7 +50,7 @@ class RegisterController extends Controller
     {
         try {
             $googleUser = Socialite::driver('google')->user();
-            
+
             // Cek apakah email sudah terdaftar
             $user = User::where('email', $googleUser->getEmail())->first();
 
@@ -58,17 +59,17 @@ class RegisterController extends Controller
                 if (!$user->google_id) {
                     $user->update([
                         'google_id' => $googleUser->getId(),
-                        'avatar'    => $googleUser->getAvatar(),
+                        'avatar' => $googleUser->getAvatar(),
                     ]);
                 }
             } else {
                 // Buat user baru (registrasi via Google)
                 $user = User::create([
-                    'name'      => $googleUser->getName(),
-                    'email'     => $googleUser->getEmail(),
+                    'name' => $googleUser->getName(),
+                    'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
-                    'avatar'    => $googleUser->getAvatar(),
-                    'password'  => Hash::make(Str::random(24)),
+                    'avatar' => $googleUser->getAvatar(),
+                    'password' => Hash::make(Str::random(24)),
                     'email_verified_at' => now(),
                 ]);
             }
@@ -83,4 +84,31 @@ class RegisterController extends Controller
                 ->withErrors(['email' => 'Terjadi kesalahan saat registrasi dengan Google.']);
         }
     }
+    public function showDriverRegister()
+    {
+        return view('auth.register-sopir'); // view baru sopir
+    }
+
+    public function storeDriver(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'min:6'],
+        ]);
+
+        // membuat akun sopir
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'phone' => $validated['phone'],
+            'role' => 'sopir', // penting!
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('sopir.dashboard');
+    }
+
 }

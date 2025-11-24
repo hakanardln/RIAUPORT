@@ -5,6 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>RiauPort – Dashboard Admin</title>
+
+    <!-- FAVICON – cukup copy-paste ini saja, sudah 100% kerja di semua browser & device -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('favicon_io/site.webmanifest') }}">
+
+    <!-- Opsional: untuk Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon_io/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicon_io/android-chrome-512x512.png') }}">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -107,7 +118,7 @@
                             </path>
                         </svg>
                     </div>
-                    <span class="font-semibold">Pengaturan</span>
+                    <span class="font-semibold">Personalisasi</span>
                 </a>
             </nav>
 
@@ -164,7 +175,8 @@
                     </div>
                     <div class="hidden lg:block">
                         {{-- Ganti gambar laptop sesuai asetmu --}}
-                        <img src="{{ asset('images/laptop1.png') }}" alt="Preview Website" class="h-40 object-contain">
+                        <img src="{{ asset('images/laptop1.png') }}" alt="Preview Website"
+                            class="h-40 object-contain">
                     </div>
                 </div>
             </section>
