@@ -330,9 +330,20 @@
 <body class="bg-[#f4f7f9] text-slate-800">
 
     {{-- NAVBAR --}}
-    <header class="w-full absolute top-0 left-0 z-[9999]">
-        <div class="max-w-6xl mx-auto px-4 md:px-2 pt-6">
-            <div class="glass-nav w-full rounded-[25px] border px-7 py-3 flex items-center justify-between">
+    <header class="w-full absolute top-0 left-0 z-20">
+        <div class="max-w-6xl mx-auto flex items-center justify-between px-4 md:px-2 pt-6">
+
+            {{-- Logo --}}
+            <div class="flex items-center">
+                <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
+            <div
+                class="w-[100%] max-w-[2500px] mx-auto
+    backdrop-blur-xl bg-white/1
+    shadow-[0_2px_12px_rgba(0,0,0,0.12)]
+    rounded-[20px]
+    border border-white/40
+    px-7 py-2
+    flex items-center justify-between">
 
                 {{-- Logo --}}
                 <div class="flex items-center">
