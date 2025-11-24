@@ -4,12 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-<<<<<<< HEAD
 // Controllers
 use App\Http\Controllers\AuthController;
-=======
 use App\Http\Controllers\SopirController;
->>>>>>> fbc1594283a46ce88e46f502cb09108a0a987a07
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\RegisterController;
@@ -29,7 +26,7 @@ Route::view('/', 'home')->name('home');
 */
 
 Route::middleware('guest')->group(function () {
-    
+
     // Login Routes
     Route::view('/login', 'auth.login')->name('login');
     Route::post('/login', function (Request $request) {
@@ -105,14 +102,9 @@ Route::get('/auth/google', [GoogleController::class, 'redirect'])->name('google.
 Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 
 Route::fallback(function () {
-<<<<<<< HEAD
     abort(404);
-});
-=======
     abort(404);   // pakai 404 bawaan Laravel, tidak butuh view errors.404
 });
-
-use App\Http\Controllers\PelangganController;
 
 Route::get('/admin/pelanggan', [PelangganController::class, 'index'])
     ->name('admin.pelanggan.index');
@@ -131,4 +123,3 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::get('/sopir/dashboard', [SopirController::class, 'dashboard'])
     ->name('sopir.dashboard');
->>>>>>> fbc1594283a46ce88e46f502cb09108a0a987a07
