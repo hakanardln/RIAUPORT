@@ -55,7 +55,6 @@
             justify-content: space-between;
         }
 
-        /* Highlight yang bergerak untuk efek "liquid" */
         .glass-nav::before {
             content: "";
             position: absolute;
@@ -120,7 +119,6 @@
             color: #0e586d;
         }
 
-        /* Tombol login ikut nuansa glass */
         .glass-btn-login {
             display: inline-flex;
             align-items: center;
@@ -284,6 +282,139 @@
             transform: translateY(0);
         }
 
+        /* ===== FOOTER (versi putih seperti gambar) ===== */
+        .footer {
+            background-color: #ffffff;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 64px 24px 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.4fr;
+            gap: 48px;
+            align-items: flex-start;
+        }
+
+        .footer-brand img {
+            height: 56px;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: #4b5563;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 320px;
+        }
+
+        .footer-social {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: #e0f2fe;
+            color: #0e586d;
+            transform: translateY(-2px);
+        }
+
+        .footer-social svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #0f172a;
+        }
+
+        .footer-list {
+            list-style: none;
+        }
+
+        .footer-list li {
+            margin-bottom: 10px;
+        }
+
+        .footer-list a,
+        .footer-list span {
+            font-size: 14px;
+            color: #4b5563;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.2s ease;
+        }
+
+        .footer-list a:hover {
+            color: #0e586d;
+        }
+
+        .footer-list svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e5e7eb;
+            margin-top: 40px;
+            padding-top: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 13px;
+            color: #4b5563;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: #4b5563;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: #0e586d;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 140px 40px 60px;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
         @media (max-width: 768px) {
             .glass-nav {
                 flex-direction: column;
@@ -321,6 +452,16 @@
             .header p {
                 font-size: 1em;
             }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -337,9 +478,9 @@
 
                 {{-- Menu Navigation --}}
                 <nav class="nav-menu">
-                    <a href="{{ url('/') }}">Home</a>
-                    <a href="{{ route('contact') }}" class="active">Contact</a>
-                    <a href="{{ url('/#about') }}">About</a>
+                    <a href="{{ route('home') }}" class="hover:text-[#0e586d] transition-colors">Home</a>
+                    <a href="{{ route('contact') }}" class="hover:text-[#0e586d] transition-colors">Contact</a>
+                    <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
                 </nav>
 
                 {{-- Tombol Login --}}
@@ -426,6 +567,112 @@
             <button type="submit" class="submit-btn">Submit Now</button>
         </form>
     </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort">
+                    <p>
+                        Platform terpadu untuk menemukan layanan travel terbaik di Riau.
+                        Menghubungkan penumpang dengan sopir travel terpercaya.
+                    </p>
+
+                    <div class="footer-social">
+                        <a href="#">
+                            <!-- X / Twitter icon -->
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <!-- Facebook -->
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="#">
+                            <!-- Instagram -->
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M7.8 2h8.4A4.8 4.8 0 0121 6.8v8.4A4.8 4.8 0 0116.2 20H7.8A4.8 4.8 0 013 15.2V6.8A4.8 4.8 0 017.8 2zm0 2A2.8 2.8 0 005 6.8v8.4A2.8 2.8 0 007.8 18h8.4a2.8 2.8 0 002.8-2.8V6.8A2.8 2.8 0 0016.2 4H7.8zm4.2 2.5a4.5 4.5 0 11-.001 9.001A4.5 4.5 0 0112 6.5zm4.75-2.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigasi -->
+                <div>
+                    <h3 class="footer-title">Navigasi</h3>
+                    <ul class="footer-list">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('about') }}">Tentang Kami</a></li>
+                        <li><a href="#">Fitur</a></li>
+                        <li><a href="{{ route('contact') }}">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <!-- Layanan -->
+                <div>
+                    <h3 class="footer-title">Layanan</h3>
+                    <ul class="footer-list">
+                        <li><a href="#">Cari Travel</a></li>
+                        <li><a href="{{ route('register.sopir.show') }}">Daftar Sopir</a></li>
+                        <li><a href="#">Rute Populer</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Hubungi Kami -->
+                <div>
+                    <h3 class="footer-title">Hubungi Kami</h3>
+                    <ul class="footer-list">
+                        <li>
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                Riau, Indonesia
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                info@riauport.com
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                +62 823-1141-2523
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 RiauPort. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Syarat & Ketentuan</a>
+                    <a href="#">Kebijakan Privasi</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

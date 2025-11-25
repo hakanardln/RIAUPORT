@@ -40,4 +40,8 @@ class SopirController extends Controller
     {
         // logic hapus
     }
+    public function travel()
+    {
+        return view('sopir.travel'); // resources/views/sopir/travel.blade.php
+    }
 }

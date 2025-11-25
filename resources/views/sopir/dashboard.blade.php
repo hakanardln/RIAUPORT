@@ -62,7 +62,7 @@
                 </a>
 
                 {{-- Travel --}}
-                <a href="#"
+                <a href="{{ route('sopir.travel') }}"
                     class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
                        rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
                     <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">

@@ -808,7 +808,7 @@
                        hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
                     <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/Images2.jpg') }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/mobil1.jpg') }}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
