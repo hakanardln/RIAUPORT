@@ -44,7 +44,8 @@
 
         .glass-nav {
             position: relative;
-            overflow: hidden;
+            overflow: visible !important;
+            /* ⬅ FIX PENTING */
             border-radius: 24px;
             background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08)),
                 linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
@@ -55,6 +56,7 @@
             -webkit-backdrop-filter: blur(18px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
+
 
         /* Highlight yang bergerak untuk efek “liquid” */
         .glass-nav::before {
@@ -347,10 +349,54 @@
                     <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
                 </nav>
 
-                {{-- Tombol Login --}}
-                <a href="{{ route('login') }}" class="glass-btn-login">
-                    Login
-                </a>
+                {{-- LOGIN BUTTON / PROFILE AVATAR --}}
+                @guest
+                    {{-- Jika belum login → tampilkan tombol login biasa --}}
+                    <a href="{{ route('login') }}" class="glass-btn-login">
+                        Login
+                    </a>
+                @endguest
+
+                @auth
+                    @php
+                        $user = auth()->user();
+
+                        // Inisial nama: "Nurvia Sulistry" → "NS"
+                        $initials = collect(explode(' ', $user->name))
+                            ->map(fn($p) => mb_substr($p, 0, 1))
+                            ->join('');
+                    @endphp
+
+                    {{-- Avatar bulat + dropdown logout --}}
+                    <div class="relative">
+                        {{-- Avatar bulat --}}
+                        <button type="button" id="userMenuButton"
+                            class="w-12 h-12 rounded-full flex items-center justify-center
+                       bg-white/20 backdrop-blur-xl border border-white/40 
+                       shadow-lg text-white font-semibold uppercase 
+                       hover:scale-110 active:scale-95 transition-all duration-200">
+                            {{ $initials }}
+                        </button>
+
+                        {{-- Dropdown menu --}}
+                        <div id="userMenu"
+                            class="hidden absolute right-0 mt-3 w-40 bg-white rounded-2xl shadow-xl
+                    border border-slate-100 py-2 text-sm text-slate-700 z-[999999]">
+                            <div class="px-4 pb-1 text-[11px] uppercase tracking-wide text-slate-400">
+                                Akun
+                            </div>
+
+                            {{-- Kalau mau tambahin menu lain, letakkan di sini --}}
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 hover:bg-slate-100">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endauth
             </div>
         </div>
     </header>
@@ -1147,3 +1193,24 @@
     </footer>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btn = document.getElementById('userMenuButton');
+        const menu = document.getElementById('userMenu');
+
+        if (!btn || !menu) return;
+
+        // klik avatar → buka/tutup menu
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menu.classList.toggle('hidden');
+        });
+
+        // klik di luar → tutup menu
+        document.addEventListener('click', function() {
+            if (!menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+            }
+        });
+    });
+</script>
