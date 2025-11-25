@@ -6,394 +6,528 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>RiauPort – Dashboard Admin</title>
 
-@section('content')
-<style>
-    .dashboard-container {
-        min-height: 100vh;
-        background: linear-gradient(135deg, #eff6ff 0%, #ecfeff 50%, #e0f2fe 100%);
-        padding: 2rem;
-    }
-    
-    .dashboard-header {
-        font-size: 2.25rem;
-        font-weight: 700;
-        color: #0d9488;
-        margin-bottom: 1.5rem;
-    }
-    
-    .welcome-card {
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border-radius: 1.5rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        gap: 1.5rem;
-        align-items: flex-start;
-    }
-    
-    .car-image {
-        width: 144px;
-        height: 96px;
-        background: #e2e8f0;
-        border-radius: 0.75rem;
-        overflow: hidden;
-        flex-shrink: 0;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .car-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    .welcome-info {
-        flex: 1;
-    }
-    
-    .welcome-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #0d9488;
-        margin-bottom: 1rem;
-    }
-    
-    .info-row {
-        display: flex;
-        gap: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .info-item {
-        display: flex;
-        gap: 0.5rem;
-    }
-    
-    .info-label {
-        color: #0d9488;
-        font-weight: 500;
-    }
-    
-    .info-value {
-        color: #374151;
-    }
-    
-    .routes-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-    }
-    
-    .route-card {
-        border-radius: 1rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        padding: 0.75rem;
-        backdrop-filter: blur(10px);
-    }
-    
-    .route-card-1 {
-        background: rgba(165, 243, 252, 0.9);
-    }
-    
-    .route-card-2 {
-        background: rgba(241, 245, 249, 0.9);
-    }
-    
-    .route-header {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        margin-bottom: 0.5rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #1f2937;
-    }
-    
-    .route-icon {
-        width: 16px;
-        height: 16px;
-    }
-    
-    .route-time {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .route-path {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-    }
-    
-    .time-icon, .location-icon {
-        width: 14px;
-        height: 14px;
-        color: #0f766e;
-    }
-    
-    .time-text, .location-text {
-        font-size: 0.875rem;
-        font-weight: 500;
-        color: #1f2937;
-    }
-    
-    .path-line {
-        flex: 1;
-        height: 1.5px;
-        background: #0f766e;
-        position: relative;
-    }
-    
-    .path-dot {
-        width: 8px;
-        height: 8px;
-        background: #0f766e;
-        border-radius: 50%;
-        position: absolute;
-        top: -3px;
-    }
-    
-    .path-dot-start {
-        left: 0;
-    }
-    
-    .path-dot-end {
-        right: 0;
-    }
-    
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.75rem;
-    }
-    
-    .stat-card {
-        border-radius: 1rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        padding: 0.75rem;
-        text-align: center;
-        backdrop-filter: blur(10px);
-    }
-    
-    .stat-card-customers {
-        background: rgba(190, 242, 100, 0.9);
-    }
-    
-    .stat-card-reviews {
-        background: rgba(255, 255, 255, 0.8);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .stat-card-map {
-        background: rgba(255, 255, 255, 0.7);
-        padding: 0;
-        overflow: hidden;
-    }
-    
-    .stat-title {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #1f2937;
-        margin-bottom: 0.25rem;
-    }
-    
-    .stat-number {
-        font-size: 2.25rem;
-        font-weight: 700;
-        color: #115e59;
-    }
-    
-    .qr-icon {
-        width: 28px;
-        height: 28px;
-        color: #0f766e;
-        margin-bottom: 0.25rem;
-    }
-    
-    .map-container {
-        width: 100%;
-        height: 150px;
-        position: relative;
-        background: linear-gradient(135deg, #d1fae5 0%, #dbeafe 100%);
-    }
-    
-    .map-label-top {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.75rem;
-        text-align: right;
-        font-size: 0.625rem;
-        color: #4b5563;
-    }
-    
-    .map-center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 1rem;
-        font-weight: 700;
-        color: #1f2937;
-    }
-    
-    .map-marker {
-        position: absolute;
-        bottom: 0.75rem;
-        right: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 0.2rem;
-    }
-    
-    .marker-dot {
-        width: 18px;
-        height: 18px;
-        background: #ef4444;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
-    }
-    
-    .marker-inner {
-        width: 8px;
-        height: 8px;
-        background: white;
-        border-radius: 50%;
-    }
-    
-    .marker-label {
-        font-size: 0.625rem;
-        font-weight: 600;
-        color: #dc2626;
-    }
-</style>
+    <!-- FAVICON – cukup copy-paste ini saja, sudah 100% kerja di semua browser & device -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('favicon_io/site.webmanifest') }}">
 
-    <!-- Welcome Card -->
-    <div class="welcome-card">
-        <div class="car-image">
-            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&h=300&fit=crop" alt="Toyota Kijang Innova">
-        </div>
-        <div class="welcome-info">
-            <h2 class="welcome-title">Halo! Selamat Datang Fitra</h2>
-            <div class="info-row">
-                <div class="info-item">
-                    <span class="info-label">Armada :</span>
-                    <span class="info-value">Toyota Kijang Innova</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">TNKB :</span>
-                    <span class="info-value">BM801452</span>
-                </div>
+    <!-- Opsional: untuk Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon_io/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicon_io/android-chrome-512x512.png') }}">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+
+        .shadow-soft {
+            box-shadow: 0 12px 24px rgba(0, 0, 0, .16);
+        }
+
+        .shadow-pill {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, .18);
+        }
+    </style>
+</head>
+
+<body class="h-screen overflow-hidden bg-white text-slate-800">
+    <div class="h-full flex">
+
+        {{-- SIDEBAR --}}
+        <aside
+            class="w-[250px] h-full bg-gradient-to-b from-[#75d0f0] via-[#37a6cc] to-[#0a6687] flex flex-col items-center py-6">
+
+            {{-- LOGO --}}
+            <div class="mb-6">
+                <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort Logo"
+                    class="h-16 object-contain mx-auto">
             </div>
-            <div class="info-item">
-                <span class="info-label">Warna :</span>
-                <span class="info-value">Hitam Metalik</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Routes -->
-    <div class="routes-grid">
-        <!-- Route 1 -->
-        <div class="route-card route-card-1">
-            <div class="route-header">
-                <svg class="route-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                </svg>
-                <span>Rute 1:</span>
-            </div>
-            <div class="route-time">
-                <svg class="time-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span class="time-text">08:00</span>
-            </div>
-            <div class="route-path">
-                <svg class="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span class="location-text">Bengkalis</span>
-                <div class="path-line">
-                    <div class="path-dot path-dot-start"></div>
-                    <div class="path-dot path-dot-end"></div>
-                </div>
-                <span class="location-text">Dumai</span>
-            </div>
-        </div>
-        
-        <!-- Route 2 -->
-        <div class="route-card route-card-2">
-            <div class="route-header">
-                <svg class="route-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
-                </svg>
-                <span>Rute 2:</span>
-            </div>
-            <div class="route-time">
-                <svg class="time-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span class="time-text">13:30</span>
-            </div>
-            <div class="route-path">
-                <svg class="location-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                </svg>
-                <span class="location-text">Dumai</span>
-                <div class="path-line">
-                    <div class="path-dot path-dot-start"></div>
-                    <div class="path-dot path-dot-end"></div>
-                </div>
-                <span class="location-text">Duri</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Stats -->
-    <div class="stats-grid">
-        <!-- Jumlah Pelanggan -->
-        <div class="stat-card stat-card-customers">
-            <div class="stat-title">Jumlah<br>Pelanggan</div>
-            <div class="stat-number">15</div>
-        </div>
-        
-        <!-- Ulasan Masuk -->
-        <div class="stat-card stat-card-reviews">
-            <svg class="qr-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
-            </svg>
-            <div class="stat-title">Ulasan Masuk</div>
-            <div class="stat-number">8</div>
-        </div>
-        
-        <!-- Map -->
-        <div class="stat-card stat-card-map">
-            <div class="map-container">
-                <div class="map-label-top">
-                    <div>Kantor Kementerian</div>
-                    <div>Agama Kabupaten...</div>
-                </div>
-                <div class="map-center">Bengkalis</div>
-                <div class="map-marker">
-                    <div class="marker-dot">
-                        <div class="marker-inner"></div>
+
+            {{-- MENU --}}
+            <nav class="space-y-3 w-full px-5 flex-1">
+                {{-- Dashboard (aktif) --}}
+                <a href="{{ route('sopir.dashboard') }}"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
+                    <div class="h-7 w-7 rounded-md bg-[#0b5f80] text-white grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="m3 11 9-8 9 8"></path>
+                            <path d="M9 22V12h6v10"></path>
+                        </svg>
                     </div>
-                    <div class="marker-label">RSUD Bengkalis</div>
-                </div>
+                    <span class="font-semibold">Dashboard</span>
+                </a>
+
+                {{-- Travel --}}
+                <a href="#"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
+                            <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Travel</span>
+                </a>
+
+                {{-- Jadwal --}}
+                <a href="#"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                            <path d="M16 2v4M8 2v4M3 10h18"></path>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Jadwal</span>
+                </a>
+
+                {{-- Profil --}}
+                <a href="#"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <circle cx="12" cy="7" r="3"></circle>
+                            <path d="M4 21a8 8 0 0 1 16 0"></path>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Profil</span>
+                </a>
+
+                {{-- Notifikasi --}}
+                <a href="#"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Notifikasi</span>
+                </a>
+
+                {{-- Personalisasi --}}
+                <a href="#"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M12 3v4"></path>
+                            <path d="M12 17v4"></path>
+                            <path d="M5 12h4"></path>
+                            <path d="M15 12h4"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Personalisasi</span>
+                </a>
+
+                {{-- Bantuan --}}
+                <a href="#"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path>
+                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Bantuan</span>
+                </a>
+            </nav>
+
+            {{-- TOMBOL KELUAR --}}
+            <div class="w-full px-5 pt-3">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit"
+                        class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                               rounded-lg px-4 py-2.5 shadow-pill text-sm">
+                        <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <path d="M16 17l5-5-5-5"></path>
+                                <path d="M21 12H9"></path>
+                            </svg>
+                        </div>
+                        <span class="font-5semibold">Keluar</span>
+                    </button>
+                </form>
             </div>
-        </div>
+        </aside>
+
+        {{-- MAIN CONTENT --}}
+        <main class="flex-1 h-full flex flex-col bg-[#f5fafc]">
+
+            {{-- HEADER ATAS --}}
+            <header class="flex items-center justify-between px-10 pt-6 pb-4">
+                <div>
+                    <h1 class="text-3xl font-semibold tracking-tight text-[#0c607f]">Dashboard</h1>
+                    <p class="text-sm text-slate-500 mt-1">
+                        Ringkasan aktivitas dan informasi perjalananmu hari ini.
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <div class="text-right">
+                        <p class="text-sm font-semibold text-[#0c607f]">
+                            {{ Auth::user()->name }}
+                        </p>
+                        <p class="text-[11px] text-emerald-600 flex items-center justify-end gap-1">
+                            <span class="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Online
+                        </p>
+                    </div>
+                    <div class="h-10 w-10 rounded-full bg-[#5fb7cf] grid place-items-center">
+                        <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 22a8 8 0 0 1 16 0"></path>
+                        </svg>
+                    </div>
+                </div>
+            </header>
+
+            {{-- KONTEN UTAMA (SCROLL DI SINI SAJA) --}}
+            <div class="flex-1 px-10 pb-8 pt-1 space-y-6 overflow-y-auto">
+
+                {{-- ================== HERO ARMADA + PROFIL SOPIR ================== --}}
+                <section
+                    class="bg-[#e3f1f6] rounded-[34px] shadow-soft px-8 py-6 flex flex-col xl:flex-row gap-6 items-stretch relative overflow-hidden">
+
+                    {{-- aksen kiri --}}
+                    <div
+                        class="absolute -left-12 top-0 h-full w-40 bg-gradient-to-b from-[#6fd2f3] to-[#0b6687] opacity-20 pointer-events-none">
+                    </div>
+
+                    {{-- FOTO ARMADA --}}
+                    <div class="w-full xl:w-[330px] flex items-center relative z-10">
+                        <div
+                            class="w-full h-[190px] bg-white rounded-[30px] shadow-soft overflow-hidden flex items-center justify-center">
+                            {{-- ganti $fotoArmada jika kamu pakai dari database --}}
+                            <img src="{{ $fotoArmada ?? asset('images/mobil1.jpg') }}" alt="Armada"
+                                class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    {{-- INFO SOPIR + ARMADA --}}
+                    <div class="flex-1 flex flex-col justify-between gap-4 relative z-10">
+                        <div>
+                            <h2 class="text-3xl font-semibold text-[#0c607f] mb-1">
+                                Halo {{ Auth::user()->name }}! Selamat Datang
+                            </h2>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Kelola jadwal, rute, dan penumpangmu dengan nyaman. Pastikan informasi
+                                armada dan rute selalu terbaru agar penumpang mudah menemukan layananmu.
+                            </p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-y-1 gap-x-6 text-sm text-[#0c607f] mt-2">
+                            <div class="flex gap-2">
+                                <span class="font-semibold min-w-[70px]">Armada</span>
+                                <span>: {{ $namaArmada ?? 'Toyota Kijang Innova' }}</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="font-semibold min-w-[70px]">TNKB</span>
+                                <span>: {{ $platNomor ?? 'BM801452' }}</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="font-semibold min-w-[70px]">Warna</span>
+                                <span>: {{ $warnaArmada ?? 'Hitam Metalik' }}</span>
+                            </div>
+                        </div>
+
+                        {{-- 3 info kecil di bawah judul --}}
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+                            <div
+                                class="bg-white/80 rounded-2xl px-4 py-2.5 shadow-soft text-xs flex items-center justify-between">
+                                <div>
+                                    <p class="text-[11px] text-slate-500">Perjalanan Hari Ini</p>
+                                    <p class="text-lg font-semibold text-[#0c607f]">
+                                        {{ $tripHariIni ?? 0 }}
+                                    </p>
+                                </div>
+                                <span
+                                    class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-[#e0f7ff] text-[#0c607f]">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z">
+                                        </path>
+                                        <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <div
+                                class="bg-white/80 rounded-2xl px-4 py-2.5 shadow-soft text-xs flex items-center justify-between">
+                                <div>
+                                    <p class="text-[11px] text-slate-500">Penumpang Bulan Ini</p>
+                                    <p class="text-lg font-semibold text-[#0c607f]">
+                                        {{ $penumpangBulanIni ?? 0 }}
+                                    </p>
+                                </div>
+                                <span
+                                    class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-[#e0f7ff] text-[#0c607f]">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <circle cx="9" cy="8" r="3"></circle>
+                                        <path d="M16 21a7 7 0 0 0-14 0"></path>
+                                    </svg>
+                                </span>
+                            </div>
+
+                            <div
+                                class="bg-white/80 rounded-2xl px-4 py-2.5 shadow-soft text-xs flex items-center justify-between">
+                                <div>
+                                    <p class="text-[11px] text-slate-500">Rating Rata-rata</p>
+                                    <p class="text-lg font-semibold text-[#0c607f]">
+                                        {{ number_format($ratingRata ?? 0, 1) }}<span class="text-xs">/5</span>
+                                    </p>
+                                </div>
+                                <span
+                                    class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-[#ffeccd] text-[#d97706]">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <polygon
+                                            points="12 2 15 8.5 22 9.3 17 14 18.3 21 12 17.8 5.7 21 7 14 2 9.3 9 8.5 12 2">
+                                        </polygon>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {{-- ================== RUTE AKTIF ================== --}}
+                <section class="grid grid-cols-1 xl:grid-cols-[2fr,1.1fr] gap-5">
+
+                    {{-- Rute utama / perjalanan berikutnya --}}
+                    <div
+                        class="bg-gradient-to-r from-[#6ecff1] via-[#2a9ac5] to-[#005c7d]
+                               rounded-[40px] shadow-soft px-7 py-5 text-white flex flex-col gap-4">
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-white/20 border border-white/40 grid place-items-center">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z">
+                                        </path>
+                                        <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
+                                    </svg>
+                                </div>
+                                <div class="font-semibold text-base">
+                                    Rute Utama Hari Ini
+                                </div>
+                            </div>
+                            <span class="text-xs bg-white/20 px-3 py-1 rounded-full">
+                                Jadwal berikutnya
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-4 text-sm">
+                            <div class="flex items-center gap-1.5">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M12 7v5l3 3"></path>
+                                </svg>
+                                <span>{{ $jamBerangkat ?? '08:00' }}</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 text-xs text-white/80">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M3 12h18"></path>
+                                    <path d="m14 9 3 3-3 3"></path>
+                                </svg>
+                                <span>Estimasi {{ $estimasiWaktu ?? '3 jam' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-sm font-medium mt-1">
+                            <span class="flex items-center gap-1.5">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                    </path>
+                                    <circle cx="12" cy="11" r="2.5"></circle>
+                                </svg>
+                                {{ $kotaAsal ?? 'Bengkalis' }}
+                            </span>
+
+                            {{-- garis titik tengah --}}
+                            <div class="flex items-center gap-1">
+                                <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+                                <span class="h-[2px] w-16 bg-white/80 rounded-full"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-white/80"></span>
+                                <span class="h-[2px] w-8 bg-white/70 rounded-full"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-white/60"></span>
+                            </div>
+
+                            <span class="flex items-center gap-1.5">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                    </path>
+                                    <circle cx="12" cy="11" r="2.5"></circle>
+                                </svg>
+                                {{ $kotaTujuan ?? 'Dumai' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    {{-- Rute tambahan / rute kedua --}}
+                    <div class="bg-[#8fd4f0] rounded-[32px] shadow-soft px-6 py-5 text-[#0a5672] flex flex-col gap-4">
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="h-10 w-10 rounded-full bg-white/80 border border-white grid place-items-center text-[#0a5672]">
+                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z">
+                                        </path>
+                                        <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
+                                    </svg>
+                                </div>
+                                <div class="font-semibold text-base">Rute Tambahan</div>
+                            </div>
+                            <span class="text-[11px] text-[#0a5672]/80">
+                                {{ $statusRuteTambahan ?? 'Belum ada jadwal' }}
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-4 text-sm">
+                            <div class="flex items-center gap-1.5">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M12 7v5l3 3"></path>
+                                </svg>
+                                <span>{{ $jamBerangkat2 ?? '13:30' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between text-sm font-medium">
+                            <span class="flex items-center gap-1.5">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                    </path>
+                                    <circle cx="12" cy="11" r="2.5"></circle>
+                                </svg>
+                                {{ $kotaAsal2 ?? 'Dumai' }}
+                            </span>
+
+                            <div class="flex items-center gap-1 text-[#0a5672]">
+                                <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]"></span>
+                                <span class="h-[2px] w-10 bg-[#0a5672]/70 rounded-full"></span>
+                                <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]/60"></span>
+                            </div>
+
+                            <span class="flex items-center gap-1.5">
+                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.8">
+                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                    </path>
+                                    <circle cx="12" cy="11" r="2.5"></circle>
+                                </svg>
+                                {{ $kotaTujuan2 ?? 'Duri' }}
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                {{-- ================== BAGIAN BAWAH: STATISTIK & MAP ================== --}}
+                <section class="grid grid-cols-1 xl:grid-cols-[1.1fr,1.1fr,1.4fr] gap-5 items-stretch">
+
+                    {{-- Jumlah pelanggan --}}
+                    <div
+                        class="bg-[#e4f86b] rounded-[32px] shadow-soft flex flex-col items-center justify-center py-6">
+                        <div class="text-sm font-semibold text-[#355100] mb-1">
+                            Jumlah Pelanggan Terdaftar
+                        </div>
+                        <div class="text-4xl font-extrabold text-[#355100] leading-none">
+                            {{ $totalPelanggan ?? 0 }}
+                        </div>
+                    </div>
+
+                    {{-- Ulasan --}}
+                    <div
+                        class="bg-[#e7eff4] rounded-[32px] shadow-soft flex flex-col items-center justify-center py-6 text-[#0c607f]">
+                        <div class="flex items-center gap-2 mb-1">
+                            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z">
+                                </path>
+                            </svg>
+                            <span class="text-sm font-semibold">Ulasan Masuk</span>
+                        </div>
+                        <div class="text-4xl font-extrabold leading-none">
+                            {{ $totalUlasan ?? 0 }}
+                        </div>
+                        <p class="text-[11px] text-slate-500 mt-1">
+                            Jaga pelayanan terbaik agar rating tetap tinggi.
+                        </p>
+                    </div>
+
+                    {{-- Area Operasional / Map --}}
+                    <div class="bg-[#e3f1f6] rounded-[32px] shadow-soft overflow-hidden flex flex-col">
+                        <div class="px-6 pt-4 pb-2 flex items-center justify-between">
+                            <div>
+                                <div class="text-sm font-semibold text-[#0c607f]">Area Operasional</div>
+                                <div class="text-[11px] text-slate-600">
+                                    Perkiraan wilayah layanan travel RiauPort.
+                                </div>
+                            </div>
+                            <div
+                                class="h-8 w-8 rounded-full bg-white/80 flex items-center justify-center border border-white">
+                                <svg class="h-4 w-4 text-[#0c607f]" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="1.8">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M12 2v4M12 18v4M4 12h4M16 12h4"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-[#c5e4f2]">
+                            {{-- nanti bisa kamu ganti dengan iframe Google Maps --}}
+                            <div
+                                class="w-full h-full flex items-center justify-center text-[11px] text-slate-700 italic">
+                                Map lokasi operasional akan ditampilkan di sini.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {{-- ERROR DB JIKA ADA --}}
+                @if (!empty($dbError))
+                    <section>
+                        <div class="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-700">
+                            Koneksi database mengalami masalah: {{ $dbError }}
+                        </div>
+                    </section>
+                @endif
+            </div>
+        </main>
     </div>
-</div>
-@endsection
+</body>
+
+</html>
