@@ -45,13 +45,19 @@
                     class="h-16 object-contain mx-auto">
             </div>
 
+            @php
+                $baseLink = 'flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm';
+                $baseIcon = 'h-7 w-7 rounded-md grid place-items-center';
+            @endphp
+
             {{-- MENU --}}
             <nav class="space-y-3 w-full px-5 flex-1">
-                {{-- Dashboard (aktif) --}}
+
+                {{-- Dashboard --}}
                 <a href="{{ route('sopir.dashboard') }}"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                    <div class="h-7 w-7 rounded-md bg-[#0b5f80] text-white grid place-items-center">
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.dashboard') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.dashboard') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="m3 11 9-8 9 8"></path>
@@ -63,9 +69,9 @@
 
                 {{-- Travel --}}
                 <a href="{{ route('sopir.travel') }}"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.travel') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.travel') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
@@ -76,10 +82,8 @@
                 </a>
 
                 {{-- Jadwal --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                <a href="{{ route('sopir.jadwal') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <rect x="3" y="4" width="18" height="18" rx="2"></rect>
@@ -90,10 +94,9 @@
                 </a>
 
                 {{-- Profil --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                <a href="{{ route('sopir.profil') }}"
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <circle cx="12" cy="7" r="3"></circle>
@@ -104,10 +107,8 @@
                 </a>
 
                 {{-- Notifikasi --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                <a href="{{ route('sopir.notifikasi') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -118,10 +119,8 @@
                 </a>
 
                 {{-- Personalisasi --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                <a href="{{ route('sopir.personal') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M12 3v4"></path>
@@ -135,10 +134,8 @@
                 </a>
 
                 {{-- Bantuan --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                <a href="{{ route('sopir.bantuan') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -154,10 +151,8 @@
             <div class="w-full px-5 pt-3">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit"
-                        class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                               rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                        <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                    <button type="submit" class="{{ $baseLink }} bg-white text-[#0b5f80]">
+                        <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -165,7 +160,7 @@
                                 <path d="M21 12H9"></path>
                             </svg>
                         </div>
-                        <span class="font-5semibold">Keluar</span>
+                        <span class="font-semibold">Keluar</span>
                     </button>
                 </form>
             </div>

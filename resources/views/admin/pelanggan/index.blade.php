@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="id">
 
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>RiauPort – Data Pelanggan</title>
+
+    <!-- FAVICON – cukup copy-paste ini saja, sudah 100% kerja di semua browser & device -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('favicon_io/site.webmanifest') }}">
+
+    <!-- Opsional: untuk Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon_io/android-chrome-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicon_io/android-chrome-512x512.png') }}">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -23,24 +35,29 @@
 <body class="h-screen overflow-hidden bg-white text-slate-800">
     <div class="h-full flex">
 
-        {{-- SIDEBAR --}}
+        {{-- SIDEBAR (DISAMAKAN POLANYA DENGAN DASHBOARD SOPIR) --}}
         <aside
             class="w-[250px] h-full bg-gradient-to-b from-[#75d0f0] via-[#37a6cc] to-[#0a6687] flex flex-col items-center py-6">
 
             {{-- LOGO --}}
             <div class="mb-6">
-                {{-- ganti src ini dengan logo milikmu --}}
                 <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort Logo"
                     class="h-16 object-contain mx-auto">
             </div>
 
+            @php
+                $baseLink = 'flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm';
+                $baseIcon = 'h-7 w-7 rounded-md grid place-items-center';
+            @endphp
+
             {{-- MENU --}}
             <nav class="space-y-3 w-full px-5 flex-1">
+
                 {{-- Dashboard --}}
                 <a href="{{ route('admin.dashboard') }}"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                    <div class="h-7 w-7 rounded-md bg-[#0b5f80] text-white grid place-items-center">
+                    class="{{ $baseLink }} {{ request()->routeIs('admin.dashboard') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('admin.dashboard') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="m3 11 9-8 9 8"></path>
@@ -50,25 +67,11 @@
                     <span class="font-semibold">Dashboard</span>
                 </a>
 
-                {{-- Profil --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
-                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <circle cx="12" cy="7" r="3"></circle>
-                            <path d="M4 21a8 8 0 0 1 16 0"></path>
-                        </svg>
-                    </div>
-                    <span class="font-semibold">Profil</span>
-                </a>
-
                 {{-- Sopir --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                <a href="{{ route('admin.sopir.index') }}"
+                    class="{{ $baseLink }} {{ request()->routeIs('admin.sopir.*') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('admin.sopir.*') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
@@ -78,26 +81,26 @@
                     <span class="font-semibold">Sopir</span>
                 </a>
 
-                {{-- Pelanggan --}}
+                {{-- Pelanggan (HALAMAN INI) --}}
                 <a href="{{ route('admin.pelanggan.index') }}"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/20 transition">
-                    <span class="grid place-items-center h-9 w-9 rounded-full bg-white/20">
-                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.7">
+                    class="{{ $baseLink }} {{ request()->routeIs('admin.pelanggan.*') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('admin.pelanggan.*') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
                             <circle cx="9" cy="8" r="3"></circle>
                             <path d="M16 21a7 7 0 0 0-14 0"></path>
                             <path d="M19 8v6M22 11h-6"></path>
                         </svg>
-                    </span>
-                    Pelanggan
+                    </div>
+                    <span class="font-semibold">Pelanggan</span>
                 </a>
 
-
-                {{-- Pengaturan --}}
-                <a href="#"
-                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                       rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                {{-- Pengaturan / Personalisasi Admin --}}
+                <a href="{{ route('admin.personalisasi.index') }}"
+                    class="{{ $baseLink }} {{ request()->routeIs('admin.pengaturan') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('admin.pengaturan') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path>
@@ -110,14 +113,13 @@
                 </a>
             </nav>
 
-            {{-- TOMBOL KELUAR (SELALU TERLIHAT) --}}
+            {{-- TOMBOL KELUAR --}}
             <div class="w-full px-5 pt-3">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
-                        class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
-                               rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                        <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                        <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                             <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -229,7 +231,7 @@
                 </div>
             </div>
 
-            {{-- FORM TAMBAH DATA (simple, di bawah tabel) --}}
+            {{-- FORM TAMBAH DATA --}}
             <div id="form-tambah" class="mt-10 bg-white rounded-2xl shadow-md p-6">
                 <h2 class="text-xl font-semibold text-[#0e586d] mb-4">Tambah Pelanggan</h2>
 

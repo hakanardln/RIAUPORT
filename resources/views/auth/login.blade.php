@@ -132,13 +132,17 @@
                     <form method="POST" action="{{ route('login.process') }}" class="space-y-6">
                         @csrf
 
+                        {{-- Bawa redirect_to dari query string ke form (untuk alur Pesan Sekarang -> Login -> WA) --}}
+                        <input type="hidden" name="redirect_to"
+                            value="{{ old('redirect_to', request('redirect_to')) }}">
+
                         <div>
                             <label class="text-sm font-semibold text-gray-700">Email</label>
                             <input type="email" name="email" required
                                 class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 
                                           focus:outline-none focus:border-[var(--primary)] input-glow
                                           transition-all duration-300 placeholder-gray-400"
-                                placeholder="nama@email.com">
+                                placeholder="nama@email.com" value="{{ old('email') }}">
                         </div>
 
                         <div>

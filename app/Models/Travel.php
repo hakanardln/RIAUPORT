@@ -11,28 +11,35 @@ class Travel extends Model
     protected $fillable = [
         'sopir_id',
         'kode_travel',
+
+        // Mobil
+        'armada',
+        'kapasitas_penumpang',
+        'warna',
+        'plat_nomor',
+        'foto_armada',
+        'jenis_layanan',
+
+        // Rute
         'rute',
         'lokasi_asal',
         'lokasi_tujuan',
         'tanggal_berangkat',
         'jam_berangkat',
-        'kapasitas_penumpang',
-        'penumpang_terdaftar',
+
+        // Kontak
+        'whatsapp',
         'harga_per_orang',
         'keterangan',
-
-        // kolom tambahan
-        'armada',
-        'warna',
-        'plat_nomor',
-        'kursi_tersedia',
-        'jenis_layanan',
-        'foto_armada',
-        'titik_jemput',
-        'titik_turun',
-        'estimasi_waktu',
-        'whatsapp',
         'deskripsi',
         'status',
+
+        // Sistem
+        'penumpang_terdaftar',
     ];
+    // app/Models/Travel.php
+    public function sopir()
+    {
+        return $this->belongsTo(User::class, 'sopir_id');
+    }
 }

@@ -35,7 +35,6 @@
         body {
             height: 100%;
             overflow: hidden;
-            /* << INI YANG BIKIN TIDAK BISA SCROLL */
         }
 
         body {
@@ -88,39 +87,38 @@
     <div class="h-full w-full max-w-7xl mx-auto">
         <div class="grid grid-cols-1 lg:grid-cols-2 h-full rounded-3xl overflow-hidden shadow-2xl">
 
-            <!-- PANEL KIRI – HERO -->
+            <!-- PANEL KIRI – HERO (disamakan scale-nya dengan register sopir) -->
             <div
                 class="hidden lg:flex relative wave-bg bg-gradient-to-br from-cyan-50 to-sky-100 items-center justify-center p-10">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
                 <div class="relative z-10 text-center">
                     <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort"
-                        class="w-80 mx-auto drop-shadow-2xl mb-8 animate-[pulse_6s_ease-in-out_infinite]">
-                    <h2 class="fell text-5xl font-bold text-gray-800 mb-4">RiauPort</h2>
-                    <p class="fell text-2xl text-gray-700 leading-relaxed max-w-md mx-auto">
-                        Temukan berbagai <span class="text-[var(--primary)] font-bold">Travel</span> impianmu<br>
-                        dalam satu platform yang <span class="italic text-[var(--accent)]">mengagumkan</span>.
+                        class="w-72 mx-auto drop-shadow-2xl mb-6 animate-[pulse_6s_ease-in-out_infinite]">
+                    <h2 class="fell text-4xl font-bold text-gray-800 mb-3">RiauPort</h2>
+                    <p class="fell text-xl text-gray-700 leading-relaxed max-w-md mx-auto">
+                        Temukan berbagai <span class="text-[var(--primary)] font-bold">Travel</span> impianmu
+                        dalam satu platform yang
+                        <span class="italic text-[var(--accent)]">mengagumkan</span>.
                     </p>
                 </div>
             </div>
 
-            <!-- PANEL KANAN – FORM (selalu muncul full height) -->
-            <div class="flex items-center justify-center bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8">
+            <!-- PANEL KANAN – FORM (disamakan dengan register sopir) -->
+            <div class="flex items-center justify-center bg-gradient-to-br from-gray-50 to-white px-4 sm:px-8 lg:px-16">
                 <div class="w-full max-w-md">
+                    <div class="glass-card rounded-3xl p-8 sm:p-10 shadow-xl relative">
 
-                    <div class="glass-card rounded-3xl p-8 sm:p-10 shadow-xl">
                         <div
                             class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]">
                         </div>
 
                         <div class="text-center mb-8">
-                            <h1 class="text-4xl font-bold text-[var(--primary)]">Buat Akun</h1>
-                            <p class="text-gray-600 mt-2">Isi data di bawah ini untuk bergabung</p>
+                            <h1 class="text-3xl font-bold text-[var(--primary)]">Buat Akun</h1>
+                            <p class="text-gray-600 mt-2 text-sm">Isi data di bawah ini untuk bergabung</p>
                         </div>
 
                         <form action="{{ route('register.store') }}" method="POST" class="space-y-5">
                             @csrf
-
-
 
                             <div>
                                 <label class="text-sm font-semibold text-gray-700">Nama Lengkap</label>
@@ -165,8 +163,8 @@
                                 <div class="absolute inset-0 flex items-center">
                                     <div class="w-full border-t border-gray-300"></div>
                                 </div>
-                                <div class="relative flex justify-center text-sm"><span
-                                        class="px-4 bg-gradient-to-br from-gray-50 to-white text-gray-500">atau</span>
+                                <div class="relative flex justify-center text-sm">
+                                    <span class="px-4 bg-gradient-to-br from-gray-50 to-white text-gray-500">atau</span>
                                 </div>
                             </div>
 
@@ -186,9 +184,9 @@
                             </a>
 
                             <div class="text-center mt-8">
-                                <span class="text-gray-600">Sudah punya akun?</span>
+                                <span class="text-gray-600 text-sm">Sudah punya akun?</span>
                                 <a href="{{ route('login') }}"
-                                    class="ml-2 font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors">
+                                    class="ml-2 font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors text-sm">
                                     Masuk di sini
                                 </a>
                             </div>
@@ -206,6 +204,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 

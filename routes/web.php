@@ -13,182 +13,97 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\SopirController;
 use App\Http\Controllers\SopirTravelController;
+use App\Http\Controllers\SopirProfilController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SopirNotifController;
+use App\Http\Controllers\SopirPersonalisasiController;
+use App\Http\Controllers\SopirBantuanController;
+use App\Http\Controllers\AdminSopirController;
+
+// Middleware (pakai class langsung)
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsSopir;
 
 /*
 |--------------------------------------------------------------------------
-| Halaman Utama
+| HOME & PUBLIC PAGE
 |--------------------------------------------------------------------------
 */
 
-Route::view('/', 'home')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/cari-travel', [HomeController::class, 'search'])->name('travel.search');
 
-// Route untuk public
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-// Route untuk about
+
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 
-// Route untuk admin (tambahkan middleware auth jika sudah ada sistem login)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admin/contacts', [ContactController::class, 'admin'])->name('admin.contacts');
-    Route::get('/admin/contacts/{id}', [ContactController::class, 'show'])->name('admin.contacts.show');
-    Route::delete('/admin/contacts/{id}', [ContactController::class, 'destroy'])->name('admin.contacts.destroy');
-    Route::patch('/admin/contacts/{id}/read', [ContactController::class, 'markAsRead'])->name('admin.contacts.read');
-});
 /*
 |--------------------------------------------------------------------------
-| ROUTE YANG HARUS LOGIN
+| LOGIN USER + SOPIR (UMUM)
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function () {
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 
-    // Dashboard Admin (hanya admin)
-    Route::get('/admin/dashboard', function () {
-        if (Auth::user()->role !== 'admin') {
-            abort(403);
-        }
-
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
-
-    // Dashboard Sopir (hanya sopir)
-    Route::get('/sopir/dashboard', function () {
-        if (Auth::user()->role !== 'sopir') {
-            abort(403);
-        }
-
-        return view('sopir.dashboard');
-    })->name('sopir.dashboard');
-
-    // CRUD Pelanggan (dipakai admin)
-    Route::get('/admin/pelanggan', [PelangganController::class, 'index'])->name('admin.pelanggan.index');
-    Route::post('/admin/pelanggan', [PelangganController::class, 'store'])->name('admin.pelanggan.store');
-    Route::get('/admin/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('admin.pelanggan.edit');
-    Route::put('/admin/pelanggan/{id}', [PelangganController::class, 'update'])->name('admin.pelanggan.update');
-    Route::delete('/admin/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('admin.pelanggan.destroy');
-
-    // Logout (kembali ke home)
-    Route::post('/logout', function (Request $request) {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect()->route('home');
-    })->name('logout');
-});
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*
 |--------------------------------------------------------------------------
-| LOGIN ADMIN
+| REGISTER USER + SOPIR
 |--------------------------------------------------------------------------
 */
+// FORM OTP
+Route::get('/verify-otp', [RegisterController::class, 'showOtpForm'])
+    ->name('otp.show');
 
-// Halaman login khusus admin
-Route::get('/admin/login', function () {
-    return view('admin.login'); // resources/views/admin/login.blade.php
-})->name('admin.login');
+// PROSES VERIFIKASI OTP
+Route::post('/verify-otp', [RegisterController::class, 'verifyOtp'])
+    ->name('otp.verify');
 
-// Proses login khusus admin (email & password)
-Route::post('/admin/login', function (Request $request) {
+Route::get('/register', [RegisterController::class, 'showRegister'])->name('register.show');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+Route::get('/register/sopir', [RegisterController::class, 'showDriverRegister'])->name('register.driver.show');
+Route::post('/register/sopir', [RegisterController::class, 'storeDriver'])->name('register.driver.store');
 
-    // hanya izinkan user dengan role admin
-    $credentials['role'] = 'admin';
+Route::get('/register/sopir', [RegisterController::class, 'showDriverRegister'])->name('register.sopir.show');
+Route::post('/register/sopir', [RegisterController::class, 'storeDriver'])->name('register.sopir.store');
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect()->route('admin.dashboard');
-    }
+Route::get('/register', [RegisterController::class, 'showRegister'])->name('register.show');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-    return back()->withErrors([
-        'email' => 'Email atau password admin tidak valid.',
-    ])->onlyInput('email');
-})->name('admin.login.process');
+Route::get('/verify-otp', [RegisterController::class, 'showOtpForm'])->name('otp.show');
+Route::post('/verify-otp', [RegisterController::class, 'verifyOtp'])->name('otp.verify');
 
-/*
-|--------------------------------------------------------------------------
-| LOGIN ADMIN GOOGLE
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/admin/google/redirect', [AdminGoogleController::class, 'redirect'])
-    ->name('admin.google.redirect');
-
-Route::get('/admin/google/callback', [AdminGoogleController::class, 'callback'])
-    ->name('admin.google.callback');
-
-/*
-|--------------------------------------------------------------------------
-| LOGIN USER & SOPIR
-|--------------------------------------------------------------------------
-*/
-
-// Halaman login umum (user + sopir)
-Route::get('/login', function () {
-    return view('auth.login'); // resources/views/auth/login.blade.php
-})->name('login');
-
-// Proses login umum
-Route::post('/login', function (Request $request) {
-
-    $credentials = $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
-
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-
-        $user = Auth::user();
-
-        // Jika sopir → ke dashboard sopir
-        if ($user->role === 'sopir') {
-            return redirect()->route('sopir.dashboard');
-        }
-
-        // Selain itu (user biasa) → ke home
-        return redirect()->route('home');
-    }
-
-    return back()->withErrors([
-        'email' => 'Email atau password salah.',
-    ])->onlyInput('email');
-})->name('login.process');
-
-/*
-|--------------------------------------------------------------------------
-| REGISTER USER (MANUAL + GOOGLE)
-|--------------------------------------------------------------------------
-*/
-
-// Login / register dengan Google untuk user biasa
-Route::get('/auth/google', [RegisterController::class, 'redirectToGoogle'])
-    ->name('google.redirect');
-
-Route::get('/auth/google/callback', [RegisterController::class, 'handleGoogleCallback'])
-    ->name('google.callback');
-
-// Halaman register
-Route::get('/register', [RegisterController::class, 'showRegister'])
-    ->name('register.show');
-
-// Proses register manual
-Route::post('/register', [RegisterController::class, 'store'])
-    ->name('register.store');
-
-// ======================= REGISTER KHUSUS SOPIR =======================
-Route::get('/register/sopir', [RegisterController::class, 'showDriverRegister'])
-    ->name('register.sopir.show');
-
-Route::post('/register/sopir', [RegisterController::class, 'storeDriver'])
+Route::post('/register-sopir', [RegisterController::class, 'storeDriver'])
     ->name('register.sopir.store');
 
-Route::middleware(['auth'])->get('/dashboard', function () {
+// Form daftar sopir
+Route::get('/register-sopir', [RegisterController::class, 'showDriverRegister'])
+    ->name('register.sopir.show');
+
+// Proses simpan sopir + OTP
+Route::post('/register-sopir', [RegisterController::class, 'storeDriver'])
+    ->name('register.sopir.store');
+
+Route::get('/verify-otp', [RegisterController::class, 'showOtpForm'])->name('otp.show');
+Route::post('/verify-otp', [RegisterController::class, 'verifyOtp'])->name('otp.verify');
+
+// 🔥 ini yang belum ada
+Route::post('/resend-otp', [RegisterController::class, 'resendOtp'])->name('otp.resend');
+
+
+/*
+|--------------------------------------------------------------------------
+| DASHBOARD (HARUS LOGIN)
+|--------------------------------------------------------------------------
+*/
+
+// route umum setelah login: arahkan berdasarkan role
+Route::middleware('auth')->get('/dashboard', function () {
     $user = Auth::user();
 
     if ($user->role === 'admin') {
@@ -203,31 +118,146 @@ Route::middleware(['auth'])->get('/dashboard', function () {
     return redirect()->route('home');
 })->name('dashboard');
 
-// Dashboard sopir
-Route::middleware(['auth'])->group(function () {
-    Route::get('/sopir/dashboard', [SopirController::class, 'dashboard'])->name('sopir.dashboard');
+/*
+|--------------------------------------------------------------------------
+| ADMIN (HARUS LOGIN + ROLE ADMIN)
+|--------------------------------------------------------------------------
+*/
 
-    // Halaman Travel sopir
-    Route::get('/sopir/travel', [SopirController::class, 'travel'])->name('sopir.travel');
-});
+Route::middleware(['auth', IsAdmin::class])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-Route::middleware(['auth'])->group(function () {
+        // Dashboard admin
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-    // dashboard sopir kamu yang lama di sini
-    // Route::get('/sopir/dashboard', ...)->name('sopir.dashboard');
+        // Kelola sopir (HALAMAN /travel.blade.php kamu)
+        Route::get('/sopir', [AdminSopirController::class, 'index'])->name('sopir.index');
 
-    Route::get('/sopir/travel', [SopirTravelController::class, 'index'])
-        ->name('sopir.travel');
+        // Personalisasi admin (kalau ada view-nya)
+        Route::get('/personalisasi', function () {
+            return view('admin.personalisasi');
+        })->name('personalisasi.index');
 
-    Route::post('/sopir/travel/mobil', [SopirTravelController::class, 'saveMobil'])
-        ->name('sopir.travel.mobil');
+        // Pelanggan
+        Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+        Route::post('/pelanggan', [PelangganController::class, 'store'])->name('pelanggan.store');
+        Route::get('/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('pelanggan.edit');
+        Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('pelanggan.update');
+        Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
 
-    Route::post('/sopir/travel/rute', [SopirTravelController::class, 'saveRute'])
-        ->name('sopir.travel.rute');
+        // Kontak yang masuk ke admin
+        Route::get('/contacts', [ContactController::class, 'admin'])->name('contacts');
+        Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
+        Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+        Route::patch('/contacts/{id}/read', [ContactController::class, 'markAsRead'])->name('contacts.read');
+    });
 
-    Route::post('/sopir/travel/kontak', [SopirTravelController::class, 'saveKontak'])
-        ->name('sopir.travel.kontak');
-});
+/*
+|--------------------------------------------------------------------------
+| LOGIN ADMIN KHUSUS (MANUAL)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/admin/login', function () {
+    return view('admin.login');
+})->name('admin.login');
+
+Route::post('/admin/login', function (Request $request) {
+
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
+
+    // paksa role admin
+    $credentials['role'] = 'admin';
+
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->route('admin.dashboard');
+    }
+
+    return back()->withErrors([
+        'email' => 'Email atau password admin tidak valid.',
+    ])->onlyInput('email');
+})->name('admin.login.process');
+
+/*
+|--------------------------------------------------------------------------
+| GOOGLE LOGIN (USER)
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/auth/google', [RegisterController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/auth/google/callback', [RegisterController::class, 'handleGoogleCallback'])->name('google.callback');
+
+/*
+|--------------------------------------------------------------------------
+| SOPIR (HARUS LOGIN + ROLE SOPIR)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware(['auth', IsSopir::class])
+    ->prefix('sopir')
+    ->name('sopir.')
+    ->group(function () {
+
+        // HALAMAN TRAVEL
+        Route::get('/travel', [SopirTravelController::class, 'index'])
+            ->name('travel');
+
+        // === ROUTE LAMA (Opsional, tetap biar tidak error di file lama) ===
+        Route::post('/travel/mobil', [SopirTravelController::class, 'saveMobil'])
+            ->name('travel.mobil');
+
+        Route::post('/travel/rute', [SopirTravelController::class, 'saveRute'])
+            ->name('travel.rute');
+
+        Route::post('/travel/kontak', [SopirTravelController::class, 'saveKontak'])
+            ->name('travel.kontak');
+
+        // === ROUTE WIZARD BARU ===
+        Route::post('/travel/simpan', [SopirTravelController::class, 'simpan'])
+            ->name('travel.simpan');
+
+
+        // Dashboard sopir
+        Route::get('/dashboard', [SopirController::class, 'dashboard'])->name('dashboard');
+
+        // Travel (wizard pengisian data armada + kontak)
+        Route::get('/travel', [SopirTravelController::class, 'index'])->name('travel');
+        Route::post('/travel/mobil', [SopirTravelController::class, 'saveMobil'])->name('travel.mobil');
+        Route::post('/travel/rute', [SopirTravelController::class, 'saveRute'])->name('travel.rute');
+        Route::post('/travel/kontak', [SopirTravelController::class, 'saveKontak'])->name('travel.kontak');
+
+        // ⬇️ route baru untuk wizard 3 step
+        Route::post('/sopir/travel/simpan', [SopirTravelController::class, 'simpan'])->name('sopir.travel.simpan');
+
+        // Jadwal travel
+        Route::get('/jadwal', [SopirTravelController::class, 'jadwal'])->name('jadwal');
+        Route::post('/jadwal', [SopirTravelController::class, 'storeJadwal'])->name('jadwal.store');
+        Route::put('/jadwal/{travel}', [SopirTravelController::class, 'updateJadwal'])->name('jadwal.update');
+        Route::delete('/jadwal/{travel}', [SopirTravelController::class, 'destroyJadwal'])->name('jadwal.destroy');
+
+        // Profil sopir
+        Route::get('/profil', [SopirProfilController::class, 'index'])->name('profil');
+
+        // Notifikasi sopir
+        Route::get('/notifikasi', [SopirNotifController::class, 'index'])->name('notifikasi');
+
+        // Personalisasi / pengaturan tampilan sopir
+        Route::get('/personal', [SopirPersonalisasiController::class, 'index'])->name('personal');
+
+        // Bantuan sopir
+        Route::get('/bantuan', [SopirBantuanController::class, 'index'])->name('bantuan');
+    });
+
+Route::middleware(['auth', IsAdmin::class])
+    ->get('/travel', [AdminSopirController::class, 'index'])
+    ->name('admin.sopir.travel'); // nama bebas, jangan sama dengan yg lain
+
 
 /*
 |--------------------------------------------------------------------------
