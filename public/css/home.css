@@ -394,3 +394,8 @@ body {
     border-color: #2563eb;
     transform: translateY(-1px);
 }
+
+#userMenu {
+    z-index: 10002 !important;
+    position: absolute !important;
+}

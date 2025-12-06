@@ -54,7 +54,8 @@
     {{-- NAVBAR --}}
     <header class="w-full absolute top-0 left-0 z-[9999]">
         <div class="max-w-6xl mx-auto px-4 md:px-2 pt-6">
-            <div class="glass-nav w-full rounded-[25px] border px-7 py-3 flex items-center justify-between">
+            <div class="glass-nav w-full rounded-[25px] border px-7 py-3 flex items-center justify-between"
+                style="overflow: visible;">
 
                 {{-- Logo --}}
                 <div class="flex items-center">
@@ -88,7 +89,7 @@
                             ->join('');
                     @endphp
 
-                    <div class="relative">
+                    <div class="relative z-[10001]">
                         <button type="button" id="userMenuButton"
                             class="w-12 h-12 rounded-full flex items-center justify-center
                            bg-white/20 backdrop-blur-xl border border-white/40 
@@ -99,7 +100,7 @@
 
                         <div id="userMenu"
                             class="hidden absolute right-0 mt-3 w-40 bg-white rounded-2xl shadow-xl
-                        border border-slate-100 py-2 text-sm text-slate-700 z-[999999]">
+                        border border-slate-100 py-2 text-sm text-slate-700">
                             <div class="px-4 pb-1 text-[11px] uppercase tracking-wide text-slate-400">
                                 Akun
                             </div>

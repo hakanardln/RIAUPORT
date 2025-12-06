@@ -189,4 +189,40 @@ class SopirTravelController extends Controller
 
         return view('sopir.jadwal', compact('jadwals'));
     }
+    public function createJadwal()
+    {
+        return view('sopir.jadwal-create');
+    }
+    public function storeJadwal(Request $request)
+    {
+        $request->validate([
+            'lokasi_asal' => 'required|string|max:255',
+            'lokasi_tujuan' => 'required|string|max:255',
+            'tanggal_berangkat' => 'required|date',
+            'jam_berangkat' => 'required',
+            'harga_per_orang' => 'required|integer|min:0',
+        ]);
+
+        Travel::create([
+            'sopir_id' => Auth::id(),
+            'kode_travel' => strtoupper(Str::random(6)),
+
+            'lokasi_asal' => $request->lokasi_asal,
+            'lokasi_tujuan' => $request->lokasi_tujuan,
+            'tanggal_berangkat' => $request->tanggal_berangkat,
+            'jam_berangkat' => $request->jam_berangkat,
+            'rute' => $request->lokasi_asal . ' - ' . $request->lokasi_tujuan,
+
+            'harga_per_orang' => $request->harga_per_orang,
+
+            // default kosong dulu
+            'kapasitas_penumpang' => 0,
+            'penumpang_terdaftar' => 0,
+            'status' => 'aktif',
+        ]);
+
+        return redirect()->route('sopir.jadwal')
+            ->with('success', 'Jadwal berhasil ditambahkan.');
+    }
+
 }

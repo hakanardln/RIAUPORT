@@ -189,7 +189,7 @@ class RegisterController extends Controller
         // update ke user
         $user->update([
             'otp_code' => $otp,
-            'otp_expires_at' => now()->addMinute(), 
+            'otp_expires_at' => now()->addMinute(),
         ]);
 
         // kirim email lagi
@@ -207,9 +207,14 @@ class RegisterController extends Controller
         $role = $request->query('role', 'user');
 
         // simpan role sementara di session
-        $request->session()->put('google_register_role', $role);
+        $request->session()->put('google_register_role', $role); 
+        {
+            config([
+                'services.google.redirect' => route('google.callback'),
+            ]);
 
-        return Socialite::driver('google')->redirect();
+            return Socialite::driver('google')->redirect();
+        }
     }
 
     public function handleGoogleCallback(Request $request)

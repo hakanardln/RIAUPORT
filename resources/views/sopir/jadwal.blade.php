@@ -257,7 +257,7 @@
                 </div>
 
                 {{-- FLOATING BUTTON TAMBAH --}}
-                <a href="#"
+                <a href="{{ route('sopir.jadwal.create') }}"
                     class="fixed bottom-10 right-10 w-16 h-16 rounded-full bg-[#0e586d] text-white text-4xl
            grid place-items-center shadow-xl hover:bg-[#0a4453] transition">
                     +

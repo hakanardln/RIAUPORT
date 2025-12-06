@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>RiauPort – Dashboard Admin</title>
+    <title>RiauPort – Dashboard Sopir</title>
 
     <!-- FAVICON – cukup copy-paste ini saja, sudah 100% kerja di semua browser & device -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
@@ -82,8 +82,10 @@
                 </a>
 
                 {{-- Jadwal --}}
-                <a href="{{ route('sopir.jadwal') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
+                <a href="{{ route('sopir.jadwal') }}"
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.jadwal') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.jadwal') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <rect x="3" y="4" width="18" height="18" rx="2"></rect>
@@ -95,8 +97,9 @@
 
                 {{-- Profil --}}
                 <a href="{{ route('sopir.profil') }}"
-                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.profil') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.profil') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <circle cx="12" cy="7" r="3"></circle>
@@ -107,8 +110,10 @@
                 </a>
 
                 {{-- Notifikasi --}}
-                <a href="{{ route('sopir.notifikasi') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
+                <a href="{{ route('sopir.notifikasi') }}"
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.notifikasi') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.notifikasi') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -119,8 +124,10 @@
                 </a>
 
                 {{-- Personalisasi --}}
-                <a href="{{ route('sopir.personal') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
+                <a href="{{ route('sopir.personal') }}"
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.personal') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.personal') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M12 3v4"></path>
@@ -134,8 +141,10 @@
                 </a>
 
                 {{-- Bantuan --}}
-                <a href="{{ route('sopir.bantuan') }}" class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
+                <a href="{{ route('sopir.bantuan') }}"
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.bantuan') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    <div
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.bantuan') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -214,9 +223,8 @@
                     <div class="w-full xl:w-[330px] flex items-center relative z-10">
                         <div
                             class="w-full h-[190px] bg-white rounded-[30px] shadow-soft overflow-hidden flex items-center justify-center">
-                            {{-- ganti $fotoArmada jika kamu pakai dari database --}}
-                            <img src="{{ $fotoArmada ?? asset('images/mobil1.jpg') }}" alt="Armada"
-                                class="w-full h-full object-cover">
+                            <img src="{{ isset($fotoArmada) && $fotoArmada ? asset('storage/' . $fotoArmada) : asset('images/mobil1.jpg') }}"
+                                alt="Armada" class="w-full h-full object-cover">
                         </div>
                     </div>
 
@@ -232,18 +240,19 @@
                             </p>
                         </div>
 
+                        {{-- INFO ARMADA --}}
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-y-1 gap-x-6 text-sm text-[#0c607f] mt-2">
                             <div class="flex gap-2">
                                 <span class="font-semibold min-w-[70px]">Armada</span>
-                                <span>: {{ $namaArmada ?? 'Toyota Kijang Innova' }}</span>
+                                <span>: {{ $namaArmada ?? 'Belum diisi' }}</span>
                             </div>
                             <div class="flex gap-2">
                                 <span class="font-semibold min-w-[70px]">TNKB</span>
-                                <span>: {{ $platNomor ?? 'BM801452' }}</span>
+                                <span>: {{ $platNomor ?? 'Belum diisi' }}</span>
                             </div>
                             <div class="flex gap-2">
                                 <span class="font-semibold min-w-[70px]">Warna</span>
-                                <span>: {{ $warnaArmada ?? 'Hitam Metalik' }}</span>
+                                <span>: {{ $warnaArmada ?? 'Belum diisi' }}</span>
                             </div>
                         </div>
 
@@ -331,60 +340,78 @@
                                     Rute Utama Hari Ini
                                 </div>
                             </div>
-                            <span class="text-xs bg-white/20 px-3 py-1 rounded-full">
-                                Jadwal berikutnya
-                            </span>
+                            @if ($jamBerangkat && $kotaAsal && $kotaTujuan)
+                                <span class="text-xs bg-white/20 px-3 py-1 rounded-full">
+                                    Jadwal berikutnya
+                                </span>
+                            @endif
                         </div>
 
-                        <div class="flex items-center gap-4 text-sm">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <circle cx="12" cy="12" r="9"></circle>
-                                    <path d="M12 7v5l3 3"></path>
-                                </svg>
-                                <span>{{ $jamBerangkat ?? '08:00' }}</span>
-                            </div>
-                            <div class="flex items-center gap-1.5 text-xs text-white/80">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <path d="M3 12h18"></path>
-                                    <path d="m14 9 3 3-3 3"></path>
-                                </svg>
-                                <span>Estimasi {{ $estimasiWaktu ?? '3 jam' }}</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between text-sm font-medium mt-1">
-                            <span class="flex items-center gap-1.5">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                    </path>
-                                    <circle cx="12" cy="11" r="2.5"></circle>
-                                </svg>
-                                {{ $kotaAsal ?? 'Bengkalis' }}
-                            </span>
-
-                            {{-- garis titik tengah --}}
-                            <div class="flex items-center gap-1">
-                                <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
-                                <span class="h-[2px] w-16 bg-white/80 rounded-full"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-white/80"></span>
-                                <span class="h-[2px] w-8 bg-white/70 rounded-full"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-white/60"></span>
+                        @if ($jamBerangkat && $kotaAsal && $kotaTujuan)
+                            <div class="flex items-center gap-4 text-sm">
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M12 7v5l3 3"></path>
+                                    </svg>
+                                    <span>{{ $jamBerangkat }}</span>
+                                </div>
+                                <div class="flex items-center gap-1.5 text-xs text-white/80">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M3 12h18"></path>
+                                        <path d="m14 9 3 3-3 3"></path>
+                                    </svg>
+                                    <span>Estimasi {{ $estimasiWaktu ?? '-' }}</span>
+                                </div>
                             </div>
 
-                            <span class="flex items-center gap-1.5">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            <div class="flex items-center justify-between text-sm font-medium mt-1">
+                                <span class="flex items-center gap-1.5">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                        </path>
+                                        <circle cx="12" cy="11" r="2.5"></circle>
+                                    </svg>
+                                    {{ $kotaAsal }}
+                                </span>
+
+                                {{-- garis titik tengah --}}
+                                <div class="flex items-center gap-1">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
+                                    <span class="h-[2px] w-16 bg-white/80 rounded-full"></span>
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white/80"></span>
+                                    <span class="h-[2px] w-8 bg-white/70 rounded-full"></span>
+                                    <span class="h-1.5 w-1.5 rounded-full bg-white/60"></span>
+                                </div>
+
+                                <span class="flex items-center gap-1.5">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                        </path>
+                                        <circle cx="12" cy="11" r="2.5"></circle>
+                                    </svg>
+                                    {{ $kotaTujuan }}
+                                </span>
+                            </div>
+                        @else
+                            <p class="text-sm text-white/90 mt-1">
+                                Kamu belum memiliki jadwal untuk hari ini. Tambahkan rute keberangkatan
+                                di menu <span class="font-semibold">Travel</span>.
+                            </p>
+                            <a href="{{ route('sopir.travel') }}"
+                                class="mt-3 inline-flex items-center gap-2 text-xs bg-white/15 px-3 py-1.5 rounded-full hover:bg-white/25 transition">
+                                <span>Tambah Jadwal Baru</span>
+                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
-                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                    </path>
-                                    <circle cx="12" cy="11" r="2.5"></circle>
+                                    <path d="M5 12h14"></path>
+                                    <path d="m13 6 6 6-6 6"></path>
                                 </svg>
-                                {{ $kotaTujuan ?? 'Dumai' }}
-                            </span>
-                        </div>
+                            </a>
+                        @endif
                     </div>
 
                     {{-- Rute tambahan / rute kedua --}}
@@ -408,44 +435,50 @@
                             </span>
                         </div>
 
-                        <div class="flex items-center gap-4 text-sm">
-                            <div class="flex items-center gap-1.5">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <circle cx="12" cy="12" r="9"></circle>
-                                    <path d="M12 7v5l3 3"></path>
-                                </svg>
-                                <span>{{ $jamBerangkat2 ?? '13:30' }}</span>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center justify-between text-sm font-medium">
-                            <span class="flex items-center gap-1.5">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                    </path>
-                                    <circle cx="12" cy="11" r="2.5"></circle>
-                                </svg>
-                                {{ $kotaAsal2 ?? 'Dumai' }}
-                            </span>
-
-                            <div class="flex items-center gap-1 text-[#0a5672]">
-                                <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]"></span>
-                                <span class="h-[2px] w-10 bg-[#0a5672]/70 rounded-full"></span>
-                                <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]/60"></span>
+                        @if ($jamBerangkat2 && $kotaAsal2 && $kotaTujuan2)
+                            <div class="flex items-center gap-4 text-sm">
+                                <div class="flex items-center gap-1.5">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M12 7v5l3 3"></path>
+                                    </svg>
+                                    <span>{{ $jamBerangkat2 }}</span>
+                                </div>
                             </div>
 
-                            <span class="flex items-center gap-1.5">
-                                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="1.8">
-                                    <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                    </path>
-                                    <circle cx="12" cy="11" r="2.5"></circle>
-                                </svg>
-                                {{ $kotaTujuan2 ?? 'Duri' }}
-                            </span>
-                        </div>
+                            <div class="flex items-center justify-between text-sm font-medium">
+                                <span class="flex items-center gap-1.5">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                        </path>
+                                        <circle cx="12" cy="11" r="2.5"></circle>
+                                    </svg>
+                                    {{ $kotaAsal2 }}
+                                </span>
+
+                                <div class="flex items-center gap-1 text-[#0a5672]">
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]"></span>
+                                    <span class="h-[2px] w-10 bg-[#0a5672]/70 rounded-full"></span>
+                                    <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]/60"></span>
+                                </div>
+
+                                <span class="flex items-center gap-1.5">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
+                                        </path>
+                                        <circle cx="12" cy="11" r="2.5"></circle>
+                                    </svg>
+                                    {{ $kotaTujuan2 }}
+                                </span>
+                            </div>
+                        @else
+                            <p class="text-sm text-[#0a5672]/80 mt-2">
+                                Belum ada rute tambahan yang dijadwalkan.
+                            </p>
+                        @endif
                     </div>
                 </section>
 

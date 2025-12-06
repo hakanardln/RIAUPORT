@@ -131,22 +131,19 @@
 
             {{-- TOMBOL KELUAR --}}
             <div class="w-full px-5 pt-3">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit"
-                        class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
+                <a href="{{ route('logout') }}"
+                    class="flex items-center gap-3 w-full bg-white text-[#0b5f80]
                                rounded-lg px-4 py-2.5 shadow-pill text-sm">
-                        <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
-                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="1.8">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <path d="M16 17l5-5-5-5"></path>
-                                <path d="M21 12H9"></path>
-                            </svg>
-                        </div>
-                        <span class="font-semibold">Keluar</span>
-                    </button>
-                </form>
+                    <div class="h-7 w-7 rounded-md bg-[#e7f5fb] text-[#0b5f80] grid place-items-center">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.8">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <path d="M16 17l5-5-5-5"></path>
+                            <path d="M21 12H9"></path>
+                        </svg>
+                    </div>
+                    <span class="font-semibold">Keluar</span>
+                </a>
             </div>
         </aside>
 
