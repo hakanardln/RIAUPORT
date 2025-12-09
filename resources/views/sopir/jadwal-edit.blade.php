@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>RiauPort – Tambah Jadwal Sopir</title>
+    <title>RiauPort – Edit Jadwal Sopir</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
@@ -66,13 +66,11 @@
     </style>
 
     <script>
-        // fade-in saat halaman selesai load
         document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.add("page-loaded");
         });
 
-        // fade-out sebelum pindah halaman
-        function smoothNavigate(url) {
+        function (url) {
             document.body.style.opacity = 0;
             setTimeout(() => window.location.href = url, 300);
         }
@@ -82,7 +80,7 @@
 <body class="h-screen overflow-hidden bg-[#f5fafc] text-slate-800">
     <div class="h-full flex">
 
-        {{-- ================= SIDEBAR (sama seperti halaman jadwal) ================= --}}
+        {{-- ================= SIDEBAR (copy dari jadwal) ================= --}}
         <aside
             class="w-[250px] h-full bg-gradient-to-b from-[#75d0f0] via-[#37a6cc] to-[#0a6687] flex flex-col items-center py-6">
 
@@ -236,9 +234,9 @@
                         </svg>
                     </button>
                     <div>
-                        <h1 class="text-3xl font-semibold text-[#0c607f]">Tambah Jadwal Baru</h1>
+                        <h1 class="text-3xl font-semibold text-[#0c607f]">Edit Jadwal</h1>
                         <p class="text-sm text-slate-500 mt-1">
-                            Lengkapi detail keberangkatan travelmu di sini.
+                            Perbarui informasi keberangkatan travelmu.
                         </p>
                     </div>
                 </div>
@@ -261,7 +259,7 @@
                 </div>
             </header>
 
-            {{-- FORM --}}
+            {{-- FORM EDIT --}}
             <div class="flex-1 px-10 pb-10 pt-2 overflow-y-auto">
                 <div class="max-w-3xl mx-auto glass rounded-3xl shadow-xl px-8 py-7 relative">
 
@@ -269,33 +267,37 @@
                     <div class="absolute -left-16 bottom-0 h-48 w-48 bg-[#37a6cc]/20 rounded-full blur-2xl"></div>
 
                     <h2 class="text-xl font-semibold text-[#0e586d] mb-6 relative z-10">
-                        Detail Jadwal Keberangkatan
+                        Ubah Detail Jadwal
                     </h2>
 
-                    <form action="{{ route('sopir.jadwal.store') }}" method="POST" class="space-y-6 relative z-10">
+                    <form action="{{ route('sopir.jadwal.update', $travel->id) }}" method="POST"
+                        class="space-y-6 relative z-10">
                         @csrf
+                        @method('PUT')
 
                         <div class="grid md:grid-cols-2 gap-5">
                             <div>
                                 <label class="label-text">Lokasi Asal</label>
                                 <input type="text" name="lokasi_asal" class="input-control"
-                                    placeholder="Contoh: Bengkalis" required>
+                                    value="{{ old('lokasi_asal', $travel->lokasi_asal) }}" required>
                             </div>
                             <div>
                                 <label class="label-text">Lokasi Tujuan</label>
                                 <input type="text" name="lokasi_tujuan" class="input-control"
-                                    placeholder="Contoh: Pekanbaru" required>
+                                    value="{{ old('lokasi_tujuan', $travel->lokasi_tujuan) }}" required>
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-5">
                             <div>
                                 <label class="label-text">Tanggal Berangkat</label>
-                                <input type="date" name="tanggal_berangkat" class="input-control" required>
+                                <input type="date" name="tanggal_berangkat" class="input-control"
+                                    value="{{ old('tanggal_berangkat', $travel->tanggal_berangkat) }}" required>
                             </div>
                             <div>
                                 <label class="label-text">Jam Berangkat</label>
-                                <input type="time" name="jam_berangkat" class="input-control" required>
+                                <input type="time" name="jam_berangkat" class="input-control"
+                                    value="{{ old('jam_berangkat', $travel->jam_berangkat) }}" required>
                             </div>
                         </div>
 
@@ -303,21 +305,24 @@
                             <div>
                                 <label class="label-text">Harga Per Orang (Rp)</label>
                                 <input type="number" min="0" name="harga_per_orang" class="input-control"
-                                    placeholder="Contoh: 150000" required>
+                                    value="{{ old('harga_per_orang', $travel->harga_per_orang) }}" required>
                             </div>
                             <div>
                                 <label class="label-text">Status</label>
                                 <select name="status" class="input-control">
-                                    <option value="aktif">Aktif</option>
-                                    <option value="nonaktif">Nonaktif</option>
+                                    <option value="aktif"
+                                        {{ old('status', $travel->status) == 'aktif' ? 'selected' : '' }}>Aktif
+                                    </option>
+                                    <option value="nonaktif"
+                                        {{ old('status', $travel->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif
+                                    </option>
                                 </select>
                             </div>
                         </div>
 
                         <div>
                             <label class="label-text">Catatan (opsional)</label>
-                            <textarea name="keterangan" rows="3" class="input-control"
-                                placeholder="Contoh: Titik kumpul di Simpang Garuda, maksimal 2 koper."></textarea>
+                            <textarea name="keterangan" rows="3" class="input-control">{{ old('keterangan', $travel->keterangan) }}</textarea>
                         </div>
 
                         <div class="flex justify-end gap-4 pt-2">
@@ -327,7 +332,7 @@
                             </button>
                             <button type="submit"
                                 class="px-6 py-2.5 rounded-xl bg-[#0e586d] text-white text-sm font-semibold hover:bg-[#0a4453] shadow-lg">
-                                Simpan Jadwal
+                                Simpan Perubahan
                             </button>
                         </div>
 

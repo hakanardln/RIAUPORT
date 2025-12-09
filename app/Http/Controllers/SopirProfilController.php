@@ -30,4 +30,26 @@ class SopirProfilController extends Controller
             'ratingRata'
         ));
     }
+    public function edit()
+    {
+        $user = Auth::user();
+
+        return view('sopir.profil-edit', compact('user'));
+    }
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'no_wa' => 'nullable|string|max:30',
+        ]);
+
+        $user->update($data);
+
+        return redirect()
+            ->route('sopir.profil')
+            ->with('success', 'Profil berhasil diperbarui.');
+    }
 }

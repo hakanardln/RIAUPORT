@@ -244,7 +244,7 @@
                             </div>
 
                             <div class="mt-6 flex justify-between">
-                                <a href="#"
+                                <a href="{{ route('sopir.jadwal.edit', $item->id) }}"
                                     class="px-5 py-2 bg-[#0e586d] text-white rounded-xl text-sm">Edit</a>
                                 <form action="#" method="POST">
                                     @csrf

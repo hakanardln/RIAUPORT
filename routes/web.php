@@ -201,9 +201,26 @@ Route::middleware(['auth', IsSopir::class])
         Route::get('/jadwal/create', [SopirTravelController::class, 'createJadwal'])->name('jadwal.create');
         Route::post('/jadwal/store', [SopirTravelController::class, 'storeJadwal'])->name('jadwal.store');
 
+        // JADWAL SOPIR
+        Route::get('/jadwal', [SopirTravelController::class, 'jadwal'])->name('jadwal');
+
+        // buat jadwal baru
+        Route::get('/jadwal/create', [SopirTravelController::class, 'createJadwal'])->name('jadwal.create');
+        Route::post('/jadwal', [SopirTravelController::class, 'storeJadwal'])->name('jadwal.store');
+
+        // edit jadwal
+        Route::get('/jadwal/{travel}/edit', [SopirTravelController::class, 'editJadwal'])->name('jadwal.edit');
+        Route::put('/jadwal/{travel}', [SopirTravelController::class, 'updateJadwal'])->name('jadwal.update');
+
+        // hapus jadwal
+        Route::delete('/jadwal/{travel}', [SopirTravelController::class, 'destroyJadwal'])->name('jadwal.destroy');
 
         // Profil sopir
         Route::get('/profil', [SopirProfilController::class, 'index'])->name('profil');
+
+        // Halaman edit profil (form)
+        Route::get('/profil/edit', [SopirProfilController::class, 'edit'])->name('profil.edit');
+        Route::put('/profil', [SopirProfilController::class, 'update'])->name('profil.update');
 
         // Notifikasi
         Route::get('/notifikasi', [SopirNotifController::class, 'index'])->name('notifikasi');

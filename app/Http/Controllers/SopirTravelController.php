@@ -225,4 +225,51 @@ class SopirTravelController extends Controller
             ->with('success', 'Jadwal berhasil ditambahkan.');
     }
 
+    // FORM EDIT JADWAL
+    public function editJadwal(Travel $travel)
+    {
+        // pastikan hanya sopir pemilik yang bisa edit
+        abort_if($travel->sopir_id !== Auth::id(), 403);
+
+        return view('sopir.jadwal-edit', compact('travel'));
+    }
+
+    // UPDATE JADWAL
+    public function updateJadwal(Request $request, Travel $travel)
+    {
+        abort_if($travel->sopir_id !== Auth::id(), 403);
+
+        $request->validate([
+            'lokasi_asal' => 'required|string|max:255',
+            'lokasi_tujuan' => 'required|string|max:255',
+            'tanggal_berangkat' => 'required|date',
+            'jam_berangkat' => 'required',
+            'harga_per_orang' => 'required|integer|min:0',
+            'status' => 'required|in:aktif,nonaktif',
+            'keterangan' => 'nullable|string',
+        ]);
+
+        $travel->update([
+            'lokasi_asal' => $request->lokasi_asal,
+            'lokasi_tujuan' => $request->lokasi_tujuan,
+            'tanggal_berangkat' => $request->tanggal_berangkat,
+            'jam_berangkat' => $request->jam_berangkat,
+            'rute' => $request->lokasi_asal . ' - ' . $request->lokasi_tujuan,
+            'harga_per_orang' => $request->harga_per_orang,
+            'status' => $request->status,
+            'keterangan' => $request->keterangan,
+        ]);
+
+        return redirect()->route('sopir.jadwal')->with('success', 'Jadwal berhasil diperbarui.');
+    }
+
+    // HAPUS JADWAL
+    public function destroyJadwal(Travel $travel)
+    {
+        abort_if($travel->sopir_id !== Auth::id(), 403);
+
+        $travel->delete();
+
+        return redirect()->route('sopir.jadwal')->with('success', 'Jadwal berhasil dihapus.');
+    }
 }

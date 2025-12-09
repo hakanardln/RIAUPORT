@@ -193,6 +193,7 @@
                         </div>
                         <span class="font-semibold">Keluar</span>
                     </button>
+                </form>
             </div>
         </aside>
 
@@ -208,7 +209,7 @@
 
                 <div class="flex items-center gap-3">
                     <div class="text-right">
-                        <p class="text-sm font-semibold text-[#0c607f]">Budi Santoso</p>
+                        <p class="text-sm font-semibold text-[#0c607f]">{{ $user->name }}</p>
                         <p class="text-[11px] text-emerald-600 flex items-center justify-end gap-1">
                             <span class="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
                             Online
@@ -254,9 +255,15 @@
                                     Sopir Berpengalaman
                                 </span>
                             </div>
-                            <h2 class="text-3xl font-bold mb-2">Selamat Datang Kembali! 👋</h2>
-                            <p class="text-white/80 text-sm">Anda telah menyelesaikan <span class="font-bold">127
-                                    perjalanan</span> dengan rating sempurna</p>
+                            <h2 class="text-3xl font-bold mb-2">Selamat Datang Kembali, {{ $user->name }}! 👋</h2>
+                            <p class="text-white/80 text-sm">
+                                Anda telah menyelesaikan
+                                <span class="font-bold">{{ $totalTravel }} perjalanan</span>
+                                @if ($ratingRata)
+                                    dengan rating rata-rata
+                                    <span class="font-bold">{{ number_format($ratingRata, 1) }}</span>
+                                @endif
+                            </p>
                         </div>
 
                         <div class="flex flex-col items-center gap-2">
@@ -269,8 +276,12 @@
                                         stroke-dashoffset="65" stroke-linecap="round"></circle>
                                 </svg>
                                 <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                    <span class="text-3xl font-bold">4.8</span>
-                                    <span class="text-xs text-white/70">Rating</span>
+                                    <span class="text-3xl font-bold">
+                                        {{ $ratingRata ? number_format($ratingRata, 1) : '–' }}
+                                    </span>
+                                    <span class="text-xs text-white/70">
+                                        {{ $ratingRata ? 'Rating' : 'Belum ada rating' }}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -280,14 +291,16 @@
                 <!-- PROFIL CARD -->
                 <section class="bg-white rounded-[34px] shadow-soft p-8 flex flex-col lg:flex-row gap-8 hover-lift">
 
-                    <!-- FOTO PROFIL -->
+                    <!-- FOTO PROFIL / AVATAR -->
                     <div class="flex flex-col items-center w-full lg:w-1/3">
                         <div class="relative">
                             <div
-                                class="h-40 w-40 rounded-full overflow-hidden shadow-soft border-4 border-white bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80]">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=BudiSantoso"
-                                    class="h-full w-full object-cover" />
+                                class="h-14 w-14 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80]
+            grid place-items-center text-white text-2xl font-semibold ring-2 ring-white shadow-lg">
+                                {{ strtoupper(substr($user->name, 0, 1)) }}
                             </div>
+
+
                             <div
                                 class="absolute bottom-2 right-2 h-8 w-8 bg-emerald-500 rounded-full border-4 border-white grid place-items-center">
                                 <svg class="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none"
@@ -298,18 +311,7 @@
                             </div>
                         </div>
 
-                        <div class="flex gap-2 mt-4">
-                            <button
-                                class="px-5 py-2 rounded-xl bg-[#0b5f80] text-white text-sm shadow-pill hover:bg-[#0a4f6a] transition">
-                                <svg class="h-4 w-4 inline mr-1" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                    <polyline points="17 8 12 3 7 8"></polyline>
-                                    <line x1="12" y1="3" x2="12" y2="15"></line>
-                                </svg>
-                                Ubah Foto
-                            </button>
-                        </div>
+                        {{-- Jika nanti mau tambah fitur edit avatar, bisa ditambahkan tombol di sini --}}
 
                         <div class="mt-6 w-full space-y-3">
                             <div class="flex items-center gap-3 px-4 py-3 bg-[#e3f1f6] rounded-xl">
@@ -322,7 +324,9 @@
                                 </svg>
                                 <div class="flex-1">
                                     <p class="text-xs text-slate-600">Member Sejak</p>
-                                    <p class="font-semibold text-[#0b5f80]">15 Jan 2023</p>
+                                    <p class="font-semibold text-[#0b5f80]">
+                                        {{ $user->created_at->format('d M Y') }}
+                                    </p>
                                 </div>
                             </div>
 
@@ -355,9 +359,24 @@
                     <!-- INFORMASI PROFIL -->
                     <div class="flex-1 space-y-6">
                         <div>
-                            <h2 class="text-2xl font-semibold text-[#0c607f]">Informasi Akun</h2>
-                            <p class="text-sm text-slate-600 mt-1">Detail akun yang terhubung dengan layanan travel
-                                Anda</p>
+                            <div class="flex items-center justify-between gap-4">
+                                <div>
+                                    <h2 class="text-2xl font-semibold text-[#0c607f]">Informasi Akun</h2>
+                                    <p class="text-sm text-slate-600 mt-1">
+                                        Detail akun yang terhubung dengan layanan travel Anda
+                                    </p>
+                                </div>
+                                {{-- Tombol Edit Profil --}}
+                                <a href="{{ route('sopir.profil.edit') }}"
+                                    class="px-5 py-2.5 rounded-xl bg-[#0b5f80] text-white text-sm shadow-pill hover:bg-[#094b68] transition flex items-center gap-2">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M12 20h9"></path>
+                                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                                    </svg>
+                                    Edit Profil
+                                </a>
+                            </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -375,7 +394,7 @@
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
                                     </div>
-                                    <input type="text" disabled value="Budi Santoso"
+                                    <input type="text" disabled value="{{ $user->name }}"
                                         class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
                                 </div>
                             </div>
@@ -393,7 +412,7 @@
                                             <path d="m2 7 10 5 10-5"></path>
                                         </svg>
                                     </div>
-                                    <input type="text" disabled value="budi.santoso@riauport.com"
+                                    <input type="text" disabled value="{{ $user->email }}"
                                         class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
                                 </div>
                             </div>
@@ -413,6 +432,7 @@
                                             </path>
                                         </svg>
                                     </div>
+                                    {{-- TODO: ganti dengan field no_wa kalau sudah ada di tabel users/sopir --}}
                                     <input type="text" disabled value="+62 812-3456-7890"
                                         class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
                                 </div>
@@ -432,48 +452,7 @@
                                             <path d="M16 2v4M8 2v4M3 10h18"></path>
                                         </svg>
                                     </div>
-                                    <input type="text" disabled value="15 Jan 2023"
-                                        class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
-                                </div>
-                            </div>
-
-                            <!-- Nomor SIM -->
-                            <div class="group">
-                                <label
-                                    class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3 block">Nomor
-                                    SIM</label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 bg-gradient-to-br from-rose-100 to-rose-50 rounded-xl grid place-items-center">
-                                        <svg class="h-5 w-5 text-rose-600" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <path
-                                                d="M3.6 9h16.8M3.6 15h16.8M5.4 3h13.2c.99 0 1.8.81 1.8 1.8v14.4c0 .99-.81 1.8-1.8 1.8H5.4c-.99 0-1.8-.81-1.8-1.8V4.8c0-.99.81-1.8 1.8-1.8Z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                    <input type="text" disabled value="1234-5678-9012"
-                                        class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
-                                </div>
-                            </div>
-
-                            <!-- Jenis SIM -->
-                            <div class="group">
-                                <label
-                                    class="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3 block">Jenis
-                                    SIM</label>
-                                <div class="relative">
-                                    <div
-                                        class="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-xl grid place-items-center">
-                                        <svg class="h-5 w-5 text-cyan-600" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2">
-                                            <rect x="1" y="4" width="22" height="16" rx="2"
-                                                ry="2"></rect>
-                                            <line x1="1" y1="10" x2="23" y2="10">
-                                            </line>
-                                        </svg>
-                                    </div>
-                                    <input type="text" disabled value="SIM A"
+                                    <input type="text" disabled value="{{ $user->created_at->format('d M Y') }}"
                                         class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
                                 </div>
                             </div>
@@ -495,7 +474,9 @@
                                         </svg>
                                     </div>
                                     <p class="text-xs text-slate-600 mb-1">Total Travel</p>
-                                    <p class="text-3xl font-extrabold text-[#0c607f]">127</p>
+                                    <p class="text-3xl font-extrabold text-[#0c607f]">
+                                        {{ $totalTravel }}
+                                    </p>
                                 </div>
 
                                 <div
@@ -510,7 +491,9 @@
                                         </svg>
                                     </div>
                                     <p class="text-xs text-slate-600 mb-1">Total Penumpang</p>
-                                    <p class="text-3xl font-extrabold text-emerald-700">1,243</p>
+                                    <p class="text-3xl font-extrabold text-emerald-700">
+                                        {{ number_format($totalTrip, 0, ',', '.') }}
+                                    </p>
                                 </div>
 
                                 <div
@@ -523,7 +506,9 @@
                                         </svg>
                                     </div>
                                     <p class="text-xs text-slate-600 mb-1">Rating Rata-rata</p>
-                                    <p class="text-3xl font-extrabold text-amber-700">4.8</p>
+                                    <p class="text-3xl font-extrabold text-amber-700">
+                                        {{ $ratingRata ? number_format($ratingRata, 1) : '–' }}
+                                    </p>
                                 </div>
 
                                 <div
@@ -536,7 +521,9 @@
                                         </svg>
                                     </div>
                                     <p class="text-xs text-slate-600 mb-1">Jam Berkendara</p>
-                                    <p class="text-3xl font-extrabold text-purple-700">2,156</p>
+                                    <p class="text-3xl font-extrabold text-purple-700">
+                                        2,156
+                                    </p>
                                 </div>
                             </div>
                         </div>
