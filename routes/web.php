@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 // Controllers
 use App\Http\Controllers\AdminController;
@@ -21,6 +23,8 @@ use App\Http\Controllers\SopirPersonalisasiController;
 use App\Http\Controllers\SopirBantuanController;
 use App\Http\Controllers\AdminSopirController;
 use App\Http\Controllers\SopirDashboardController;
+use App\Http\Controllers\ReviewController;
+
 
 // Middleware
 use App\Http\Middleware\IsAdmin;
@@ -39,6 +43,10 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+Route::post('/reviews', [ReviewController::class, 'store'])
+    ->name('reviews.store')
+    ->middleware('auth');
 
 /*
 |--------------------------------------------------------------------------
@@ -222,6 +230,8 @@ Route::middleware(['auth', IsSopir::class])
         Route::get('/profil/edit', [SopirProfilController::class, 'edit'])->name('profil.edit');
         Route::put('/profil', [SopirProfilController::class, 'update'])->name('profil.update');
 
+
+        
         // Notifikasi
         Route::get('/notifikasi', [SopirNotifController::class, 'index'])->name('notifikasi');
 

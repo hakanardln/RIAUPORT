@@ -6,7 +6,8 @@ body {
 
 /* Posisi section Halaman Depan 2 (FITUR) */
 #fitur {
-    margin-top: -300px;      /* kasih jarak aman dari CTA */
+    margin-top: -300px;
+    /* kasih jarak aman dari CTA */
     position: relative;
     z-index: 10;
 }
@@ -154,8 +155,7 @@ body {
     background: linear-gradient(to bottom,
             rgba(15, 23, 42, 0.65),
             rgba(15, 23, 42, 0.40),
-            rgba(15, 23, 42, 0.25)
-        );
+            rgba(15, 23, 42, 0.25));
     z-index: 1;
     pointer-events: none;
 }
@@ -400,56 +400,27 @@ body {
     position: absolute !important;
 }
 
-/* ===================== NAVBAR RESPONSIVE ===================== */
-
-/* Tablet & HP sedang */
-@media (max-width: 768px) {
-    .glass-nav {
-        border-radius: 18px;
+/* ================ NAVBAR MOBILE STYLE ================ */
+@media (max-width: 640px) {
+    header .glass-nav-mobile {
         padding: 8px 14px;
+        border-radius: 18px;
+        height: 52px;
     }
 
-    .glass-nav img {
-        height: 48px;            /* logo sedikit lebih kecil */
+    header .glass-nav-mobile img {
+        height: 32px;
     }
 
-    #mainNav {
-        gap: 1rem;
-        font-size: 0.9rem;       /* teks menu lebih kecil */
-    }
-
-    .glass-btn-login {
-        padding: 0.45rem 1.4rem;
-        font-size: 0.9rem;
-    }
-}
-
-/* HP kecil (lebar sangat sempit) */
-@media (max-width: 480px) {
-    /* Izinkan navbar jadi 2 baris */
-    .glass-nav {
-        flex-wrap: wrap;
-        row-gap: 0.35rem;
-        justify-content: space-between;
-    }
-
-    /* Logo di kiri, login di kanan di baris pertama */
-    .glass-nav > div:first-child {
-        flex: 1 1 auto;
-    }
-
-    .glass-btn-login {
-        padding: 0.35rem 1.1rem;
-        font-size: 0.85rem;
-    }
-
-    /* Menu pindah ke baris kedua, di tengah, full width */
-    #mainNav {
-        order: 3;                /* taruh setelah logo & login */
-        width: 100%;
+    header .glass-nav-mobile nav {
         justify-content: center;
-        gap: 0.9rem;
-        font-size: 0.85rem;
+        text-align: center;
+        font-size: 0.9rem;
+        gap: 1.6rem;
+    }
+
+    .nav-highlight {
+        display: none;
+        /* highlight hanya untuk desktop */
     }
 }
-

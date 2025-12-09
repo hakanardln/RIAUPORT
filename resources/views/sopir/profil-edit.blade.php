@@ -210,11 +210,16 @@
                             <div class="relative">
                                 <div
                                     class="h-28 w-28 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80] overflow-hidden grid place-items-center text-white text-3xl font-semibold ring-2 ring-white shadow-lg">
-                                    @if (!empty($user->avatar_path))
+                                    @if ($user->avatar_path)
                                         <img src="{{ asset('storage/' . $user->avatar_path) }}" alt="Foto Profil"
-                                            class="h-full w-full object-cover">
+                                            class="h-32 w-32 rounded-full object-cover border-4 border-white shadow-lg">
                                     @else
-                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                        {{-- Avatar inisial --}}
+                                        <div
+                                            class="h-32 w-32 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80] 
+                flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+                                            {{ strtoupper(substr($user->name, 0, 1)) }}
+                                        </div>
                                     @endif
                                 </div>
 

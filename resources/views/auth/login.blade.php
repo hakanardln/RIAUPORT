@@ -149,7 +149,7 @@
                                     class="mt-2 w-full px-5 py-4 pr-12 rounded-2xl bg-white/70 border border-gray-200 
                                               focus:outline-none focus:border-[var(--primary)] input-glow
                                               transition-all duration-300 placeholder-gray-400"
-                                    placeholder="••••••••">
+                                    placeholder="">
                                 <button type="button" onmousedown="showPassword()" onmouseup="hidePassword()"
                                     onmouseleave="hidePassword()" ontouchstart="showPassword()"
                                     ontouchend="hidePassword()"

@@ -51,10 +51,13 @@
 
 <body class="bg-[#f4f7f9] text-slate-800">
 
-    {{-- NAVBAR --}}
+    {{-- ================= NAVBAR WRAPPER ================= --}}
     <header class="w-full absolute top-0 left-0 z-[9999]">
         <div class="max-w-6xl mx-auto px-4 md:px-2 pt-6">
-            <div class="glass-nav w-full rounded-[25px] border px-7 py-3 flex items-center justify-between"
+
+            {{-- =============== DESKTOP NAVBAR =============== --}}
+            <div class="glass-nav glass-nav-desktop w-full rounded-[25px] border px-7 py-3
+                   hidden md:flex items-center justify-between"
                 style="overflow: visible;">
 
                 {{-- Logo --}}
@@ -62,19 +65,16 @@
                     <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
                 </div>
 
-                {{-- Menu Navigation --}}
+                {{-- Menu Navigation (DESKTOP) --}}
                 <nav id="mainNav"
-                    class="nav-links flex items-center gap-8 text-slate-800 font-semibold text-base md:text-lg relative z-[10000]">
-
-                    {{-- bayangan biru yang bergerak --}}
+                    class="nav-links flex items-center gap-8 text-slate-800 font-semibold text-lg relative z-[10000]">
                     <div id="navHighlight" class="nav-highlight"></div>
-
                     <a href="#home" class="hover:text-[#0e586d] transition-colors">Home</a>
                     <a href="{{ route('contact') }}" class="hover:text-[#0e586d] transition-colors">Contact</a>
                     <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
                 </nav>
 
-                {{-- LOGIN BUTTON / PROFILE AVATAR --}}
+                {{-- LOGIN / PROFILE (DESKTOP) --}}
                 @guest
                     <a href="{{ route('login') }}" class="glass-btn-login">
                         Login
@@ -90,17 +90,17 @@
                     @endphp
 
                     <div class="relative z-[10001]">
-                        <button type="button" id="userMenuButton"
+                        <button id="userMenuButtonDesktop"
                             class="w-12 h-12 rounded-full flex items-center justify-center
-                           bg-white/20 backdrop-blur-xl border border-white/40 
-                           shadow-lg text-white font-semibold uppercase 
-                           hover:scale-110 active:scale-95 transition-all duration-200">
+                               bg-white/20 backdrop-blur-xl border border-white/40 
+                               shadow-lg text-white font-semibold uppercase 
+                               hover:scale-110 active:scale-95 transition-all duration-200">
                             {{ $initials }}
                         </button>
 
-                        <div id="userMenu"
+                        <div id="userMenuDesktop"
                             class="hidden absolute right-0 mt-3 w-40 bg-white rounded-2xl shadow-xl
-                        border border-slate-100 py-2 text-sm text-slate-700">
+                               border border-slate-100 py-2 text-sm text-slate-700">
                             <div class="px-4 pb-1 text-[11px] uppercase tracking-wide text-slate-400">
                                 Akun
                             </div>
@@ -115,8 +115,51 @@
                     </div>
                 @endauth
             </div>
+
+            {{-- =============== MOBILE NAVBAR =============== --}}
+            <div class="glass-nav glass-nav-mobile w-full rounded-[20px] border
+                   px-4 py-2 flex items-center justify-between md:hidden"
+                style="overflow: visible;">
+
+                {{-- LOGO (kiri) --}}
+                <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort"
+                    class="h-9 drop-shadow-md flex-shrink-0">
+
+                {{-- MENU TENGAH (MOBILE) --}}
+                <nav class="flex items-center justify-center gap-5 font-semibold text-sm text-slate-800 flex-1">
+                    <a href="#home" class="hover:text-[#0e586d]">Home</a>
+                    <a href="{{ route('contact') }}" class="hover:text-[#0e586d]">Contact</a>
+                    <a href="{{ route('about') }}" class="hover:text-[#0e586d]">About</a>
+                </nav>
+
+                {{-- LOGIN BULAT (kanan) --}}
+                @guest
+                    <a href="{{ route('login') }}"
+                        class="w-10 h-10 rounded-full bg-[#0e586d] text-white flex items-center
+                           justify-center shadow-md text-xs font-semibold hover:scale-110 transition-all flex-shrink-0">
+                        In
+                    </a>
+                @endguest
+
+                @auth
+                    @php
+                        $initials = collect(explode(' ', auth()->user()->name))
+                            ->map(fn($p) => strtoupper(mb_substr($p, 0, 1)))
+                            ->join('');
+                    @endphp
+
+                    <button id="userMenuButtonMobile"
+                        class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl border border-white/40
+                           text-white flex items-center justify-center shadow-md text-xs font-bold flex-shrink-0">
+                        {{ $initials }}
+                    </button>
+                @endauth
+            </div>
+
         </div>
     </header>
+
+
 
     {{-- HERO + PENCARIAN --}}
     <section class="hero relative" id="home" data-frames='@json($frames)'>
@@ -552,7 +595,7 @@
                 hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
                     <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/wisata3.jpg') }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
