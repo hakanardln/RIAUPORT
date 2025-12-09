@@ -473,17 +473,22 @@
         </div>
     </section>
 
-    {{-- ================== SECTION SOPIR TERPOPULER ================== --}}
+
+
+    <!-- ================== SECTION WISATA ALAM ================== -->
     <section
         class="w-full bg-gradient-to-b from-[#EAF7FA] via-[#CDEBF3] to-[#3FA6C4] pt-20 pb-24 flex flex-col items-center">
 
         <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 text-center">
-            Temukan Sopir Sesuai Tujuan Anda
+            Explore Taman & Objek Wisata Alam di Provinsi Riau
         </h2>
+
         <div class="w-40 h-1 bg-[#0E586D] rounded-full mb-14"></div>
 
+        <!-- Container -->
         <div class="relative w-full max-w-6xl">
 
+            <!-- Left button -->
             <button
                 class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-xl p-4 rounded-full hover:scale-110 hover:shadow-2xl transition-all z-10 border border-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="black"
@@ -492,27 +497,25 @@
                 </svg>
             </button>
 
+            <!-- Grid -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10 px-12 md:px-16">
+
+                <!-- Card Wisata 1 -->
                 <div
                     class="bg-white rounded-3xl shadow-md border border-gray-100 p-5 transition-all duration-300 ease-out
-                       hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+                hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
                     <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/mobil1.jpg') }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
                     <div class="mt-4 flex items-center gap-3 text-[#0E586D] font-bold text-lg">
-                        <div
-                            class="w-10 h-10 bg-[#0E586D] text-white rounded-full flex items-center justify-center text-sm">
-                            F
-                        </div>
-                        FITRA
+                        Danau Buatan Lembah Sari
                     </div>
 
                     <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                        <strong>Tujuan :</strong><br>
-                        Bengkalis > Pekanbaru > Siak > Dumai
+                        Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi danau.
                     </p>
 
                     <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
@@ -520,26 +523,22 @@
                     </a>
                 </div>
 
+                <!-- Card Wisata 2 -->
                 <div
                     class="bg-white rounded-3xl shadow-md border border-gray-100 p-5 transition-all duration-300 ease-out
-                       hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+                hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
                     <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/mobil2.jpg') }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
                     <div class="mt-4 flex items-center gap-3 text-[#0E586D] font-bold text-lg">
-                        <div
-                            class="w-10 h-10 bg-[#0E586D] text-white rounded-full flex items-center justify-center text-sm">
-                            Z
-                        </div>
-                        Zawa Aufi
+                        Taman Nasional Zamrud
                     </div>
 
                     <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                        <strong>Tujuan :</strong><br>
-                        Bengkalis > Dumai > Pekanbaru
+                        Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa gambut.
                     </p>
 
                     <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
@@ -547,26 +546,22 @@
                     </a>
                 </div>
 
+                <!-- Card Wisata 3 -->
                 <div
                     class="bg-white rounded-3xl shadow-md border border-gray-100 p-5 transition-all duration-300 ease-out
-                       hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+                hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
                     <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/mobil3.jpg') }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('images/wisata3.jpg') }}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
                     <div class="mt-4 flex items-center gap-3 text-[#0E586D] font-bold text-lg">
-                        <div
-                            class="w-10 h-10 bg-[#0E586D] text-white rounded-full flex items-center justify-center text-sm">
-                            R
-                        </div>
-                        Riki
+                        Alam Mayang Pekanbaru
                     </div>
 
                     <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                        <strong>Tujuan :</strong><br>
-                        Duri > Dumai > Pakning > Bengkalis
+                        Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta aktivitas outdoor.
                     </p>
 
                     <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
@@ -576,6 +571,7 @@
 
             </div>
 
+            <!-- Right button -->
             <button
                 class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-xl p-4 rounded-full hover:scale-110 hover:shadow-2xl transition-all z-10 border border-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="black"
@@ -591,6 +587,92 @@
             <div class="w-3.5 h-3.5 bg-white border border-[#0E586D] rounded-full"></div>
         </div>
 
+    </section>
+
+
+    <!-- ================== SECTION FAQ ================== -->
+    <section id="faq" class="py-16 bg-gradient-to-b from-sky-300 to-green-200">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-10">
+
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                Pernyataan Umum
+            </h2>
+
+            <div class="divide-y divide-gray-200 text-lg">
+
+                <!-- FAQ 1 -->
+                <details class="group py-6 transition-all duration-300">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                        <span>Apa itu Riauport?</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </summary>
+                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                        Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
+                        dalam memperoleh informasi terkait perjalanan travel, dan kontak hubung sopir di seluruh Riau.
+                    </p>
+                </details>
+
+                <!-- FAQ 2 -->
+                <details class="group py-6 transition-all duration-300">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                        <span>Bagaimana cara mendapatkan Whatsapp Sopir?</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </summary>
+                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                        Kamu bisa melihat nomor sopir langsung pada detail travel yang tersedia di halaman utama.
+                    </p>
+                </details>
+
+                <!-- FAQ 3 -->
+                <details class="group py-6 transition-all duration-300">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                        <span>Bagaimana cara melihat detail travel?</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </summary>
+                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                        Klik pada nama travel yang ditampilkan, maka kamu akan diarahkan ke halaman detail travel
+                        tersebut.
+                    </p>
+                </details>
+
+                <!-- FAQ 4 -->
+                <details class="group py-6 transition-all duration-300">
+                    <summary
+                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                        <span>Apa saja persyaratan mendaftarkan travel?</span>
+                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </summary>
+                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                        Harus memiliki informasi rute, jadwal, kontak aktif, serta izin operasional dari pihak
+                        berwenang.
+                    </p>
+                </details>
+
+            </div>
+        </div>
     </section>
 
     {{-- ================== SECTION ABOUT US / OUR TEAM ================== --}}
