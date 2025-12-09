@@ -14,18 +14,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-
-        // ROLE USER / SOPIR
         'role',
-
-        // === FIELD TAMBAHAN UNTUK OTP ===
         'otp_code',
         'otp_expires_at',
         'is_verified',
-
-        // === FIELD TAMBAHAN UNTUK LOGIN GOOGLE ===
         'google_id',
-        'avatar',
+        'avatar_path',
+        'no_wa',
     ];
 
     protected $hidden = [

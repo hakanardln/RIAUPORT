@@ -9,6 +9,7 @@
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+            overflow: hidden;
         }
 
         .shadow-soft {
@@ -27,7 +28,7 @@
 
         <!-- SIDEBAR -->
         <aside
-            class="w-[250px] h-full bg-gradient-to-b from-[#75d0f0] via-[#37a6cc] to-[#0a6687] flex flex-col items-center py-6">
+            class="w-[250px] h-full overflow-y-auto bg-gradient-to-b from-[#75d0f0] via-[#37a6cc] to-[#0a6687] flex flex-col items-center py-6">
 
             {{-- LOGO --}}
             <div class="mb-6">
@@ -125,7 +126,7 @@
                 </a>
             </nav>
 
-            <div class="w-full px-5 pt-3">
+            <div class="w-full px-5 pt-3 pb-2">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
@@ -152,7 +153,7 @@
             <header class="flex items-center justify-between px-10 pt-6 pb-4">
                 <div>
                     <h1 class="text-3xl font-semibold tracking-tight text-[#0c607f]">Edit Profil Sopir</h1>
-                    <p class="text-sm text-slate-500 mt-1">Perbarui informasi akun Anda</p>
+                    <p class="text-sm text-slate-500 mt-1">Perbarui foto profil serta informasi akun Anda.</p>
                 </div>
 
                 <div class="flex items-center gap-3">
@@ -164,26 +165,22 @@
                         </p>
                     </div>
                     <div
-                        class="h-10 w-10 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80] grid place-items-center ring-2 ring-white shadow-lg">
-                        <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <circle cx="12" cy="8" r="4"></circle>
-                            <path d="M4 22a8 8 0 0 1 16 0"></path>
-                        </svg>
+                        class="h-10 w-10 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80] grid place-items-center ring-2 ring-white shadow-lg text-white text-sm font-semibold">
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
                     </div>
                 </div>
             </header>
 
-            <!-- SCROLL AREA -->
-            <div class="flex-1 overflow-y-auto px-10 pb-10">
+            <!-- AREA KONTEN (tanpa scroll, konten dipaksa muat di layar) -->
+            <div class="flex-1 flex items-center justify-center px-10 pb-6">
 
-                <section class="bg-white rounded-[34px] shadow-soft p-8 max-w-3xl mx-auto">
+                <section class="bg-white rounded-[34px] shadow-soft px-10 pt-6 pb-7 w-full max-w-4xl">
 
-                    <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center justify-between mb-4">
                         <div>
-                            <h2 class="text-2xl font-semibold text-[#0c607f]">Informasi Akun</h2>
+                            <h2 class="text-2xl font-semibold text-[#0c607f]">Foto Profil & Informasi Akun</h2>
                             <p class="text-sm text-slate-600 mt-1">
-                                Sesuaikan nama, email, dan nomor WhatsApp Anda.
+                                Unggah foto profil baru atau ubah detail akun Anda.
                             </p>
                         </div>
 
@@ -194,7 +191,7 @@
 
                     {{-- ERROR VALIDATION --}}
                     @if ($errors->any())
-                        <div class="mb-4 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-800">
+                        <div class="mb-3 px-4 py-3 rounded-xl bg-red-50 border border-red-200 text-sm text-red-800">
                             <p class="font-semibold mb-1">Perbaiki error berikut:</p>
                             <ul class="list-disc list-inside space-y-1">
                                 @foreach ($errors->all() as $error)
@@ -204,12 +201,38 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('sopir.profil.update') }}" class="space-y-6">
+                    <form method="POST" action="{{ route('sopir.profil.update') }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
+                        {{-- AVATAR --}}
+                        <div class="flex flex-col items-center mb-2">
+                            <div class="relative">
+                                <div
+                                    class="h-28 w-28 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80] overflow-hidden grid place-items-center text-white text-3xl font-semibold ring-2 ring-white shadow-lg">
+                                    @if (!empty($user->avatar_path))
+                                        <img src="{{ asset('storage/' . $user->avatar_path) }}" alt="Foto Profil"
+                                            class="h-full w-full object-cover">
+                                    @else
+                                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                                    @endif
+                                </div>
+
+                                <label for="avatar"
+                                    class="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-[#0b5f80] text-white text-xs shadow-pill cursor-pointer hover:bg-[#094b68]">
+                                    Ubah
+                                </label>
+                            </div>
+                            <p class="mt-4 text-xs text-slate-500">
+                                Format JPG/PNG (maks 2MB)
+                            </p>
+                        </div>
+
+                        {{-- input file sebenarnya --}}
+                        <input type="file" id="avatar" name="avatar" accept="image/*" class="hidden">
+
                         {{-- Nama Lengkap --}}
-                        <div>
+                        <div class="mt-2">
                             <label class="block text-sm font-medium text-slate-700 mb-1">Nama Lengkap</label>
                             <input type="text" name="name" value="{{ old('name', $user->name) }}"
                                 class="w-full border rounded-xl px-4 py-2.5 text-sm border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#0b5f80]">
@@ -236,7 +259,8 @@
                             </p>
                         </div>
 
-                        <div class="flex items-center justify-end gap-3 pt-4">
+                        {{-- ACTION BUTTONS --}}
+                        <div class="flex items-center justify-end gap-3 pt-2">
                             <a href="{{ route('sopir.profil') }}"
                                 class="px-5 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-700 hover:bg-slate-50">
                                 Batal

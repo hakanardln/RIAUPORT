@@ -13,9 +13,13 @@ class SopirTravelController extends Controller
     // ===== HALAMAN TRAVEL =====
     public function index()
     {
-        $travel = Travel::where('sopir_id', Auth::id())->first() ?? new Travel();
+        $travel = Travel::firstOrNew([
+            'sopir_id' => Auth::id(),
+        ]);
+
         return view('sopir.travel', compact('travel'));
     }
+
 
     // ====== WIZARD: SIMPAN SEMUA STEP SEKALIGUS ======
     public function simpan(Request $request)
@@ -43,11 +47,12 @@ class SopirTravelController extends Controller
             'status' => 'required|in:aktif,nonaktif',
         ]);
 
-        // cari / buat 1 data travel untuk sopir ini
-        $travel = Travel::firstOrCreate(
-            ['sopir_id' => Auth::id()],
-            ['kode_travel' => strtoupper(Str::random(6))]
-        );
+        // cari / buat 1 data travel untuk sopir
+        $travel = Travel::firstOrNew(['sopir_id' => Auth::id()]);
+
+        if (!$travel->exists) {
+            $travel->kode_travel = strtoupper(Str::random(6));
+        }
 
         // ====== STEP MOBIL ======
         if ($request->hasFile('foto_armada')) {
@@ -99,10 +104,12 @@ class SopirTravelController extends Controller
             'foto_armada' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $travel = Travel::firstOrCreate(
-            ['sopir_id' => Auth::id()],
-            ['kode_travel' => strtoupper(Str::random(6))]
-        );
+        $travel = Travel::firstOrNew(['sopir_id' => Auth::id()]);
+
+        if (!$travel->exists) {
+            $travel->kode_travel = strtoupper(Str::random(6));
+        }
+
 
         if ($request->hasFile('foto_armada')) {
             $path = $request->file('foto_armada')->store('armada', 'public');
@@ -130,10 +137,11 @@ class SopirTravelController extends Controller
             'jam_berangkat' => 'required',
         ]);
 
-        $travel = Travel::firstOrCreate(
-            ['sopir_id' => Auth::id()],
-            ['kode_travel' => strtoupper(Str::random(6))]
-        );
+        $travel = Travel::firstOrNew(['sopir_id' => Auth::id()]);
+
+        if (!$travel->exists) {
+            $travel->kode_travel = strtoupper(Str::random(6));
+        }
 
         $travel->lokasi_asal = $request->lokasi_asal;
         $travel->lokasi_tujuan = $request->lokasi_tujuan;

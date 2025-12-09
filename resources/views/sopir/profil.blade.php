@@ -33,30 +33,6 @@
             @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium;
         }
 
-        .progress-ring {
-            transform: rotate(-90deg);
-        }
-
-        .progress-ring-circle {
-            transition: stroke-dashoffset 0.5s ease;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fadeInUp {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
         .hover-lift {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -89,8 +65,8 @@
 
             <nav class="space-y-3 w-full px-5 flex-1">
                 <a href="{{ route('sopir.dashboard') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="m3 11 9-8 9 8"></path>
@@ -101,8 +77,8 @@
                 </a>
 
                 <a href="{{ route('sopir.travel') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
@@ -113,8 +89,8 @@
                 </a>
 
                 <a href="{{ route('sopir.jadwal') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <rect x="3" y="4" width="18" height="18" rx="2"></rect>
@@ -125,8 +101,8 @@
                 </a>
 
                 <a href="{{ route('sopir.profil') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] ring-2 ring-white/70">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#0b5f80] text-white">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] ring-2 ring-white/70">
+                    <div class="{{ $baseIcon }} bg-[#0b5f80] text-white">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <circle cx="12" cy="7" r="3"></circle>
@@ -137,8 +113,8 @@
                 </a>
 
                 <a href="{{ route('sopir.notifikasi') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path>
@@ -149,8 +125,8 @@
                 </a>
 
                 <a href="{{ route('sopir.personal') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M12 3v4"></path>
@@ -164,8 +140,8 @@
                 </a>
 
                 <a href="{{ route('sopir.bantuan') }}"
-                    class="flex items-center gap-3 w-full rounded-lg px-4 py-2.5 shadow-pill text-sm bg-white text-[#0b5f80] hover:bg-white/90 transition">
-                    <div class="h-7 w-7 rounded-md grid place-items-center bg-[#e7f5fb] text-[#0b5f80]">
+                    class="{{ $baseLink }} bg-white text-[#0b5f80] hover:bg-white/90 transition">
+                    <div class="{{ $baseIcon }} bg-[#e7f5fb] text-[#0b5f80]">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -215,13 +191,11 @@
                             Online
                         </p>
                     </div>
+                    {{-- Avatar kecil: inisial nama --}}
                     <div
-                        class="h-10 w-10 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80] grid place-items-center ring-2 ring-white shadow-lg">
-                        <svg class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="1.8">
-                            <circle cx="12" cy="8" r="4"></circle>
-                            <path d="M4 22a8 8 0 0 1 16 0"></path>
-                        </svg>
+                        class="h-10 w-10 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80]
+                           grid place-items-center text-white text-sm font-semibold ring-2 ring-white shadow-lg">
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
                     </div>
                 </div>
             </header>
@@ -229,89 +203,26 @@
             <!-- SCROLL AREA -->
             <div class="flex-1 overflow-y-auto px-10 pb-10 space-y-6">
 
-                <!-- BANNER CARD WITH STATUS -->
-                <section
-                    class="bg-gradient-to-r from-[#0b5f80] via-[#0c7ba0] to-[#37a6cc] rounded-[34px] shadow-soft p-8 text-white relative overflow-hidden animate-fadeInUp">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
-                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24"></div>
-
-                    <div class="relative z-10 flex items-center justify-between">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="badge bg-emerald-400 text-emerald-900">
-                                    <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2">
-                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                    </svg>
-                                    Akun Terverifikasi
-                                </span>
-                                <span class="badge bg-amber-400 text-amber-900">
-                                    <svg class="h-3 w-3" viewBox="0 0 24 24" fill="currentColor">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                        </path>
-                                    </svg>
-                                    Sopir Berpengalaman
-                                </span>
-                            </div>
-                            <h2 class="text-3xl font-bold mb-2">Selamat Datang Kembali, {{ $user->name }}! 👋</h2>
-                            <p class="text-white/80 text-sm">
-                                Anda telah menyelesaikan
-                                <span class="font-bold">{{ $totalTravel }} perjalanan</span>
-                                @if ($ratingRata)
-                                    dengan rating rata-rata
-                                    <span class="font-bold">{{ number_format($ratingRata, 1) }}</span>
-                                @endif
-                            </p>
-                        </div>
-
-                        <div class="flex flex-col items-center gap-2">
-                            <div class="relative">
-                                <svg class="progress-ring" width="120" height="120">
-                                    <circle cx="60" cy="60" r="52" stroke="rgba(255,255,255,0.2)"
-                                        stroke-width="8" fill="none"></circle>
-                                    <circle class="progress-ring-circle" cx="60" cy="60" r="52"
-                                        stroke="#fbbf24" stroke-width="8" fill="none" stroke-dasharray="327"
-                                        stroke-dashoffset="65" stroke-linecap="round"></circle>
-                                </svg>
-                                <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                    <span class="text-3xl font-bold">
-                                        {{ $ratingRata ? number_format($ratingRata, 1) : '–' }}
-                                    </span>
-                                    <span class="text-xs text-white/70">
-                                        {{ $ratingRata ? 'Rating' : 'Belum ada rating' }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <!-- PROFIL CARD -->
                 <section class="bg-white rounded-[34px] shadow-soft p-8 flex flex-col lg:flex-row gap-8 hover-lift">
 
-                    <!-- FOTO PROFIL / AVATAR -->
+                    <!-- AVATAR + INFO SINGKAT -->
                     <div class="flex flex-col items-center w-full lg:w-1/3">
-                        <div class="relative">
+                        <div class="mb-4">
                             <div
-                                class="h-14 w-14 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80]
-            grid place-items-center text-white text-2xl font-semibold ring-2 ring-white shadow-lg">
+                                class="h-24 w-24 rounded-full bg-gradient-to-br from-[#5fb7cf] to-[#0b5f80]
+                                   grid place-items-center text-white text-4xl font-semibold ring-4 ring-white shadow-soft">
                                 {{ strtoupper(substr($user->name, 0, 1)) }}
-                            </div>
-
-
-                            <div
-                                class="absolute bottom-2 right-2 h-8 w-8 bg-emerald-500 rounded-full border-4 border-white grid place-items-center">
-                                <svg class="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                                </svg>
                             </div>
                         </div>
 
-                        {{-- Jika nanti mau tambah fitur edit avatar, bisa ditambahkan tombol di sini --}}
+                        <div class="text-center space-y-1">
+                            <p class="text-sm text-slate-500">Profil Sopir</p>
+                            <p class="text-lg font-semibold text-[#0b5f80]">{{ $user->name }}</p>
+                            <p class="text-xs text-slate-500">
+                                Bergabung sejak {{ $user->created_at->format('d M Y') }}
+                            </p>
+                        </div>
 
                         <div class="mt-6 w-full space-y-3">
                             <div class="flex items-center gap-3 px-4 py-3 bg-[#e3f1f6] rounded-xl">
@@ -432,8 +343,7 @@
                                             </path>
                                         </svg>
                                     </div>
-                                    {{-- TODO: ganti dengan field no_wa kalau sudah ada di tabel users/sopir --}}
-                                    <input type="text" disabled value="+62 812-3456-7890"
+                                    <input type="text" disabled value="{{ $user->no_wa ?? '+62 8xx-xxxx-xxxx' }}"
                                         class="w-full pl-[68px] pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-gradient-to-br from-slate-50 to-white text-slate-800 font-medium text-sm cursor-not-allowed shadow-sm">
                                 </div>
                             </div>
@@ -526,76 +436,6 @@
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- ACHIEVEMENTS -->
-                <section class="bg-white rounded-[34px] shadow-soft p-8 hover-lift">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h2 class="text-2xl font-semibold text-[#0c607f]">Pencapaian & Badge</h2>
-                            <p class="text-sm text-slate-600 mt-1">Koleksi prestasi yang telah Anda raih</p>
-                        </div>
-                        <button
-                            class="px-4 py-2 rounded-xl bg-[#e3f1f6] text-[#0b5f80] text-sm hover:bg-[#d0e9f2] transition">
-                            Lihat Semua
-                        </button>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div
-                            class="bg-gradient-to-br from-amber-50 to-amber-100 rounded-2xl p-6 text-center hover-lift border-2 border-amber-200">
-                            <div
-                                class="h-16 w-16 mx-auto mb-3 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full grid place-items-center shadow-lg">
-                                <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <h3 class="font-bold text-amber-900 mb-1">100 Trip Master</h3>
-                            <p class="text-xs text-amber-700">Selesaikan 100 perjalanan</p>
-                        </div>
-
-                        <div
-                            class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-6 text-center hover-lift border-2 border-emerald-200">
-                            <div
-                                class="h-16 w-16 mx-auto mb-3 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full grid place-items-center shadow-lg">
-                                <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                </svg>
-                            </div>
-                            <h3 class="font-bold text-emerald-900 mb-1">Top Earner</h3>
-                            <p class="text-xs text-emerald-700">Pendapatan tertinggi bulan ini</p>
-                        </div>
-
-                        <div
-                            class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center hover-lift border-2 border-blue-200">
-                            <div
-                                class="h-16 w-16 mx-auto mb-3 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full grid place-items-center shadow-lg">
-                                <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M12 20h9"></path>
-                                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="font-bold text-blue-900 mb-1">Perfect Rating</h3>
-                            <p class="text-xs text-blue-700">Rating 5.0 selama 10 trip</p>
-                        </div>
-
-                        <div
-                            class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center hover-lift border-2 border-purple-200">
-                            <div
-                                class="h-16 w-16 mx-auto mb-3 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full grid place-items-center shadow-lg">
-                                <svg class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none"
-                                    stroke="currentColor" stroke-width="2">
-                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                                </svg>
-                            </div>
-                            <h3 class="font-bold text-purple-900 mb-1">Speed Demon</h3>
-                            <p class="text-xs text-purple-700">Selesaikan trip dengan cepat</p>
                         </div>
                     </div>
                 </section>

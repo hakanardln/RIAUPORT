@@ -407,14 +407,14 @@
                                         class="mt-1 cursor-pointer w-full flex justify-center bg-white border border-dashed border-gray-300 rounded-2xl">
                                         <div class="w-full max-w-xl p-8 flex flex-col items-center text-center">
 
-                                            {{-- PREVIEW FOTO (JIKA SUDAH ADA DI DATABASE) --}}
-                                            @if ($travel->foto_armada)
-                                                <div class="mb-4">
+                                            {{-- PREVIEW FOTO ARMADA (DARI DB / DARI INPUT BARU) --}}
+                                            <div id="previewArmada" class="mb-4">
+                                                @if ($travel->foto_armada)
                                                     <img src="{{ asset('storage/' . $travel->foto_armada) }}"
-                                                        class="w-40 h-28 object-cover rounded-xl border border-slate-200 mx-auto">
-                                                </div>
-                                            @endif
-
+                                                        class="w-40 h-28 object-cover rounded-xl border border-slate-200 mx-auto"
+                                                        alt="Foto armada">
+                                                @endif
+                                            </div>
                                             {{-- IKON & TEKS DROPZONE --}}
                                             <svg class="w-14 text-gray-400 mx-auto mb-3" width="70"
                                                 height="46" viewBox="0 0 70 46" fill="none"
@@ -809,6 +809,62 @@
                 }
             });
         });
+
+        // =========================
+        // EMPTY STATE → BUKA WIZARD
+        // =========================
+        const emptyState = document.getElementById('emptyState');
+        const wizardWrapper = document.getElementById('wizardWrapper');
+        const btnStartInput = document.getElementById('btnStartInput');
+
+        if (btnStartInput && emptyState && wizardWrapper) {
+            btnStartInput.addEventListener('click', () => {
+                // sembunyikan kartu kosong
+                emptyState.classList.add('hidden');
+
+                // tampilkan wizard
+                wizardWrapper.classList.remove('hidden');
+
+                // pastikan mulai dari step pertama
+                currentStepIndex = 0;
+                document.querySelectorAll('[data-step-panel]').forEach((panel, idx) => {
+                    if (idx === 0) {
+                        panel.classList.remove('hidden');
+                    } else {
+                        panel.classList.add('hidden');
+                    }
+                });
+                updateHeaderAndButtons();
+            });
+        }
+
+        // =========================
+        // PREVIEW FOTO ARMADA
+        // =========================
+        const inputFoto = document.getElementById('foto_armada');
+        const previewArmada = document.getElementById('previewArmada');
+
+        if (inputFoto && previewArmada) {
+            inputFoto.addEventListener('change', function() {
+                const file = this.files && this.files[0];
+                if (!file) return;
+                if (!file.type.startsWith('image/')) return;
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // kosongkan preview lama
+                    previewArmada.innerHTML = '';
+
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Foto armada';
+                    img.className = 'w-40 h-28 object-cover rounded-xl border border-slate-200 mx-auto';
+
+                    previewArmada.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
 
         // inisialisasi
         updateHeaderAndButtons();
