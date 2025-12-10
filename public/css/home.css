@@ -400,49 +400,53 @@ body {
     position: absolute !important;
 }
 
-/* ================ NAVBAR MOBILE STYLE ================ */
+/* ==================== NAVBAR MOBILE STYLE ==================== */
 @media (max-width: 640px) {
+
+    /* Wrapper navbar mobile */
     header .glass-nav-mobile {
-        padding: 8px 14px;
-        border-radius: 18px;
-        height: 52px;
+        padding: 8px 14px !important;
+        border-radius: 18px !important;
+        height: 52px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        position: relative !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
     }
 
+    /* Logo */
     header .glass-nav-mobile img {
-        height: 32px;
+        height: 32px !important;
+        pointer-events: auto !important;
     }
 
+    /* Menu tengah */
     header .glass-nav-mobile nav {
-        justify-content: center;
-        text-align: center;
-        font-size: 0.9rem;
-        gap: 1.6rem;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 1.6rem !important;
+        flex: 1 !important;
+        text-align: center !important;
+        font-size: 0.9rem !important;
+        pointer-events: auto !important;
     }
 
+    header .glass-nav-mobile nav a {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    /* Tombol login */
+    header .glass-nav-mobile button,
+    header .glass-nav-mobile a {
+        pointer-events: auto !important;
+    }
+
+    /* Matikan highlight desktop */
     .nav-highlight {
-        display: none;
-        /* highlight hanya untuk desktop */
-    }
-
-    /* ================ NAVBAR MOBILE CLICK ================ */
-    @media (max-width: 640px) {
-        .glass-nav-mobile {
-            pointer-events: auto !important;
-        }
-
-        .glass-nav-mobile * {
-            pointer-events: auto !important;
-        }
-
-        .glass-nav-mobile a {
-            cursor: pointer;
-        }
-
-        /* Pastikan hanya desktop nav yang pakai highlight */
-        @media (max-width: 640px) {
-            .nav-highlight {
-                display: none !important;
-            }
-        }
+        display: none !important;
     }
 }

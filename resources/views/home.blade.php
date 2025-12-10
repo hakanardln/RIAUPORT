@@ -51,13 +51,11 @@
 
 <body class="bg-[#f4f7f9] text-slate-800">
 
-    {{-- ================= NAVBAR WRAPPER ================= --}}
-    <header class="w-full absolute top-0 left-0 z-[9999]">
+    {{-- ================== NAVBAR DESKTOP ================== --}}
+    <header class="w-full absolute top-0 left-0 z-[9999] hidden md:block">
         <div class="max-w-6xl mx-auto px-4 md:px-2 pt-6">
-
-            {{-- =============== DESKTOP NAVBAR =============== --}}
-            <div class="glass-nav glass-nav-desktop w-full rounded-[25px] border px-7 py-3
-                   hidden md:flex items-center justify-between"
+            <div class="glass-nav w-full rounded-[25px] border px-7 py-3
+                   flex items-center justify-between"
                 style="overflow: visible;">
 
                 {{-- Logo --}}
@@ -65,7 +63,7 @@
                     <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-20 drop-shadow-md">
                 </div>
 
-                {{-- Menu Navigation (DESKTOP) --}}
+                {{-- Menu Navigation --}}
                 <nav id="mainNav"
                     class="nav-links flex items-center gap-8 text-slate-800 font-semibold text-lg relative z-[10000]">
                     <div id="navHighlight" class="nav-highlight"></div>
@@ -74,7 +72,7 @@
                     <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
                 </nav>
 
-                {{-- LOGIN / PROFILE (DESKTOP) --}}
+                {{-- LOGIN / PROFILE DESKTOP --}}
                 @guest
                     <a href="{{ route('login') }}" class="glass-btn-login">
                         Login
@@ -115,20 +113,24 @@
                     </div>
                 @endauth
             </div>
+        </div>
+    </header>
 
-            {{-- =============== MOBILE NAVBAR =============== --}}
-            <div class="glass-nav glass-nav-mobile w-full rounded-[20px] border
-           px-4 py-2 flex items-center justify-between md:hidden
-           relative z-[10000]"
+    {{-- ================== NAVBAR MOBILE ================== --}}
+    <header class="w-full absolute top-0 left-0 z-[9999] md:hidden">
+        <div class="max-w-6xl mx-auto px-4 pt-6">
+            <div class="glass-nav w-full rounded-[20px] border
+                   px-4 py-2 flex items-center justify-between"
                 style="overflow: visible;">
-
 
                 {{-- LOGO (kiri) --}}
                 <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort"
                     class="h-9 drop-shadow-md flex-shrink-0">
 
-                {{-- MENU TENGAH (MOBILE) --}}
-                <nav class="flex items-center justify-center gap-5 font-semibold text-sm text-slate-800 flex-1">
+                {{-- MENU TENGAH --}}
+                <nav
+                    class="flex items-center justify-center gap-5 font-semibold text-sm text-slate-800 flex-1
+                       relative z-[10000]">
                     <a href="#home" class="hover:text-[#0e586d]">Home</a>
                     <a href="{{ route('contact') }}" class="hover:text-[#0e586d]">Contact</a>
                     <a href="{{ route('about') }}" class="hover:text-[#0e586d]">About</a>
@@ -150,16 +152,16 @@
                             ->join('');
                     @endphp
 
-                    <button id="userMenuButtonMobile"
+                    <button
                         class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl border border-white/40
                            text-white flex items-center justify-center shadow-md text-xs font-bold flex-shrink-0">
                         {{ $initials }}
                     </button>
                 @endauth
             </div>
-
         </div>
     </header>
+
 
 
 
