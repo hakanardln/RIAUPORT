@@ -1,24 +1,26 @@
 <header class="site-header">
     <div class="navbar-container">
         <div class="glass-nav nav-content">
-
-            {{-- Logo --}}
+            {{-- LOGO --}}
             <div class="logo-section">
-                <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort">
+                <a href="{{ route('home') }}">
+                    <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort">
+                </a>
             </div>
 
-            {{-- NAVIGATION --}}
-            <nav id="mainNav" class="nav-menu nav-links">
+            {{-- MENU TENGAH --}}
+            <nav id="mainNav" class="nav-links nav-menu">
                 <div id="navHighlight" class="nav-highlight"></div>
-
                 <a href="{{ route('home') }}">Home</a>
                 <a href="{{ route('contact') }}">Contact</a>
                 <a href="{{ route('about') }}">About</a>
             </nav>
 
-            {{-- LOGIN / AVATAR --}}
+            {{-- LOGIN / AVATAR KANAN --}}
             @guest
-                <a href="{{ route('login') }}" class="glass-btn-login">Login</a>
+                <a href="{{ route('login') }}" class="glass-btn-login">
+                    Login
+                </a>
             @endguest
 
             @auth
@@ -29,22 +31,22 @@
                         ->join('');
                 @endphp
 
-                <div class="relative">
-                    <button id="userMenuButton" class="avatar-btn">
+                <div style="position: relative;">
+                    <button id="userMenuButtonDesktop" class="avatar-btn">
                         {{ $initials }}
                     </button>
 
-                    <div id="userMenu" class="user-dropdown hidden">
+                    <div id="userMenuDesktop" class="user-dropdown hidden">
                         <div class="dropdown-label">Akun</div>
-
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <button type="submit" class="dropdown-item">Logout</button>
+                            <button type="submit" class="dropdown-item">
+                                Logout
+                            </button>
                         </form>
                     </div>
                 </div>
             @endauth
-
         </div>
     </div>
 </header>
