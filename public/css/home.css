@@ -288,10 +288,12 @@ body {
 .wisata-marquee {
     width: 100%;
     position: relative;
-    overflow: hidden;
-    /* desktop: hanya tampilin area tengah */
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-block: 1.5rem;
 }
 
+/* track yang jalan */
 .wisata-track {
     display: flex;
     gap: 3rem;
@@ -299,16 +301,20 @@ body {
     animation: wisataScroll 35s linear infinite;
 }
 
+/* ukuran kartu */
 .wisata-card {
     flex: 0 0 auto;
     width: 270px;
 }
 
-/* Pause animasi ketika cursor di area wisata (desktop) */
-.wisata-marquee:hover .wisata-track {
-    animation-play-state: paused;
+/* PAUSE animasi:
+   - kalau hover area wisata (desktop)
+   - atau JS menambahkan class .paused
+*/
+.wisata-marquee:hover .wisata-track,
+.wisata-track.paused {
+    animation-play-state: paused !important;
 }
-
 
 /* Gerak pelan dari kanan ke kiri */
 @keyframes wisataScroll {
@@ -363,11 +369,6 @@ body {
     }
 }
 
-.wisata-marquee {
-    overflow-x: hidden;
-    overflow-y: visible;
-    padding-block: 1.5rem;
-}
 
 /* ===== FAQ ===== */
 .faq-card {
