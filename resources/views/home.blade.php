@@ -771,9 +771,10 @@
                         <button class="team-social-btn" type="button">
                             in
                         </button>
-                        <button class="team-social-btn" type="button">
+                        <a href="https://www.instagram.com/yours_viii/" target="_blank" rel="noopener noreferrer"
+                            class="team-social-btn">
                             IG
-                        </button>
+                        </a>
                         <button class="team-social-btn" type="button">
                             X
                         </button>
@@ -802,9 +803,10 @@
                         <button class="team-social-btn" type="button">
                             in
                         </button>
-                        <button class="team-social-btn" type="button">
+                        <a href="https://www.instagram.com/lkrsarbi/" target="_blank" rel="noopener noreferrer"
+                            class="team-social-btn">
                             IG
-                        </button>
+                        </a>
                         <button class="team-social-btn" type="button">
                             X
                         </button>
@@ -831,9 +833,10 @@
                         <button class="team-social-btn" type="button">
                             in
                         </button>
-                        <button class="team-social-btn" type="button">
+                        <a href="https://www.instagram.com/nurlelasbila31/" target="_blank" rel="noopener noreferrer"
+                            class="team-social-btn">
                             IG
-                        </button>
+                        </a>
                         <button class="team-social-btn" type="button">
                             X
                         </button>
