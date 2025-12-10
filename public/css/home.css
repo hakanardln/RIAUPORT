@@ -284,6 +284,42 @@ body {
     font-weight: 600;
 }
 
+/* ===== WISATA – MARQUEE SLIDER ===== */
+.wisata-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.wisata-track {
+    display: flex;
+    gap: 3rem;
+    /* jarak antar kartu */
+    padding: 0 2.5rem;
+    /* sedikit ruang kiri kanan di dalam max-w-6xl */
+    width: max-content;
+    animation: wisataScroll 35s linear infinite;
+    /* ubah 35s kalau mau lebih cepat / lambat */
+}
+
+.wisata-card {
+    width: 270px;
+    flex-shrink: 0;
+}
+
+@keyframes wisataScroll {
+    from {
+        transform: translateX(0);
+        /* mulai rapih, tanpa kosong di kiri */
+    }
+
+    to {
+        transform: translateX(-50%);
+        /* geser 50% dari panjang track (karena kartunya diduplikasi 2x) */
+    }
+}
+
+
 /* ===== FAQ ===== */
 .faq-card {
     box-shadow: 0 12px 22px rgba(0, 0, 0, .10)

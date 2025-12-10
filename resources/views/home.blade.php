@@ -538,109 +538,302 @@
 
         <div class="w-40 h-1 bg-[#0E586D] rounded-full mb-14"></div>
 
-        <!-- Container -->
-        <div class="relative w-full max-w-6xl">
+        <!-- MARQUEE WRAPPER -->
+        <div class="w-full">
+            <div class="wisata-marquee max-w-6xl mx-auto">
+                <div class="wisata-track">
 
-            <!-- Left button -->
-            <button
-                class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-xl p-4 rounded-full hover:scale-110 hover:shadow-2xl transition-all z-10 border border-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="black"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
+                    <!-- ===== 6 KARTU ASLI ===== -->
 
-            <!-- Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 px-12 md:px-16">
+                    <!-- Card 1 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                <!-- Card Wisata 1 -->
-                <div
-                    class="bg-white rounded-3xl shadow-md border border-gray-100 p-5 transition-all duration-300 ease-out
-                hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
 
-                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                    </div>
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Danau Buatan Lembah Sari
+                        </h3>
 
-                    <div class="mt-4 flex items-center gap-3 text-[#0E586D] font-bold text-lg">
-                        Danau Buatan Lembah Sari
-                    </div>
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi danau.
+                        </p>
 
-                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                        Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi danau.
-                    </p>
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
 
-                    <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                        Lihat selengkapnya →
-                    </a>
-                </div>
+                    <!-- Card 2 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                <!-- Card Wisata 2 -->
-                <div
-                    class="bg-white rounded-3xl shadow-md border border-gray-100 p-5 transition-all duration-300 ease-out
-                hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
 
-                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                    </div>
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Taman Nasional Zamrud
+                        </h3>
 
-                    <div class="mt-4 flex items-center gap-3 text-[#0E586D] font-bold text-lg">
-                        Taman Nasional Zamrud
-                    </div>
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa gambut.
+                        </p>
 
-                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                        Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa gambut.
-                    </p>
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
 
-                    <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                        Lihat selengkapnya →
-                    </a>
-                </div>
+                    <!-- Card 3 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                <!-- Card Wisata 3 -->
-                <div
-                    class="bg-white rounded-3xl shadow-md border border-gray-100 p-5 transition-all duration-300 ease-out
-                hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
 
-                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                        <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                    </div>
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Alam Mayang Pekanbaru
+                        </h3>
 
-                    <div class="mt-4 flex items-center gap-3 text-[#0E586D] font-bold text-lg">
-                        Alam Mayang Pekanbaru
-                    </div>
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta aktivitas outdoor.
+                        </p>
 
-                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                        Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta aktivitas outdoor.
-                    </p>
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
 
-                    <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                        Lihat selengkapnya →
-                    </a>
-                </div>
+                    <!-- Card 4 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-            </div>
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata4.webp') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
 
-            <!-- Right button -->
-            <button
-                class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-xl p-4 rounded-full hover:scale-110 hover:shadow-2xl transition-all z-10 border border-gray-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="black"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Hutan Kota Pekanbaru
+                        </h3>
 
-        </div>
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga santai.
+                        </p>
 
-        <div class="flex gap-3 mt-10">
-            <div class="w-3.5 h-3.5 bg-[#0E586D] rounded-full"></div>
-            <div class="w-3.5 h-3.5 bg-white border border-[#0E586D] rounded-full"></div>
-        </div>
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
 
+                    <!-- Card 5 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata5.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Bukit Suligi Rokan Hulu
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- Card 6 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata6.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Air Terjun Aek Martua
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Air terjun bertingkat dengan suasana alam sejuk dan spot foto alami yang memukau.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- ===== DUPLIKASI 6 KARTU UNTUK LOOP HALUS ===== -->
+                    <!-- Card 1 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Danau Buatan Lembah Sari
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi
+                            danau.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Taman Nasional Zamrud
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa
+                            gambut.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Alam Mayang Pekanbaru
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta
+                            aktivitas outdoor.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- Card 4 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata4.webp') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Hutan Kota Pekanbaru
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga
+                            santai.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- Card 5 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata5.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Bukit Suligi Rokan Hulu
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
+
+                    <!-- Card 6 -->
+                    <article
+                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                    transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
+
+                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                            <img src="{{ asset('images/wisata6.jpg') }}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
+                            </div>
+                        </div>
+
+                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                            Air Terjun Aek Martua
+                        </h3>
+
+                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                            Air terjun bertingkat dengan suasana alam sejuk dan spot foto alami yang
+                            memukau.
+                        </p>
+
+                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                            Lihat selengkapnya →
+                        </a>
+                    </article>
     </section>
+
 
 
     <!-- ================== SECTION FAQ ================== -->
@@ -668,8 +861,12 @@
                             </svg>
                         </summary>
                         <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                            Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
-                            dalam memperoleh informasi terkait perjalanan travel, dan kontak hubung sopir di seluruh
+                            Sistem Informasi Layanan Travel berbasis website berfungsi
+                            untuk mempermudah
+                            masyarakat
+                            dalam memperoleh informasi terkait perjalanan travel, dan
+                            kontak hubung
+                            sopir di seluruh
                             Riau.
                         </p>
                     </details>
@@ -687,7 +884,9 @@
                             </svg>
                         </summary>
                         <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                            Kamu bisa melihat nomor sopir langsung pada detail travel yang tersedia di halaman utama.
+                            Kamu bisa melihat nomor sopir langsung pada detail travel
+                            yang tersedia di
+                            halaman utama.
                         </p>
                     </details>
 
@@ -704,7 +903,9 @@
                             </svg>
                         </summary>
                         <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                            Klik pada nama travel yang ditampilkan, maka kamu akan diarahkan ke halaman detail travel
+                            Klik pada nama travel yang ditampilkan, maka kamu akan
+                            diarahkan ke halaman
+                            detail travel
                             tersebut.
                         </p>
                     </details>
@@ -722,7 +923,9 @@
                             </svg>
                         </summary>
                         <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                            Harus memiliki informasi rute, jadwal, kontak aktif, serta izin operasional dari pihak
+                            Harus memiliki informasi rute, jadwal, kontak aktif, serta
+                            izin operasional
+                            dari pihak
                             berwenang.
                         </p>
                     </details>
@@ -743,7 +946,8 @@
                 <p class="mt-4 text-base md:text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed">
                     A diverse group of passionate students collaborating to build
                     <span class="font-semibold text-slate-700">RiauPort</span>,
-                    menghadirkan solusi travel yang modern dan mudah diakses untuk semua.
+                    menghadirkan solusi travel yang modern dan mudah diakses untuk
+                    semua.
                 </p>
             </div>
 
@@ -859,7 +1063,8 @@
                             <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort" class="h-16 mb-3">
                         </div>
                         <p class="text-gray-600 text-sm mb-6 leading-relaxed">
-                            Platform terpadu untuk menemukan layanan travel terbaik di Riau.
+                            Platform terpadu untuk menemukan layanan travel terbaik di
+                            Riau.
                             Menghubungkan penumpang dengan sopir travel terpercaya.
                         </p>
                         <div class="flex gap-4">
@@ -887,30 +1092,39 @@
                     </div>
 
                     <div>
-                        <h3 class="text-gray-900 font-semibold text-base mb-4">Navigasi</h3>
+                        <h3 class="text-gray-900 font-semibold text-base mb-4">Navigasi
+                        </h3>
                         <ul class="space-y-3 text-sm">
                             <li><a href="{{ route('home') }}" class="text-gray-600 hover:text-[#3FA6C4]">Home</a>
                             </li>
-                            <li><a href="#about" class="text-gray-600 hover:text-[#3FA6C4]">Tentang Kami</a></li>
-                            <li><a href="#fitur" class="text-gray-600 hover:text-[#3FA6C4]">Fitur</a></li>
-                            <li><a href="#contact" class="text-gray-600 hover:text-[#3FA6C4]">Kontak</a></li>
+                            <li><a href="#about" class="text-gray-600 hover:text-[#3FA6C4]">Tentang
+                                    Kami</a></li>
+                            <li><a href="#fitur" class="text-gray-600 hover:text-[#3FA6C4]">Fitur</a>
+                            </li>
+                            <li><a href="#contact" class="text-gray-600 hover:text-[#3FA6C4]">Kontak</a>
+                            </li>
                         </ul>
                     </div>
 
                     <div>
-                        <h3 class="text-gray-900 font-semibold text-base mb-4">Layanan</h3>
+                        <h3 class="text-gray-900 font-semibold text-base mb-4">Layanan
+                        </h3>
                         <ul class="space-y-3 text-sm">
-                            <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">Cari Travel</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">Cari
+                                    Travel</a></li>
                             <li><a href="{{ route('register.sopir.show') }}"
                                     class="text-gray-600 hover:text-[#3FA6C4]">Daftar
                                     Sopir</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">Rute Populer</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">FAQ</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">Rute
+                                    Populer</a></li>
+                            <li><a href="#" class="text-gray-600 hover:text-[#3FA6C4]">FAQ</a>
+                            </li>
                         </ul>
                     </div>
 
                     <div id="contact">
-                        <h3 class="text-gray-900 font-semibold text-base mb-4">Hubungi Kami</h3>
+                        <h3 class="text-gray-900 font-semibold text-base mb-4">Hubungi
+                            Kami</h3>
                         <ul class="space-y-3 text-sm">
                             <li class="text-gray-600 flex items-start gap-2">
                                 <svg class="w-5 h-5 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor"
