@@ -368,171 +368,170 @@
     </section>
 
     {{-- ================== SECTION ULASAN / TESTIMONI ================== --}}
-    <section id="ulasan" class="bg-gradient-to-b from-white to-[#EAF7FA] py-20">
+    <section id="ulasan" class="py-20">
         <div class="max-w-6xl mx-auto px-4 md:px-6">
+            <div class="max-w-6xl mx-auto px-4 md:px-6">
 
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-12">
-                <div class="max-w-xl">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-snug">
-                        Apa kata pengguna<br class="hidden md:block" />
-                        tentang <span class="text-[#0E586D]">RiauPort</span>
-                    </h2>
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-12">
+                    <div class="max-w-xl">
+                        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-snug">
+                            Apa kata pengguna<br class="hidden md:block" />
+                            tentang <span class="text-[#0E586D]">RiauPort</span>
+                        </h2>
 
-                    <div class="mt-5 h-[3px] w-32 bg-slate-900 rounded-full"></div>
+                        <div class="mt-5 h-[3px] w-32 bg-slate-900 rounded-full"></div>
+                    </div>
+
+                    <div class="flex-1 flex flex-col md:items-end gap-4">
+                        <p class="text-sm md:text-base text-slate-500 max-w-md">
+                            Beberapa ulasan berikut masih berupa data dummy sebagai contoh.
+                            Nantinya bisa diganti dengan ulasan asli dari penumpang dan mitra travel
+                            yang menggunakan layanan RiauPort.
+                        </p>
+
+                        <div class="flex items-center gap-3">
+                            <button type="button"
+                                class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-900 hover:text-white transition">
+                                ‹
+                            </button>
+                            <button type="button"
+                                class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-900 hover:text-white transition">
+                                ›
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="flex-1 flex flex-col md:items-end gap-4">
-                    <p class="text-sm md:text-base text-slate-500 max-w-md">
-                        Beberapa ulasan berikut masih berupa data dummy sebagai contoh.
-                        Nantinya bisa diganti dengan ulasan asli dari penumpang dan mitra travel
-                        yang menggunakan layanan RiauPort.
-                    </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                    <article
+                        class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
+                       transition-all duration-300 ease-out
+                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
 
-                    <div class="flex items-center gap-3">
-                        <button type="button"
-                            class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-900 hover:text-white transition">
-                            ‹
-                        </button>
-                        <button type="button"
-                            class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-500 hover:bg-slate-900 hover:text-white transition">
-                            ›
-                        </button>
-                    </div>
+                        <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                            “Pelayanannya sangat membantu perjalanan saya”
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                            Pemesanan travel jadi lebih mudah. Saya bisa melihat jadwal, harga,
+                            dan kontak sopir tanpa harus chat satu-satu. Sangat praktis untuk
+                            yang sering pulang-pergi Bengkalis - Pekanbaru.
+                        </p>
+
+                        <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-semibold text-slate-900">Anonymous</p>
+                                <p class="text-[11px] text-slate-400">Mahasiswa – Bengkalis</p>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0E586D] to-[#5CBCCB]
+                               flex items-center justify-center text-white text-xs font-semibold
+                               transition-all duration-300 group-hover:scale-105">
+                            </div>
+                        </div>
+                    </article>
+
+                    <article
+                        class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
+                       transition-all duration-300 ease-out
+                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                            “Sangat membantu mengelola armada travel”
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                            Sebagai pemilik travel, saya bisa mengatur jadwal keberangkatan,
+                            melihat data penumpang, dan mengelola sopir di satu dashboard.
+                            Tidak perlu pakai catatan manual lagi.
+                        </p>
+
+                        <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-semibold text-slate-900">Budi Utama</p>
+                                <p class="text-[11px] text-slate-400">Owner Travel Riau Jaya</p>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#7BD1DF] to-[#0E586D]
+                               flex items-center justify-center text-white text-xs font-semibold
+                               transition-all duration-300 group-hover:scale-105">
+                                BS
+                            </div>
+                        </div>
+                    </article>
+
+                    <article
+                        class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
+                       transition-all duration-300 ease-out
+                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                            “Lebih tenang karena dapat info sopir jelas”
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                            Sebelum berangkat saya sudah tahu nama sopir, jenis mobil, dan nomor
+                            yang bisa dihubungi. Rasanya lebih aman apalagi kalau pulang malam.
+                        </p>
+
+                        <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-semibold text-slate-900">Raditya</p>
+                                <p class="text-[11px] text-slate-400">Karyawan – Pekanbaru</p>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#5CBCCB] to-[#0E586D]
+                               flex items-center justify-center text-white text-xs font-semibold
+                               transition-all duration-300 group-hover:scale-105">
+                                RA
+                            </div>
+                        </div>
+                    </article>
+
+                    <article
+                        class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
+                       transition-all duration-300 ease-out
+                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
+                        <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-slate-900 mb-2">
+                            “Antarmuka simpel, gampang dipahami orang tua”
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-6">
+                            Saya sering bantu orang tua pesan travel. Tampilan RiauPort
+                            sederhana, tombolnya jelas, jadi mereka pun bisa belajar pesan sendiri.
+                        </p>
+
+                        <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-semibold text-slate-900">Zahra</p>
+                                <p class="text-[11px] text-slate-400">Pengguna Rutin</p>
+                            </div>
+                            <div
+                                class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0E586D] to-[#7BD1DF]
+                               flex items-center justify-center text-white text-xs font-semibold
+                               transition-all duration-300 group-hover:scale-105">
+                                SZ
+                            </div>
+                        </div>
+                    </article>
+
                 </div>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                <article
-                    class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
-                       transition-all duration-300 ease-out
-                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
-                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-
-                    <h3 class="text-sm font-semibold text-slate-900 mb-2">
-                        “Pelayanannya sangat membantu perjalanan saya”
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed mb-6">
-                        Pemesanan travel jadi lebih mudah. Saya bisa melihat jadwal, harga,
-                        dan kontak sopir tanpa harus chat satu-satu. Sangat praktis untuk
-                        yang sering pulang-pergi Bengkalis - Pekanbaru.
-                    </p>
-
-                    <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-semibold text-slate-900">Anonymous</p>
-                            <p class="text-[11px] text-slate-400">Mahasiswa – Bengkalis</p>
-                        </div>
-                        <div
-                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0E586D] to-[#5CBCCB]
-                               flex items-center justify-center text-white text-xs font-semibold
-                               transition-all duration-300 group-hover:scale-105">
-                        </div>
-                    </div>
-                </article>
-
-                <article
-                    class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
-                       transition-all duration-300 ease-out
-                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
-                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-
-                    <h3 class="text-sm font-semibold text-slate-900 mb-2">
-                        “Sangat membantu mengelola armada travel”
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed mb-6">
-                        Sebagai pemilik travel, saya bisa mengatur jadwal keberangkatan,
-                        melihat data penumpang, dan mengelola sopir di satu dashboard.
-                        Tidak perlu pakai catatan manual lagi.
-                    </p>
-
-                    <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-semibold text-slate-900">Budi Utama</p>
-                            <p class="text-[11px] text-slate-400">Owner Travel Riau Jaya</p>
-                        </div>
-                        <div
-                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#7BD1DF] to-[#0E586D]
-                               flex items-center justify-center text-white text-xs font-semibold
-                               transition-all duration-300 group-hover:scale-105">
-                            BS
-                        </div>
-                    </div>
-                </article>
-
-                <article
-                    class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
-                       transition-all duration-300 ease-out
-                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
-                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-
-                    <h3 class="text-sm font-semibold text-slate-900 mb-2">
-                        “Lebih tenang karena dapat info sopir jelas”
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed mb-6">
-                        Sebelum berangkat saya sudah tahu nama sopir, jenis mobil, dan nomor
-                        yang bisa dihubungi. Rasanya lebih aman apalagi kalau pulang malam.
-                    </p>
-
-                    <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-semibold text-slate-900">Raditya</p>
-                            <p class="text-[11px] text-slate-400">Karyawan – Pekanbaru</p>
-                        </div>
-                        <div
-                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#5CBCCB] to-[#0E586D]
-                               flex items-center justify-center text-white text-xs font-semibold
-                               transition-all duration-300 group-hover:scale-105">
-                            RA
-                        </div>
-                    </div>
-                </article>
-
-                <article
-                    class="group bg-white rounded-3xl shadow-sm border border-slate-100 p-6 flex flex-col h-full
-                       transition-all duration-300 ease-out
-                       hover:-translate-y-3 hover:shadow-xl hover:border-[#0E586D]/30">
-                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
-                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                    </div>
-
-                    <h3 class="text-sm font-semibold text-slate-900 mb-2">
-                        “Antarmuka simpel, gampang dipahami orang tua”
-                    </h3>
-                    <p class="text-xs text-slate-500 leading-relaxed mb-6">
-                        Saya sering bantu orang tua pesan travel. Tampilan RiauPort
-                        sederhana, tombolnya jelas, jadi mereka pun bisa belajar pesan sendiri.
-                    </p>
-
-                    <div class="mt-auto pt-5 border-t border-slate-100 flex items-center justify-between">
-                        <div>
-                            <p class="text-xs font-semibold text-slate-900">Zahra</p>
-                            <p class="text-[11px] text-slate-400">Pengguna Rutin</p>
-                        </div>
-                        <div
-                            class="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0E586D] to-[#7BD1DF]
-                               flex items-center justify-center text-white text-xs font-semibold
-                               transition-all duration-300 group-hover:scale-105">
-                            SZ
-                        </div>
-                    </div>
-                </article>
-
-            </div>
-        </div>
     </section>
 
 
 
     <!-- ================== SECTION WISATA ALAM ================== -->
-    <section
-        class="w-full bg-gradient-to-b from-[#EAF7FA] via-[#CDEBF3] to-[#3FA6C4] pt-20 pb-24 flex flex-col items-center">
-
+    <section class="w-full pt-20 pb-24 flex flex-col items-center">
         <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3 text-center">
             Explore Taman & Objek Wisata Alam di Provinsi Riau
         </h2>
@@ -645,88 +644,91 @@
 
 
     <!-- ================== SECTION FAQ ================== -->
-    <section id="faq" class="py-16 bg-gradient-to-b from-sky-300 to-green-200">
+    <section id="faq" class="py-16">
         <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-10">
 
-            <h2 class="text-3xl font-bold text-gray-900 mb-6">
-                Pernyataan Umum
-            </h2>
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-10">
 
-            <div class="divide-y divide-gray-200 text-lg">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">
+                    Pernyataan Umum
+                </h2>
 
-                <!-- FAQ 1 -->
-                <details class="group py-6 transition-all duration-300">
-                    <summary
-                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
-                        <span>Apa itu Riauport?</span>
-                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
-                            fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </summary>
-                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                        Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
-                        dalam memperoleh informasi terkait perjalanan travel, dan kontak hubung sopir di seluruh Riau.
-                    </p>
-                </details>
+                <div class="divide-y divide-gray-200 text-lg">
 
-                <!-- FAQ 2 -->
-                <details class="group py-6 transition-all duration-300">
-                    <summary
-                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
-                        <span>Bagaimana cara mendapatkan Whatsapp Sopir?</span>
-                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
-                            fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </summary>
-                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                        Kamu bisa melihat nomor sopir langsung pada detail travel yang tersedia di halaman utama.
-                    </p>
-                </details>
+                    <!-- FAQ 1 -->
+                    <details class="group py-6 transition-all duration-300">
+                        <summary
+                            class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                            <span>Apa itu Riauport?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </summary>
+                        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                            Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
+                            dalam memperoleh informasi terkait perjalanan travel, dan kontak hubung sopir di seluruh
+                            Riau.
+                        </p>
+                    </details>
 
-                <!-- FAQ 3 -->
-                <details class="group py-6 transition-all duration-300">
-                    <summary
-                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
-                        <span>Bagaimana cara melihat detail travel?</span>
-                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
-                            fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </summary>
-                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                        Klik pada nama travel yang ditampilkan, maka kamu akan diarahkan ke halaman detail travel
-                        tersebut.
-                    </p>
-                </details>
+                    <!-- FAQ 2 -->
+                    <details class="group py-6 transition-all duration-300">
+                        <summary
+                            class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                            <span>Bagaimana cara mendapatkan Whatsapp Sopir?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </summary>
+                        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                            Kamu bisa melihat nomor sopir langsung pada detail travel yang tersedia di halaman utama.
+                        </p>
+                    </details>
 
-                <!-- FAQ 4 -->
-                <details class="group py-6 transition-all duration-300">
-                    <summary
-                        class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
-                        <span>Apa saja persyaratan mendaftarkan travel?</span>
-                        <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
-                            fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </summary>
-                    <p class="mt-3 text-gray-700 leading-relaxed text-base">
-                        Harus memiliki informasi rute, jadwal, kontak aktif, serta izin operasional dari pihak
-                        berwenang.
-                    </p>
-                </details>
+                    <!-- FAQ 3 -->
+                    <details class="group py-6 transition-all duration-300">
+                        <summary
+                            class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                            <span>Bagaimana cara melihat detail travel?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </summary>
+                        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                            Klik pada nama travel yang ditampilkan, maka kamu akan diarahkan ke halaman detail travel
+                            tersebut.
+                        </p>
+                    </details>
 
+                    <!-- FAQ 4 -->
+                    <details class="group py-6 transition-all duration-300">
+                        <summary
+                            class="flex justify-between items-center cursor-pointer font-semibold text-gray-900 list-none">
+                            <span>Apa saja persyaratan mendaftarkan travel?</span>
+                            <svg class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180 text-gray-800"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </summary>
+                        <p class="mt-3 text-gray-700 leading-relaxed text-base">
+                            Harus memiliki informasi rute, jadwal, kontak aktif, serta izin operasional dari pihak
+                            berwenang.
+                        </p>
+                    </details>
+
+                </div>
             </div>
-        </div>
     </section>
 
     {{-- ================== SECTION ABOUT US / OUR TEAM ================== --}}
