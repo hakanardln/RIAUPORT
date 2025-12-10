@@ -284,41 +284,90 @@ body {
     font-weight: 600;
 }
 
-/* ===== WISATA – MARQUEE SLIDER ===== */
-.wisata-wrapper {
+/* ===== WISATA – SLIDER DESKTOP ===== */
+.wisata-marquee {
     width: 100%;
-    overflow: hidden;
     position: relative;
+    overflow: hidden;
+    /* desktop: hanya tampilin area tengah */
 }
 
 .wisata-track {
     display: flex;
     gap: 3rem;
-    /* jarak antar kartu */
-    padding: 0 2.5rem;
-    /* sedikit ruang kiri kanan di dalam max-w-6xl */
     width: max-content;
     animation: wisataScroll 35s linear infinite;
-    /* ubah 35s kalau mau lebih cepat / lambat */
 }
 
 .wisata-card {
+    flex: 0 0 auto;
     width: 270px;
-    flex-shrink: 0;
 }
 
+/* Pause animasi ketika cursor di area wisata (desktop) */
+.wisata-marquee:hover .wisata-track {
+    animation-play-state: paused;
+}
+
+
+/* Gerak pelan dari kanan ke kiri */
 @keyframes wisataScroll {
     from {
         transform: translateX(0);
-        /* mulai rapih, tanpa kosong di kiri */
     }
 
     to {
         transform: translateX(-50%);
-        /* geser 50% dari panjang track (karena kartunya diduplikasi 2x) */
     }
 }
 
+/* ===== WISATA – MODE MOBILE/TABLET: SCROLL MANUAL ===== */
+@media (max-width: 1024px) {
+
+    /* Container jadi bisa di-swipe kiri-kanan */
+    .wisata-marquee {
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        /* swipe halus di HP */
+        padding-bottom: 0.75rem;
+    }
+
+    /* Matikan animasi jalan otomatis di layar kecil */
+    .wisata-track {
+        animation: none;
+        gap: 1.25rem;
+        padding-inline: 1.5rem;
+        /* sedikit ruang kiri–kanan */
+    }
+
+    /* Kartu nyaman untuk di-swipe */
+    .wisata-card {
+        min-width: 260px;
+        max-width: 280px;
+    }
+
+    /* (opsional) scrollbar tipis */
+    .wisata-marquee::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .wisata-marquee::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .wisata-marquee::-webkit-scrollbar-thumb {
+        background: rgba(14, 88, 109, 0.4);
+        /* nuansa #0E586D */
+        border-radius: 999px;
+    }
+}
+
+.wisata-marquee {
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-block: 1.5rem;
+}
 
 /* ===== FAQ ===== */
 .faq-card {

@@ -539,299 +539,300 @@
         <div class="w-40 h-1 bg-[#0E586D] rounded-full mb-14"></div>
 
         <!-- MARQUEE WRAPPER -->
-        <div class="w-full">
-            <div class="wisata-marquee max-w-6xl mx-auto">
-                <div class="wisata-track">
+        <div class="wisata-marquee w-full">
+            <div class="wisata-track">
 
-                    <!-- ===== 6 KARTU ASLI ===== -->
+                <!-- ===== 6 KARTU ASLI ===== -->
 
-                    <!-- Card 1 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 1 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Danau Buatan Lembah Sari
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Danau Buatan Lembah Sari
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi danau.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi danau.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d3253499-Reviews-Lembah_Sari_Artificial_Lake-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 2 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 2 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Taman Nasional Zamrud
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Taman Nasional Zamrud
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa gambut.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa gambut.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://tnzamrud.org/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 3 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 3 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Alam Mayang Pekanbaru
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Alam Mayang Pekanbaru
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta aktivitas outdoor.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta aktivitas outdoor.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d6607230-Reviews-Alam_Mayang-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 4 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 4 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata4.webp') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata4.webp') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Hutan Kota Pekanbaru
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Hutan Kota Pekanbaru
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga santai.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga santai.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.indonesia.travel/ph/en/destination/sumatra/riau/hutan-kota-pekanbaru" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 5 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 5 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata5.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata5.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Bukit Suligi Rokan Hulu
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Bukit Suligi Rokan Hulu
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.trip.com/travel-guide/attraction/rokan-hulu/danau-bukit-suligi-137285979/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 6 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 6 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata6.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                        </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata6.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Air Terjun Aek Martua
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Air Terjun Aek Martua
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Air terjun bertingkat dengan suasana alam sejuk dan spot foto alami yang memukau.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Air terjun bertingkat dengan suasana alam sejuk dan spot foto alami yang memukau.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d447114-Reviews-Air_Mertua_Waterfall-Pekanbaru_Riau_Province_Sumatra.html"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- ===== DUPLIKASI 6 KARTU UNTUK LOOP HALUS ===== -->
-                    <!-- Card 1 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- ===== DUPLIKASI 6 KARTU UNTUK LOOP HALUS ===== -->
+                <!-- Card 1 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
-                            </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata1.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
                         </div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Danau Buatan Lembah Sari
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Danau Buatan Lembah Sari
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi
-                            danau.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi
+                        danau.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d3253499-Reviews-Lembah_Sari_Artificial_Lake-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 2 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 2 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
-                            </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata2.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
                         </div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Taman Nasional Zamrud
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Taman Nasional Zamrud
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa
-                            gambut.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa
+                        gambut.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://tnzamrud.org/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 3 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 3 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
-                            </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata3.png') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
                         </div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Alam Mayang Pekanbaru
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Alam Mayang Pekanbaru
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta
-                            aktivitas outdoor.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta
+                        aktivitas outdoor.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d6607230-Reviews-Alam_Mayang-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 4 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 4 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata4.webp') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
-                            </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata4.webp') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
                         </div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Hutan Kota Pekanbaru
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Hutan Kota Pekanbaru
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga
-                            santai.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga
+                        santai.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.indonesia.travel/ph/en/destination/sumatra/riau/hutan-kota-pekanbaru"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 5 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 5 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata5.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
-                            </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata5.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
                         </div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Bukit Suligi Rokan Hulu
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Bukit Suligi Rokan Hulu
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.trip.com/travel-guide/attraction/rokan-hulu/danau-bukit-suligi-137285979/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
 
-                    <!-- Card 6 -->
-                    <article
-                        class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
+                <!-- Card 6 -->
+                <article
+                    class="wisata-card bg-white rounded-3xl shadow-md border border-gray-100 p-5
                     transition-all duration-300 ease-out hover:-translate-y-4 hover:shadow-2xl hover:border-[#0E586D]/40">
 
-                        <div class="relative w-full h-48 rounded-2xl overflow-hidden">
-                            <img src="{{ asset('images/wisata6.jpg') }}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
-                            </div>
+                    <div class="relative w-full h-48 rounded-2xl overflow-hidden">
+                        <img src="{{ asset('images/wisata6.jpg') }}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent">
                         </div>
+                    </div>
 
-                        <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
-                            Air Terjun Aek Martua
-                        </h3>
+                    <h3 class="mt-4 text-[#0E586D] font-bold text-lg">
+                        Air Terjun Aek Martua
+                    </h3>
 
-                        <p class="text-sm text-gray-700 mt-2 leading-relaxed">
-                            Air terjun bertingkat dengan suasana alam sejuk dan spot foto alami yang
-                            memukau.
-                        </p>
+                    <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+                        Air terjun bertingkat dengan suasana alam sejuk dan spot foto alami yang
+                        memukau.
+                    </p>
 
-                        <a href="#" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
-                            Lihat selengkapnya →
-                        </a>
-                    </article>
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d447114-Reviews-Air_Mertua_Waterfall-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                        Lihat selengkapnya →
+                    </a>
+                </article>
     </section>
 
 
