@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* ===== Navbar Glass ===== */
+        /* ===== Navbar Glass Desktop ===== */
         .site-header {
             position: fixed;
             top: 0;
@@ -405,6 +405,64 @@
             color: #0e586d;
         }
 
+        /* ===== NAVBAR MOBILE (SAMAKAN DGN HOME) ===== */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1.25rem 1rem;
+            }
+
+            .glass-nav {
+                padding: 6px 16px;
+                border-radius: 20px;
+                height: 50px;
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                align-items: center;
+                column-gap: 8px;
+            }
+
+            /* Matikan pseudo-element di mobile */
+            .glass-nav::before {
+                content: none;
+            }
+
+            .logo-container img {
+                height: 30px;
+            }
+
+            .nav-menu {
+                justify-content: center;
+                gap: 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            /* Login button jadi bulat kecil */
+            .glass-btn-login {
+                width: 40px;
+                height: 40px;
+                border-radius: 999px;
+                padding: 0;
+                font-size: 0.75rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                justify-self: end;
+            }
+
+            /* Sembunyikan teks "Login", tampilkan "In" saja */
+            .glass-btn-login::before {
+                content: "In";
+            }
+
+            .glass-btn-login {
+                font-size: 0;
+            }
+
+            .glass-btn-login::before {
+                font-size: 0.75rem;
+            }
+        }
+
         @media (max-width: 1024px) {
             .container {
                 padding: 140px 40px 60px;
@@ -416,22 +474,6 @@
         }
 
         @media (max-width: 768px) {
-            .glass-nav {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .nav-menu {
-                flex-direction: column;
-                gap: 1rem;
-                font-size: 1rem;
-            }
-
-            .logo-container img {
-                height: 4rem;
-            }
-
             .container {
                 padding: 140px 20px 40px;
             }
@@ -478,9 +520,9 @@
 
                 {{-- Menu Navigation --}}
                 <nav class="nav-menu">
-                    <a href="{{ route('home') }}" class="hover:text-[#0e586d] transition-colors">Home</a>
-                    <a href="{{ route('contact') }}" class="hover:text-[#0e586d] transition-colors">Contact</a>
-                    <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
+                    <a href="{{ route('home') }}">Home</a>
+                    <a href="{{ route('contact') }}">Contact</a>
+                    <a href="{{ route('about') }}">About</a>
                 </nav>
 
                 {{-- Tombol Login --}}
