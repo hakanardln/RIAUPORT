@@ -118,8 +118,10 @@
 
             {{-- =============== MOBILE NAVBAR =============== --}}
             <div class="glass-nav glass-nav-mobile w-full rounded-[20px] border
-                   px-4 py-2 flex items-center justify-between md:hidden"
+           px-4 py-2 flex items-center justify-between md:hidden
+           relative z-[10000]"
                 style="overflow: visible;">
+
 
                 {{-- LOGO (kiri) --}}
                 <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort"

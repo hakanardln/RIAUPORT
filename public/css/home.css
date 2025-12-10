@@ -423,4 +423,26 @@ body {
         display: none;
         /* highlight hanya untuk desktop */
     }
+
+    /* ================ NAVBAR MOBILE CLICK ================ */
+    @media (max-width: 640px) {
+        .glass-nav-mobile {
+            pointer-events: auto !important;
+        }
+
+        .glass-nav-mobile * {
+            pointer-events: auto !important;
+        }
+
+        .glass-nav-mobile a {
+            cursor: pointer;
+        }
+
+        /* Pastikan hanya desktop nav yang pakai highlight */
+        @media (max-width: 640px) {
+            .nav-highlight {
+                display: none !important;
+            }
+        }
+    }
 }
