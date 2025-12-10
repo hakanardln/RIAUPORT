@@ -119,48 +119,55 @@
     {{-- ================== NAVBAR MOBILE ================== --}}
     <header class="w-full absolute top-0 left-0 z-[9999] md:hidden">
         <div class="max-w-6xl mx-auto px-4 pt-6">
-            <div class="glass-nav w-full rounded-[20px] border
-                   px-4 py-2 flex items-center justify-between"
+
+            <div class="glass-nav-mobile w-full rounded-[20px] border
+           px-4 py-2 grid grid-cols-3 items-center"
                 style="overflow: visible;">
 
-                {{-- LOGO (kiri) --}}
-                <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort"
-                    class="h-9 drop-shadow-md flex-shrink-0">
 
-                {{-- MENU TENGAH --}}
-                <nav
-                    class="flex items-center justify-center gap-5 font-semibold text-sm text-slate-800 flex-1
-                       relative z-[10000]">
+                {{-- LOGO (Kolom 1) --}}
+                <div class="flex items-center">
+                    <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort" class="h-9 drop-shadow-md">
+                </div>
+
+                {{-- MENU TENGAH (Kolom 2) --}}
+                <nav class="flex items-center justify-center gap-4 font-semibold text-sm text-slate-800">
                     <a href="#home" class="hover:text-[#0e586d]">Home</a>
                     <a href="{{ route('contact') }}" class="hover:text-[#0e586d]">Contact</a>
                     <a href="{{ route('about') }}" class="hover:text-[#0e586d]">About</a>
                 </nav>
 
-                {{-- LOGIN BULAT (kanan) --}}
-                @guest
-                    <a href="{{ route('login') }}"
-                        class="w-10 h-10 rounded-full bg-[#0e586d] text-white flex items-center
-                           justify-center shadow-md text-xs font-semibold hover:scale-110 transition-all flex-shrink-0">
-                        In
-                    </a>
-                @endguest
+                {{-- LOGIN (Kolom 3) --}}
+                <div class="flex justify-end items-center">
 
-                @auth
-                    @php
-                        $initials = collect(explode(' ', auth()->user()->name))
-                            ->map(fn($p) => strtoupper(mb_substr($p, 0, 1)))
-                            ->join('');
-                    @endphp
+                    @guest
+                        <a href="{{ route('login') }}"
+                            class="login-circle-mobile w-10 h-10 rounded-full bg-[#0e586d] text-white flex items-center
+                               justify-center shadow-md text-xs font-semibold hover:scale-110 transition-all">
+                            In
+                        </a>
+                    @endguest
 
-                    <button
-                        class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl border border-white/40
-                           text-white flex items-center justify-center shadow-md text-xs font-bold flex-shrink-0">
-                        {{ $initials }}
-                    </button>
-                @endauth
+                    @auth
+                        @php
+                            $initials = collect(explode(' ', auth()->user()->name))
+                                ->map(fn($p) => strtoupper(mb_substr($p, 0, 1)))
+                                ->join('');
+                        @endphp
+
+                        <button
+                            class="login-circle-mobile w-10 h-10 rounded-full bg-white/20 backdrop-blur-xl border border-white/40
+                                    text-white flex items-center justify-center shadow-md text-xs font-bold">
+                            {{ $initials }}
+                        </button>
+                    @endauth
+
+                </div>
+
             </div>
         </div>
     </header>
+
 
 
 

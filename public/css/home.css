@@ -35,7 +35,6 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* Highlight yang bergerak untuk efek “liquid” */
 .glass-nav::before {
     content: "";
     position: absolute;
@@ -43,6 +42,7 @@ body {
     opacity: 0.6;
     mix-blend-mode: screen;
     animation: liquidMove 14s infinite alternate ease-in-out;
+    pointer-events: none;
 }
 
 @keyframes liquidMove {
@@ -403,49 +403,68 @@ body {
 /* ==================== NAVBAR MOBILE STYLE ==================== */
 @media (max-width: 640px) {
 
-    /* Wrapper navbar mobile */
-    header .glass-nav-mobile {
-        padding: 8px 14px !important;
-        border-radius: 18px !important;
-        height: 52px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        position: relative !important;
-        z-index: 9999 !important;
-        pointer-events: auto !important;
+    .glass-nav-mobile {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+        background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.08)),
+            linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.05));
+        box-shadow:
+            0 18px 45px rgba(0, 0, 0, 0.18),
+            0 0 0 1px rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(18px) saturate(180%);
+        -webkit-backdrop-filter: blur(18px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .glass-nav-mobile::before,
+    .glass-nav-mobile::after {
+        content: none;
     }
 
     /* Logo */
     header .glass-nav-mobile img {
         height: 32px !important;
-        pointer-events: auto !important;
     }
 
-    /* Menu tengah */
+    /* Menu tengah — kolom 2 */
     header .glass-nav-mobile nav {
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 1.6rem !important;
-        flex: 1 !important;
-        text-align: center !important;
+        gap: 1.4rem !important;
         font-size: 0.9rem !important;
-        pointer-events: auto !important;
+        flex: none !important;
     }
 
     header .glass-nav-mobile nav a {
-        pointer-events: auto !important;
         cursor: pointer !important;
     }
 
-    /* Tombol login */
-    header .glass-nav-mobile button,
-    header .glass-nav-mobile a {
+    /* Login Circle — kolom 3 */
+    header .glass-nav-mobile .login-circle-mobile {
+        justify-self: end !important;
+        position: relative !important;
+        z-index: 3 !important;
+        cursor: pointer !important;
+    }
+
+    /* Matikan klik di layer efek glass khusus navbar mobile */
+    header .glass-nav-mobile::before,
+    header .glass-nav-mobile::after {
+        pointer-events: none !important;
+        z-index: 0 !important;
+    }
+
+    /* Naikkan layer menu tengah */
+    header .glass-nav-mobile nav,
+    header .glass-nav-mobile nav * {
+        position: relative;
+        z-index: 2 !important;
         pointer-events: auto !important;
     }
 
-    /* Matikan highlight desktop */
+    /* Matikan highlight desktop di mobile */
     .nav-highlight {
         display: none !important;
     }
