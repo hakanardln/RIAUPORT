@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // ================== TYPEWRITER ANIMATION ==================
+    const typewriterElement = document.getElementById('typewriterText');
+
+    if (typewriterElement) {
+        const fullText = typewriterElement.getAttribute('data-text');
+        let index = 0;
+
+        // Kosongkan dulu
+        typewriterElement.textContent = '';
+
+        function typeWriter() {
+            if (index < fullText.length) {
+                typewriterElement.textContent += fullText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 80); // Kecepatan ketik (80ms per karakter)
+            } else {
+                // Tambahkan class untuk cursor blink setelah selesai
+                typewriterElement.classList.add('typing-complete');
+            }
+        }
+
+        // Mulai animasi setelah delay 300ms
+        setTimeout(typeWriter, 300);
+    }
+
     // ================== SLIDESHOW HERO ==================
     const heroSection = document.querySelector('section.hero[data-frames]');
     const heroBg = document.getElementById('heroBg');
@@ -42,19 +67,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // ================== DROPDOWN AVATAR USER ==================
-    const btn = document.getElementById('userMenuButton');
-    const menu = document.getElementById('userMenu');
+    // ================== DROPDOWN AVATAR USER DESKTOP ==================
+    const btnDesktop = document.getElementById('userMenuButtonDesktop');
+    const menuDesktop = document.getElementById('userMenuDesktop');
 
-    if (btn && menu) {
-        btn.addEventListener('click', function (e) {
+    if (btnDesktop && menuDesktop) {
+        btnDesktop.addEventListener('click', function (e) {
             e.stopPropagation();
-            menu.classList.toggle('hidden');
+            menuDesktop.classList.toggle('hidden');
         });
 
         document.addEventListener('click', function () {
-            if (!menu.classList.contains('hidden')) {
-                menu.classList.add('hidden');
+            if (!menuDesktop.classList.contains('hidden')) {
+                menuDesktop.classList.add('hidden');
             }
         });
     }

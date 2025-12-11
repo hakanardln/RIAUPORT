@@ -187,7 +187,8 @@
                         class="search-card bg-white/95 rounded-[32px] px-6 py-10 md:px-10
                            flex flex-col gap-6 items-center border border-slate-200">
                         <h1 class="text-2xl md:text-3xl font-semibold text-slate-800 text-center">
-                            Hai Kamu, <span class="font-bold text-primary">Ingin pergi ke mana?</span>
+                            <span id="typewriterText" class="typewriter-text font-bold text-primary"
+                                data-text="Hai Kamu, Ingin pergi ke mana?"></span>
                         </h1>
 
                         <!-- Form dengan ID -->
@@ -562,7 +563,8 @@
                         Destinasi alam populer di Pekanbaru dengan suasana tenang dan spot foto tepi danau.
                     </p>
 
-                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d3253499-Reviews-Lembah_Sari_Artificial_Lake-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d3253499-Reviews-Lembah_Sari_Artificial_Lake-Pekanbaru_Riau_Province_Sumatra.html"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -585,7 +587,8 @@
                         Kawasan konservasi dengan keanekaragaman hayati unik dan panorama rawa gambut.
                     </p>
 
-                    <a href="https://tnzamrud.org/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://tnzamrud.org/"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -608,7 +611,8 @@
                         Lokasi wisata keluarga yang menghadirkan suasana hijau, danau, serta aktivitas outdoor.
                     </p>
 
-                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d6607230-Reviews-Alam_Mayang-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d6607230-Reviews-Alam_Mayang-Pekanbaru_Riau_Province_Sumatra.html"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -631,7 +635,8 @@
                         Area hijau luas di pusat kota, cocok untuk rekreasi keluarga dan olahraga santai.
                     </p>
 
-                    <a href="https://www.indonesia.travel/ph/en/destination/sumatra/riau/hutan-kota-pekanbaru" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.indonesia.travel/ph/en/destination/sumatra/riau/hutan-kota-pekanbaru"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -654,7 +659,8 @@
                         Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
                     </p>
 
-                    <a href="https://www.trip.com/travel-guide/attraction/rokan-hulu/danau-bukit-suligi-137285979/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.trip.com/travel-guide/attraction/rokan-hulu/danau-bukit-suligi-137285979/"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -704,7 +710,8 @@
                         danau.
                     </p>
 
-                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d3253499-Reviews-Lembah_Sari_Artificial_Lake-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d3253499-Reviews-Lembah_Sari_Artificial_Lake-Pekanbaru_Riau_Province_Sumatra.html"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -729,7 +736,8 @@
                         gambut.
                     </p>
 
-                    <a href="https://tnzamrud.org/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://tnzamrud.org/"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -754,7 +762,8 @@
                         aktivitas outdoor.
                     </p>
 
-                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d6607230-Reviews-Alam_Mayang-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d6607230-Reviews-Alam_Mayang-Pekanbaru_Riau_Province_Sumatra.html"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -804,7 +813,8 @@
                         Destinasi pendakian populer dengan panorama sunrise dan hamparan awan.
                     </p>
 
-                    <a href="https://www.trip.com/travel-guide/attraction/rokan-hulu/danau-bukit-suligi-137285979/" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.trip.com/travel-guide/attraction/rokan-hulu/danau-bukit-suligi-137285979/"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
@@ -829,7 +839,8 @@
                         memukau.
                     </p>
 
-                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d447114-Reviews-Air_Mertua_Waterfall-Pekanbaru_Riau_Province_Sumatra.html" class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
+                    <a href="https://www.tripadvisor.co.id/Attraction_Review-g303957-d447114-Reviews-Air_Mertua_Waterfall-Pekanbaru_Riau_Province_Sumatra.html"
+                        class="text-sm text-[#0E586D] hover:underline mt-3 block font-medium">
                         Lihat selengkapnya →
                     </a>
                 </article>
