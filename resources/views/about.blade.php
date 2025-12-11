@@ -13,6 +13,55 @@
 
     {{-- Inline style untuk memastikan kartu muncul --}}
     <style>
+        /* CRITICAL: Ensure dropdown is visible above everything */
+        #userMenu {
+            position: absolute !important;
+            right: 0 !important;
+            top: 100% !important;
+            margin-top: 12px !important;
+            width: 160px !important;
+            background: #ffffff !important;
+            border-radius: 16px !important;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35) !important;
+            border: 1px solid #e2e8f0 !important;
+            padding: 8px 0 6px !important;
+            z-index: 99999 !important;
+            display: none;
+        }
+
+        #userMenu:not(.hidden) {
+            display: block !important;
+        }
+
+        .dropdown-label {
+            padding: 4px 14px 2px !important;
+            font-size: 11px !important;
+            text-transform: uppercase !important;
+            color: #94a3b8 !important;
+            font-weight: 600 !important;
+        }
+
+        .dropdown-item {
+            width: 100% !important;
+            text-align: left !important;
+            padding: 10px 14px !important;
+            background: transparent !important;
+            font-size: 14px !important;
+            cursor: pointer !important;
+            border: none !important;
+            color: #334155 !important;
+            transition: background-color 0.2s ease !important;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f5f9 !important;
+        }
+
+        .avatar-wrapper-about {
+            position: relative !important;
+            z-index: 10005 !important;
+        }
+
         /* Force team section styles */
         .team-section-wrapper {
             background: #f5f7ff !important;
@@ -184,12 +233,12 @@
                                 ->join('');
                         @endphp
 
-                        <div class="relative" style="z-index: 10002;">
+                        <div class="avatar-wrapper-about">
                             <button id="userMenuButton" class="avatar-btn">
                                 {{ $initials }}
                             </button>
 
-                            <div id="userMenu" class="user-dropdown hidden">
+                            <div id="userMenu" class="hidden">
                                 <div class="dropdown-label">
                                     Akun
                                 </div>
@@ -312,6 +361,60 @@
     @include('components.footer')
 
     <script src="{{ asset('js/about.js') }}"></script>
+
+    {{-- Script untuk dropdown menu & navbar highlight --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ================== DROPDOWN AVATAR USER ==================
+            const userMenuButton = document.getElementById('userMenuButton');
+            const userMenu = document.getElementById('userMenu');
+
+            if (userMenuButton && userMenu) {
+                userMenuButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userMenu.classList.toggle('hidden');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!userMenu.classList.contains('hidden') &&
+                        !userMenuButton.contains(e.target) &&
+                        !userMenu.contains(e.target)) {
+                        userMenu.classList.add('hidden');
+                    }
+                });
+            }
+
+            // ================== NAVBAR LIQUID HIGHLIGHT ==================
+            const nav = document.querySelector('.nav-links.nav-menu');
+            const highlight = document.getElementById('navHighlight');
+
+            if (nav && highlight) {
+                const links = nav.querySelectorAll('a');
+
+                function moveHighlight(el) {
+                    const navRect = nav.getBoundingClientRect();
+                    const rect = el.getBoundingClientRect();
+                    const paddingX = 14;
+
+                    const width = rect.width + paddingX * 2;
+                    const left = rect.left - navRect.left - paddingX;
+
+                    highlight.style.width = `${width}px`;
+                    highlight.style.left = `${left}px`;
+                    highlight.style.opacity = '1';
+                }
+
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', () => moveHighlight(link));
+                });
+
+                nav.addEventListener('mouseleave', () => {
+                    highlight.style.opacity = '0';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

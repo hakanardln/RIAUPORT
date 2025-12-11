@@ -715,6 +715,66 @@
             </div>
         </div>
     </footer>
+
+    {{-- Script untuk navbar liquid highlight --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ================== NAVBAR LIQUID HIGHLIGHT ==================
+            const nav = document.querySelector('.nav-menu');
+
+            // Buat element highlight jika belum ada
+            let highlight = document.getElementById('navHighlight');
+            if (!highlight && nav) {
+                highlight = document.createElement('div');
+                highlight.id = 'navHighlight';
+                highlight.style.cssText = `
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    transform: translateY(-50%);
+                    height: 34px;
+                    border-radius: 999px;
+                    background: rgba(96, 165, 250, 0.16);
+                    box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.2), 0 14px 30px rgba(15, 23, 42, 0.18);
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: left 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+                                width 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+                                opacity 0.18s ease-out;
+                    z-index: 0;
+                `;
+                nav.style.position = 'relative';
+                nav.insertBefore(highlight, nav.firstChild);
+            }
+
+            if (nav && highlight) {
+                const links = nav.querySelectorAll('a');
+
+                function moveHighlight(el) {
+                    const navRect = nav.getBoundingClientRect();
+                    const rect = el.getBoundingClientRect();
+                    const paddingX = 14;
+
+                    const width = rect.width + paddingX * 2;
+                    const left = rect.left - navRect.left - paddingX;
+
+                    highlight.style.width = `${width}px`;
+                    highlight.style.left = `${left}px`;
+                    highlight.style.opacity = '1';
+                }
+
+                links.forEach(link => {
+                    link.style.position = 'relative';
+                    link.style.zIndex = '1';
+                    link.addEventListener('mouseenter', () => moveHighlight(link));
+                });
+
+                nav.addEventListener('mouseleave', () => {
+                    highlight.style.opacity = '0';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
