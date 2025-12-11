@@ -4,24 +4,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (typewriterElement) {
         const fullText = typewriterElement.getAttribute('data-text');
-        let index = 0;
 
-        // Kosongkan dulu
-        typewriterElement.textContent = '';
+        // Cek apakah mobile (lebar layar <= 767px)
+        const isMobile = window.innerWidth <= 767;
 
-        function typeWriter() {
-            if (index < fullText.length) {
-                typewriterElement.textContent += fullText.charAt(index);
-                index++;
-                setTimeout(typeWriter, 80); // Kecepatan ketik (80ms per karakter)
-            } else {
-                // Tambahkan class untuk cursor blink setelah selesai
-                typewriterElement.classList.add('typing-complete');
+        if (isMobile) {
+            // Di mobile, langsung tampilkan teks tanpa animasi
+            typewriterElement.textContent = fullText;
+            typewriterElement.classList.add('typing-complete');
+        } else {
+            // Di desktop, jalankan animasi typewriter
+            let index = 0;
+            typewriterElement.textContent = '';
+
+            function typeWriter() {
+                if (index < fullText.length) {
+                    typewriterElement.textContent += fullText.charAt(index);
+                    index++;
+                    setTimeout(typeWriter, 80);
+                } else {
+                    typewriterElement.classList.add('typing-complete');
+                }
             }
-        }
 
-        // Mulai animasi setelah delay 300ms
-        setTimeout(typeWriter, 300);
+            setTimeout(typeWriter, 300);
+        }
     }
 
     // ================== SLIDESHOW HERO ==================

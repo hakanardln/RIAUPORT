@@ -32,7 +32,25 @@
         body {
             height: 100%;
             margin: 0;
-            overflow: hidden;
+        }
+
+        /* Desktop: overflow hidden */
+        @media (min-width: 1024px) {
+
+            html,
+            body {
+                overflow: hidden;
+            }
+        }
+
+        /* Mobile: allow scroll */
+        @media (max-width: 1023px) {
+
+            html,
+            body {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
         }
 
         body {
@@ -77,56 +95,74 @@
             box-shadow: 0 0 0 3px rgba(14, 88, 109, 0.25);
             border-color: var(--primary);
         }
+
+        /* Mobile adjustments */
+        @media (max-width: 1023px) {
+            .mobile-hero {
+                min-height: 35vh;
+                padding: 2rem 1rem;
+            }
+
+            .mobile-form-container {
+                min-height: 65vh;
+                padding: 2rem 1rem;
+            }
+        }
     </style>
 </head>
 
-<body class="h-full flex items-center justify-center p-4 sm:p-6">
+<body class="h-full lg:flex lg:items-center lg:justify-center lg:p-4 sm:p-6">
 
-    <!-- Ukuran 90% dari layar + sedikit margin di sekeliling -->
+    <!-- Desktop: ukuran 90% dari layar + sedikit margin -->
+    <!-- Mobile: full screen dengan scroll -->
     <div
-        class="w-full max-w-7xl h-[90vh] mx-auto grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl">
+        class="w-full lg:max-w-7xl lg:h-[90vh] lg:mx-auto grid grid-cols-1 lg:grid-cols-2 lg:rounded-3xl overflow-hidden lg:shadow-2xl min-h-screen lg:min-h-0">
 
         <!-- PANEL KIRI – HERO -->
-        <div class="relative wave-bg bg-gradient-to-br from-cyan-50 to-sky-100 flex items-center justify-center p-10">
+        <div
+            class="mobile-hero relative wave-bg bg-gradient-to-br from-cyan-50 to-sky-100 flex items-center justify-center lg:p-10">
             <div class="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
 
             <div class="relative z-10 text-center">
                 <img src="{{ asset('images/riauport-logo.png') }}" alt="RiauPort Logo"
-                    class="w-80 mx-auto drop-shadow-2xl mb-8 animate-[pulse_6s_ease-in-out_infinite]">
+                    class="w-48 lg:w-80 mx-auto drop-shadow-2xl mb-4 lg:mb-8 animate-[pulse_6s_ease-in-out_infinite]">
 
-                <h2 class="fell text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                <h2 class="fell text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 mb-2 lg:mb-4">
                     RiauPort
                 </h2>
-                <p class="fell text-xl md:text-2xl text-gray-700 leading-relaxed max-w-md mx-auto">
+                <p
+                    class="fell text-base md:text-lg lg:text-xl xl:text-2xl text-gray-700 leading-relaxed max-w-md mx-auto px-4">
                     Temukan berbagai <span class="text-[var(--primary)] font-bold">Travel</span> impianmu<br>
                     dalam satu platform yang <span class="italic text-[var(--accent)]">mengagumkan</span>.
                 </p>
 
-                <div class="mt-12 flex justify-center gap-3">
-                    <div class="w-3 h-3 bg-[var(--primary)] rounded-full animate-bounce"></div>
-                    <div class="w-3 h-3 bg-[var(--accent)] rounded-full animate-bounce delay-100"></div>
-                    <div class="w-3 h-3 bg-cyan-400 rounded-full animate-bounce delay-200"></div>
+                <div class="mt-6 lg:mt-12 flex justify-center gap-3">
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-[var(--primary)] rounded-full animate-bounce"></div>
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-[var(--accent)] rounded-full animate-bounce delay-100"></div>
+                    <div class="w-2 h-2 lg:w-3 lg:h-3 bg-cyan-400 rounded-full animate-bounce delay-200"></div>
                 </div>
             </div>
         </div>
 
         <!-- PANEL KANAN – FORM LOGIN -->
-        <div class="bg-gradient-to-br from-gray-50 to-white flex items-center justify-center p-8 md:p-12">
-            <div class="w-full max-w-md">
+        <div
+            class="mobile-form-container bg-gradient-to-br from-gray-50 to-white flex items-center justify-center lg:p-8 xl:p-12">
+            <div class="w-full max-w-md px-4 lg:px-0">
 
-                <div class="glass-card rounded-3xl p-8 md:p-10 shadow-xl relative overflow-hidden">
+                <div
+                    class="glass-card rounded-2xl lg:rounded-3xl p-6 md:p-8 lg:p-10 shadow-xl relative overflow-hidden">
                     <div
                         class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[var(--primary)] to-[var(--accent)]">
                     </div>
 
-                    <div class="flex items-center justify-between mb-10">
+                    <div class="flex items-center justify-between mb-6 lg:mb-10">
                         <div>
-                            <h1 class="text-4xl font-bold text-[var(--primary)]">Welcome!</h1>
-                            <p class="text-gray-600 mt-1">Login to your account</p>
+                            <h1 class="text-3xl lg:text-4xl font-bold text-[var(--primary)]">Welcome!</h1>
+                            <p class="text-gray-600 mt-1 text-sm lg:text-base">Login to your account</p>
                         </div>
                     </div>
 
-                    <form method="POST" action="{{ route('login.process') }}" class="space-y-6">
+                    <form method="POST" action="{{ route('login.process') }}" class="space-y-5 lg:space-y-6">
                         @csrf
 
                         {{-- Bawa redirect_to dari query string ke form (untuk alur Pesan Sekarang -> Login -> WA) --}}
@@ -136,9 +172,9 @@
                         <div>
                             <label class="text-sm font-semibold text-gray-700">Email</label>
                             <input type="email" name="email" required
-                                class="mt-2 w-full px-5 py-4 rounded-2xl bg-white/70 border border-gray-200 
+                                class="mt-2 w-full px-4 lg:px-5 py-3 lg:py-4 rounded-xl lg:rounded-2xl bg-white/70 border border-gray-200 
                                           focus:outline-none focus:border-[var(--primary)] input-glow
-                                          transition-all duration-300 placeholder-gray-400"
+                                          transition-all duration-300 placeholder-gray-400 text-sm lg:text-base"
                                 placeholder="" value="{{ old('email') }}">
                         </div>
 
@@ -146,16 +182,17 @@
                             <label class="text-sm font-semibold text-gray-700">Password</label>
                             <div class="relative">
                                 <input type="password" name="password" id="password" required
-                                    class="mt-2 w-full px-5 py-4 pr-12 rounded-2xl bg-white/70 border border-gray-200 
+                                    class="mt-2 w-full px-4 lg:px-5 py-3 lg:py-4 pr-12 rounded-xl lg:rounded-2xl bg-white/70 border border-gray-200 
                                               focus:outline-none focus:border-[var(--primary)] input-glow
-                                              transition-all duration-300 placeholder-gray-400"
+                                              transition-all duration-300 placeholder-gray-400 text-sm lg:text-base"
                                     placeholder="">
                                 <button type="button" onmousedown="showPassword()" onmouseup="hidePassword()"
                                     onmouseleave="hidePassword()" ontouchstart="showPassword()"
                                     ontouchend="hidePassword()"
-                                    class="absolute right-4 top-1/2 -translate-y-1/2 mt-1 text-gray-500 hover:text-gray-700 focus:outline-none">
+                                    class="absolute right-3 lg:right-4 top-1/2 -translate-y-1/2 mt-1 text-gray-500 hover:text-gray-700 focus:outline-none">
                                     <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                        class="w-5 h-5 lg:w-6 lg:h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -163,7 +200,7 @@
                                     </svg>
                                     <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                        class="w-6 h-6 hidden">
+                                        class="w-5 h-5 lg:w-6 lg:h-6 hidden">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                                     </svg>
@@ -171,18 +208,19 @@
                             </div>
                         </div>
 
-                        <div class="flex items-center justify-between">
-                            <label class="flex items-center gap-3 cursor-pointer select-none">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <label class="flex items-center gap-2 lg:gap-3 cursor-pointer select-none">
                                 <input type="checkbox"
-                                    class="w-5 h-5 rounded text-[var(--primary)] focus:ring-[var(--primary)]">
-                                <span class="text-gray-600">Ingat saya</span>
+                                    class="w-4 h-4 lg:w-5 lg:h-5 rounded text-[var(--primary)] focus:ring-[var(--primary)]">
+                                <span class="text-gray-600 text-sm lg:text-base">Ingat saya</span>
                             </label>
-                            <a href="#" class="text-sm text-[var(--primary)] hover:underline">Lupa password?</a>
+                            <a href="#" class="text-xs lg:text-sm text-[var(--primary)] hover:underline">Lupa
+                                password?</a>
                         </div>
 
                         <button type="submit"
-                            class="btn-3d w-full py-5 rounded-2xl text-white font-bold text-lg
-                                       relative overflow-hidden group mt-8">
+                            class="btn-3d w-full py-4 lg:py-5 rounded-xl lg:rounded-2xl text-white font-bold text-base lg:text-lg
+                                       relative overflow-hidden group mt-6 lg:mt-8">
                             <span class="relative z-10">Login Sekarang</span>
                             <div
                                 class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent 
@@ -191,17 +229,17 @@
                             </div>
                         </button>
 
-                        <div class="text-center mt-8">
-                            <span class="text-gray-600">Belum punya akun?</span>
+                        <div class="text-center mt-6 lg:mt-8">
+                            <span class="text-gray-600 text-sm lg:text-base">Belum punya akun?</span>
                             <a href="{{ route('register.show') }}"
-                                class="ml-2 font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors">
+                                class="ml-2 font-bold text-[var(--primary)] hover:text-[var(--primary-dark)] transition-colors text-sm lg:text-base">
                                 Daftar di sini
                             </a>
                         </div>
 
                         @if ($errors->any())
                             <div
-                                class="mt-6 p-4 bg-red-50 border border-red-200 rounded-2xl text-sm text-red-700 text-center">
+                                class="mt-4 lg:mt-6 p-3 lg:p-4 bg-red-50 border border-red-200 rounded-xl lg:rounded-2xl text-xs lg:text-sm text-red-700 text-center">
                                 {{ $errors->first() }}
                             </div>
                         @endif

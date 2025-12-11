@@ -168,10 +168,6 @@
         </div>
     </header>
 
-
-
-
-
     {{-- HERO + PENCARIAN --}}
     <section class="hero relative" id="home" data-frames='@json($frames)'>
         <div id="heroBg" class="hero-bg absolute inset-0 z-0"></div>
@@ -218,27 +214,43 @@
 
                 <!-- Tombol di luar kartu, tapi masih nempel -->
                 <button type="submit" form="searchForm"
-                    class="absolute top-1/2 -translate-y-1/2
-                       right-[-40px] md:right-[-80px]
-                       h-[55px] w-[55px] md:h-[70px] md:w-[70px]
-                       rounded-full
-                       bg-white/20 backdrop-blur-xl
-                       border border-white/40
-                       shadow-2xl
-                       flex items-center justify-center
-                       hover:bg-white/35 hover:border-white/60
-                       hover:scale-110 active:scale-95
-                       transition-all duration-300
-                       focus:outline-none focus:ring-4 focus:ring-white/30
-                       z-30 ring-1 ring-white/50 ring-inset">
+                    class="
+        /* MOBILE: tidak ada class, biarkan CSS custom yang handle */
+        
+        /* DESKTOP ONLY */
+        md:absolute md:top-1/2 md:-translate-y-1/2
+        md:right-[-40px] lg:right-[-80px]
+        md:h-[70px] md:w-[70px]
+        md:rounded-full
+        md:bg-white/20 md:backdrop-blur-xl
+        md:border md:border-white/40
+        md:shadow-2xl
+        md:hover:bg-white/35 md:hover:border-white/60
+        md:hover:scale-110 md:active:scale-95
+        md:ring-1 md:ring-white/50 md:ring-inset
+        
+        /* COMMON */
+        flex items-center justify-center
+        transition-all duration-300
+        focus:outline-none z-30">
 
-                    <span class="sr-only">Cari</span>
+                    <!-- Icon untuk desktop -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                        class="h-7 w-7 md:h-8 md:w-8 text-white drop-shadow-lg" fill="none" stroke="currentColor"
-                        stroke-width="3" stroke-linecap="round">
+                        class="hidden md:block md:h-8 md:w-8 text-white drop-shadow-lg" fill="none"
+                        stroke="currentColor" stroke-width="3" stroke-linecap="round">
                         <circle cx="11" cy="11" r="6"></circle>
                         <path d="m16 16 5 5"></path>
                     </svg>
+
+                    <!-- Icon + Text untuk mobile -->
+                    <span class="flex items-center gap-2 md:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="text-white"
+                            fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+                            <circle cx="11" cy="11" r="6"></circle>
+                            <path d="m16 16 5 5"></path>
+                        </svg>
+                        <span class="text-white font-bold tracking-wide">Cari</span>
+                    </span>
                 </button>
             </div>
         </div>
