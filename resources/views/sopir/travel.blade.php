@@ -410,7 +410,7 @@
                                             {{-- PREVIEW FOTO ARMADA (DARI DB / DARI INPUT BARU) --}}
                                             <div id="previewArmada" class="mb-4">
                                                 @if ($travel->foto_armada)
-                                                    <img src="{{ asset('storage/' . $travel->foto_armada) }}"
+                                                    <img src="{{ asset('file/' . rawurlencode($travel->foto_armada)) }}"
                                                         class="w-40 h-28 object-cover rounded-xl border border-slate-200 mx-auto"
                                                         alt="Foto armada">
                                                 @endif

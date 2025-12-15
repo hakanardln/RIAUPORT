@@ -37,6 +37,19 @@ use App\Http\Middleware\IsSopir;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/file/{path}', function ($path, $status = null) {
+
+    $path = urldecode($path);
+
+    if (!Storage::disk('public')->exists($path)) {
+        abort(404);
+    }
+
+    return response()->file(Storage::disk('public')->path($path));
+
+})->where('path', '.*');
+
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/cari-travel', [HomeController::class, 'search'])->name('travel.search');
 
@@ -145,7 +158,7 @@ Route::middleware(['auth', IsAdmin::class])
             Route::post('/{id}/reject', [TravelApprovalController::class, 'reject'])->name('reject');
             Route::delete('/{id}', [TravelApprovalController::class, 'destroy'])->name('destroy');
         });
-        
+
     });
 
 /*
@@ -242,7 +255,7 @@ Route::middleware(['auth', IsSopir::class])
         Route::put('/profil', [SopirProfilController::class, 'update'])->name('profil.update');
 
 
-        
+
         // Notifikasi
         Route::get('/notifikasi', [SopirNotifController::class, 'index'])->name('notifikasi');
 
