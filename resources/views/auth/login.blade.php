@@ -107,10 +107,9 @@
                     class="md:aspect-[7/10] bg-gradient-to-br from-cyan-50 to-sky-100 relative overflow-hidden w-full h-full">
                     <img src="{{ asset('images/riauport-logo.png') }}" class="w-full h-full object-contain p-12 md:p-20"
                         alt="RiauPort Logo" />
-                    <div class="absolute inset-0 flex items-end justify-center">
-                        <div
-                            class="w-full bg-gradient-to-t from-[var(--primary)]/60 via-[var(--primary)]/30 to-transparent absolute bottom-0 p-6 max-md:hidden">
-                            <h1 class="fell text-gray-800 text-3xl font-bold mb-2">Welcome Back</h1>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-full text-center pt-64 px-6 max-md:hidden">
+                            <h1 class="fell text-[var(--primary)] text-3xl font-bold mb-2">RiauPort</h1>
                             <p class="fell text-gray-700 text-[15px] font-medium leading-relaxed">
                                 Temukan berbagai <span class="text-[var(--primary)] font-bold">Travel</span> impianmu
                                 dalam satu platform yang <span class="italic text-[var(--accent)]">mengagumkan</span>.
