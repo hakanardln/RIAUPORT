@@ -25,6 +25,7 @@ use App\Http\Controllers\AdminSopirController;
 use App\Http\Controllers\SopirDashboardController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\TravelApprovalController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 
 // Middleware
@@ -36,6 +37,12 @@ use App\Http\Middleware\IsSopir;
 | HOME & PUBLIC PAGE
 |--------------------------------------------------------------------------
 */
+
+// routes terms and conditions
+Route::get('/syarat-ketentuan', function () {
+    return view('terms');
+})->name('terms');
+
 
 Route::get('/file/{path}', function ($path, $status = null) {
 
@@ -67,6 +74,13 @@ Route::post('/reviews', [ReviewController::class, 'store'])
 | LOGIN & LOGOUT (USER + SOPIR + ADMIN)
 |--------------------------------------------------------------------------
 */
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.process');

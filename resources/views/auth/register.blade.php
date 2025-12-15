@@ -168,9 +168,9 @@
                         <input type="checkbox" required class="mt-1 h-4 w-4 accent-[var(--primary)] rounded">
                         <p class="text-sm text-slate-600">
                             Saya setuju dengan
-                            <span class="text-[var(--primary)] font-semibold hover:underline cursor-pointer">
+                            <a href="{{ route('terms') }}" class="text-[var(--primary)] font-semibold hover:underline">
                                 Syarat & Ketentuan
-                            </span>.
+                            </a>
                         </p>
                     </div>
 

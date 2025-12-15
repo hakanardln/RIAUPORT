@@ -201,7 +201,8 @@
                             </label>
                         </div>
                         <div>
-                            <a href="#" class="text-[var(--primary)] font-medium text-sm hover:underline">
+                            <a href="{{ route('password.request') }}"
+                                class="text-[var(--primary)] font-medium text-sm hover:underline">
                                 Lupa password?
                             </a>
                         </div>

@@ -164,6 +164,17 @@
                         </div>
                     </div>
 
+                    <!-- Terms -->
+                    <div class="flex items-start gap-3">
+                        <input type="checkbox" required class="mt-1 h-4 w-4 accent-[var(--primary)] rounded">
+                        <p class="text-sm text-slate-600">
+                            Saya setuju dengan
+                            <a href="{{ route('terms') }}" class="text-[var(--primary)] font-semibold hover:underline">
+                                Syarat & Ketentuan
+                            </a>
+                        </p>
+                    </div>
+
                     <!-- Submit -->
                     <button type="submit"
                         class="btn-3d w-full py-4 rounded-2xl text-white font-bold text-sm
