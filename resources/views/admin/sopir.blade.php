@@ -198,8 +198,8 @@
                                 {{-- Foto Armada --}}
                                 <div class="w-32 h-24 rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
                                     @if ($travel->foto_armada)
-                                        <img src="{{ asset('storage/' . $travel->foto_armada) }}" alt="Armada"
-                                            class="w-full h-full object-cover">
+                                        <img src="{{ url('/file/' . rawurlencode($travel->foto_armada)) }}"
+                                            alt="Armada" class="w-full h-full object-cover">
                                     @else
                                         <div class="w-full h-full flex items-center justify-center text-gray-400">
                                             <svg class="w-8 h-8" fill="none" stroke="currentColor"
