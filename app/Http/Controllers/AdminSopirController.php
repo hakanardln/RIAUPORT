@@ -46,7 +46,7 @@ class AdminSopirController extends Controller
                 'tahunKendaraan' => optional($travel)->tahun_kendaraan ?? '-',
                 'rute' => $travel ? ($travel->lokasi_asal . ' - ' . $travel->lokasi_tujuan) : '-',
                 'whatsapp' => optional($travel)->whatsapp ?? '-',
-                'tglDaftar' => $travel ? $travel->created_at->format('d M Y') : '-',
+                'tglDaftar' => $travel?->created_at?->format('d M Y') ?? '-',
 
                 // Status approval
                 'status' => optional($travel)->status_approval ?? 'pending',
