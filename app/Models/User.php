@@ -36,9 +36,21 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // RELASI JIKA USER ADALAH SOPIR
+    /**
+     * Relasi One-to-Many: User (sopir) has many travels
+     * Digunakan untuk ambil semua travel milik sopir
+     */
     public function travels()
     {
-        return $this->hasMany(\App\Models\Travel::class, 'sopir_id');
+        return $this->hasMany(Travel::class, 'sopir_id');
+    }
+
+    /**
+     * Relasi One-to-One: User (sopir) has one travel (ambil yang terbaru)
+     * Digunakan jika hanya butuh 1 travel per sopir
+     */
+    public function travel()
+    {
+        return $this->hasOne(Travel::class, 'sopir_id')->latest();
     }
 }

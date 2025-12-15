@@ -37,9 +37,14 @@ class HomeController extends Controller
             'tujuan' => 'required',
         ]);
 
+        // TAMBAHKAN FILTER: hanya tampilkan travel yang sudah approved
         $travels = Travel::where('lokasi_asal', $request->asal)
             ->where('lokasi_tujuan', $request->tujuan)
-            ->where('status', 'aktif')   // kalau pakai kolom status
+            ->where('status', 'aktif')
+            ->where('status_approval', 'approved') // ← BARU: Filter approved
+            ->with('sopir') // Eager load sopir
+            ->orderBy('tanggal_berangkat', 'asc')
+            ->orderBy('jam_berangkat', 'asc')
             ->get();
 
         return view('travel.hasil', [

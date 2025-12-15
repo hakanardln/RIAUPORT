@@ -16,12 +16,6 @@
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-            opacity: 0;
-            transition: opacity .4s ease-in-out;
-        }
-
-        body.page-loaded {
-            opacity: 1;
         }
 
         .glass {
@@ -65,22 +59,13 @@
         }
     </style>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.body.classList.add("page-loaded");
-        });
 
-        function (url) {
-            document.body.style.opacity = 0;
-            setTimeout(() => window.location.href = url, 300);
-        }
-    </script>
 </head>
 
 <body class="h-screen overflow-hidden bg-[#f5fafc] text-slate-800">
     <div class="h-full flex">
 
-        {{-- ================= SIDEBAR (copy dari jadwal) ================= --}}
+        {{-- ================= SIDEBAR ================= --}}
         <aside
             class="w-[250px] h-full bg-gradient-to-b from-[#75d0f0] via-[#37a6cc] to-[#0a6687] flex flex-col items-center py-6">
 
@@ -128,9 +113,9 @@
 
                 {{-- Jadwal (aktif) --}}
                 <a href="{{ route('sopir.jadwal') }}"
-                    class="{{ $baseLink }} {{ request()->routeIs('sopir.jadwal') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
+                    class="{{ $baseLink }} {{ request()->routeIs('sopir.jadwal*') ? 'bg-white text-[#0b5f80] ring-2 ring-white/70' : 'bg-white text-[#0b5f80] hover:bg-white/90 transition' }}">
                     <div
-                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.jadwal') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
+                        class="{{ $baseIcon }} {{ request()->routeIs('sopir.jadwal*') ? 'bg-[#0b5f80] text-white' : 'bg-[#e7f5fb] text-[#0b5f80]' }}">
                         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <rect x="3" y="4" width="18" height="18" rx="2"></rect>
@@ -226,17 +211,17 @@
             {{-- HEADER --}}
             <header class="flex items-center justify-between px-10 pt-6 pb-4">
                 <div class="flex items-center gap-4">
-                    <button type="button" onclick="smoothNavigate('{{ route('sopir.jadwal') }}')"
+                    <a href="{{ route('sopir.jadwal') }}"
                         class="h-9 w-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition flex items-center justify-center">
                         <svg class="h-4 w-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M15 18l-6-6 6-6"></path>
                         </svg>
-                    </button>
+                    </a>
                     <div>
                         <h1 class="text-3xl font-semibold text-[#0c607f]">Edit Jadwal</h1>
                         <p class="text-sm text-slate-500 mt-1">
-                            Perbarui informasi keberangkatan travelmu.
+                            Perbarui detail keberangkatan travelmu di sini.
                         </p>
                     </div>
                 </div>
@@ -259,7 +244,7 @@
                 </div>
             </header>
 
-            {{-- FORM EDIT --}}
+            {{-- FORM --}}
             <div class="flex-1 px-10 pb-10 pt-2 overflow-y-auto">
                 <div class="max-w-3xl mx-auto glass rounded-3xl shadow-xl px-8 py-7 relative">
 
@@ -267,7 +252,7 @@
                     <div class="absolute -left-16 bottom-0 h-48 w-48 bg-[#37a6cc]/20 rounded-full blur-2xl"></div>
 
                     <h2 class="text-xl font-semibold text-[#0e586d] mb-6 relative z-10">
-                        Ubah Detail Jadwal
+                        Detail Jadwal Keberangkatan
                     </h2>
 
                     <form action="{{ route('sopir.jadwal.update', $travel->id) }}" method="POST"
@@ -279,12 +264,20 @@
                             <div>
                                 <label class="label-text">Lokasi Asal</label>
                                 <input type="text" name="lokasi_asal" class="input-control"
+                                    placeholder="Contoh: Bengkalis"
                                     value="{{ old('lokasi_asal', $travel->lokasi_asal) }}" required>
+                                @error('lokasi_asal')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label class="label-text">Lokasi Tujuan</label>
                                 <input type="text" name="lokasi_tujuan" class="input-control"
+                                    placeholder="Contoh: Pekanbaru"
                                     value="{{ old('lokasi_tujuan', $travel->lokasi_tujuan) }}" required>
+                                @error('lokasi_tujuan')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -293,11 +286,17 @@
                                 <label class="label-text">Tanggal Berangkat</label>
                                 <input type="date" name="tanggal_berangkat" class="input-control"
                                     value="{{ old('tanggal_berangkat', $travel->tanggal_berangkat) }}" required>
+                                @error('tanggal_berangkat')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label class="label-text">Jam Berangkat</label>
                                 <input type="time" name="jam_berangkat" class="input-control"
                                     value="{{ old('jam_berangkat', $travel->jam_berangkat) }}" required>
+                                @error('jam_berangkat')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -305,7 +304,11 @@
                             <div>
                                 <label class="label-text">Harga Per Orang (Rp)</label>
                                 <input type="number" min="0" name="harga_per_orang" class="input-control"
+                                    placeholder="Contoh: 150000"
                                     value="{{ old('harga_per_orang', $travel->harga_per_orang) }}" required>
+                                @error('harga_per_orang')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div>
                                 <label class="label-text">Status</label>
@@ -317,22 +320,34 @@
                                         {{ old('status', $travel->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif
                                     </option>
                                 </select>
+                                @error('status')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
 
                         <div>
                             <label class="label-text">Catatan (opsional)</label>
-                            <textarea name="keterangan" rows="3" class="input-control">{{ old('keterangan', $travel->keterangan) }}</textarea>
+                            <textarea name="keterangan" rows="3" class="input-control"
+                                placeholder="Contoh: Titik kumpul di Simpang Garuda, maksimal 2 koper.">{{ old('keterangan', $travel->keterangan) }}</textarea>
+                            @error('keterangan')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="flex justify-end gap-4 pt-2">
-                            <button type="button" onclick="smoothNavigate('{{ route('sopir.jadwal') }}')"
-                                class="px-5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-600 text-sm hover:bg-slate-50">
+                            <a href="{{ route('sopir.jadwal') }}"
+                                class="px-5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-600 text-sm hover:bg-slate-50 transition">
                                 Batal
-                            </button>
-                            <button type="submit"
-                                class="px-6 py-2.5 rounded-xl bg-[#0e586d] text-white text-sm font-semibold hover:bg-[#0a4453] shadow-lg">
-                                Simpan Perubahan
+                            </a>
+                            <button type="submit" id="submitBtn"
+                                class="px-6 py-2.5 cursor-pointer rounded-lg flex items-center justify-center text-white text-sm tracking-wider font-medium border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600 transition">
+                                <span id="btnText">Perbarui Jadwal</span>
+                                <svg id="btnLoader" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px"
+                                    fill="#fff" class="ml-2 hidden animate-spin" viewBox="0 0 24 24">
+                                    <path fill="#fff"
+                                        d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z" />
+                                </svg>
                             </button>
                         </div>
 
@@ -342,6 +357,24 @@
 
         </main>
     </div>
+
+    <script>
+        // Loading animation saat submit
+        const form = document.querySelector('form');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnLoader = document.getElementById('btnLoader');
+
+        form.addEventListener('submit', function(e) {
+            // Disable button untuk prevent double submit
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            // Ubah text dan tampilkan loader
+            btnText.textContent = 'Memproses...';
+            btnLoader.classList.remove('hidden');
+        });
+    </script>
 </body>
 
 </html>

@@ -24,6 +24,7 @@ use App\Http\Controllers\SopirBantuanController;
 use App\Http\Controllers\AdminSopirController;
 use App\Http\Controllers\SopirDashboardController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\Admin\TravelApprovalController;
 
 
 // Middleware
@@ -135,6 +136,16 @@ Route::middleware(['auth', IsAdmin::class])
         Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contacts.show');
         Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contacts.destroy');
         Route::patch('/contacts/{id}/read', [ContactController::class, 'markAsRead'])->name('contacts.read');
+
+        // === TRAVEL APPROVAL (BARU) ===
+        Route::prefix('travel')->name('travel.')->group(function () {
+            Route::get('/', [TravelApprovalController::class, 'index'])->name('index');
+            Route::get('/{id}', [TravelApprovalController::class, 'show'])->name('show');
+            Route::post('/{id}/approve', [TravelApprovalController::class, 'approve'])->name('approve');
+            Route::post('/{id}/reject', [TravelApprovalController::class, 'reject'])->name('reject');
+            Route::delete('/{id}', [TravelApprovalController::class, 'destroy'])->name('destroy');
+        });
+        
     });
 
 /*

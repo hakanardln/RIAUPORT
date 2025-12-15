@@ -207,8 +207,7 @@ class RegisterController extends Controller
         $role = $request->query('role', 'user');
 
         // simpan role sementara di session
-        $request->session()->put('google_register_role', $role); 
-        {
+        $request->session()->put('google_register_role', $role); {
             config([
                 'services.google.redirect' => route('google.callback'),
             ]);
@@ -232,7 +231,7 @@ class RegisterController extends Controller
                 if (!$user->google_id) {
                     $user->update([
                         'google_id' => $googleUser->getId(),
-                        'avatar' => $googleUser->getAvatar(),
+                        'avatar_path' => $googleUser->getAvatar(),
                         'is_verified' => true,
                     ]);
                 }
@@ -248,7 +247,7 @@ class RegisterController extends Controller
                     'name' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
-                    'avatar' => $googleUser->getAvatar(),
+                    'avatar_path' => $googleUser->getAvatar(),
                     'password' => Hash::make(Str::random(24)),
                     'email_verified_at' => now(),
                     'is_verified' => true, // Google dianggap verified

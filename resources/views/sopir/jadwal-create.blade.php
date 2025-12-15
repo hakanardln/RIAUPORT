@@ -16,12 +16,6 @@
     <style>
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-            opacity: 0;
-            transition: opacity .4s ease-in-out;
-        }
-
-        body.page-loaded {
-            opacity: 1;
         }
 
         .glass {
@@ -65,18 +59,6 @@
         }
     </style>
 
-    <script>
-        // fade-in saat halaman selesai load
-        document.addEventListener("DOMContentLoaded", () => {
-            document.body.classList.add("page-loaded");
-        });
-
-        // fade-out sebelum pindah halaman
-        function smoothNavigate(url) {
-            document.body.style.opacity = 0;
-            setTimeout(() => window.location.href = url, 300);
-        }
-    </script>
 </head>
 
 <body class="h-screen overflow-hidden bg-[#f5fafc] text-slate-800">
@@ -228,13 +210,13 @@
             {{-- HEADER --}}
             <header class="flex items-center justify-between px-10 pt-6 pb-4">
                 <div class="flex items-center gap-4">
-                    <button type="button" onclick="smoothNavigate('{{ route('sopir.jadwal') }}')"
+                    <a href="{{ route('sopir.jadwal') }}"
                         class="h-9 w-9 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition flex items-center justify-center">
                         <svg class="h-4 w-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="1.8">
                             <path d="M15 18l-6-6 6-6"></path>
                         </svg>
-                    </button>
+                    </a>
                     <div>
                         <h1 class="text-3xl font-semibold text-[#0c607f]">Tambah Jadwal Baru</h1>
                         <p class="text-sm text-slate-500 mt-1">
@@ -321,10 +303,10 @@
                         </div>
 
                         <div class="flex justify-end gap-4 pt-2">
-                            <button type="button" onclick="smoothNavigate('{{ route('sopir.jadwal') }}')"
-                                class="px-5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-600 text-sm hover:bg-slate-50">
+                            <a href="{{ route('sopir.jadwal') }}"
+                                class="px-5 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-600 text-sm hover:bg-slate-50 transition">
                                 Batal
-                            </button>
+                            </a>
                             <button type="submit"
                                 class="px-6 py-2.5 rounded-xl bg-[#0e586d] text-white text-sm font-semibold hover:bg-[#0a4453] shadow-lg">
                                 Simpan Jadwal

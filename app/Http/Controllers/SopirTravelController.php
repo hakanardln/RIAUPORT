@@ -85,11 +85,21 @@ class SopirTravelController extends Controller
         $travel->deskripsi = $request->deskripsi;
         $travel->status = $request->status;
 
+        // ====== APPROVAL SYSTEM (BARU) ======
+        // Jika travel baru atau sedang di-reject, set ke pending
+        if (!$travel->exists || $travel->isRejected()) {
+            $travel->status_approval = 'pending';
+            $travel->submitted_at = now();
+            $travel->reviewed_at = null;
+            $travel->reviewed_by = null;
+            $travel->rejection_reason = null;
+        }
+
         $travel->save();
 
         return redirect()
             ->route('sopir.travel')
-            ->with('success', 'Informasi travel berhasil disimpan.');
+            ->with('success', 'Informasi travel berhasil disimpan dan menunggu persetujuan admin.');
     }
 
     // ===== TAB 1: MOBIL (VERSI LAMA, BOLEH DIBIARKAN) =====
