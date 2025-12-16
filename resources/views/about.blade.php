@@ -17,12 +17,16 @@
     {{-- Tailwind CDN --}}
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="stylesheet" href="{{ asset('css/about.css') }}?v=12">
+    {{-- CSS about.css --}}
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}?v=17">
 
-    {{-- Inline style HANYA untuk dropdown menu --}}
+    {{-- CSS Force Override untuk Dropdown - TANPA ANIMASI --}}
     <style>
-        /* Dropdown menu only */
-        #userMenu {
+        /* DROPDOWN TANPA ANIMASI */
+        #userMenu,
+        #userMenuDesktop,
+        .user-dropdown {
+            display: block !important;
             position: absolute !important;
             right: 0 !important;
             top: 100% !important;
@@ -34,35 +38,24 @@
             border: 1px solid #e2e8f0 !important;
             padding: 8px 0 6px !important;
             z-index: 99999 !important;
-            display: none;
+
+            /* Hidden state - TANPA TRANSITION */
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+
+            /* HAPUS SEMUA TRANSITION DAN TRANSFORM */
+            transition: none !important;
+            transform: none !important;
         }
 
-        #userMenu:not(.hidden) {
-            display: block !important;
-        }
-
-        .dropdown-label {
-            padding: 4px 14px 2px !important;
-            font-size: 11px !important;
-            text-transform: uppercase !important;
-            color: #94a3b8 !important;
-            font-weight: 600 !important;
-        }
-
-        .dropdown-item {
-            width: 100% !important;
-            text-align: left !important;
-            padding: 10px 14px !important;
-            background: transparent !important;
-            font-size: 14px !important;
-            cursor: pointer !important;
-            border: none !important;
-            color: #334155 !important;
-            transition: background-color 0.2s ease !important;
-        }
-
-        .dropdown-item:hover {
-            background-color: #f1f5f9 !important;
+        /* Show state - langsung muncul tanpa animasi */
+        #userMenu.show,
+        #userMenuDesktop.show,
+        .user-dropdown.show {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
         }
 
         .avatar-wrapper-about {
@@ -74,63 +67,10 @@
 
 <body>
 
-    {{-- ================== NAVBAR ================== --}}
-    <header class="site-header">
-        <div class="navbar-container">
-            <div class="glass-nav">
-                <div class="nav-content">
-                    {{-- Logo --}}
-                    <div class="logo-section">
-                        <img src="{{ asset('images/riauport-white.png') }}" alt="RiauPort">
-                    </div>
+    {{-- ================== INCLUDE NAVBAR ================== --}}
+    @include('components.navbar')
 
-                    {{-- Menu Navigation --}}
-                    <nav class="nav-links nav-menu">
-                        <div id="navHighlight" class="nav-highlight"></div>
-                        <a href="{{ route('home') }}">Home</a>
-                        <a href="{{ route('contact') }}">Contact</a>
-                        <a href="{{ route('about') }}">About</a>
-                    </nav>
-
-                    {{-- LOGIN / PROFILE --}}
-                    @guest
-                        <a href="{{ route('login') }}" class="glass-btn-login">
-                            Login
-                        </a>
-                    @endguest
-
-                    @auth
-                        @php
-                            $user = auth()->user();
-                            $initials = collect(explode(' ', $user->name))
-                                ->map(fn($p) => mb_substr($p, 0, 1))
-                                ->join('');
-                        @endphp
-
-                        <div class="avatar-wrapper-about">
-                            <button id="userMenuButton" class="avatar-btn">
-                                {{ $initials }}
-                            </button>
-
-                            <div id="userMenu" class="hidden">
-                                <div class="dropdown-label">
-                                    Akun
-                                </div>
-
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">
-                                        Logout
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    @endauth
-                </div>
-            </div>
-        </div>
-    </header>
-
+    {{-- ================== HERO SECTION ================== --}}
     <section id="about" class="hero-section">
         <div class="hero-content">
             <div class="about-label">TENTANG RIAUPORT</div>
@@ -138,11 +78,12 @@
         </div>
     </section>
 
+    {{-- ================== CONTENT SECTION ================== --}}
     <section class="content-section">
         <div class="content-column">
             <h2>Tentang RiauPort</h2>
             <p><strong>S</strong>istem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
-                dalam memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.</p>
+                dalam memperolkan informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.</p>
             <p>Website ini menyediakan informasi terpusat tentang nama travel, jadwal keberangkatan, destinasi, harga,
                 jenis kendaraan, dan kontak yang bisa dihubungi.</p>
         </div>
@@ -174,6 +115,7 @@
                     </div>
                     <h3 class="team-modern-name">Nurvia Sulistry</h3>
                     <div class="team-modern-role">Anggota 1</div>
+                    <div class="team-modern-position">UI/UX Designer & Documentation Support</div>
                 </article>
 
                 {{-- Card 2: Handal --}}
@@ -183,6 +125,7 @@
                     </div>
                     <h3 class="team-modern-name">Handal Karis Arbi</h3>
                     <div class="team-modern-role">Koordinator</div>
+                    <div class="team-modern-position">Founder, Koordinator & Web Developer</div>
                 </article>
 
                 {{-- Card 3: Nur Lela --}}
@@ -192,6 +135,7 @@
                     </div>
                     <h3 class="team-modern-name">Nur Lela Sabila</h3>
                     <div class="team-modern-role">Anggota 2</div>
+                    <div class="team-modern-position">Database Developer & User Guide Writer</div>
                 </article>
 
             </div>
@@ -207,63 +151,13 @@
         </div>
     </section>
 
+    {{-- ================== FOOTER ================== --}}
     @include('components.footer')
 
-    <script src="{{ asset('js/about.js') }}"></script>
+    {{-- ================== JAVASCRIPT ================== --}}
+    {{-- Ganti ke versi normal (bukan debug) --}}
+    <script src="{{ asset('js/navbar.js') }}?v=17"></script>
 
-    {{-- Script untuk dropdown menu & navbar highlight --}}
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // ================== DROPDOWN AVATAR USER ==================
-            const userMenuButton = document.getElementById('userMenuButton');
-            const userMenu = document.getElementById('userMenu');
-
-            if (userMenuButton && userMenu) {
-                userMenuButton.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    userMenu.classList.toggle('hidden');
-                });
-
-                // Close dropdown when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!userMenu.classList.contains('hidden') &&
-                        !userMenuButton.contains(e.target) &&
-                        !userMenu.contains(e.target)) {
-                        userMenu.classList.add('hidden');
-                    }
-                });
-            }
-
-            // ================== NAVBAR LIQUID HIGHLIGHT ==================
-            const nav = document.querySelector('.nav-links.nav-menu');
-            const highlight = document.getElementById('navHighlight');
-
-            if (nav && highlight) {
-                const links = nav.querySelectorAll('a');
-
-                function moveHighlight(el) {
-                    const navRect = nav.getBoundingClientRect();
-                    const rect = el.getBoundingClientRect();
-                    const paddingX = 14;
-
-                    const width = rect.width + paddingX * 2;
-                    const left = rect.left - navRect.left - paddingX;
-
-                    highlight.style.width = `${width}px`;
-                    highlight.style.left = `${left}px`;
-                    highlight.style.opacity = '1';
-                }
-
-                links.forEach(link => {
-                    link.addEventListener('mouseenter', () => moveHighlight(link));
-                });
-
-                nav.addEventListener('mouseleave', () => {
-                    highlight.style.opacity = '0';
-                });
-            }
-        });
-    </script>
 </body>
 
 </html>

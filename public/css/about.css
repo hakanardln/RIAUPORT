@@ -135,7 +135,7 @@ body {
     z-index: 1;
 }
 
-/* Login Button - SAMA PERSIS DENGAN HOME */
+/* Login Button */
 .glass-btn-login {
     display: inline-flex;
     align-items: center;
@@ -177,6 +177,13 @@ body {
         0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
+/* ===== AVATAR & DROPDOWN - FIXED VERSION ===== */
+/* Avatar wrapper - pastikan relative positioning */
+.avatar-wrapper-about {
+    position: relative !important;
+    z-index: 10005 !important;
+}
+
 /* Avatar Button */
 .avatar-btn {
     width: 48px;
@@ -209,50 +216,59 @@ body {
     transform: scale(0.95);
 }
 
-/* Dropdown - FIXED Z-INDEX & POSITIONING */
-.user-dropdown {
-    position: absolute;
-    right: 0;
-    margin-top: 12px;
-    width: 160px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.25);
-    border: 1px solid #e2e8f0;
-    padding: 8px 0 6px;
-    z-index: 10003 !important;
+/* Dropdown menu - TANPA ANIMASI */
+#userMenu {
+    position: absolute !important;
+    right: 0 !important;
+    top: 100% !important;
+    margin-top: 12px !important;
+    width: 160px !important;
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35) !important;
+    border: 1px solid #e2e8f0 !important;
+    padding: 8px 0 6px !important;
+    z-index: 99999 !important;
+
+    /* Hidden state - TANPA TRANSITION */
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+
+    /* HAPUS SEMUA TRANSITION DAN TRANSFORM */
+    transition: none !important;
+    transform: none !important;
 }
 
-/* Wrapper untuk avatar & dropdown */
-.nav-content>div[class*="relative"] {
-    position: relative;
-    z-index: 10002 !important;
-}
-
-.hidden {
-    display: none;
+/* Show dropdown - langsung muncul tanpa animasi */
+#userMenu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
 }
 
 .dropdown-label {
-    padding: 4px 14px 2px;
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #94a3b8;
+    padding: 4px 14px 2px !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    color: #94a3b8 !important;
+    font-weight: 600 !important;
 }
 
 .dropdown-item {
-    width: 100%;
-    text-align: left;
-    padding: 8px 14px;
-    background: transparent;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.2s ease;
+    width: 100% !important;
+    text-align: left !important;
+    padding: 10px 14px !important;
+    background: transparent !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    border: none !important;
+    color: #334155 !important;
+    transition: background-color 0.2s ease !important;
 }
 
 .dropdown-item:hover {
-    background-color: #f1f5f9;
+    background-color: #f1f5f9 !important;
 }
 
 /* ========================= HERO SECTION ========================= */
@@ -264,7 +280,6 @@ body {
     justify-content: center;
     padding-top: 120px;
     text-align: center;
-
     background-color: #0f172a;
     background-image: url('../images/riauport-logoabout.png');
     background-position: center;
@@ -352,7 +367,6 @@ body {
     width: 100%;
 }
 
-/* Header */
 .team-modern-header {
     text-align: center;
     margin-bottom: 2.5rem;
@@ -374,7 +388,6 @@ body {
     margin: 0;
 }
 
-/* Team Grid - 3 Columns */
 .team-modern-grid {
     display: flex;
     justify-content: center;
@@ -384,7 +397,6 @@ body {
     flex-wrap: nowrap;
 }
 
-/* Team Card */
 .team-modern-card {
     display: flex;
     flex-direction: column;
@@ -395,12 +407,10 @@ body {
     max-width: 200px;
 }
 
-/* Koordinator (Card tengah) sedikit lebih tinggi */
 .team-modern-card:nth-child(2) {
     margin-bottom: 20px;
 }
 
-/* Avatar */
 .team-modern-avatar {
     width: 200px;
     height: 200px;
@@ -417,7 +427,6 @@ body {
     display: block;
 }
 
-/* Name */
 .team-modern-name {
     font-size: 1.125rem;
     font-weight: 600;
@@ -428,16 +437,24 @@ body {
     line-height: 1.3;
 }
 
-/* Role */
 .team-modern-role {
     font-size: 0.9375rem;
     color: #718096;
     font-weight: 400;
     text-align: center;
-    margin: 0;
+    margin: 0 0 0.25rem 0;
 }
 
-/* Additional Info Section */
+/* Tambahan: Position/Job Title */
+.team-modern-position {
+    font-size: 0.875rem;
+    color: #0E586D;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    padding-top: 0.25rem;
+}
+
 .team-modern-info {
     max-width: 750px;
     margin: 0 auto;
@@ -544,13 +561,10 @@ footer {
 }
 
 @media (max-width: 768px) {
-
-    /* HERO */
     .hero-content h1 {
         font-size: 32px;
     }
 
-    /* CONTENT */
     .content-section {
         grid-template-columns: 1fr;
         gap: 40px;
@@ -558,7 +572,6 @@ footer {
         margin: 40px auto;
     }
 
-    /* TEAM MODERN SECTION */
     .team-section-modern {
         padding: 2rem 1rem;
     }
@@ -596,13 +609,12 @@ footer {
         text-align: center;
     }
 
-    /* FOOTER */
     .footer-grid {
         grid-template-columns: 1fr 1fr;
         gap: 32px;
     }
 
-    /* ===== NAVBAR MOBILE (SAMAKAN DGN HOME) ===== */
+    /* NAVBAR MOBILE */
     .navbar-container {
         padding: 1.25rem 1rem;
     }
@@ -617,7 +629,6 @@ footer {
         align-items: center;
     }
 
-    /* Matikan pseudo-element di mobile */
     .glass-nav::before {
         content: none;
     }
@@ -635,7 +646,6 @@ footer {
         font-size: 0.9rem;
     }
 
-    /* Login button mobile - SAMA PERSIS DENGAN HOME */
     .glass-btn-login {
         width: 40px;
         height: 40px;
@@ -656,7 +666,6 @@ footer {
         font-weight: 600;
     }
 
-    /* Avatar button mobile */
     .avatar-btn {
         width: 40px;
         height: 40px;
