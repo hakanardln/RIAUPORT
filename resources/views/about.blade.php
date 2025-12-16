@@ -177,7 +177,7 @@
 
     {{-- ================== JAVASCRIPT ================== --}}
     {{-- Ganti ke versi normal (bukan debug) --}}
-    <script src="{{ asset('js/navbar.js') }}?v=17"></script>
+    <script src="{{ asset('js/navbar.js') }}?v=18"></script>
 
 </body>
 
