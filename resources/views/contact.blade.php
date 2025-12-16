@@ -32,7 +32,10 @@
                 </div>
 
                 {{-- Menu Navigation --}}
-                <nav class="nav-menu">
+                <nav class="nav-menu nav-links">
+                    {{-- HIGHLIGHT ELEMENT --}}
+                    <div class="nav-highlight"></div>
+
                     <a href="{{ route('home') }}">Home</a>
                     <a href="{{ route('contact') }}">Contact</a>
                     <a href="{{ route('about') }}">About</a>
@@ -237,16 +240,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
-                                info@riauport.com
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                +62 823-1141-2523
+                                riauport.info@gmail.com
                             </span>
                         </li>
                     </ul>
@@ -270,45 +264,70 @@
             const btn = document.getElementById('userMenuButton');
             const menu = document.getElementById('userMenu');
 
-            if (!btn || !menu) return;
+            if (btn && menu) {
+                // Pindahkan dropdown ke body agar tidak ter-clip
+                document.body.appendChild(menu);
 
-            // Pindahkan dropdown ke body agar tidak ter-clip
-            document.body.appendChild(menu);
+                function placeMenu() {
+                    const rect = btn.getBoundingClientRect();
+                    const gap = 12;
+                    const menuWidth = menu.offsetWidth || 176;
 
-            function placeMenu() {
-                const rect = btn.getBoundingClientRect();
-                const gap = 12;
-                const menuWidth = menu.offsetWidth || 176;
+                    menu.style.position = 'fixed';
+                    menu.style.top = (rect.bottom + gap) + 'px';
+                    menu.style.left = Math.max(12, rect.right - menuWidth) + 'px';
+                    menu.style.zIndex = '999999';
+                }
 
-                menu.style.position = 'fixed';
-                menu.style.top = (rect.bottom + gap) + 'px';
-                menu.style.left = Math.max(12, rect.right - menuWidth) + 'px';
-                menu.style.zIndex = '999999';
+                function openMenu() {
+                    menu.classList.remove('hidden');
+                    placeMenu();
+                }
+
+                function closeMenu() {
+                    menu.classList.add('hidden');
+                }
+
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    menu.classList.contains('hidden') ? openMenu() : closeMenu();
+                });
+
+                document.addEventListener('click', closeMenu);
+
+                window.addEventListener('resize', function() {
+                    if (!menu.classList.contains('hidden')) placeMenu();
+                });
+
+                window.addEventListener('scroll', function() {
+                    if (!menu.classList.contains('hidden')) placeMenu();
+                }, true);
             }
 
-            function openMenu() {
-                menu.classList.remove('hidden');
-                placeMenu();
+            // ===== NAV HIGHLIGHT ANIMATION =====
+            const navLinks = document.querySelector('.nav-links');
+            const highlight = document.querySelector('.nav-highlight');
+            const links = document.querySelectorAll('.nav-links a');
+
+            if (navLinks && highlight && links.length) {
+                links.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        const rect = this.getBoundingClientRect();
+                        const navRect = navLinks.getBoundingClientRect();
+
+                        // Tambahkan padding ekstra untuk highlight (12px kiri + 12px kanan = 24px total)
+                        const paddingExtra = 24;
+
+                        highlight.style.opacity = '1';
+                        highlight.style.left = (rect.left - navRect.left - 12) + 'px';
+                        highlight.style.width = (rect.width + paddingExtra) + 'px';
+                    });
+                });
+
+                navLinks.addEventListener('mouseleave', function() {
+                    highlight.style.opacity = '0';
+                });
             }
-
-            function closeMenu() {
-                menu.classList.add('hidden');
-            }
-
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                menu.classList.contains('hidden') ? openMenu() : closeMenu();
-            });
-
-            document.addEventListener('click', closeMenu);
-
-            window.addEventListener('resize', function() {
-                if (!menu.classList.contains('hidden')) placeMenu();
-            });
-
-            window.addEventListener('scroll', function() {
-                if (!menu.classList.contains('hidden')) placeMenu();
-            }, true);
         });
     </script>
 

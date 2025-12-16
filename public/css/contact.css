@@ -152,6 +152,36 @@ body {
         0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
+/* ===== NAV HOVER LIQUID HIGHLIGHT ===== */
+.nav-links {
+    position: relative;
+}
+
+.nav-highlight {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 40px;
+    border-radius: 999px;
+    background: rgba(96, 165, 250, 0.16);
+    box-shadow:
+        0 0 0 1px rgba(129, 140, 248, 0.2),
+        0 14px 30px rgba(15, 23, 42, 0.18);
+    pointer-events: none;
+    opacity: 0;
+    transition:
+        left 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+        width 0.28s cubic-bezier(0.22, 0.61, 0.36, 1),
+        opacity 0.18s ease-out;
+    z-index: 0;
+}
+
+.nav-links a {
+    position: relative;
+    z-index: 1;
+}
+
 /* ===== CONTAINER & FORM ===== */
 .container {
     max-width: 1200px;
@@ -417,6 +447,11 @@ textarea.form-control {
     /* Matikan pseudo-element di mobile */
     .glass-nav::before {
         content: none;
+    }
+
+    /* Matikan highlight desktop di mobile */
+    .nav-highlight {
+        display: none !important;
     }
 
     .logo-container img {
