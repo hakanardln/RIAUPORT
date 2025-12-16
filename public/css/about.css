@@ -178,7 +178,6 @@ body {
 }
 
 /* ===== AVATAR & DROPDOWN - FIXED VERSION ===== */
-/* Avatar wrapper - pastikan relative positioning */
 .avatar-wrapper-about {
     position: relative !important;
     z-index: 10005 !important;
@@ -230,17 +229,14 @@ body {
     padding: 8px 0 6px !important;
     z-index: 99999 !important;
 
-    /* Hidden state - TANPA TRANSITION */
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
 
-    /* HAPUS SEMUA TRANSITION DAN TRANSFORM */
     transition: none !important;
     transform: none !important;
 }
 
-/* Show dropdown - langsung muncul tanpa animasi */
 #userMenu.show {
     opacity: 1 !important;
     visibility: visible !important;
@@ -274,11 +270,11 @@ body {
 /* ========================= HERO SECTION ========================= */
 .hero-section {
     position: relative;
-    height: 380px;
+    height: 420px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 120px;
+    padding-top: 140px;
     text-align: center;
     background-color: #0f172a;
     background-image: url('../images/riauport-logoabout.png');
@@ -320,7 +316,7 @@ body {
 /* ========================= CONTENT SECTION ========================= */
 .content-section {
     max-width: 1200px;
-    margin: 80px auto;
+    margin: 30px auto 80px;
     padding: 0 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -361,7 +357,7 @@ body {
 }
 
 .team-modern-container {
-    max-width: 800px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 1rem;
     width: 100%;
@@ -369,7 +365,7 @@ body {
 
 .team-modern-header {
     text-align: center;
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
 }
 
 .team-modern-title {
@@ -389,70 +385,164 @@ body {
 }
 
 .team-modern-grid {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 2.5rem;
-    flex-wrap: nowrap;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: end;
 }
 
 .team-modern-card {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+    transition: transform 0.2s ease;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    flex: 0 0 auto;
-    max-width: 200px;
 }
 
 .team-modern-card:nth-child(2) {
     margin-bottom: 20px;
 }
 
+.team-modern-card:hover {
+    transform: translateY(-2px);
+}
+
 .team-modern-avatar {
-    width: 200px;
-    height: 200px;
-    border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
-    margin-bottom: 1rem;
-    background: #f7fafc;
+    background: #f9fafb;
 }
 
 .team-modern-avatar img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 30%;
     display: block;
 }
 
-.team-modern-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #1a202c;
-    margin-bottom: 0.25rem;
-    margin-top: 0;
+/* Foto khusus untuk kartu pertama (Nurvia) */
+.team-modern-card:nth-child(1) .team-modern-avatar img {
+    transform: scale(1.1);
+}
+
+/* Foto khusus untuk kartu kedua (Handal) */
+.team-modern-card:nth-child(2) .team-modern-avatar img {
+    object-position: center 53%;
+    transform: scale(1.25);
+}
+
+/* Foto khusus untuk kartu ketiga (Nur Lela) */
+.team-modern-card:nth-child(3) .team-modern-avatar img {
+    object-position: center 20%;
+}
+
+.team-modern-content {
+    padding: 1rem 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     text-align: center;
+    align-items: center;
+    min-height: 190px;
+}
+
+.team-modern-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
     line-height: 1.3;
+    text-align: center;
 }
 
 .team-modern-role {
-    font-size: 0.9375rem;
-    color: #718096;
-    font-weight: 400;
+    font-size: 0.75rem;
+    color: #000000 !important;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
     text-align: center;
-    margin: 0 0 0.25rem 0;
 }
 
-/* Tambahan: Position/Job Title */
 .team-modern-position {
     font-size: 0.875rem;
-    color: #0E586D;
-    font-weight: 600;
+    color: #64748b;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+    flex-grow: 1;
     text-align: center;
-    margin: 0;
-    padding-top: 0.25rem;
+}
+
+/* Social Media Buttons */
+.team-social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    justify-content: center;
+    padding-top: 0.5rem;
+}
+
+.team-social-btn {
+    width: 1.75rem;
+    height: 1.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.team-social-btn.facebook {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.team-social-btn.facebook:hover {
+    background: linear-gradient(45deg, #d17d2d 0%, #c75a34 25%, #b92139 50%, #a91d5a 75%, #9a1573 100%);
+}
+
+.team-social-btn.facebook:active {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.team-social-btn.twitter {
+    background-color: #1da1f2;
+}
+
+.team-social-btn.twitter:hover {
+    background-color: #0c85d0;
+}
+
+.team-social-btn.twitter:active {
+    background-color: #1da1f2;
+}
+
+.team-social-btn.linkedin {
+    background-color: #0077b5;
+}
+
+.team-social-btn.linkedin:hover {
+    background-color: #005885;
+}
+
+.team-social-btn.linkedin:active {
+    background-color: #0077b5;
+}
+
+.team-social-btn svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: #ffffff;
 }
 
 .team-modern-info {
@@ -547,16 +637,8 @@ footer {
 /* ========================= RESPONSIVE ========================= */
 @media (max-width: 1024px) {
     .team-modern-grid {
-        gap: 1.25rem;
-    }
-
-    .team-modern-card {
-        max-width: 140px;
-    }
-
-    .team-modern-avatar {
-        width: 120px;
-        height: 120px;
+        gap: 1.5rem;
+        max-width: 600px;
     }
 }
 
@@ -577,36 +659,25 @@ footer {
     }
 
     .team-modern-header {
-        margin-bottom: 1.75rem;
+        margin-bottom: 2rem;
     }
 
     .team-modern-title {
-        font-size: 1.625rem;
+        font-size: 1.75rem;
     }
 
     .team-modern-subtitle {
-        font-size: 0.8125rem;
+        font-size: 0.9375rem;
     }
 
     .team-modern-grid {
-        flex-direction: column;
-        gap: 1.75rem;
-        margin-bottom: 1.75rem;
-        align-items: center;
-    }
-
-    .team-modern-card {
-        max-width: 140px;
-    }
-
-    .team-modern-avatar {
-        width: 140px;
-        height: 140px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .team-modern-info p {
-        font-size: 0.8125rem;
-        text-align: center;
+        font-size: 0.9375rem;
     }
 
     .footer-grid {
@@ -687,16 +758,8 @@ footer {
         text-align: center;
     }
 
-    .team-modern-container {
-        padding: 0 0.75rem;
-    }
-
-    .team-modern-card {
-        max-width: 130px;
-    }
-
-    .team-modern-avatar {
-        width: 130px;
-        height: 130px;
+    .team-modern-grid {
+        grid-template-columns: 1fr;
+        max-width: 280px;
     }
 }

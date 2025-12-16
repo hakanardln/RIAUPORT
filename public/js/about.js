@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log('About.js loaded!'); // Debug log
+
     // Dropdown avatar
     const btn = document.getElementById('userMenuButton');
     const menu = document.getElementById('userMenu');
@@ -42,6 +44,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
         nav.addEventListener('mouseleave', () => {
             highlight.style.opacity = '0';
+        });
+    }
+
+    // Animasi fade-in untuk kartu team
+    const teamCards = document.querySelectorAll('.team-modern-card');
+    console.log('Team cards found:', teamCards.length); // Debug log
+
+    if (teamCards.length > 0) {
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach((entry) => {
+                console.log('Card observed:', entry.isIntersecting); // Debug log
+                if (entry.isIntersecting) {
+                    const index = Array.from(teamCards).indexOf(entry.target);
+                    setTimeout(() => {
+                        entry.target.classList.add('card-visible');
+                        console.log('Card visible class added'); // Debug log
+                    }, index * 150);
+                }
+            });
+        }, observerOptions);
+
+        teamCards.forEach(card => {
+            observer.observe(card);
         });
     }
 });
