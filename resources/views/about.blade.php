@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     {{-- CSS about.css --}}
-    <link rel="stylesheet" href="{{ asset('css/about.css') }}?v=17">
+    <link rel="stylesheet" href="{{ asset('css/about.css') }}?v=19">
 
     {{-- CSS Force Override untuk Dropdown - TANPA ANIMASI --}}
     <style>
@@ -61,6 +61,27 @@
         .avatar-wrapper-about {
             position: relative !important;
             z-index: 10005 !important;
+        }
+
+        /* FORCE TEAM POSITION STYLE - BACKUP INLINE CSS */
+        .team-modern-position {
+            font-size: 0.9375rem !important;
+            color: #0E586D !important;
+            font-weight: 700 !important;
+            text-align: center !important;
+            margin: 0 !important;
+            padding-top: 0 !important;
+            line-height: 1.4 !important;
+            display: block !important;
+        }
+
+        .team-modern-role {
+            font-size: 0.9375rem !important;
+            color: #718096 !important;
+            font-weight: 400 !important;
+            text-align: center !important;
+            margin: 0 0 0.5rem 0 !important;
+            line-height: 1.3 !important;
         }
     </style>
 </head>
