@@ -99,22 +99,26 @@
         </div>
     </section>
 
-    {{-- ================== CONTENT SECTION ================== --}}
-    <section class="content-section">
-        <div class="content-column">
-            <h2>Tentang RiauPort</h2>
-            <p>Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
-                dalam memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.</p>
-            <p>Website ini menyediakan informasi terpusat tentang nama travel, jadwal keberangkatan, destinasi, harga,
-                jenis kendaraan, dan kontak yang bisa dihubungi.</p>
-        </div>
+  {{-- ================== CONTENT SECTION ================== --}}
+<section class="content-section">
+    <div class="content-column">
+        <h2>Tentang RiauPort</h2>
+        <p class="first-line:tracking-widest">
+            Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
+            dalam memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.
+        </p>
+        <p class="first-line:tracking-widest">
+            Website ini menyediakan informasi terpusat tentang nama travel, jadwal keberangkatan, destinasi, harga,
+            jenis kendaraan, dan kontak yang bisa dihubungi.
+        </p>
+    </div>
 
-        <div class="content-column">
-            <div class="highlight-box">
-                Temukan berbagai Travel dalam satu platform RiauPort
-            </div>
+    <div class="content-column">
+        <div class="highlight-box">
+            Temukan berbagai Travel dalam satu platform RiauPort
         </div>
-    </section>
+    </div>
+</section>
 
     {{-- ================== SECTION OUR TEAM ================== --}}
     <section class="team-section-modern">
@@ -262,7 +266,7 @@
     {{-- ================== JAVASCRIPT ================== --}}
     <script src="{{ asset('js/navbar.js') }}"></script>
     <script src="{{ asset('js/about.js') }}"</script>
+        < /body>
 
-</body>
-
-</html>
+        <
+        /html>

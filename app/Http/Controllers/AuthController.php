@@ -69,7 +69,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Setelah logout balik ke home
-        return redirect()->route('home');
+        // ✅ PERBAIKAN: Redirect ke halaman login setelah logout
+        return redirect()->route('login')->with('success', 'Anda berhasil logout');
     }
 }
