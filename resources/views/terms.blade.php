@@ -23,8 +23,6 @@
             --primary-dark: #0B4C5D;
             --accent: #00D4FF;
         }
-
-        /* ✅ Background + gradasi diambil dari file login kamu */
         body {
             font-family: 'Inter', sans-serif;
             background:

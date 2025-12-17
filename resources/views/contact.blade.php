@@ -37,7 +37,7 @@
                     <div id="navHighlight" class="nav-highlight"></div>
                     <a href="https://ours.web.id/" target="_blank"
                         class="hover:text-[#0e586d] transition-colors">Portal</a>
-                    <a href="#home" class="hover:text-[#0e586d] transition-colors">Home</a>
+                    <a href="{{ route('home') }}" class="hover:text-[#0e586d] transition-colors">Home</a>
                     <a href="{{ route('contact') }}" class="hover:text-[#0e586d] transition-colors">Contact</a>
                     <a href="{{ route('about') }}" class="hover:text-[#0e586d] transition-colors">About</a>
                 </nav>
