@@ -227,8 +227,8 @@
                                 <img src="{{ asset('storage/' . $travel->foto_armada) }}" alt="Armada"
                                     class="w-full h-full object-cover">
                             @else
-                                <img src="{{ asset('images/mobil1.jpg') }}" alt="Armada"
-                                    class="w-full h-full object-cover">
+                                <img src="{{ !empty($fotoArmada) ? asset('file/' . rawurlencode($fotoArmada)) : asset('images/mobil1.jpg') }}"
+                                    alt="Armada" class="w-full h-full object-cover object-center" />
                             @endif
                         </div>
                     </div>
