@@ -223,10 +223,16 @@
                     <div class="w-full xl:w-[330px] flex items-center relative z-10">
                         <div
                             class="w-full h-[190px] bg-white rounded-[30px] shadow-soft overflow-hidden flex items-center justify-center">
-                            <img src="{{ asset('storage/' . $travel->foto_armada) }}" alt="Foto Armada"
-                                class="w-full h-full object-cover object-center">
+                            @if (!empty($travel) && !empty($travel->foto_armada))
+                                <img src="{{ asset('storage/' . $travel->foto_armada) }}" alt="Armada"
+                                    class="w-full h-full object-cover">
+                            @else
+                                <img src="{{ asset('images/mobil1.jpg') }}" alt="Armada"
+                                    class="w-full h-full object-cover">
+                            @endif
                         </div>
                     </div>
+
 
                     {{-- INFO SOPIR + ARMADA --}}
                     <div class="flex-1 flex flex-col justify-between gap-4 relative z-10">
