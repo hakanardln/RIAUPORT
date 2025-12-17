@@ -223,8 +223,8 @@
                     <div class="w-full xl:w-[330px] flex items-center relative z-10">
                         <div
                             class="w-full h-[190px] bg-white rounded-[30px] shadow-soft overflow-hidden flex items-center justify-center">
-                            <img src="{{ isset($fotoArmada) && $fotoArmada ? asset('storage/' . $fotoArmada) : asset('images/mobil1.jpg') }}"
-                                alt="Armada" class="w-full h-full object-cover">
+                            <img src="{{ !empty($fotoArmada) ? asset('file/' . rawurlencode($fotoArmada)) : asset('images/mobil1.jpg') }}"
+                                alt="Armada" class="w-full h-full object-cover object-center" />
                         </div>
                     </div>
 
