@@ -409,11 +409,15 @@
 
                                             {{-- PREVIEW FOTO ARMADA (DARI DB / DARI INPUT BARU) --}}
                                             <div id="previewArmada" class="mb-4">
-                                                @if ($travel->foto_armada)
-                                                    <img src="{{ asset('file/' . rawurlencode($travel->foto_armada)) }}"
-                                                        class="w-40 h-28 object-cover rounded-xl border border-slate-200 mx-auto"
-                                                        alt="Foto armada">
+                                                @if (!empty($travel) && !empty($travel->foto_armada))
+                                                    <div class="w-full max-w-sm mx-auto mt-3">
+                                                        <img src="{{ asset('storage/' . $travel->foto_armada) }}"
+                                                            alt="Foto Armada"
+                                                            class="w-full h-40 object-cover rounded-lg border">
+                                                    </div>
                                                 @endif
+
+
                                             </div>
                                             {{-- IKON & TEKS DROPZONE --}}
                                             <svg class="w-14 text-gray-400 mx-auto mb-3" width="70"

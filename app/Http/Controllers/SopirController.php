@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Travel;
 
 class SopirController extends Controller
 {
     public function dashboard()
     {
-        return view('sopir.dashboard');
+        $travel = Travel::where('sopir_id', Auth::id())->first(); // 1 travel per sopir
+        return view('sopir.dashboard', compact('travel'));
     }
 
+    
     public function index()
     {
         return view('sopir.index');
