@@ -103,8 +103,8 @@
     <section class="content-section">
         <div class="content-column">
             <h2>Tentang RiauPort</h2>
-            <p><strong>S</strong>istem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
-                dalam memperolkan informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.</p>
+            <p>Sistem Informasi Layanan Travel berbasis website berfungsi untuk mempermudah masyarakat
+                dalam memperoleh informasi terkait perjalanan travel, khususnya untuk kebutuhan mudik.</p>
             <p>Website ini menyediakan informasi terpusat tentang nama travel, jadwal keberangkatan, destinasi, harga,
                 jenis kendaraan, dan kontak yang bisa dihubungi.</p>
         </div>

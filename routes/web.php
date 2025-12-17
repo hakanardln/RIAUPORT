@@ -242,11 +242,6 @@ Route::middleware(['auth', IsSopir::class])
         // Wizard baru 3 step
         Route::post('/travel/simpan', [SopirTravelController::class, 'simpan'])->name('travel.simpan');
 
-        // Jadwal
-        Route::get('/jadwal', [SopirTravelController::class, 'jadwal'])->name('jadwal');
-        Route::get('/jadwal/create', [SopirTravelController::class, 'createJadwal'])->name('jadwal.create');
-        Route::post('/jadwal/store', [SopirTravelController::class, 'storeJadwal'])->name('jadwal.store');
-
         // JADWAL SOPIR
         Route::get('/jadwal', [SopirTravelController::class, 'jadwal'])->name('jadwal');
 
