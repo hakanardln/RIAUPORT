@@ -261,7 +261,7 @@
 
     {{-- ================== JAVASCRIPT ================== --}}
     <script src="{{ asset('js/navbar.js') }}"></script>
-    <script src="{{ asset('js/about.js') }}"></script>
+    <script src="{{ asset('js/about.js') }}"</script>
 
 </body>
 

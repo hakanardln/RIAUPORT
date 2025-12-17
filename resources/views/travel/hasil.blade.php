@@ -299,7 +299,7 @@
                                     <div class="w-full h-36 rounded-2xl overflow-hidden bg-gray-200 shadow-sm">
 
                                         @if (!empty($travel->foto_armada))
-                                            <img src="{{ asset('storage/' . $travel->foto_armada) }}"
+                                            <img src="{{ asset('file/' . rawurlencode($travel->foto_armada)) }}"
                                                 alt="Foto Armada" class="w-full h-full object-cover object-center">
                                         @else
                                             <div class="w-full h-full flex items-center justify-center">
@@ -445,7 +445,7 @@
                             <div class="relative rounded-2xl overflow-hidden bg-gradient-to-br from-cyan-100 to-blue-100"
                                 style="height: 360px">
                                 @if (!empty($travel->foto_armada))
-                                    <img src="{{ asset('storage/' . $travel->foto_armada) }}" alt="Armada Travel"
+                                    <img src="{{ url('/file/' . rawurlencode($travel->foto_armada)) }}" alt="Armada Travel"
                                         class="w-full h-full object-cover">
                                 @else
                                     <div class="w-full h-full flex items-center justify-center">

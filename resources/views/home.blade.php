@@ -20,7 +20,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     {{-- CSS custom halaman ini --}}
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}?v=12">
 </head>
 
 @php
