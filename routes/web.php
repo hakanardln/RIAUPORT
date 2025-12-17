@@ -210,6 +210,9 @@ Route::post('/admin/login', function (Request $request) {
 |--------------------------------------------------------------------------
 */
 
+Route::get('/auth/google/login', [AuthController::class, 'redirectToGoogle'])->name('google.login.redirect');
+Route::get('/auth/google/login/callback', [AuthController::class, 'handleGoogleCallback'])->name('google.login.callback');
+
 Route::get('/auth/google', [RegisterController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('/auth/google/callback', [RegisterController::class, 'handleGoogleCallback'])->name('google.callback');
 

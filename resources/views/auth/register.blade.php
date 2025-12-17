@@ -195,7 +195,7 @@
                     </div>
 
                     <!-- Google -->
-                    <a href="{{ route('google.redirect') }}"
+                    <a href="{{ route('google.redirect', ['context' => 'register-user']) }}"
                         class="w-full flex items-center justify-center gap-3 py-3 rounded-2xl
                               border border-gray-300 bg-white hover:bg-gray-50 text-sm font-semibold text-slate-700
                               transition-all duration-200">

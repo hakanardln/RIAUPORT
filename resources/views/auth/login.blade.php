@@ -132,7 +132,7 @@
                     </div>
 
                     <!-- TOMBOL GOOGLE LOGIN -->
-                    <a href="{{ route('google.redirect') }}"
+                    <a href="{{ route('google.redirect', ['context' => 'login']) }}"
                         class="btn-google w-full py-3 rounded-lg font-medium text-gray-700 text-sm
                               flex items-center justify-center gap-3 mb-6 hover:shadow-lg transition-all">
                         <svg class="w-5 h-5" viewBox="0 0 24 24">
