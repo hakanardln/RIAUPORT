@@ -150,17 +150,8 @@
                 </div>
             </div>
 
-            {{-- Bar atas: Tambah + Search --}}
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-                {{-- Tambah Data --}}
-                <div class="flex items-center gap-2">
-                    <button onclick="document.getElementById('form-tambah').scrollIntoView({behavior:'smooth'});"
-                        class="flex items-center gap-2 text-[#0e586d] font-semibold hover:text-[#0a4a5e] transition">
-                        <span class="text-2xl leading-none">+</span>
-                        <span>Tambah Data</span>
-                    </button>
-                </div>
-
+            {{-- Bar atas: Search --}}
+            <div class="flex flex-col md:flex-row md:items-center md:justify-end mb-6 gap-4">
                 {{-- Form search --}}
                 <form method="GET" action="{{ route('admin.pelanggan.index') }}" class="flex items-center gap-2">
                     <label class="text-slate-600 text-sm">Search :</label>
@@ -201,6 +192,9 @@
                                     Telepon
                                 </th>
                                 <th class="p-4 text-left text-sm font-semibold text-slate-900">
+                                    Sumber
+                                </th>
+                                <th class="p-4 text-left text-sm font-semibold text-slate-900">
                                     Aksi
                                 </th>
                             </tr>
@@ -215,7 +209,7 @@
                                     <td class="p-4 text-sm text-slate-900 font-medium">
                                         <div class="flex items-center cursor-pointer">
                                             <div
-                                                class="h-9 w-9 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 grid place-items-center text-white font-semibold text-sm shrink-0">
+                                                class="h-9 w-9 rounded-full {{ $pelanggan->source == 'user' ? 'bg-gradient-to-br from-purple-400 to-purple-600' : 'bg-gradient-to-br from-blue-400 to-blue-600' }} grid place-items-center text-white font-semibold text-sm shrink-0">
                                                 {{ strtoupper(substr($pelanggan->nama, 0, 1)) }}
                                             </div>
                                             <div class="ml-4">
@@ -229,27 +223,59 @@
                                     <td class="px-6 py-3 text-sm text-slate-600 font-medium">
                                         {{ $pelanggan->telepon ?? '-' }}
                                     </td>
+                                    <td class="px-6 py-3 text-sm font-medium">
+                                        @if ($pelanggan->source == 'user')
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                Akun Terdaftar
+                                            </span>
+                                        @else
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                                <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                                                </svg>
+                                                Data Manual
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="px-6 py-3 text-sm text-slate-600 font-medium">
-                                        <a href="{{ route('admin.pelanggan.edit', $pelanggan->id) }}"
-                                            class="inline-block px-4 py-2 text-xs font-semibold rounded bg-emerald-500 text-white hover:bg-emerald-600 transition mr-2">
-                                            Edit
-                                        </a>
+                                        @if ($pelanggan->source == 'pelanggan')
+                                            <a href="{{ route('admin.pelanggan.edit', $pelanggan->original_id) }}"
+                                                class="inline-block px-4 py-2 text-xs font-semibold rounded bg-emerald-500 text-white hover:bg-emerald-600 transition mr-2">
+                                                Edit
+                                            </a>
 
-                                        <form action="{{ route('admin.pelanggan.destroy', $pelanggan->id) }}"
-                                            method="POST" class="inline-block"
-                                            onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="px-4 py-2 text-xs font-semibold rounded bg-red-500 text-white hover:bg-red-600 transition">
-                                                Delete
-                                            </button>
-                                        </form>
+                                            <form id="delete-pelanggan-{{ $pelanggan->original_id }}" action="{{ route('admin.pelanggan.destroy', $pelanggan->original_id) }}"
+                                                method="POST" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    onclick="showDeleteModal('delete-pelanggan-{{ $pelanggan->original_id }}', '{{ $pelanggan->nama }}', 'pelanggan')"
+                                                    class="px-4 py-2 text-xs font-semibold rounded bg-red-500 text-white hover:bg-red-600 transition">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        @else
+                                            {{-- Tombol Hapus untuk Akun User Terdaftar --}}
+                                            <form id="delete-user-{{ $pelanggan->original_id }}" action="{{ route('admin.pelanggan.destroyUser', $pelanggan->original_id) }}"
+                                                method="POST" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button"
+                                                    onclick="showDeleteModal('delete-user-{{ $pelanggan->original_id }}', '{{ $pelanggan->nama }}', 'user')"
+                                                    class="px-4 py-2 text-xs font-semibold rounded bg-red-500 text-white hover:bg-red-600 transition">
+                                                    Hapus Akun
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="p-8 text-center text-slate-500">
+                                    <td colspan="6" class="p-8 text-center text-slate-500">
                                         Belum ada data pelanggan.
                                     </td>
                                 </tr>
@@ -338,66 +364,134 @@
                 </div>
             </div>
 
-            {{-- FORM TAMBAH DATA --}}
-            <div id="form-tambah" class="mt-10 bg-white rounded-2xl shadow-md p-6">
-                <h2 class="text-xl font-semibold text-[#0e586d] mb-4">Tambah Pelanggan</h2>
 
-                @if ($errors->any())
-                    <div class="mb-4 rounded-lg bg-red-50 border border-red-200 text-red-700 px-4 py-3">
-                        <ul class="list-disc list-inside text-sm">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                @if (session('status'))
-                    <div
-                        class="mb-4 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-700 px-4 py-3 text-sm">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <form action="{{ route('admin.pelanggan.store') }}" method="POST"
-                    class="grid md:grid-cols-2 gap-4">
-                    @csrf
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Nama Pelanggan</label>
-                        <input type="text" name="nama" value="{{ old('nama') }}"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            required>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Email</label>
-                        <input type="email" name="email" value="{{ old('email') }}"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Telepon</label>
-                        <input type="text" name="telepon" value="{{ old('telepon') }}"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div class="md:col-span-2">
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Alamat</label>
-                        <textarea name="alamat" rows="3"
-                            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">{{ old('alamat') }}</textarea>
-                    </div>
-
-                    <div class="md:col-span-2 flex justify-end">
-                        <button type="submit"
-                            class="px-6 py-2.5 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold transition shadow-md">
-                            Simpan
-                        </button>
-                    </div>
-                </form>
-            </div>
 
         </main>
     </div>
+
+    {{-- MODAL KONFIRMASI HAPUS --}}
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden">
+        {{-- Backdrop --}}
+        <div id="modalBackdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+        
+        {{-- Modal Content --}}
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div id="modalContent" class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full transform transition-all duration-300 scale-95 opacity-0">
+                {{-- Header with Icon --}}
+                <div class="pt-8 pb-4 text-center">
+                    <div class="mx-auto w-16 h-16 rounded-full bg-gradient-to-br from-red-100 to-red-200 flex items-center justify-center mb-4 animate-pulse">
+                        <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800">Konfirmasi Hapus</h3>
+                </div>
+                
+                {{-- Body --}}
+                <div class="px-8 pb-6 text-center">
+                    <p class="text-slate-600 mb-2" id="deleteMessage">Apakah Anda yakin ingin menghapus data ini?</p>
+                    <p class="font-semibold text-slate-800 text-lg" id="deleteName"></p>
+                    <div id="deleteWarning" class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg hidden">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <p class="text-sm text-amber-700 text-left">Akun pelanggan akan dihapus permanen dan tidak dapat dikembalikan.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                {{-- Footer Buttons --}}
+                <div class="px-8 pb-8 flex gap-3">
+                    <button type="button" onclick="closeDeleteModal()"
+                        class="flex-1 px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold transition-all duration-200 hover:scale-[1.02]">
+                        Batal
+                    </button>
+                    <button type="button" onclick="confirmDelete()"
+                        class="flex-1 px-5 py-3 rounded-xl bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold transition-all duration-200 hover:scale-[1.02] shadow-lg shadow-red-500/30">
+                        Ya, Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentFormId = null;
+
+        function showDeleteModal(formId, name, type) {
+            currentFormId = formId;
+            const modal = document.getElementById('deleteModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const content = document.getElementById('modalContent');
+            const deleteName = document.getElementById('deleteName');
+            const deleteMessage = document.getElementById('deleteMessage');
+            const deleteWarning = document.getElementById('deleteWarning');
+
+            // Set nama pelanggan
+            deleteName.textContent = name;
+
+            // Set pesan dan warning berdasarkan tipe
+            if (type === 'user') {
+                deleteMessage.textContent = 'Apakah Anda yakin ingin menghapus akun pelanggan ini?';
+                deleteWarning.classList.remove('hidden');
+            } else {
+                deleteMessage.textContent = 'Apakah Anda yakin ingin menghapus data pelanggan ini?';
+                deleteWarning.classList.add('hidden');
+            }
+
+            // Show modal
+            modal.classList.remove('hidden');
+            
+            // Trigger animation
+            setTimeout(() => {
+                backdrop.classList.remove('opacity-0');
+                backdrop.classList.add('opacity-100');
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDeleteModal() {
+            const modal = document.getElementById('deleteModal');
+            const backdrop = document.getElementById('modalBackdrop');
+            const content = document.getElementById('modalContent');
+
+            // Trigger close animation
+            backdrop.classList.remove('opacity-100');
+            backdrop.classList.add('opacity-0');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+
+            // Hide modal after animation
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                currentFormId = null;
+            }, 300);
+
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        function confirmDelete() {
+            if (currentFormId) {
+                document.getElementById(currentFormId).submit();
+            }
+        }
+
+        // Close modal on backdrop click
+        document.getElementById('modalBackdrop').addEventListener('click', closeDeleteModal);
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDeleteModal();
+            }
+        });
+    </script>
 </body>
 
 </html>

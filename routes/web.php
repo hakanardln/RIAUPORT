@@ -157,6 +157,7 @@ Route::middleware(['auth', IsAdmin::class])
         Route::get('/pelanggan/{id}/edit', [PelangganController::class, 'edit'])->name('pelanggan.edit');
         Route::put('/pelanggan/{id}', [PelangganController::class, 'update'])->name('pelanggan.update');
         Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
+        Route::delete('/pelanggan/user/{id}', [PelangganController::class, 'destroyUser'])->name('pelanggan.destroyUser');
 
         // Kontak yang masuk ke admin
         Route::get('/contacts', [ContactController::class, 'admin'])->name('contacts');
