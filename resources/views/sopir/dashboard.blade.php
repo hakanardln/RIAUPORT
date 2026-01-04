@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>RiauPort – Dashboard Sopir</title>
 
-    <!-- FAVICON – cukup copy-paste ini saja, sudah 100% kerja di semua browser & device -->
+    <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon_io/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon_io/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon_io/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('favicon_io/site.webmanifest') }}">
-
-    <!-- Opsional: untuk Android Chrome -->
     <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon_io/android-chrome-192x192.png') }}">
     <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('favicon_io/android-chrome-512x512.png') }}">
 
@@ -233,7 +231,6 @@
                         </div>
                     </div>
 
-
                     {{-- INFO SOPIR + ARMADA --}}
                     <div class="flex-1 flex flex-col justify-between gap-4 relative z-10">
                         <div>
@@ -276,8 +273,7 @@
                                     class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-[#e0f7ff] text-[#0c607f]">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z">
-                                        </path>
+                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
                                         <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
                                     </svg>
                                 </span>
@@ -323,38 +319,36 @@
                     </div>
                 </section>
 
-                {{-- ================== RUTE AKTIF ================== --}}
-                <section class="grid grid-cols-1 xl:grid-cols-[2fr,1.1fr] gap-5">
+                {{-- ================== RUTE AKTIF & ULASAN ================== --}}
+                <section class="grid grid-cols-1 xl:grid-cols-3 gap-5">
 
                     {{-- Rute utama / perjalanan berikutnya --}}
                     <div
-                        class="bg-gradient-to-r from-[#6ecff1] via-[#2a9ac5] to-[#005c7d]
-                               rounded-[40px] shadow-soft px-7 py-5 text-white flex flex-col gap-4">
+                        class="bg-gradient-to-r from-[#6ecff1] via-[#2a9ac5] to-[#005c7d] rounded-[32px] shadow-soft px-6 py-5 text-white flex flex-col gap-4">
 
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2">
                                 <div
-                                    class="h-10 w-10 rounded-full bg-white/20 border border-white/40 grid place-items-center">
-                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    class="h-9 w-9 rounded-full bg-white/20 border border-white/40 grid place-items-center">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z">
-                                        </path>
+                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
                                         <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
                                     </svg>
                                 </div>
-                                <div class="font-semibold text-base">
-                                    Rute Utama Hari Ini
+                                <div class="font-semibold text-sm">
+                                    Rute Utama
                                 </div>
                             </div>
                             @if ($jamBerangkat && $kotaAsal && $kotaTujuan)
-                                <span class="text-xs bg-white/20 px-3 py-1 rounded-full">
-                                    Jadwal berikutnya
+                                <span class="text-[10px] bg-white/20 px-2 py-1 rounded-full">
+                                    Hari Ini
                                 </span>
                             @endif
                         </div>
 
                         @if ($jamBerangkat && $kotaAsal && $kotaTujuan)
-                            <div class="flex items-center gap-4 text-sm">
+                            <div class="flex items-center gap-3 text-xs">
                                 <div class="flex items-center gap-1.5">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
@@ -363,55 +357,53 @@
                                     </svg>
                                     <span>{{ $jamBerangkat }}</span>
                                 </div>
-                                <div class="flex items-center gap-1.5 text-xs text-white/80">
-                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="1.8">
-                                        <path d="M3 12h18"></path>
-                                        <path d="m14 9 3 3-3 3"></path>
-                                    </svg>
-                                    <span>Estimasi {{ $estimasiWaktu ?? '-' }}</span>
-                                </div>
+                                @if ($estimasiWaktu)
+                                    <div class="flex items-center gap-1.5 text-[11px] text-white/80">
+                                        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.8">
+                                            <path d="M3 12h18"></path>
+                                            <path d="m14 9 3 3-3 3"></path>
+                                        </svg>
+                                        <span>{{ $estimasiWaktu }}</span>
+                                    </div>
+                                @endif
                             </div>
 
-                            <div class="flex items-center justify-between text-sm font-medium mt-1">
-                                <span class="flex items-center gap-1.5">
+                            <div class="space-y-3 text-sm font-medium mt-1">
+                                <div class="flex items-center gap-2">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                        </path>
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
                                         <circle cx="12" cy="11" r="2.5"></circle>
                                     </svg>
-                                    {{ $kotaAsal }}
-                                </span>
-
-                                {{-- garis titik tengah --}}
-                                <div class="flex items-center gap-1">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white"></span>
-                                    <span class="h-[2px] w-16 bg-white/80 rounded-full"></span>
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/80"></span>
-                                    <span class="h-[2px] w-8 bg-white/70 rounded-full"></span>
-                                    <span class="h-1.5 w-1.5 rounded-full bg-white/60"></span>
+                                    <span>{{ $kotaAsal }}</span>
                                 </div>
 
-                                <span class="flex items-center gap-1.5">
+                                <div class="flex items-center gap-2 pl-1">
+                                    <div class="flex flex-col gap-1">
+                                        <span class="h-1 w-1 rounded-full bg-white/60"></span>
+                                        <span class="h-1 w-1 rounded-full bg-white/60"></span>
+                                        <span class="h-1 w-1 rounded-full bg-white/60"></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-2">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                        </path>
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
                                         <circle cx="12" cy="11" r="2.5"></circle>
                                     </svg>
-                                    {{ $kotaTujuan }}
-                                </span>
+                                    <span>{{ $kotaTujuan }}</span>
+                                </div>
                             </div>
                         @else
-                            <p class="text-sm text-white/90 mt-1">
-                                Kamu belum memiliki jadwal untuk hari ini. Tambahkan rute keberangkatan
-                                di menu <span class="font-semibold">Travel</span>.
+                            <p class="text-xs text-white/90 mt-1">
+                                Belum ada jadwal untuk hari ini.
                             </p>
                             <a href="{{ route('sopir.travel') }}"
-                                class="mt-3 inline-flex items-center gap-2 text-xs bg-white/15 px-3 py-1.5 rounded-full hover:bg-white/25 transition">
-                                <span>Tambah Jadwal Baru</span>
-                                <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                class="mt-2 inline-flex items-center gap-2 text-[11px] bg-white/15 px-3 py-1.5 rounded-full hover:bg-white/25 transition w-fit">
+                                <span>Tambah Jadwal</span>
+                                <svg class="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="1.8">
                                     <path d="M5 12h14"></path>
                                     <path d="m13 6 6 6-6 6"></path>
@@ -424,25 +416,24 @@
                     <div class="bg-[#8fd4f0] rounded-[32px] shadow-soft px-6 py-5 text-[#0a5672] flex flex-col gap-4">
 
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
+                            <div class="flex items-center gap-2">
                                 <div
-                                    class="h-10 w-10 rounded-full bg-white/80 border border-white grid place-items-center text-[#0a5672]">
-                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    class="h-9 w-9 rounded-full bg-white/80 border border-white grid place-items-center text-[#0a5672]">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z">
-                                        </path>
+                                        <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
                                         <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
                                     </svg>
                                 </div>
-                                <div class="font-semibold text-base">Rute Tambahan</div>
+                                <div class="font-semibold text-sm">Rute Tambahan</div>
                             </div>
-                            <span class="text-[11px] text-[#0a5672]/80">
-                                {{ $statusRuteTambahan ?? 'Belum ada jadwal' }}
+                            <span class="text-[10px] text-[#0a5672]/80">
+                                {{ $statusRuteTambahan ?? 'Belum ada' }}
                             </span>
                         </div>
 
                         @if ($jamBerangkat2 && $kotaAsal2 && $kotaTujuan2)
-                            <div class="flex items-center gap-4 text-sm">
+                            <div class="flex items-center gap-3 text-xs">
                                 <div class="flex items-center gap-1.5">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
@@ -453,59 +444,44 @@
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-between text-sm font-medium">
-                                <span class="flex items-center gap-1.5">
+                            <div class="space-y-3 text-sm font-medium">
+                                <div class="flex items-center gap-2">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                        </path>
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
                                         <circle cx="12" cy="11" r="2.5"></circle>
                                     </svg>
-                                    {{ $kotaAsal2 }}
-                                </span>
-
-                                <div class="flex items-center gap-1 text-[#0a5672]">
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]"></span>
-                                    <span class="h-[2px] w-10 bg-[#0a5672]/70 rounded-full"></span>
-                                    <span class="h-1.5 w-1.5 rounded-full bg-[#0a5672]/60"></span>
+                                    <span>{{ $kotaAsal2 }}</span>
                                 </div>
 
-                                <span class="flex items-center gap-1.5">
+                                <div class="flex items-center gap-2 pl-1">
+                                    <div class="flex flex-col gap-1">
+                                        <span class="h-1 w-1 rounded-full bg-[#0a5672]/60"></span>
+                                        <span class="h-1 w-1 rounded-full bg-[#0a5672]/60"></span>
+                                        <span class="h-1 w-1 rounded-full bg-[#0a5672]/60"></span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center gap-2">
                                     <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="1.8">
-                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z">
-                                        </path>
+                                        <path d="M12 21s-6-4.35-6-10a6 6 0 1 1 12 0c0 5.65-6 10-6 10Z"></path>
                                         <circle cx="12" cy="11" r="2.5"></circle>
                                     </svg>
-                                    {{ $kotaTujuan2 }}
-                                </span>
+                                    <span>{{ $kotaTujuan2 }}</span>
+                                </div>
                             </div>
                         @else
-                            <p class="text-sm text-[#0a5672]/80 mt-2">
-                                Belum ada rute tambahan yang dijadwalkan.
+                            <p class="text-xs text-[#0a5672]/80 mt-2">
+                                Belum ada rute tambahan.
                             </p>
                         @endif
                     </div>
-                </section>
 
-                {{-- ================== BAGIAN BAWAH: STATISTIK & MAP ================== --}}
-                <section class="grid grid-cols-1 xl:grid-cols-[1.1fr,1.1fr,1.4fr] gap-5 items-stretch">
-
-                    {{-- Jumlah pelanggan --}}
-                    <div
-                        class="bg-[#e4f86b] rounded-[32px] shadow-soft flex flex-col items-center justify-center py-6">
-                        <div class="text-sm font-semibold text-[#355100] mb-1">
-                            Jumlah Pelanggan Terdaftar
-                        </div>
-                        <div class="text-4xl font-extrabold text-[#355100] leading-none">
-                            {{ $totalPelanggan ?? 0 }}
-                        </div>
-                    </div>
-
-                    {{-- Ulasan --}}
+                    {{-- Ulasan Masuk --}}
                     <div
                         class="bg-[#e7eff4] rounded-[32px] shadow-soft flex flex-col items-center justify-center py-6 text-[#0c607f]">
-                        <div class="flex items-center gap-2 mb-1">
+                        <div class="flex items-center gap-2 mb-2">
                             <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="1.8">
                                 <path
@@ -514,41 +490,126 @@
                             </svg>
                             <span class="text-sm font-semibold">Ulasan Masuk</span>
                         </div>
-                        <div class="text-4xl font-extrabold leading-none">
+                        <div class="text-4xl font-extrabold leading-none mt-1">
                             {{ $totalUlasan ?? 0 }}
                         </div>
-                        <p class="text-[11px] text-slate-500 mt-1">
+                        <p class="text-[11px] text-slate-500 mt-2 text-center px-4">
                             Jaga pelayanan terbaik agar rating tetap tinggi.
                         </p>
                     </div>
+                </section>
 
-                    {{-- Area Operasional / Map --}}
-                    <div class="bg-[#e3f1f6] rounded-[32px] shadow-soft overflow-hidden flex flex-col">
-                        <div class="px-6 pt-4 pb-2 flex items-center justify-between">
-                            <div>
-                                <div class="text-sm font-semibold text-[#0c607f]">Area Operasional</div>
-                                <div class="text-[11px] text-slate-600">
-                                    Perkiraan wilayah layanan travel RiauPort.
-                                </div>
-                            </div>
-                            <div
-                                class="h-8 w-8 rounded-full bg-white/80 flex items-center justify-center border border-white">
+                {{-- ================== QUICK ACTIONS & CUACA ================== --}}
+                <section class="grid grid-cols-1 xl:grid-cols-2 gap-5">
+
+                    {{-- Quick Actions --}}
+                    <div class="bg-white rounded-[32px] shadow-soft px-6 py-5">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="h-9 w-9 rounded-full bg-[#e0f7ff] grid place-items-center">
                                 <svg class="h-4 w-4 text-[#0c607f]" viewBox="0 0 24 24" fill="none"
                                     stroke="currentColor" stroke-width="1.8">
                                     <circle cx="12" cy="12" r="10"></circle>
-                                    <path d="M12 2v4M12 18v4M4 12h4M16 12h4"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="m8 12 2 2 4-4"></path>
                                 </svg>
                             </div>
+                            <span class="text-sm font-semibold text-[#0c607f]">Aksi Cepat</span>
                         </div>
-                        <div class="flex-1 bg-[#c5e4f2]">
-                            {{-- nanti bisa kamu ganti dengan iframe Google Maps --}}
-                            <div
-                                class="w-full h-full flex items-center justify-center text-[11px] text-slate-700 italic">
-                                Map lokasi operasional akan ditampilkan di sini.
+
+                        <div class="grid grid-cols-3 gap-3">
+                            <a href="{{ route('sopir.travel') }}"
+                                class="bg-gradient-to-br from-[#6ecff1] to-[#2a9ac5] rounded-2xl p-4 text-white hover:shadow-lg transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center gap-2 text-center min-h-[100px]">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                <span class="text-xs font-semibold">Tambah Jadwal</span>
+                            </a>
+
+                            <a href="{{ route('sopir.travel') }}"
+                                class="bg-gradient-to-br from-[#8fd4f0] to-[#5fb7cf] rounded-2xl p-4 text-white hover:shadow-lg transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center gap-2 text-center min-h-[100px]">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M3 7h18l-1.5 9a2 2 0 0 1-2 1.7H6.5a2 2 0 0 1-2-1.7L3 7Z"></path>
+                                    <path d="M6 7V5a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v2"></path>
+                                </svg>
+                                <span class="text-xs font-semibold">Lihat Travel</span>
+                            </a>
+
+                            <a href="{{ route('sopir.bantuan') }}"
+                                class="bg-gradient-to-br from-[#a8d5ea] to-[#75d0f0] rounded-2xl p-4 text-white hover:shadow-lg transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center gap-2 text-center min-h-[100px]">
+                                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                <span class="text-xs font-semibold">Pusat Bantuan</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    {{-- Cuaca Hari Ini --}}
+                    <div
+                        class="bg-gradient-to-br from-[#fef3c7] via-[#fde68a] to-[#fcd34d] rounded-[32px] shadow-soft px-6 py-5 text-[#78350f] relative overflow-hidden">
+                        {{-- Dekorasi matahari --}}
+                        <div class="absolute -top-8 -right-8 w-32 h-32 bg-yellow-300 rounded-full opacity-20"></div>
+
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="h-9 w-9 rounded-full bg-white/50 grid place-items-center">
+                                        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.8">
+                                            <circle cx="12" cy="12" r="5"></circle>
+                                            <path
+                                                d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                    <span class="text-sm font-semibold">Cuaca Hari Ini</span>
+                                </div>
+                            </div>
+
+                            <div id="cuaca-content" class="flex items-center justify-between">
+                                <div>
+                                    <div class="flex items-baseline gap-1">
+                                        <span id="cuaca-temp" class="text-4xl font-extrabold">--</span>
+                                        <span class="text-2xl">°C</span>
+                                    </div>
+                                    <p id="cuaca-kota" class="text-sm font-medium mt-1">Loading...</p>
+                                </div>
+                                <div class="text-center">
+                                    <div id="cuaca-icon" class="text-5xl mb-1">🌤️</div>
+                                    <p id="cuaca-desc" class="text-xs font-medium">--</p>
+                                </div>
+                            </div>
+
+                            <div id="cuaca-detail"
+                                class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-yellow-800/20">
+                                <div class="flex items-center gap-2 text-xs">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path
+                                            d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2">
+                                        </path>
+                                    </svg>
+                                    <span>Angin: <strong id="cuaca-wind">--</strong> km/h</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-xs">
+                                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.8">
+                                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                    </svg>
+                                    <span>Kelembaban: <strong id="cuaca-humidity">--</strong>%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </section>
+
+                {{-- ================== BAGIAN BAWAH: ULASAN ================== --}}
+                <section class="flex justify-center" style="display: none;">
+                    {{-- Section ini dihidden karena sudah dipindah ke atas --}}
                 </section>
 
                 {{-- ERROR DB JIKA ADA --}}
@@ -562,6 +623,8 @@
             </div>
         </main>
     </div>
+
+
 </body>
 
 </html>
