@@ -271,6 +271,8 @@ Route::middleware(['auth', IsSopir::class])
 
         // Notifikasi
         Route::get('/notifikasi', [SopirNotifController::class, 'index'])->name('notifikasi');
+        Route::post('/notifikasi/{id}/read', [SopirNotifController::class, 'markAsRead'])->name('notifikasi.read');
+        Route::post('/notifikasi/read-all', [SopirNotifController::class, 'markAllAsRead'])->name('notifikasi.readAll');
 
         // Personalisasi
         Route::get('/personal', [SopirPersonalisasiController::class, 'index'])->name('personal');

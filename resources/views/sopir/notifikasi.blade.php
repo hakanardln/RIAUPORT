@@ -240,7 +240,7 @@
                             <div>
                                 <h2 class="text-2xl font-bold text-slate-800 leading-tight">Kotak Notifikasi</h2>
                                 <p class="text-slate-500 text-sm" id="notif-count">
-                                    5 notifikasi belum dibaca
+                                    {{ $unreadCount }} notifikasi belum dibaca
                                 </p>
                             </div>
                         </div>
@@ -301,230 +301,80 @@
 
                 {{-- LIST NOTIFIKASI --}}
                 <section class="space-y-3" id="notifications-list">
-                    {{-- Ulasan --}}
-                    <div class="notification-item bg-white rounded-2xl shadow-soft border border-blue-100 border-l-[6px] border-l-blue-500 bg-blue-50/40 transition-all hover:shadow-lg"
-                        data-type="review" data-read="false">
-                        <div class="p-5">
-                            <div class="flex gap-4">
-                                <div
-                                    class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-amber-100 text-amber-600">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
-                                        <h3 class="font-semibold text-gray-800 text-lg">Ulasan Baru dari Pelanggan</h3>
-                                        <span class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></span>
+                    @forelse ($reviews as $review)
+                        {{-- Ulasan dari Database --}}
+                        <div class="notification-item bg-white rounded-2xl shadow-soft border {{ $review->is_read ? 'border-slate-100 border-l-gray-300' : 'border-blue-100 border-l-blue-500 bg-blue-50/40' }} border-l-[6px] transition-all hover:shadow-lg"
+                            data-type="review" data-read="{{ $review->is_read ? 'true' : 'false' }}" data-id="{{ $review->id }}">
+                            <div class="p-5">
+                                <div class="flex gap-4">
+                                    <div class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-amber-100 text-amber-600">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                        </svg>
                                     </div>
-                                    <p class="text-gray-600 mb-2">
-                                        Budi Santoso memberikan rating 5 bintang untuk perjalanan Anda.
-                                    </p>
-                                    <div class="flex gap-1 mb-2">
-                                        @for ($i = 0; $i < 5; $i++)
-                                            <svg class="w-4 h-4 fill-amber-400 text-amber-400" viewBox="0 0 24 24">
-                                                <path
-                                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                            </svg>
-                                        @endfor
-                                    </div>
-                                    <div class="flex items-center gap-2 mb-2">
-                                        <div
-                                            class="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-semibold">
-                                            BS
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-start justify-between gap-2 mb-1">
+                                            <h3 class="font-semibold text-gray-800 text-lg">Ulasan Baru dari Pelanggan</h3>
+                                            @if (!$review->is_read)
+                                                <span class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></span>
+                                            @endif
                                         </div>
-                                        <span class="text-sm text-gray-500">Budi Santoso</span>
-                                    </div>
-                                    <div class="flex items-center justify-between mt-3">
-                                        <span class="text-sm text-gray-400">5 menit yang lalu</span>
-                                        <div class="flex gap-2">
-                                            <button onclick="markAsRead(this)"
-                                                class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                                                Tandai Dibaca
-                                            </button>
-                                            <button onclick="deleteNotification(this)"
-                                                class="text-gray-400 hover:text-red-500 transition-colors">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                    </path>
-                                                </svg>
-                                            </button>
+                                        <p class="text-gray-600 mb-2">
+                                            {{ $review->user->name ?? 'Pengguna' }} memberikan rating {{ $review->rating }} bintang untuk 
+                                            <span class="font-medium">{{ $review->travel->armada ?? ($review->travel->lokasi_asal . ' → ' . $review->travel->lokasi_tujuan) }}</span>.
+                                        </p>
+                                        {{-- Bintang Rating --}}
+                                        <div class="flex gap-1 mb-2">
+                                            @for ($i = 1; $i <= 5; $i++)
+                                                @if ($i <= $review->rating)
+                                                    <svg class="w-4 h-4 fill-amber-400 text-amber-400" viewBox="0 0 24 24">
+                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                                    </svg>
+                                                @else
+                                                    <svg class="w-4 h-4 fill-gray-300 text-gray-300" viewBox="0 0 24 24">
+                                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                                                    </svg>
+                                                @endif
+                                            @endfor
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Peringatan --}}
-                    <div class="notification-item bg-white rounded-2xl shadow-soft border border-red-100 border-l-[6px] border-l-blue-500 bg-blue-50/30 transition-all hover:shadow-lg"
-                        data-type="warning" data-read="false">
-                        <div class="p-5">
-                            <div class="flex gap-4">
-                                <div
-                                    class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-red-100 text-red-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
-                                        <h3 class="font-semibold text-gray-800 text-lg">Peringatan Akun</h3>
-                                        <span class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></span>
-                                    </div>
-                                    <p class="text-gray-600 mb-2">
-                                        Dokumen SIM Anda akan kedaluwarsa dalam 30 hari. Segera perbarui!
-                                    </p>
-                                    <div class="flex items-center justify-between mt-3">
-                                        <span class="text-sm text-gray-400">1 jam yang lalu</span>
-                                        <div class="flex gap-2">
-                                            <button onclick="markAsRead(this)"
-                                                class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                                                Tandai Dibaca
-                                            </button>
-                                            <button onclick="deleteNotification(this)"
-                                                class="text-gray-400 hover:text-red-500 transition-colors">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                    </path>
-                                                </svg>
-                                            </button>
+                                        {{-- Isi Ulasan --}}
+                                        @if ($review->review)
+                                            <div class="bg-gray-50 rounded-lg p-3 mb-3 text-sm text-gray-600 italic">
+                                                "{{ Str::limit($review->review, 200) }}"
+                                            </div>
+                                        @endif
+                                        {{-- Avatar dan Nama --}}
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <div class="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                                {{ strtoupper(substr($review->user->name ?? 'A', 0, 2)) }}
+                                            </div>
+                                            <span class="text-sm text-gray-500">{{ $review->user->name ?? 'Anonim' }}</span>
+                                        </div>
+                                        <div class="flex items-center justify-between mt-3">
+                                            <span class="text-sm text-gray-400">{{ $review->created_at->diffForHumans() }}</span>
+                                            <div class="flex gap-2">
+                                                @if (!$review->is_read)
+                                                    <button onclick="markAsRead(this, {{ $review->id }})"
+                                                        class="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                                                        Tandai Dibaca
+                                                    </button>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {{-- Tindakan --}}
-                    <div class="notification-item bg-white rounded-2xl shadow-soft border border-blue-100 border-l-[6px] border-l-blue-500 bg-blue-50/30 transition-all hover:shadow-lg"
-                        data-type="action" data-read="false">
-                        <div class="p-5">
-                            <div class="flex gap-4">
-                                <div
-                                    class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-blue-100 text-blue-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
-                                        <h3 class="font-semibold text-gray-800 text-lg">Tindakan Diperlukan</h3>
-                                        <span class="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></span>
-                                    </div>
-                                    <p class="text-gray-600 mb-2">
-                                        Verifikasi identitas Anda untuk melanjutkan layanan.
-                                    </p>
-                                    <div class="flex items-center justify-between mt-3">
-                                        <span class="text-sm text-gray-400">2 jam yang lalu</span>
-                                        <div class="flex gap-2">
-                                            <button onclick="markAsRead(this)"
-                                                class="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                                                Tandai Dibaca
-                                            </button>
-                                            <button onclick="deleteNotification(this)"
-                                                class="text-gray-400 hover:text-red-500 transition-colors">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    @empty
+                        {{-- Empty state --}}
+                        <div class="bg-white rounded-2xl shadow-soft p-12 text-center border border-slate-100">
+                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                            </svg>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Belum Ada Ulasan</h3>
+                            <p class="text-gray-500">Ulasan dari pelanggan akan muncul di sini setelah mereka memberikan review untuk travel Anda.</p>
                         </div>
-                    </div>
-
-                    {{-- Pengingat (sudah dibaca) --}}
-                    <div class="notification-item bg-white rounded-2xl shadow-soft border border-slate-100 border-l-[6px] border-l-gray-300 transition-all hover:shadow-lg"
-                        data-type="reminder" data-read="true">
-                        <div class="p-5">
-                            <div class="flex gap-4">
-                                <div
-                                    class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-purple-100 text-purple-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
-                                        <h3 class="font-semibold text-gray-800 text-lg">Pengingat Jadwal</h3>
-                                    </div>
-                                    <p class="text-gray-600 mb-2">
-                                        Jangan lupa update jadwal ketersediaan Anda untuk minggu depan.
-                                    </p>
-                                    <div class="flex items-center justify-between mt-3">
-                                        <span class="text-sm text-gray-400">3 jam yang lalu</span>
-                                        <div class="flex gap-2">
-                                            <button onclick="deleteNotification(this)"
-                                                class="text-gray-400 hover:text-red-500 transition-colors">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Sukses (sudah dibaca) --}}
-                    <div class="notification-item bg-white rounded-2xl shadow-soft border border-slate-100 border-l-[6px] border-l-gray-300 transition-all hover:shadow-lg"
-                        data-type="success" data-read="true">
-                        <div class="p-5">
-                            <div class="flex gap-4">
-                                <div
-                                    class="flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center bg-green-100 text-green-600">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                </div>
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start justify-between gap-2 mb-1">
-                                        <h3 class="font-semibold text-gray-800 text-lg">Pembayaran Diterima</h3>
-                                    </div>
-                                    <p class="text-gray-600 mb-2">
-                                        Transfer pendapatan minggu ini sebesar Rp 2.450.000 telah berhasil.
-                                    </p>
-                                    <div class="flex items-center justify-between mt-3">
-                                        <span class="text-sm text-gray-400">2 hari yang lalu</span>
-                                        <div class="flex gap-2">
-                                            <button onclick="deleteNotification(this)"
-                                                class="text-gray-400 hover:text-red-500 transition-colors">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforelse
                 </section>
 
             </div>
@@ -575,57 +425,68 @@
             updateUnreadCount();
         }
 
-        function markAsRead(button) {
-            const notifItem = button.closest('.notification-item');
-            notifItem.classList.remove('border-l-blue-500', 'bg-blue-50/30', 'bg-blue-50/40');
-            notifItem.classList.add('border-l-gray-300');
-            notifItem.dataset.read = 'true';
+        function markAsRead(button, reviewId) {
+            // Send AJAX request to mark as read
+            fetch(`{{ url('/sopir/notifikasi') }}/${reviewId}/read`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const notifItem = button.closest('.notification-item');
+                    notifItem.classList.remove('border-l-blue-500', 'bg-blue-50/30', 'bg-blue-50/40', 'border-blue-100');
+                    notifItem.classList.add('border-l-gray-300', 'border-slate-100');
+                    notifItem.dataset.read = 'true';
 
-            const badge = notifItem.querySelector('.bg-blue-500.rounded-full');
-            if (badge) badge.remove();
+                    const badge = notifItem.querySelector('.bg-blue-500.rounded-full');
+                    if (badge) badge.remove();
 
-            button.remove();
-            updateUnreadCount();
+                    button.remove();
+                    updateUnreadCount();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal menandai sebagai dibaca. Silakan coba lagi.');
+            });
         }
 
         function markAllAsRead() {
-            document.querySelectorAll('.notification-item[data-read="false"]').forEach(item => {
-                item.classList.remove('border-l-blue-500', 'bg-blue-50/30', 'bg-blue-50/40');
-                item.classList.add('border-l-gray-300');
-                item.dataset.read = 'true';
+            // Send AJAX request to mark all as read
+            fetch('{{ route("sopir.notifikasi.readAll") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.querySelectorAll('.notification-item[data-read="false"]').forEach(item => {
+                        item.classList.remove('border-l-blue-500', 'bg-blue-50/30', 'bg-blue-50/40', 'border-blue-100');
+                        item.classList.add('border-l-gray-300', 'border-slate-100');
+                        item.dataset.read = 'true';
 
-                const badge = item.querySelector('.bg-blue-500.rounded-full');
-                if (badge) badge.remove();
+                        const badge = item.querySelector('.bg-blue-500.rounded-full');
+                        if (badge) badge.remove();
 
-                const readBtn = item.querySelector('button[onclick="markAsRead(this)"]');
-                if (readBtn) readBtn.remove();
-            });
-            updateUnreadCount();
-        }
-
-        function deleteNotification(button) {
-            if (confirm('Apakah Anda yakin ingin menghapus notifikasi ini?')) {
-                const notifItem = button.closest('.notification-item');
-                notifItem.style.transition = 'all 0.3s ease';
-                notifItem.style.opacity = '0';
-                notifItem.style.transform = 'translateX(20px)';
-
-                setTimeout(() => {
-                    notifItem.remove();
+                        const readBtn = item.querySelector('button[onclick^="markAsRead"]');
+                        if (readBtn) readBtn.remove();
+                    });
                     updateUnreadCount();
-
-                    if (document.querySelectorAll('.notification-item').length === 0) {
-                        document.getElementById('notifications-list').innerHTML = `
-                        <div class="bg-white rounded-2xl shadow-soft p-12 text-center border border-slate-100">
-                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
-                            </svg>
-                            <p class="text-gray-500 text-lg">Tidak ada notifikasi</p>
-                        </div>
-                    `;
-                    }
-                }, 300);
-            }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Gagal menandai semua sebagai dibaca. Silakan coba lagi.');
+            });
         }
 
         function updateUnreadCount() {

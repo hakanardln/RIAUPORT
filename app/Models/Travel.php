@@ -63,6 +63,14 @@ class Travel extends Model
         return $this->belongsTo(User::class, 'reviewed_by');
     }
 
+    /**
+     * Relasi ke reviews (ulasan penumpang)
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     // ========== QUERY SCOPES (TAMBAHKAN INI) ==========
 
     /**

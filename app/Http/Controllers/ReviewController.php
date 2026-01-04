@@ -16,8 +16,18 @@ class ReviewController extends Controller
             'review' => 'required|string|max:2000',
         ]);
 
+        // Hanya user dengan role 'user' yang bisa memberi ulasan
         if (Auth::user()->role !== 'user') {
             return back()->with('error', 'Hanya pengguna yang dapat memberikan ulasan.');
+        }
+
+        // Cek apakah user sudah pernah memberikan ulasan untuk travel ini
+        $existingReview = Review::where('travel_id', $validated['travel_id'])
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if ($existingReview) {
+            return back()->with('error', 'Anda sudah pernah memberikan ulasan untuk travel ini.');
         }
 
         Review::create([
@@ -25,8 +35,9 @@ class ReviewController extends Controller
             'user_id' => Auth::id(),
             'rating' => $validated['rating'],
             'review' => $validated['review'],
+            'is_read' => false, // notifikasi belum dibaca oleh sopir
         ]);
 
-        return back()->with('success', 'Ulasan berhasil dikirim!');
+        return back()->with('success', 'Ulasan berhasil dikirim! Terima kasih atas feedback Anda.');
     }
 }

@@ -615,55 +615,81 @@
                 <div id="tab-reviews-{{ $travel->id }}" class="tab-content hidden p-6">
                     <h3 class="text-lg font-bold text-gray-900 mb-6">Ulasan Penumpang</h3>
 
+                    {{-- Flash Messages --}}
+                    @if (session('success'))
+                        <div class="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-sm text-emerald-700">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     {{-- FORM INPUT ULASAN --}}
                     <div class="mb-6">
                         @if (Auth::check() && Auth::user()->role === 'user')
-                            <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-                                <h4 class="text-sm font-semibold text-gray-900 mb-3">
-                                    Tulis Ulasanmu
-                                </h4>
+                            @php
+                                $hasReviewed = $travel->reviews->where('user_id', Auth::id())->count() > 0;
+                            @endphp
 
-                                <form method="POST" action="{{ route('reviews.store') }}">
-                                    @csrf
-                                    {{-- Kirim id travel --}}
-                                    <input type="hidden" name="travel_id" value="{{ $travel->id }}">
+                            @if ($hasReviewed)
+                                <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-2xl text-center text-sm text-blue-700">
+                                    <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Anda sudah memberikan ulasan untuk travel ini.
+                                </div>
+                            @else
+                                <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
+                                    <h4 class="text-sm font-semibold text-gray-900 mb-3">
+                                        Tulis Ulasanmu
+                                    </h4>
 
-                                    {{-- Rating --}}
-                                    <div class="mb-4">
-                                        <label for="rating-{{ $travel->id }}"
-                                            class="block text-xs font-medium text-gray-700 mb-1">
-                                            Rating Perjalanan
-                                        </label>
-                                        <select id="rating-{{ $travel->id }}" name="rating"
-                                            class="block w-full rounded-xl border-gray-300 text-sm shadow-sm focus:ring-[#0e586d] focus:border-[#0e586d]">
-                                            <option value="">Pilih rating</option>
-                                            <option value="5">⭐⭐⭐⭐⭐ – Sangat puas</option>
-                                            <option value="4">⭐⭐⭐⭐ – Puas</option>
-                                            <option value="3">⭐⭐⭐ – Cukup</option>
-                                            <option value="2">⭐⭐ – Kurang</option>
-                                            <option value="1">⭐ – Tidak puas</option>
-                                        </select>
-                                    </div>
+                                    <form method="POST" action="{{ route('reviews.store') }}">
+                                        @csrf
+                                        {{-- Kirim id travel --}}
+                                        <input type="hidden" name="travel_id" value="{{ $travel->id }}">
 
-                                    {{-- Kolom ulasan --}}
-                                    <div class="mb-4">
-                                        <label for="review-{{ $travel->id }}"
-                                            class="block text-xs font-medium text-gray-700 mb-1">
-                                            Ulasan
-                                        </label>
-                                        <textarea id="review-{{ $travel->id }}" name="review" rows="3"
-                                            class="block w-full rounded-xl border-gray-300 text-sm shadow-sm focus:ring-[#0e586d] focus:border-[#0e586d]"
-                                            placeholder="Ceritakan pengalamanmu, misalnya: kenyamanan mobil, keramahan sopir, ketepatan waktu, dll."></textarea>
-                                    </div>
+                                        {{-- Rating --}}
+                                        <div class="mb-4">
+                                            <label for="rating-{{ $travel->id }}"
+                                                class="block text-xs font-medium text-gray-700 mb-1">
+                                                Rating Perjalanan
+                                            </label>
+                                            <select id="rating-{{ $travel->id }}" name="rating" required
+                                                class="block w-full rounded-xl border-gray-300 text-sm shadow-sm focus:ring-[#0e586d] focus:border-[#0e586d]">
+                                                <option value="">Pilih rating</option>
+                                                <option value="5">⭐⭐⭐⭐⭐ – Sangat puas</option>
+                                                <option value="4">⭐⭐⭐⭐ – Puas</option>
+                                                <option value="3">⭐⭐⭐ – Cukup</option>
+                                                <option value="2">⭐⭐ – Kurang</option>
+                                                <option value="1">⭐ – Tidak puas</option>
+                                            </select>
+                                        </div>
 
-                                    <div class="flex items-center justify-end gap-2">
-                                        <button type="submit"
-                                            class="inline-flex items-center px-4 py-2 rounded-xl bg-[#0e586d] text-white text-sm font-semibold hover:bg-[#0b4353] transition shadow-sm">
-                                            Kirim Ulasan
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                                        {{-- Kolom ulasan --}}
+                                        <div class="mb-4">
+                                            <label for="review-{{ $travel->id }}"
+                                                class="block text-xs font-medium text-gray-700 mb-1">
+                                                Ulasan
+                                            </label>
+                                            <textarea id="review-{{ $travel->id }}" name="review" rows="3" required
+                                                class="block w-full rounded-xl border-gray-300 text-sm shadow-sm focus:ring-[#0e586d] focus:border-[#0e586d]"
+                                                placeholder="Ceritakan pengalamanmu, misalnya: kenyamanan mobil, keramahan sopir, ketepatan waktu, dll."></textarea>
+                                        </div>
+
+                                        <div class="flex items-center justify-end gap-2">
+                                            <button type="submit"
+                                                class="inline-flex items-center px-4 py-2 rounded-xl bg-[#0e586d] text-white text-sm font-semibold hover:bg-[#0b4353] transition shadow-sm">
+                                                Kirim Ulasan
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            @endif
                         @else
                             <div
                                 class="mb-6 p-4 bg-gray-50 border border-dashed border-gray-200 rounded-2xl text-center text-xs text-gray-600">
@@ -675,72 +701,99 @@
                         @endif
                     </div>
 
-                    {{-- Ringkasan rating (sementara dummy, nanti bisa dihubungkan ke DB) --}}
+                    @php
+                        $reviewCount = $travel->reviews->count();
+                        $avgRating = $reviewCount > 0 ? round($travel->reviews->avg('rating'), 1) : 0;
+                    @endphp
+
+                    {{-- Ringkasan rating --}}
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                         <div class="flex items-center gap-4">
                             <div
                                 class="w-16 h-16 rounded-2xl bg-[#0e586d]/5 flex items-center justify-center flex-shrink-0">
-                                <span class="text-2xl font-bold text-[#0e586d]">–</span>
+                                <span class="text-2xl font-bold text-[#0e586d]">{{ $avgRating > 0 ? $avgRating : '–' }}</span>
                             </div>
                             <div>
                                 <p class="text-sm text-gray-500">Rating Rata-rata</p>
                                 <div class="flex items-center gap-2 mt-1">
-                                    {{-- Bintang dummy --}}
-                                    <div class="flex items-center gap-1 text-amber-400">
-                                        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
-                                        <svg class="w-4 h-4 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                        </svg>
+                                    {{-- Bintang dinamis --}}
+                                    <div class="flex items-center gap-1">
+                                        @for ($i = 1; $i <= 5; $i++)
+                                            @if ($i <= floor($avgRating))
+                                                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                </svg>
+                                            @else
+                                                <svg class="w-4 h-4 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                </svg>
+                                            @endif
+                                        @endfor
                                     </div>
-                                    <span class="text-xs text-gray-500">Belum ada rating</span>
+                                    <span class="text-xs text-gray-500">{{ $reviewCount }} ulasan</span>
                                 </div>
                             </div>
                         </div>
 
                         {{-- Tag kategori ulasan --}}
                         <div class="flex flex-wrap gap-2 text-xs">
-                            <span
-                                class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">Kenyamanan</span>
-                            <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-100">Ketepatan
-                                waktu</span>
-                            <span
-                                class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100">Pelayanan
-                                sopir</span>
+                            <span class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">Kenyamanan</span>
+                            <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-700 border border-sky-100">Ketepatan waktu</span>
+                            <span class="px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100">Pelayanan sopir</span>
                         </div>
                     </div>
 
-                    {{-- Empty state list ulasan --}}
-                    <div class="border border-dashed border-gray-200 rounded-2xl p-6 text-center">
-                        <div
-                            class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4 text-gray-400">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m5-4a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                    {{-- List ulasan --}}
+                    @if ($travel->reviews->count() > 0)
+                        <div class="space-y-4">
+                            @foreach ($travel->reviews->sortByDesc('created_at') as $review)
+                                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-sm">
+                                    <div class="flex items-start gap-4">
+                                        {{-- Avatar --}}
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-sm font-semibold">
+                                            {{ strtoupper(substr($review->user->name ?? 'A', 0, 1)) }}
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between gap-2 mb-1">
+                                                <h4 class="font-semibold text-gray-900 text-sm">{{ $review->user->name ?? 'Anonim' }}</h4>
+                                                <span class="text-xs text-gray-400">{{ $review->created_at->diffForHumans() }}</span>
+                                            </div>
+                                            {{-- Bintang rating --}}
+                                            <div class="flex items-center gap-1 mb-2">
+                                                @for ($i = 1; $i <= 5; $i++)
+                                                    @if ($i <= $review->rating)
+                                                        <svg class="w-4 h-4 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                        </svg>
+                                                    @else
+                                                        <svg class="w-4 h-4 text-gray-300" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                        </svg>
+                                                    @endif
+                                                @endfor
+                                            </div>
+                                            {{-- Isi ulasan --}}
+                                            <p class="text-sm text-gray-600">{{ $review->review }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <p class="text-sm font-semibold text-gray-900 mb-1">Belum ada ulasan untuk travel ini</p>
-                        <p class="text-xs text-gray-500 max-w-md mx-auto">
-                            Setelah penumpang mengirim ulasan, pengalaman perjalanan mereka akan tampil di sini dan
-                            membantu penumpang lain
-                            dalam memilih travel.
-                        </p>
-                    </div>
+                    @else
+                        {{-- Empty state list ulasan --}}
+                        <div class="border border-dashed border-gray-200 rounded-2xl p-6 text-center">
+                            <div class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4 text-gray-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m5-4a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <p class="text-sm font-semibold text-gray-900 mb-1">Belum ada ulasan untuk travel ini</p>
+                            <p class="text-xs text-gray-500 max-w-md mx-auto">
+                                Setelah penumpang mengirim ulasan, pengalaman perjalanan mereka akan tampil di sini dan
+                                membantu penumpang lain dalam memilih travel.
+                            </p>
+                        </div>
+                    @endif
                 </div>
 
 

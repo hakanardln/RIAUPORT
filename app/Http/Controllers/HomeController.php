@@ -42,7 +42,7 @@ class HomeController extends Controller
             ->where('lokasi_tujuan', $request->tujuan)
             ->where('status', 'aktif')
             ->where('status_approval', 'approved') // ← BARU: Filter approved
-            ->with('sopir') // Eager load sopir
+            ->with(['sopir', 'reviews.user']) // Eager load sopir dan reviews beserta user
             ->orderBy('tanggal_berangkat', 'asc')
             ->orderBy('jam_berangkat', 'asc')
             ->get();
