@@ -130,4 +130,9 @@ class Travel extends Model
     {
         return $this->status_approval === 'rejected';
     }
+
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
 }

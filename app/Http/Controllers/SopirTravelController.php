@@ -244,18 +244,26 @@ class SopirTravelController extends Controller
     }
 
     // FORM EDIT JADWAL
-    public function editJadwal(Travel $travel)
+    public function editJadwal($id)
     {
+        $travel = Travel::findOrFail($id);
+
         // pastikan hanya sopir pemilik yang bisa edit
-        abort_if($travel->sopir_id !== Auth::id(), 403);
+        if ($travel->sopir_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses untuk mengedit jadwal ini.');
+        }
 
         return view('sopir.jadwal-edit', compact('travel'));
     }
 
     // UPDATE JADWAL
-    public function updateJadwal(Request $request, Travel $travel)
+    public function updateJadwal(Request $request, $id)
     {
-        abort_if($travel->sopir_id !== Auth::id(), 403);
+        $travel = Travel::findOrFail($id);
+
+        if ($travel->sopir_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses untuk mengupdate jadwal ini.');
+        }
 
         $request->validate([
             'lokasi_asal' => 'required|string|max:255',
@@ -282,9 +290,13 @@ class SopirTravelController extends Controller
     }
 
     // HAPUS JADWAL
-    public function destroyJadwal(Travel $travel)
+    public function destroyJadwal($id)
     {
-        abort_if($travel->sopir_id !== Auth::id(), 403);
+        $travel = Travel::findOrFail($id);
+
+        if ($travel->sopir_id !== Auth::id()) {
+            abort(403, 'Anda tidak memiliki akses untuk menghapus jadwal ini.');
+        }
 
         $travel->delete();
 

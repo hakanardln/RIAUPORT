@@ -254,11 +254,11 @@ Route::middleware(['auth', IsSopir::class])
         Route::post('/jadwal', [SopirTravelController::class, 'storeJadwal'])->name('jadwal.store');
 
         // edit jadwal
-        Route::get('/jadwal/{travel}/edit', [SopirTravelController::class, 'editJadwal'])->name('jadwal.edit');
-        Route::put('/jadwal/{travel}', [SopirTravelController::class, 'updateJadwal'])->name('jadwal.update');
+        Route::get('/jadwal/{id}/edit', [SopirTravelController::class, 'editJadwal'])->name('jadwal.edit');
+        Route::put('/jadwal/{id}', [SopirTravelController::class, 'updateJadwal'])->name('jadwal.update');
 
         // hapus jadwal
-        Route::delete('/jadwal/{travel}', [SopirTravelController::class, 'destroyJadwal'])->name('jadwal.destroy');
+        Route::delete('/jadwal/{id}', [SopirTravelController::class, 'destroyJadwal'])->name('jadwal.destroy');
 
         // Profil sopir
         Route::get('/profil', [SopirProfilController::class, 'index'])->name('profil');
