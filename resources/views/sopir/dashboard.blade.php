@@ -516,13 +516,14 @@
                         </div>
 
                         <div class="grid grid-cols-3 gap-3">
-                            <a href="{{ route('sopir.travel') }}"
+                            <a href="{{ route('sopir.jadwal') }}"
                                 class="bg-gradient-to-br from-[#6ecff1] to-[#2a9ac5] rounded-2xl p-4 text-white hover:shadow-lg transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center gap-2 text-center min-h-[100px]">
                                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
-                                    <path d="M12 5v14M5 12h14"></path>
+                                    <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+                                    <path d="M16 2v4M8 2v4M3 10h18"></path>
                                 </svg>
-                                <span class="text-xs font-semibold">Tambah Jadwal</span>
+                                <span class="text-xs font-semibold">Jadwal</span>
                             </a>
 
                             <a href="{{ route('sopir.travel') }}"
@@ -623,6 +624,82 @@
             </div>
         </main>
     </div>
+
+    {{-- Script Cuaca --}}
+    <script>
+        // Fungsi untuk mendapatkan cuaca
+        async function getCuaca() {
+            try {
+                // Koordinat default (bisa disesuaikan dengan lokasi sopir)
+                const kotaAsal = @json($kotaAsal ?? 'Pekanbaru');
+                const apiKey = '{{ env('OPENWEATHER_API_KEY', '') }}'; // API key dari .env
+
+                if (!apiKey) {
+                    document.getElementById('cuaca-temp').textContent = '--';
+                    document.getElementById('cuaca-kota').textContent = 'API key belum diset';
+                    document.getElementById('cuaca-desc').textContent = 'Konfigurasi diperlukan';
+                    return;
+                }
+
+                // Request ke OpenWeatherMap API
+                const response = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?q=${kotaAsal},ID&appid=${apiKey}&units=metric&lang=id`
+                );
+
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data cuaca');
+                }
+
+                const data = await response.json();
+
+                // Update UI dengan data cuaca
+                document.getElementById('cuaca-temp').textContent = Math.round(data.main.temp);
+                document.getElementById('cuaca-kota').textContent = data.name;
+                document.getElementById('cuaca-desc').textContent = data.weather[0].description;
+                document.getElementById('cuaca-wind').textContent = Math.round(data.wind.speed * 3.6); // m/s ke km/h
+                document.getElementById('cuaca-humidity').textContent = data.main.humidity;
+
+                // Update icon cuaca berdasarkan kondisi
+                const weatherIcon = getWeatherIcon(data.weather[0].main);
+                document.getElementById('cuaca-icon').textContent = weatherIcon;
+
+            } catch (error) {
+                console.error('Error fetching weather:', error);
+                document.getElementById('cuaca-temp').textContent = '--';
+                document.getElementById('cuaca-kota').textContent = 'Gagal memuat';
+                document.getElementById('cuaca-desc').textContent = 'Coba lagi nanti';
+            }
+        }
+
+        // Fungsi untuk mendapatkan emoji icon berdasarkan kondisi cuaca
+        function getWeatherIcon(condition) {
+            const icons = {
+                'Clear': '☀️',
+                'Clouds': '☁️',
+                'Rain': '🌧️',
+                'Drizzle': '🌦️',
+                'Thunderstorm': '⛈️',
+                'Snow': '❄️',
+                'Mist': '🌫️',
+                'Smoke': '🌫️',
+                'Haze': '🌫️',
+                'Dust': '🌫️',
+                'Fog': '🌫️',
+                'Sand': '🌫️',
+                'Ash': '🌫️',
+                'Squall': '💨',
+                'Tornado': '🌪️'
+            };
+            return icons[condition] || '🌤️';
+        }
+
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            getCuaca();
+            // Refresh cuaca setiap 30 menit
+            setInterval(getCuaca, 30 * 60 * 1000);
+        });
+    </script>
 
 
 </body>
