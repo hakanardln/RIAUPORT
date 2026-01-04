@@ -46,9 +46,13 @@ class Travel extends Model
     ];
 
     protected $casts = [
+        'sopir_id' => 'integer',
         'tanggal_berangkat' => 'date',
         'submitted_at' => 'datetime',
         'reviewed_at' => 'datetime',
+        'kapasitas_penumpang' => 'integer',
+        'harga_per_orang' => 'integer',
+        'penumpang_terdaftar' => 'integer',
     ];
 
     // ========== RELASI ==========

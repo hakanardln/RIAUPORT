@@ -248,8 +248,8 @@ class SopirTravelController extends Controller
     {
         $travel = Travel::findOrFail($id);
 
-        // pastikan hanya sopir pemilik yang bisa edit
-        if ($travel->sopir_id !== Auth::id()) {
+        // Gunakan != bukan !==
+        if ($travel->sopir_id != Auth::id()) {
             abort(403, 'Anda tidak memiliki akses untuk mengedit jadwal ini.');
         }
 
@@ -261,7 +261,7 @@ class SopirTravelController extends Controller
     {
         $travel = Travel::findOrFail($id);
 
-        if ($travel->sopir_id !== Auth::id()) {
+        if ($travel->sopir_id != Auth::id()) {
             abort(403, 'Anda tidak memiliki akses untuk mengupdate jadwal ini.');
         }
 
@@ -294,7 +294,7 @@ class SopirTravelController extends Controller
     {
         $travel = Travel::findOrFail($id);
 
-        if ($travel->sopir_id !== Auth::id()) {
+        if ($travel->sopir_id != Auth::id()) {
             abort(403, 'Anda tidak memiliki akses untuk menghapus jadwal ini.');
         }
 
