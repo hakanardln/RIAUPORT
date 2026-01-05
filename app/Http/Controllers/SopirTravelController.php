@@ -10,14 +10,35 @@ use Illuminate\Support\Facades\Storage;
 
 class SopirTravelController extends Controller
 {
-    // ===== HALAMAN TRAVEL =====
+    // ===== HALAMAN TRAVEL (UPDATE: 3 STATES) =====
     public function index()
     {
-        $travel = Travel::firstOrNew([
-            'sopir_id' => Auth::id(),
-        ]);
+        $userId = Auth::id();
 
-        return view('sopir.travel', compact('travel'));
+        // Ambil travel terbaru milik sopir ini
+        $travel = Travel::where('sopir_id', $userId)
+            ->orderByDesc('created_at')
+            ->first();
+
+        // Jika tidak ada travel, buat instance kosong
+        if (!$travel) {
+            $travel = new Travel();
+        }
+
+        // Tentukan state berdasarkan status_approval
+        $pageState = 'form'; // default: tampilkan form
+
+        if ($travel->exists) {
+            if ($travel->status_approval === 'pending') {
+                $pageState = 'pending'; // Sedang ditinjau
+            } elseif ($travel->status_approval === 'approved') {
+                $pageState = 'approved'; // Disetujui - tampilkan profil
+            } elseif ($travel->status_approval === 'rejected') {
+                $pageState = 'form'; // Ditolak - bisa input ulang
+            }
+        }
+
+        return view('sopir.travel', compact('travel', 'pageState'));
     }
 
 
@@ -47,22 +68,32 @@ class SopirTravelController extends Controller
             'status' => 'required|in:aktif,nonaktif',
         ]);
 
-        // cari / buat 1 data travel untuk sopir
-        $travel = Travel::firstOrNew(['sopir_id' => Auth::id()]);
+        $userId = Auth::id();
 
-        if (!$travel->exists) {
-            $travel->kode_travel = strtoupper(Str::random(6));
+        // Cek apakah sudah ada travel sebelumnya
+        $travel = Travel::where('sopir_id', $userId)->first();
+
+        // Generate kode travel jika belum ada
+        if (!$travel) {
+            $travel = new Travel();
+            $travel->sopir_id = $userId;
+            $travel->kode_travel = 'TRV-' . strtoupper(Str::random(8));
         }
 
         // ====== STEP MOBIL ======
         if ($request->hasFile('foto_armada')) {
-            // hapus foto lama kalau ada
-            if ($travel->foto_armada) {
-                Storage::disk('public')->delete($travel->foto_armada);
+            $file = $request->file('foto_armada');
+            $filename = time() . '_' . $file->getClientOriginalName();
+
+            // Simpan ke folder public/file (sesuai dengan yang digunakan di blade)
+            $file->move(public_path('file'), $filename);
+
+            // Hapus foto lama jika ada
+            if ($travel->foto_armada && file_exists(public_path('file/' . $travel->foto_armada))) {
+                unlink(public_path('file/' . $travel->foto_armada));
             }
 
-            $path = $request->file('foto_armada')->store('armada', 'public');
-            $travel->foto_armada = $path;
+            $travel->foto_armada = $filename;
         }
 
         $travel->armada = $request->armada;
@@ -85,21 +116,19 @@ class SopirTravelController extends Controller
         $travel->deskripsi = $request->deskripsi;
         $travel->status = $request->status;
 
-        // ====== APPROVAL SYSTEM (BARU) ======
-        // Jika travel baru atau sedang di-reject, set ke pending
-        if (!$travel->exists || $travel->isRejected()) {
-            $travel->status_approval = 'pending';
-            $travel->submitted_at = now();
-            $travel->reviewed_at = null;
-            $travel->reviewed_by = null;
-            $travel->rejection_reason = null;
-        }
+        // ====== APPROVAL SYSTEM ======
+        // Set status ke pending (menunggu review admin)
+        $travel->status_approval = 'pending';
+        $travel->submitted_at = now();
+        $travel->reviewed_at = null;
+        $travel->reviewed_by = null;
+        $travel->rejection_reason = null;
 
         $travel->save();
 
         return redirect()
             ->route('sopir.travel')
-            ->with('success', 'Informasi travel berhasil disimpan dan menunggu persetujuan admin.');
+            ->with('success', 'Data travel berhasil disimpan dan akan segera ditinjau oleh admin.');
     }
 
     // ===== TAB 1: MOBIL (VERSI LAMA, BOLEH DIBIARKAN) =====
@@ -119,7 +148,6 @@ class SopirTravelController extends Controller
         if (!$travel->exists) {
             $travel->kode_travel = strtoupper(Str::random(6));
         }
-
 
         if ($request->hasFile('foto_armada')) {
             $path = $request->file('foto_armada')->store('armada', 'public');
@@ -200,17 +228,21 @@ class SopirTravelController extends Controller
     {
         $userId = Auth::id();
 
+        // Ambil semua jadwal (travel) milik sopir, hanya yang approved
         $jadwals = Travel::where('sopir_id', $userId)
+            ->where('status_approval', 'approved')
             ->orderBy('tanggal_berangkat', 'asc')
             ->orderBy('jam_berangkat', 'asc')
             ->get();
 
         return view('sopir.jadwal', compact('jadwals'));
     }
+
     public function createJadwal()
     {
         return view('sopir.jadwal-create');
     }
+
     public function storeJadwal(Request $request)
     {
         $request->validate([
@@ -221,22 +253,40 @@ class SopirTravelController extends Controller
             'harga_per_orang' => 'required|integer|min:0',
         ]);
 
-        Travel::create([
-            'sopir_id' => Auth::id(),
-            'kode_travel' => strtoupper(Str::random(6)),
+        $userId = Auth::id();
 
+        // Ambil data armada dari travel yang sudah approved
+        $existingTravel = Travel::where('sopir_id', $userId)
+            ->where('status_approval', 'approved')
+            ->first();
+
+        // Buat jadwal baru dengan data armada dari travel yang sudah ada
+        Travel::create([
+            'sopir_id' => $userId,
+            'kode_travel' => 'TRV-' . strtoupper(Str::random(8)),
+
+            // Copy data armada dari travel sebelumnya (jika ada)
+            'armada' => $existingTravel->armada ?? null,
+            'kapasitas_penumpang' => $existingTravel->kapasitas_penumpang ?? 0,
+            'warna' => $existingTravel->warna ?? null,
+            'plat_nomor' => $existingTravel->plat_nomor ?? null,
+            'foto_armada' => $existingTravel->foto_armada ?? null,
+            'jenis_layanan' => $existingTravel->jenis_layanan ?? 'reguler',
+            'whatsapp' => $existingTravel->whatsapp ?? null,
+            'keterangan' => $existingTravel->keterangan ?? null,
+            'deskripsi' => $existingTravel->deskripsi ?? null,
+
+            // Data jadwal baru
             'lokasi_asal' => $request->lokasi_asal,
             'lokasi_tujuan' => $request->lokasi_tujuan,
             'tanggal_berangkat' => $request->tanggal_berangkat,
             'jam_berangkat' => $request->jam_berangkat,
             'rute' => $request->lokasi_asal . ' - ' . $request->lokasi_tujuan,
-
             'harga_per_orang' => $request->harga_per_orang,
 
-            // default kosong dulu
-            'kapasitas_penumpang' => 0,
             'penumpang_terdaftar' => 0,
             'status' => 'aktif',
+            'status_approval' => 'approved', // Langsung approved karena data armada sudah verified
         ]);
 
         return redirect()->route('sopir.jadwal')
@@ -248,7 +298,6 @@ class SopirTravelController extends Controller
     {
         $travel = Travel::findOrFail($id);
 
-        // Gunakan != bukan !==
         if ($travel->sopir_id != Auth::id()) {
             abort(403, 'Anda tidak memiliki akses untuk mengedit jadwal ini.');
         }
