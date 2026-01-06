@@ -104,7 +104,7 @@
             @if ($travel->foto_armada)
                 <div class="mt-4 pt-4 border-t border-slate-100">
                     <p class="text-slate-500 mb-2 text-xs">Foto Armada</p>
-                    <img src="{{ asset('file/' . $travel->foto_armada) }}" alt="Armada"
+                    <img src="{{ asset('file/' . rawurlencode($travel->foto_armada)) }}" alt="Foto Armada"
                         class="w-48 h-32 object-cover rounded-xl border border-slate-200">
                 </div>
             @else
