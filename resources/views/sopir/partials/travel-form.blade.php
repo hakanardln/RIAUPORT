@@ -118,7 +118,7 @@
                         <div class="w-full max-w-xl p-8 flex flex-col items-center text-center">
                             <div id="previewArmada" class="mb-4">
                                 @if ($travel->foto_armada)
-                                    <img src="{{ asset('file/' . rawurlencode($travel->foto_armada)) }}"
+                                    <img src="{{ url('/file/' . rawurlencode($travel->foto_armada)) }}"
                                         class="w-40 h-28 object-cover rounded-xl border border-slate-200 mx-auto"
                                         alt="Foto armada">
                                 @endif
