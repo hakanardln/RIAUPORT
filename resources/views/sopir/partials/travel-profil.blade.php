@@ -29,7 +29,7 @@
         {{-- Foto Armada --}}
         @if ($travel->foto_armada)
             <div class="w-full h-64 bg-slate-100 overflow-hidden">
-                <img src="{{ asset('file/' . rawurlencode($travel->foto_armada)) }}" alt="Foto Armada"
+                <img src="{{ asset('file/' . $travel->foto_armada) }}" alt="Foto Armada"
                     class="w-full h-full object-cover">
             </div>
         @endif
